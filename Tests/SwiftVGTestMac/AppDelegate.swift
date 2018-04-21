@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftVG
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -15,6 +16,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
+		let url = Bundle.main.url(forResource: "united-states", withExtension: "svg", subdirectory: "Sample Images")!
+		let image = SVGImage(url: url)
+		
+		print("Image: \(image!)")
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {

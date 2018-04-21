@@ -23,6 +23,12 @@
 /* Begin PBXBuildFile section */
 		B53173C11F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */; };
 		B53173C31F5F4CCE00F9C5AB /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
+		B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
+		B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
+		B5417D67208B903B00C678C5 /* SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D66208B903B00C678C5 /* SVGImage.swift */; };
+		B5417D68208B903B00C678C5 /* SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D66208B903B00C678C5 /* SVGImage.swift */; };
+		B5417D6B208B90D600C678C5 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5417D6A208B90D600C678C5 /* Sample Images */; };
+		B5417D6C208B90D600C678C5 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5417D6A208B90D600C678C5 /* Sample Images */; };
 		B55523531F5963A7005D026B /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B55523551F5963C1005D026B /* SwiftVG.framework in Copy Libraries */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B583A78A1CB4951C00AF73BA /* SwiftVG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -110,6 +116,9 @@
 		B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftVGUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVGUnitTests.swift; sourceTree = "<group>"; };
 		B53173C21F5F4CCE00F9C5AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5417D63208B8FE300C678C5 /* SVGParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
+		B5417D66208B903B00C678C5 /* SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGImage.swift; sourceTree = "<group>"; };
+		B5417D6A208B90D600C678C5 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = SOURCE_ROOT; };
 		B58D64671A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58D64681A898F81005A0002 /* SwiftVG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG.h; sourceTree = "<group>"; };
 		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -229,6 +238,22 @@
 			path = SwiftVGUnitTests;
 			sourceTree = "<group>";
 		};
+		B5417D62208B8FE300C678C5 /* Parsing & Loading */ = {
+			isa = PBXGroup;
+			children = (
+				B5417D63208B8FE300C678C5 /* SVGParser.swift */,
+			);
+			path = "Parsing & Loading";
+			sourceTree = "<group>";
+		};
+		B5417D69208B903F00C678C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B5417D66208B903B00C678C5 /* SVGImage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B58D64661A898F81005A0002 /* SwiftVG_Mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +277,8 @@
 		B58D64741A898F81005A0002 /* Framework Code */ = {
 			isa = PBXGroup;
 			children = (
+				B5417D62208B8FE300C678C5 /* Parsing & Loading */,
+				B5417D69208B903F00C678C5 /* Model */,
 			);
 			name = "Framework Code";
 			path = "SwiftVG/Framework Code";
@@ -273,6 +300,7 @@
 		B59311231F58A3EB0056D353 /* SwiftVGTestMac */ = {
 			isa = PBXGroup;
 			children = (
+				B5417D6A208B90D600C678C5 /* Sample Images */,
 				B59311241F58A3EB0056D353 /* AppDelegate.swift */,
 				B59311301F58A5CB0056D353 /* SVGDisplayWindowController.swift */,
 				B59311311F58A5CB0056D353 /* SVGDisplayWindowController.xib */,
@@ -423,7 +451,7 @@
 					};
 					B504E6451A8968DC001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 					};
 					B504E6661A89690C001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -431,7 +459,7 @@
 					};
 					B504E6AE1A898110001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 					};
 					B53173BD1F5F4CCE00F9C5AB = {
 						CreatedOnToolsVersion = 9.0;
@@ -475,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B58D64931A899094005A0002 /* Images.xcassets in Resources */,
+				B5417D6B208B90D600C678C5 /* Sample Images in Resources */,
 				B58D64911A899094005A0002 /* LaunchScreen.xib in Resources */,
 				B58D64921A899094005A0002 /* Main.storyboard in Resources */,
 			);
@@ -506,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B59311331F58A5CB0056D353 /* SVGDisplayWindowController.xib in Resources */,
+				B5417D6C208B90D600C678C5 /* Sample Images in Resources */,
 				B59311271F58A3EB0056D353 /* Assets.xcassets in Resources */,
 				B593112A1F58A3EB0056D353 /* MainMenu.xib in Resources */,
 			);
@@ -543,6 +573,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5417D67208B903B00C678C5 /* SVGImage.swift in Sources */,
+				B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +582,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5417D68208B903B00C678C5 /* SVGImage.swift in Sources */,
+				B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +762,7 @@
 		B504E6331A89230F001B414B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ben Gottlieb (JW8DK48L4U)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -743,6 +778,7 @@
 		B504E6341A89230F001B414B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tests/TestHost/Info.plist";
@@ -893,6 +929,7 @@
 		B53173C71F5F4CCE00F9C5AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -919,6 +956,7 @@
 		B53173C81F5F4CCE00F9C5AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -945,6 +983,7 @@
 		B593112E1F58A3EB0056D353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -972,6 +1011,7 @@
 		B593112F1F58A3EB0056D353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
