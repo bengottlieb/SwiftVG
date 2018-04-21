@@ -1,0 +1,12 @@
+{
+  "mac-output" : [
+    "..\/Mac Framework\/CrossPlatformKit.framework"
+  ],
+  "name" : "CrossPlatformKit",
+  "working-directory" : "..\/",
+  "disabled" : false,
+  "scriptpath" : "..\/CrossPlatformKit\/BuildFramework.sh",
+  "ios-output" : [
+    "..\/iOS Framework\/CrossPlatformKit.framework"
+  ]
+}
