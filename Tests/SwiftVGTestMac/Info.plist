@@ -9,15 +9,15 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>eml</string>
+				<string>svg</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Emails</string>
+			<string>svg</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.message</string>
+				<string>public.svg-image</string>
 			</array>
 		</dict>
 	</array>

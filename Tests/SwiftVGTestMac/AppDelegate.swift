@@ -17,9 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		let url = Bundle.main.url(forResource: "united-states", withExtension: "svg", subdirectory: "Sample Images")!
-		let image = SVGImage(url: url)
-		
-		print("Image: \(image!)")
+
+		SVGDisplayWindowController(path: url.path).showWindow(nil)
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -31,6 +30,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func application(_ sender: NSApplication, openFiles filenames: [String]) {
+		for file in filenames {
+			let url = URL(fileURLWithPath: file)
+			_ = SVGImage(url: url)
+			//print(image?.description ?? "")
+		}
 	}
 }
 

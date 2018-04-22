@@ -8,18 +8,24 @@
 
 import Foundation
 
-public class SVGImage {
+public class SVGImage: CustomStringConvertible {
+	public var viewBox: CGRect!
+	public var size = CGSize.zero
+
 	var parser: SVGParser?
 	
-	public init(data: Data) {
-		self.parser = SVGParser(data: data)
-		self.parser?.start()
+	public init?(url: URL) {
+		guard let data = try? Data(contentsOf: url) else { return nil }
+		self.parser = SVGParser(data: data, from: url)
+		self.parser?.start(with: self)
 	}
+	
+	public func draw(in ctx: CGContext) {
+		self.parser?.draw(in: ctx)
+	}
+	
+	public var description: String { return "Image" }
 }
 
 extension SVGImage {
-	public convenience init?(url: URL) {
-		guard let data = try? Data(contentsOf: url) else { return nil }
-		self.init(data: data)
-	}
 }

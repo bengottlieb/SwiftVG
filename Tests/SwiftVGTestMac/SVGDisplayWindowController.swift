@@ -13,12 +13,13 @@ import WebKit
 class SVGDisplayWindowController: NSWindowController {
 	static var windows: [SVGDisplayWindowController] = []
 	
+	var image: SVGImage!
 	var data: Data!
 	var webView: WebView!
 	
 	convenience init(path: String) {
 		self.init(windowNibName: NSNib.Name("SVGDisplayWindowController"))
-		self.data = try! Data(contentsOf: URL(fileURLWithPath: path))
+		self.image = SVGImage(url: URL(fileURLWithPath: path))
 		
 		SVGDisplayWindowController.windows.append(self)
 	}
@@ -26,9 +27,24 @@ class SVGDisplayWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
 		
-
+		let view = SVGImageView(frame: self.window!.contentView!.bounds)
+		view.image = self.image
+		self.window!.contentView?.addSubview(view)
+		view.autoresizingMask = [.width, .height]
+		view.setNeedsDisplay(view.bounds)
 	}
     
+}
+
+class SVGImageView: NSView {
+	var image: SVGImage!
+	override var isFlipped: Bool { return true }
+	
+	override func draw(_ dirtyRect: NSRect) {
+		let ctx = NSGraphicsContext.current!.cgContext
+
+		self.image?.draw(in: ctx)
+	}
 }
 
 extension SVGDisplayWindowController: WebFrameLoadDelegate {
