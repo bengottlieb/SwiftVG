@@ -15,22 +15,11 @@ class SVGElement {
 
 	func draw(in ctx: CGContext) {}
 	
+	var id: String? { return self.attributes?["id"] }
+	
 	init(kind: SVGElement.Kind, parent: SVGElement?) {
 		self.kind = kind
 		self.parent = parent
-	}
-}
-
-extension SVGElement {
-	class Container: SVGElement {
-		var children: [SVGElement] = []
-		func append(child: SVGElement) { self.children.append(child) }
-		override func draw(in ctx: CGContext) { self.drawChildren(in: ctx) }
-		func drawChildren(in ctx: CGContext) {
-			for child in self.children {
-				child.draw(in: ctx)
-			}
-		}
 	}
 }
 

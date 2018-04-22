@@ -35,22 +35,39 @@ extension String {
 		}
 	}
 	
+	var firstPathPoint: CGPoint? {
+		var tokenizer = PathTokenizer(string: self)
+		guard let first = tokenizer.nextCommand() else { return nil }
+		
+		if first == .move || first == .moveAbs { return tokenizer.nextPoint() }
+		return nil
+	}
+	
 	func generateBezierPath() throws -> CGPath? {
 		var tokenizer = PathTokenizer(string: self)
 		let path = CGMutablePath()
 		var lastPoint = CGPoint.zero
 		var lastCommand = PathTokenizer.Command.line
 		var closed = false
+		var firstPoint: CGPoint?
 		var previousCurve: PreviousCurve?
 		
 		while !closed {
 			let command = tokenizer.nextCommand() ?? lastCommand
+			print("Rendering \(command.rawValue)")
 			switch command {
 			case .move, .moveAbs:
-				guard var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
-				if command == .move { point += lastPoint }
-				path.move(to: point)
-				lastPoint = point
+				while true {
+					guard var point = tokenizer.nextPoint() else { break }
+					if command == .move { point += lastPoint }
+					if firstPoint == nil {
+						firstPoint = point
+						path.move(to: point)
+					} else {
+						path.addLine(to: point)
+					}
+					lastPoint = point
+				}
 				
 			case .line, .lineAbs:
 				guard var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
@@ -90,13 +107,18 @@ extension String {
 					previousCurve = PreviousCurve(point: point, control1: control, control2: nil)
 				}
 				
-			case .closePath, .closePathAbs: closed = true
+			case .closePath, .closePathAbs:
+				if let firstPoint = firstPoint { path.addLine(to: firstPoint) }
+				path.closeSubpath()
+				closed = true
 				
 			case .curve, .curveAbs:
-				guard var control1 = tokenizer.nextPoint(), var control2 = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
-				if command == .curve { control1 += lastPoint; control2 += lastPoint; point += lastPoint }
-				path.addCurve(to: point, control1: control1, control2: control2)
-				lastPoint = point
+				while true {
+					guard var control1 = tokenizer.nextPoint(), var control2 = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { break }
+					if command == .curve { control1 += lastPoint; control2 += lastPoint; point += lastPoint }
+					path.addCurve(to: point, control1: control1, control2: control2)
+					lastPoint = point
+				}
 				
 			case .smoothCurve, .smoothCurveAbs:
 				guard var control = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }

@@ -24,14 +24,20 @@ extension String {
 		if let dbl = Double(filtered) { return CGFloat(dbl) }
 		return nil
 	}
-		
+	
+	subscript(_ range: Range<Int>) -> String {
+		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
+		let end = self.index(self.startIndex, offsetBy: range.upperBound)
+		return self[start..<end]
+	}
+	
 	var tokens: [String] {
 		var result: [String] = []
 		var currentChunk = ""
 		var inNumber = false
 		
 		for chr in self {
-			let nowInNumber = (chr >= "0" && chr <= "9") || chr == "." || chr == "-"
+			let nowInNumber = (chr >= "0" && chr <= "9") || chr == "." || chr == "-" || chr == "e"
 			if chr == " " ||  chr == "," {
 				inNumber = false
 				if !currentChunk.isEmpty { result.append(currentChunk) }
@@ -45,7 +51,7 @@ extension String {
 			}
 			
 			if chr == "-" {
-				if !currentChunk.isEmpty { result.append(currentChunk) }
+				if !currentChunk.isEmpty, (!inNumber || currentChunk.last != "e") { result.append(currentChunk) }
 				currentChunk = "-"
 				inNumber = true
 				continue
