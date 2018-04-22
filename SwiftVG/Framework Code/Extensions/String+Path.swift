@@ -54,7 +54,6 @@ extension String {
 		
 		while !closed {
 			let command = tokenizer.nextCommand() ?? lastCommand
-			print("Rendering \(command.rawValue)")
 			switch command {
 			case .move, .moveAbs:
 				while true {
@@ -108,7 +107,6 @@ extension String {
 				}
 				
 			case .closePath, .closePathAbs:
-				if let firstPoint = firstPoint { path.addLine(to: firstPoint) }
 				path.closeSubpath()
 				closed = true
 				

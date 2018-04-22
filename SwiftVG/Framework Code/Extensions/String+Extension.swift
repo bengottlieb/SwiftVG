@@ -31,6 +31,18 @@ extension String {
 		return self[start..<end]
 	}
 	
+	subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
+		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
+		let end = self.endIndex
+		return self[start..<end]
+	}
+	
+//	subscript(_ range: CountablePartialRangeTo<Int>) -> String {
+//		let start = self.startIndex
+//		let end = self.index(self.startIndex, offsetBy: range.upperBound)
+//		return self[start..<end]
+//	}
+	
 	var tokens: [String] {
 		var result: [String] = []
 		var currentChunk = ""

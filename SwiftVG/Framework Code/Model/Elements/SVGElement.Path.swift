@@ -20,8 +20,8 @@ extension SVGElement {
 			
 			NSColor.random().setFill()
 			NSColor.black.setStroke()
-			ctx.addPath(path)
-			ctx.fillPath()
+		//	ctx.addPath(path)
+		//	ctx.fillPath()
 			ctx.addPath(path)
 			ctx.strokePath()
 			
