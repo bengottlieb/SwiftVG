@@ -9,7 +9,7 @@
 import Foundation
 
 extension Element {
-	class Root: ContainerElement, CustomStringConvertible {
+	class Root: Container, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		

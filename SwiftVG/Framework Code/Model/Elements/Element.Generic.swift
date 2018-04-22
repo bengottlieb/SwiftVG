@@ -10,7 +10,7 @@ import Foundation
 
 
 extension Element {
-	class Generic: ContainerElement, CustomStringConvertible, CustomDebugStringConvertible {
+	class Generic: Container, CustomStringConvertible, CustomDebugStringConvertible {
 		var qualifiedName: String?
 		var nameSpace: String?
 		var content: String = ""

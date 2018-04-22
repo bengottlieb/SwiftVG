@@ -35,7 +35,7 @@ extension SVGParser: XMLParserDelegate {
 		if self.document == nil, let root = element as? Element.Root { self.document = SVGDocument(root: root) }
 
 		if self.currentTree.count > 0 {
-			(self.currentTree.last as? ContainerElement)?.append(child: element)
+			(self.currentTree.last as? Element.Container)?.append(child: element)
 		}
 		self.currentTree.append(element)
 	}
