@@ -9,10 +9,7 @@
 import Foundation
 
 extension SVGParser {
-	struct Element_svg: Element, CustomStringConvertible {
-		let kind = ElementKind.svg
-		var children: [Element] = []
-		
+	class Element_svg: ContainerElement, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		
@@ -25,7 +22,8 @@ extension SVGParser {
 			return "\(self.size.width)x\(self.size.height)"
 		}
 		
-		init(attributes: [String: String]) {
+		init(parent: Element? = nil, attributes: [String: String]) {
+			super.init(kind: .svg, parent: parent)
 			self.viewBox = attributes["viewBox"]?.viewBox
 			self.size.width = attributes["width"]?.dimension ?? 0
 			self.size.height = attributes["height"]?.dimension ?? 0

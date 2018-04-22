@@ -9,30 +9,25 @@
 import Foundation
 
 extension SVGParser {
-	struct Element_path: Element, AttributedElement, CustomStringConvertible {
-		let kind = ElementKind.path
-		var children: [Element] = []
-		var attributes: [String : String] = [:]
-		
+	class Element_path: Element, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		
-		func draw(in ctx: CGContext) {
-			guard let data = self.attributes["d"] else { return }
+		override func draw(in ctx: CGContext) {
+			guard let data = self.attributes?["d"] else { return }
 			guard let path = try! data.generateBezierPath() else { return }
 			
 			NSColor.red.setStroke()
 			ctx.addPath(path)
 			ctx.strokePath()
-			
-			self.drawChildren(in: ctx) 
 		}
 		
 		var description: String {
 			return "Path"
 		}
 		
-		init(attributes: [String: String]) {
+		init(parent: Element?, attributes: [String: String]) {
+			super.init(kind: .path, parent: parent)
 			self.attributes = attributes
 		}
 	}

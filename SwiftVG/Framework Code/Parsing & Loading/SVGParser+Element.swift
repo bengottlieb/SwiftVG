@@ -8,41 +8,47 @@
 
 import Foundation
 
-protocol Element {
-	var kind: SVGParser.ElementKind { get }
-	var children: [Element] { get set }
-	func draw(in ctx: CGContext)
+class Element {
+	let kind: SVGParser.ElementKind
+	var parent: Element!
+	var attributes: [String: String]?
+
+	func draw(in ctx: CGContext) {}
+	
+	init(kind: SVGParser.ElementKind, parent: Element?) {
+		self.kind = kind
+		self.parent = parent
+	}
 }
 
-protocol ContentElement: Element {
-	func append(content: String)
-}
-
-protocol AttributedElement: Element {
-	var attributes: [String: String] { get }
-}
-
-extension Element {
+class ContainerElement: Element {
+	var children: [Element] = []
+	func append(child: Element) { self.children.append(child) }
+	override func draw(in ctx: CGContext) { self.drawChildren(in: ctx) }
 	func drawChildren(in ctx: CGContext) {
 		for child in self.children {
 			child.draw(in: ctx)
 		}
 	}
+}
 
-	func draw(in ctx: CGContext) { self.drawChildren(in: ctx) }
-	
+protocol ContentElement {
+	func append(content: String)
+}
+
+extension Element {
 	func toString(depth: Int = 0) -> String {
 		var result = String(repeating: "\t", count: depth)
 		
 		result += "<" + self.kind.rawValue
 		
-		if let attr = (self as? AttributedElement)?.attributes, attr.count > 0 {
+		if let attr = self.attributes, attr.count > 0 {
 			result += ", " + attr.prettyString
 		}
 		
-		if self.children.count > 0 {
+		if let children = (self as? ContainerElement)?.children, children.count > 0 {
 			result += ": [\n"
-			for child in self.children {
+			for child in children {
 				result += child.toString(depth: depth + 1)
 			}
 			result += "]"
@@ -52,51 +58,27 @@ extension Element {
 }
 
 extension SVGParser {
-	enum ElementKind: String { case unknown
-		case svg
-		
-		// not yet implemented
-		case defs, use, path, rect, line, circle, ellipse, polygon, polyline, title, pattern, clipPath, group = "g", metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, tspan, work = "Work", style, desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
-		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
-		case colorProfile = "color-profile"
-		case animate, animateMotion, animateColor, animateTransform
-		case font, fontFace = "font-face", fontFaceSrc = "font-face-src", fontFaceURI = "font-face-uri"
-		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
-		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
-
-		func element(attributes: [String: String]) -> Element? {
-			switch self {
-			case .svg: return Element_svg(attributes: attributes)
-			case .path: return Element_path(attributes: attributes)
-			default: return GenericElement(kind: self, attributes: attributes)
-			}
-		}
-	}
-	
-	struct GenericElement: Element, CustomStringConvertible, CustomDebugStringConvertible {
-		var kind: ElementKind = .unknown
+	class GenericElement: ContainerElement, CustomStringConvertible, CustomDebugStringConvertible {
 		var qualifiedName: String?
 		var nameSpace: String?
-		var attributes: [String: String] = [:]
-		var children: [Element] = []
-		var contents: String = ""
+		var content: String = ""
 		
-		init(kind: ElementKind, attributes: [String: String]) {
-			self.kind = kind
+		init(kind: ElementKind, parent: Element?, attributes: [String: String]) {
+			super.init(kind: kind, parent: parent)
 			self.attributes = attributes
 		}
 		
-		mutating func append(content: String){
-			self.contents += content
+		func append(content: String){
+			self.content += content
 		}
 		
 		var description: String {
 			var result = self.kind.rawValue
 			
-			if !self.contents.isEmpty { result += ": \(self.contents)" }
-			if !self.attributes.isEmpty {
+			if !self.content.isEmpty { result += ": \(self.content)" }
+			if self.attributes?.isEmpty == false {
 				result += " { "
-				for (key, value) in self.attributes {
+				for (key, value) in self.attributes! {
 					result += "\(key): \(value), "
 				}
 				result += "} "
@@ -112,5 +94,26 @@ extension SVGParser {
 		}
 		
 		var debugDescription: String { return self.description }
+	}
+
+	enum ElementKind: String { case unknown
+		case svg
+		
+		// not yet implemented
+		case defs, use, path, rect, line, circle, ellipse, polygon, polyline, title, pattern, clipPath, group = "g", metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, tspan, work = "Work", style, desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
+		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
+		case colorProfile = "color-profile"
+		case animate, animateMotion, animateColor, animateTransform
+		case font, fontFace = "font-face", fontFaceSrc = "font-face-src", fontFaceURI = "font-face-uri"
+		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
+		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
+
+		func element(in parent: Element?, attributes: [String: String]) -> Element? {
+			switch self {
+			case .svg: return Element_svg(parent: parent, attributes: attributes)
+			case .path: return Element_path(parent: parent, attributes: attributes)
+			default: return GenericElement(kind: self, parent: parent, attributes: attributes)
+			}
+		}
 	}
 }
