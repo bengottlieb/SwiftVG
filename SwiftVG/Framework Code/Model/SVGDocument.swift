@@ -9,9 +9,9 @@
 import Foundation
 
 class SVGDocument {
-	let root: Element.Root
+	let root: SVGElement.Root
 	
-	init(root: Element.Root) {
+	init(root: SVGElement.Root) {
 		self.root = root
 	}
 }

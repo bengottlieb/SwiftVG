@@ -17,7 +17,7 @@ class SVGParser: NSObject {
 	var size: CGSize?
 	
 	var title: String?
-	var currentTree: [Element] = []
+	var currentTree: [SVGElement] = []
 	
 	init(data: Data, from url: URL? = nil) {
 		self.data = data

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Element {
+extension SVGElement {
 	class Root: Container, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
@@ -22,7 +22,7 @@ extension Element {
 			return "\(self.size.width)x\(self.size.height)"
 		}
 		
-		init(parent: Element? = nil, attributes: [String: String]) {
+		init(parent: SVGElement? = nil, attributes: [String: String]) {
 			super.init(kind: .svg, parent: parent)
 			self.viewBox = attributes["viewBox"]?.viewBox
 			self.size.width = attributes["width"]?.dimension ?? 0

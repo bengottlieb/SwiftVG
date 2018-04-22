@@ -26,23 +26,23 @@ extension SVGParser: XMLParserDelegate {
 	}
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes: [String : String] = [:]) {
-		guard let kind = Element.Kind(rawValue: elementName) else {
+		guard let kind = SVGElement.Kind(rawValue: elementName) else {
 			if !elementName.contains(":") { print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")") }
 			return
 		}
 		guard let element = kind.element(in: self.currentTree.last, attributes: attributes) else { return }
 		
-		if self.document == nil, let root = element as? Element.Root { self.document = SVGDocument(root: root) }
+		if self.document == nil, let root = element as? SVGElement.Root { self.document = SVGDocument(root: root) }
 
 		if self.currentTree.count > 0 {
-			(self.currentTree.last as? Element.Container)?.append(child: element)
+			(self.currentTree.last as? SVGElement.Container)?.append(child: element)
 		}
 		self.currentTree.append(element)
 	}
 	
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-		if let topKind = self.currentTree.last?.kind, topKind != Element.Kind(rawValue: elementName) {
-			if Element.Kind(rawValue: elementName) != nil {
+		if let topKind = self.currentTree.last?.kind, topKind != SVGElement.Kind(rawValue: elementName) {
+			if SVGElement.Kind(rawValue: elementName) != nil {
 				print("element name mismatch: \(topKind.rawValue) vs. \(elementName)")
 			}
 			return

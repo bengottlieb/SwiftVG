@@ -8,23 +8,23 @@
 
 import Foundation
 
-class Element {
-	let kind: Element.Kind
-	var parent: Element!
+class SVGElement {
+	let kind: SVGElement.Kind
+	var parent: SVGElement!
 	var attributes: [String: String]?
 
 	func draw(in ctx: CGContext) {}
 	
-	init(kind: Element.Kind, parent: Element?) {
+	init(kind: SVGElement.Kind, parent: SVGElement?) {
 		self.kind = kind
 		self.parent = parent
 	}
 }
 
-extension Element {
-	class Container: Element {
-		var children: [Element] = []
-		func append(child: Element) { self.children.append(child) }
+extension SVGElement {
+	class Container: SVGElement {
+		var children: [SVGElement] = []
+		func append(child: SVGElement) { self.children.append(child) }
 		override func draw(in ctx: CGContext) { self.drawChildren(in: ctx) }
 		func drawChildren(in ctx: CGContext) {
 			for child in self.children {
@@ -38,7 +38,7 @@ protocol ContentElement {
 	func append(content: String)
 }
 
-extension Element {
+extension SVGElement {
 	func toString(depth: Int = 0) -> String {
 		var result = String(repeating: "\t", count: depth)
 		
@@ -59,7 +59,7 @@ extension Element {
 	}
 }
 
-extension Element {
+extension SVGElement {
 	enum Kind: String { case unknown
 		case svg, path
 		
@@ -72,11 +72,11 @@ extension Element {
 		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
 		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
 
-		func element(in parent: Element?, attributes: [String: String]) -> Element? {
+		func element(in parent: SVGElement?, attributes: [String: String]) -> SVGElement? {
 			switch self {
-			case .svg: return Element.Root(parent: parent, attributes: attributes)
-			case .path: return Element.Path(parent: parent, attributes: attributes)
-			default: return Element.Generic(kind: self, parent: parent, attributes: attributes)
+			case .svg: return SVGElement.Root(parent: parent, attributes: attributes)
+			case .path: return SVGElement.Path(parent: parent, attributes: attributes)
+			default: return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
 			}
 		}
 	}

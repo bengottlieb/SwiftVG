@@ -9,13 +9,13 @@
 import Foundation
 
 
-extension Element {
+extension SVGElement {
 	class Generic: Container, CustomStringConvertible, CustomDebugStringConvertible {
 		var qualifiedName: String?
 		var nameSpace: String?
 		var content: String = ""
 		
-		init(kind: Element.Kind, parent: Element?, attributes: [String: String]) {
+		init(kind: SVGElement.Kind, parent: SVGElement?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.attributes = attributes
 		}

@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension Element {
-	class Path: Element, CustomStringConvertible {
+extension SVGElement {
+	class Path: SVGElement, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		
@@ -26,7 +26,7 @@ extension Element {
 			return "Path"
 		}
 		
-		init(parent: Element?, attributes: [String: String]) {
+		init(parent: SVGElement?, attributes: [String: String]) {
 			super.init(kind: .path, parent: parent)
 			self.attributes = attributes
 		}

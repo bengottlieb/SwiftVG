@@ -9,8 +9,8 @@
 import Foundation
 
 public class SVGImage: CustomStringConvertible {
-	public var viewBox: CGRect!
-	public var size = CGSize.zero
+	public var viewBox: CGRect { return self.document?.root.viewBox ?? .zero }
+	public var size: CGSize { return self.document?.root.size ?? .zero }
 	public var drawable = false
 	
 	var document: SVGDocument! { didSet { self.drawable = true }}
