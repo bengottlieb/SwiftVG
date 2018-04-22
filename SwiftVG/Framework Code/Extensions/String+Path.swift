@@ -43,19 +43,21 @@ extension String {
 		return nil
 	}
 	
-	func generateBezierPath() throws -> CGPath? {
+	func generateBezierPaths() throws -> [CGPath] {
 		var tokenizer = PathTokenizer(string: self)
-		let path = CGMutablePath()
+		var paths: [CGPath] = []
+		var path: CGMutablePath!
 		var lastPoint = CGPoint.zero
-		var lastCommand = PathTokenizer.Command.line
-		var closed = false
 		var firstPoint: CGPoint?
 		var previousCurve: PreviousCurve?
 		
-		while !closed {
-			let command = tokenizer.nextCommand() ?? lastCommand
+		while true {
+			guard let command = tokenizer.nextCommand() else { break }
 			switch command {
 			case .move, .moveAbs:
+				firstPoint = nil
+				path = CGMutablePath()
+				paths.append(path)
 				while true {
 					guard var point = tokenizer.nextPoint() else { break }
 					if command == .move { point += lastPoint }
@@ -69,11 +71,13 @@ extension String {
 				}
 				
 			case .line, .lineAbs:
-				guard var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
-				if command == .line { point += lastPoint }
-				path.addLine(to: point)
-				lastPoint = point
-				
+				while true {
+					guard var point = tokenizer.nextPoint() else { break }
+					if command == .line { point += lastPoint }
+					path.addLine(to: point)
+					lastPoint = point
+				}
+					
 			case .horizontalLine, .horizontalLineAbs:
 				guard var x = tokenizer.nextFloat() else { throw PathError.failedToGetPoint }
 				if command == .horizontalLine { x += lastPoint.x }
@@ -108,7 +112,6 @@ extension String {
 				
 			case .closePath, .closePathAbs:
 				path.closeSubpath()
-				closed = true
 				
 			case .curve, .curveAbs:
 				while true {
@@ -181,16 +184,11 @@ extension String {
 				path.addRelativeArc(center: .zero, radius: 1, startAngle: startAngle, delta: angle, transform: inverted)
 
 				lastPoint = p2
-
-			default:
-				print("Failed to handle \(command.rawValue)")
-				break
 			}
-			lastCommand = command
 		}
+		if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
 		
-		
-		return path
+		return paths
 	}
 	
 	struct PathTokenizer {
@@ -213,8 +211,10 @@ extension String {
 			self.tokens = string.tokens
 		}
 		
+		var hasContentLeft: Bool { return self.index < self.tokens.count }
+		
 		mutating func nextCommand() -> Command? {
-			if self.index >= self.tokens.count { return .closePath }
+			if self.index >= self.tokens.count { return nil }
 			if let command = Command(rawValue: self.tokens[self.index]) {
 				self.index += 1
 				return command

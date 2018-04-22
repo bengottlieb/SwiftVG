@@ -16,15 +16,21 @@ extension SVGElement {
 		
 		override func draw(in ctx: CGContext) {			
 			guard let data = self.attributes?["d"] else { return }
-			guard let path = try! data.generateBezierPath() else { return }
+			let paths = try! data.generateBezierPaths()
 			
-			NSColor.random().setFill()
-			NSColor.black.setStroke()
-		//	ctx.addPath(path)
-		//	ctx.fillPath()
-			ctx.addPath(path)
-			ctx.strokePath()
-			
+			for path in paths {
+				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
+				if let fill = self.fillColor {
+					fill.setFill()
+					ctx.addPath(path)
+					ctx.fillPath()
+				}
+				if let stroke = self.strokeColor {
+					stroke.setStroke()
+					ctx.addPath(path)
+					ctx.strokePath()
+				}
+			}
 			if self.indicateFirstPoint, let first = data.firstPathPoint {
 				ctx.beginPath()
 				ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)
@@ -39,7 +45,7 @@ extension SVGElement {
 		
 		init(parent: SVGElement?, attributes: [String: String]) {
 			super.init(kind: .path, parent: parent)
-			self.attributes = attributes
+			self.load(attributes: attributes)
 		}
 	}
 }

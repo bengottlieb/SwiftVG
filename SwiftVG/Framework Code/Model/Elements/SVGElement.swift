@@ -12,14 +12,21 @@ class SVGElement {
 	let kind: SVGElement.Kind
 	var parent: SVGElement!
 	var attributes: [String: String]?
+	var styles: CSSFragment?
 
 	func draw(in ctx: CGContext) {}
 	
 	var id: String? { return self.attributes?["id"] }
+	var `class`: String? { return self.attributes?["class"] }
 	
 	init(kind: SVGElement.Kind, parent: SVGElement?) {
 		self.kind = kind
 		self.parent = parent
+	}
+	
+	func load(attributes: [String: String]?) {
+		self.attributes = attributes
+		if let style = attributes?["style"] { self.styles = CSSFragment(css: style) }
 	}
 }
 

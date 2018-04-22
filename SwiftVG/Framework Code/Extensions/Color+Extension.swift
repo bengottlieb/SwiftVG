@@ -24,13 +24,17 @@ extension SVGColor {
 	}
 	
 	convenience init?(_ string: String) {
+		if string == "none" {
+			self.init(white: 0.0, alpha: 0.0)
+			return
+		}
 		var str = string
 		var alpha: UInt32 = 255
 		var red: UInt32 = 0
 		var green: UInt32 = 0
 		var blue: UInt32 = 0
 		
-		if str.hasPrefix("#") { str = String(str[str.startIndex...]) }
+		if str.hasPrefix("#") { str = String(str[1...]) }
 		let length = str.count
 		if length == 0 { return nil }
 		

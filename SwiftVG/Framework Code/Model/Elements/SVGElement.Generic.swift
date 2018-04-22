@@ -17,7 +17,7 @@ extension SVGElement {
 		
 		init(kind: SVGElement.Kind, parent: SVGElement?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
-			self.attributes = attributes
+			self.load(attributes: attributes)
 		}
 		
 		func append(content: String){

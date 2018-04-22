@@ -55,6 +55,12 @@
 		B5417D85208D0DE200C678C5 /* SVGElement.Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D83208D0DE200C678C5 /* SVGElement.Group.swift */; };
 		B5417D87208D108E00C678C5 /* String+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D86208D108E00C678C5 /* String+Transform.swift */; };
 		B5417D88208D108E00C678C5 /* String+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D86208D108E00C678C5 /* String+Transform.swift */; };
+		B5417D8A208D16FF00C678C5 /* CSSFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D89208D16FF00C678C5 /* CSSFragment.swift */; };
+		B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D89208D16FF00C678C5 /* CSSFragment.swift */; };
+		B5417D8E208D1BAE00C678C5 /* CSSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D8D208D1BAE00C678C5 /* CSSValue.swift */; };
+		B5417D8F208D1BAE00C678C5 /* CSSValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D8D208D1BAE00C678C5 /* CSSValue.swift */; };
+		B5417D91208D294500C678C5 /* SVGElement+Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */; };
+		B5417D92208D294500C678C5 /* SVGElement+Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */; };
 		B55523531F5963A7005D026B /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B55523551F5963C1005D026B /* SwiftVG.framework in Copy Libraries */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B583A78A1CB4951C00AF73BA /* SwiftVG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -158,6 +164,9 @@
 		B5417D7F208C23C400C678C5 /* String+Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Path.swift"; sourceTree = "<group>"; };
 		B5417D83208D0DE200C678C5 /* SVGElement.Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Group.swift; sourceTree = "<group>"; };
 		B5417D86208D108E00C678C5 /* String+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Transform.swift"; sourceTree = "<group>"; };
+		B5417D89208D16FF00C678C5 /* CSSFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSFragment.swift; sourceTree = "<group>"; };
+		B5417D8D208D1BAE00C678C5 /* CSSValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSValue.swift; sourceTree = "<group>"; };
+		B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+Attributes.swift"; sourceTree = "<group>"; };
 		B58D64671A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58D64681A898F81005A0002 /* SwiftVG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG.h; sourceTree = "<group>"; };
 		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -272,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				B5417D70208BFED700C678C5 /* SVGElement.swift */,
+				B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */,
 				B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */,
 				B50C26CB208CB318007BF209 /* SVGElement.Generic.swift */,
 				B5417D79208C12FD00C678C5 /* SVGElement.Root.swift */,
@@ -304,6 +314,7 @@
 			children = (
 				B5417D66208B903B00C678C5 /* SVGImage.swift */,
 				B50C26C8208CB2E4007BF209 /* SVGDocument.swift */,
+				B5417D8C208D17A600C678C5 /* CSS */,
 				B50C26CE208CB416007BF209 /* Elements */,
 			);
 			path = Model;
@@ -319,6 +330,15 @@
 				B5417D76208C04F200C678C5 /* Dictionary+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B5417D8C208D17A600C678C5 /* CSS */ = {
+			isa = PBXGroup;
+			children = (
+				B5417D89208D16FF00C678C5 /* CSSFragment.swift */,
+				B5417D8D208D1BAE00C678C5 /* CSSValue.swift */,
+			);
+			path = CSS;
 			sourceTree = "<group>";
 		};
 		B58D64661A898F81005A0002 /* SwiftVG_Mac */ = {
@@ -647,13 +667,16 @@
 				B5417D67208B903B00C678C5 /* SVGImage.swift in Sources */,
 				B50C26CC208CB318007BF209 /* SVGElement.Generic.swift in Sources */,
 				B5417D6E208BF6FA00C678C5 /* String+Extension.swift in Sources */,
+				B5417D91208D294500C678C5 /* SVGElement+Attributes.swift in Sources */,
 				B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */,
 				B5417D74208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B50C26D5208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
+				B5417D8A208D16FF00C678C5 /* CSSFragment.swift in Sources */,
 				B5417D84208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
 				B50C26D2208CF1C3007BF209 /* Color+Extension.swift in Sources */,
 				B5417D7A208C12FD00C678C5 /* SVGElement.Root.swift in Sources */,
 				B5417D77208C04F200C678C5 /* Dictionary+Extension.swift in Sources */,
+				B5417D8E208D1BAE00C678C5 /* CSSValue.swift in Sources */,
 				B50C26C9208CB2E4007BF209 /* SVGDocument.swift in Sources */,
 				B5417D80208C23C400C678C5 /* String+Path.swift in Sources */,
 			);
@@ -669,13 +692,16 @@
 				B5417D68208B903B00C678C5 /* SVGImage.swift in Sources */,
 				B50C26CD208CB318007BF209 /* SVGElement.Generic.swift in Sources */,
 				B5417D6F208BF6FA00C678C5 /* String+Extension.swift in Sources */,
+				B5417D92208D294500C678C5 /* SVGElement+Attributes.swift in Sources */,
 				B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */,
 				B5417D75208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B50C26D6208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
+				B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */,
 				B5417D85208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
 				B50C26D3208CF1C4007BF209 /* Color+Extension.swift in Sources */,
 				B5417D7B208C12FD00C678C5 /* SVGElement.Root.swift in Sources */,
 				B5417D78208C04F200C678C5 /* Dictionary+Extension.swift in Sources */,
+				B5417D8F208D1BAE00C678C5 /* CSSValue.swift in Sources */,
 				B50C26CA208CB2E4007BF209 /* SVGDocument.swift in Sources */,
 				B5417D81208C23C400C678C5 /* String+Path.swift in Sources */,
 			);

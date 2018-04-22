@@ -14,7 +14,7 @@ extension SVGElement {
 	class Group: SVGElement.Container {
 		init(parent: SVGElement? = nil, attributes: [String: String]) {
 			super.init(kind: .group, parent: parent)
-			self.attributes = attributes
+			self.load(attributes: attributes)
 		}
 		
 		override func draw(in ctx: CGContext) {
