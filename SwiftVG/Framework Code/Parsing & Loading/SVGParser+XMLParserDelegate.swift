@@ -26,11 +26,13 @@ extension SVGParser: XMLParserDelegate {
 	}
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes: [String : String] = [:]) {
-		guard let kind = ElementKind(rawValue: elementName) else {
+		guard let kind = Element.Kind(rawValue: elementName) else {
 			if !elementName.contains(":") { print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")") }
 			return
 		}
 		guard let element = kind.element(in: self.currentTree.last, attributes: attributes) else { return }
+		
+		if self.document == nil, let root = element as? Element.Root { self.document = SVGDocument(root: root) }
 
 		if self.currentTree.count > 0 {
 			(self.currentTree.last as? ContainerElement)?.append(child: element)
@@ -39,8 +41,10 @@ extension SVGParser: XMLParserDelegate {
 	}
 	
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-		if let topKind = self.currentTree.last?.kind, topKind != ElementKind(rawValue: elementName) {
-			print("element name mismatch: \(topKind.rawValue) vs. \(elementName)")
+		if let topKind = self.currentTree.last?.kind, topKind != Element.Kind(rawValue: elementName) {
+			if Element.Kind(rawValue: elementName) != nil {
+				print("element name mismatch: \(topKind.rawValue) vs. \(elementName)")
+			}
 			return
 		}
 		

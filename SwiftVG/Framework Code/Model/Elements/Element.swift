@@ -1,5 +1,5 @@
 //
-//  SVGParser+Element.swift
+//  Element.swift
 //  SwiftVG
 //
 //  Created by Ben Gottlieb on 4/21/18.
@@ -9,13 +9,13 @@
 import Foundation
 
 class Element {
-	let kind: SVGParser.ElementKind
+	let kind: Element.Kind
 	var parent: Element!
 	var attributes: [String: String]?
 
 	func draw(in ctx: CGContext) {}
 	
-	init(kind: SVGParser.ElementKind, parent: Element?) {
+	init(kind: Element.Kind, parent: Element?) {
 		self.kind = kind
 		self.parent = parent
 	}
@@ -57,46 +57,8 @@ extension Element {
 	}
 }
 
-extension SVGParser {
-	class GenericElement: ContainerElement, CustomStringConvertible, CustomDebugStringConvertible {
-		var qualifiedName: String?
-		var nameSpace: String?
-		var content: String = ""
-		
-		init(kind: ElementKind, parent: Element?, attributes: [String: String]) {
-			super.init(kind: kind, parent: parent)
-			self.attributes = attributes
-		}
-		
-		func append(content: String){
-			self.content += content
-		}
-		
-		var description: String {
-			var result = self.kind.rawValue
-			
-			if !self.content.isEmpty { result += ": \(self.content)" }
-			if self.attributes?.isEmpty == false {
-				result += " { "
-				for (key, value) in self.attributes! {
-					result += "\(key): \(value), "
-				}
-				result += "} "
-			}
-			if !self.children.isEmpty {
-				result += " [\n"
-				for kid in self.children {
-					result += "\t \(kid)\n"
-				}
-				result += "]\n"
-			}
-			return result
-		}
-		
-		var debugDescription: String { return self.description }
-	}
-
-	enum ElementKind: String { case unknown
+extension Element {
+	enum Kind: String { case unknown
 		case svg
 		
 		// not yet implemented
@@ -110,9 +72,9 @@ extension SVGParser {
 
 		func element(in parent: Element?, attributes: [String: String]) -> Element? {
 			switch self {
-			case .svg: return Element_svg(parent: parent, attributes: attributes)
-			case .path: return Element_path(parent: parent, attributes: attributes)
-			default: return GenericElement(kind: self, parent: parent, attributes: attributes)
+			case .svg: return Element.Root(parent: parent, attributes: attributes)
+			case .path: return Element.Path(parent: parent, attributes: attributes)
+			default: return Element.Generic(kind: self, parent: parent, attributes: attributes)
 			}
 		}
 	}

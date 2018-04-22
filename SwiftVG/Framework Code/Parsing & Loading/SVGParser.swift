@@ -13,7 +13,7 @@ class SVGParser: NSObject {
 	var url: URL?
 	let data: Data
 	var xmlParser: XMLParser!
-	var root: Element! { return self.currentTree.first }
+	var document: SVGDocument!
 	var size: CGSize?
 	
 	var title: String?
@@ -32,11 +32,8 @@ class SVGParser: NSObject {
 	}
 	
 	func finished() {
-		print("Done: \(self.root!.toString())")
+		self.image.document = self.document
 	}
 	
-	func draw(in ctx: CGContext) {
-		self.root?.draw(in: ctx)
-	}
 }
 

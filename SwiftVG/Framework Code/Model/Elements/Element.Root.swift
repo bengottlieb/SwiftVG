@@ -1,5 +1,5 @@
 //
-//  SVGParser+Element+svg.swift
+//  Element.Root.swift
 //  SwiftVG
 //
 //  Created by Ben Gottlieb on 4/21/18.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension SVGParser {
-	class Element_svg: ContainerElement, CustomStringConvertible {
+extension Element {
+	class Root: ContainerElement, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		

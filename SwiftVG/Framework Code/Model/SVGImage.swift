@@ -11,17 +11,18 @@ import Foundation
 public class SVGImage: CustomStringConvertible {
 	public var viewBox: CGRect!
 	public var size = CGSize.zero
-
-	var parser: SVGParser?
+	public var drawable = false
 	
+	var document: SVGDocument! { didSet { self.drawable = true }}
+
 	public init?(url: URL) {
 		guard let data = try? Data(contentsOf: url) else { return nil }
-		self.parser = SVGParser(data: data, from: url)
-		self.parser?.start(with: self)
+		let parser = SVGParser(data: data, from: url)
+		parser.start(with: self)
 	}
 	
 	public func draw(in ctx: CGContext) {
-		self.parser?.draw(in: ctx)
+		self.document?.root.draw(in: ctx)
 	}
 	
 	public var description: String { return "Image" }

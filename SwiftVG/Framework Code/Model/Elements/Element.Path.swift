@@ -1,5 +1,5 @@
 //
-//  SVGParser+Element+path.swift
+//  Element.Path.swift
 //  SwiftVG
 //
 //  Created by Ben Gottlieb on 4/21/18.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension SVGParser {
-	class Element_path: Element, CustomStringConvertible {
+extension Element {
+	class Path: Element, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		
