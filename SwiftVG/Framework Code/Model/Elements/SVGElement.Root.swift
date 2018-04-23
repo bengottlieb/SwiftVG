@@ -49,16 +49,31 @@ extension SVGElement {
 			guard let box = self.viewBox else { return }
 			let mode = ScaleMode(rawValue: self.attributes?["preserveAspectRatio"])
 			let myAspect = box.width / box.height
-			let targetApsect = rect.width / rect.height
+			var targetRect = rect
 			switch mode {
 			case .scaleAspectFit:
-				if (myAspect > 1) == (targetApsect > 1) {
-					
+				if myAspect > 1 {
+					if targetRect.size.height > targetRect.width / myAspect {
+						targetRect.size.height = targetRect.width / myAspect
+					} else {
+						targetRect.size.width = targetRect.height * myAspect
+					}
+				} else {
+					if targetRect.size.width > targetRect.height * myAspect {
+						targetRect.size.width = targetRect.height * myAspect
+					} else {
+						targetRect.size.width = targetRect.width / myAspect
+					}
 				}
+				
+			case .scaleAspectFill: break
+				
 			default: break
 			}
 			
+			let scale = min(targetRect.width / box.width, targetRect.height / box.height)
 			
+			ctx.concatenate(CGAffineTransform(scaleX: scale, y: scale))
 		}
 	}
 }
