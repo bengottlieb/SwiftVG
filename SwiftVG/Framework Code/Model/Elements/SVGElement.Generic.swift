@@ -15,7 +15,7 @@ extension SVGElement {
 		var nameSpace: String?
 		var content: String = ""
 		
-		init(kind: SVGElement.Kind, parent: SVGElement?, attributes: [String: String]) {
+		init(kind: SVGElement.Kind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)
 		}

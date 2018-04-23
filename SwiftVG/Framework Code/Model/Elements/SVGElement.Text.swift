@@ -12,7 +12,7 @@ extension SVGElement {
 	class Text: SVGElement, ContentElement {
 		var content = ""
 		
-		init(parent: SVGElement?, attributes: [String: String]) {
+		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: .text, parent: parent)
 			self.load(attributes: attributes)
 		}

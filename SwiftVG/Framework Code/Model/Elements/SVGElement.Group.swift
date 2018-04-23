@@ -12,7 +12,7 @@ import Foundation
 
 extension SVGElement {
 	class Group: SVGElement.Container {
-		init(parent: SVGElement? = nil, attributes: [String: String]) {
+		init(parent: Container? = nil, attributes: [String: String]) {
 			super.init(kind: .group, parent: parent)
 			self.load(attributes: attributes)
 		}

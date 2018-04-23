@@ -10,7 +10,7 @@ import Foundation
 
 extension SVGElement {
 	class Ellipse: SVGElement {		
-		init(kind: Kind, parent: SVGElement?, attributes: [String: String]) {
+		init(kind: Kind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)
 		}

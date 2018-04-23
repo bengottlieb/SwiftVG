@@ -22,13 +22,12 @@ extension SVGElement {
 			return "\(self.size.width)x\(self.size.height)"
 		}
 		
-		init(parent: SVGElement? = nil, attributes: [String: String]) {
+		init(parent: Container? = nil, attributes: [String: String]) {
 			super.init(kind: .svg, parent: parent)
 			self.attributes = attributes
 			self.viewBox = attributes["viewBox"]?.viewBox
 			self.size.width = attributes["width"]?.dimension ?? 0
 			self.size.height = attributes["height"]?.dimension ?? 0
 		}
-		
 	}
 }

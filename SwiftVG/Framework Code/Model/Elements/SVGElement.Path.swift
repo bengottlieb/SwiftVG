@@ -48,7 +48,7 @@ extension SVGElement {
 			return "Path"
 		}
 		
-		init(parent: SVGElement?, attributes: [String: String]) {
+		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: .path, parent: parent)
 			self.load(attributes: attributes)
 		}

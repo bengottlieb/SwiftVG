@@ -10,7 +10,7 @@ import Foundation
 
 class SVGElement {
 	let kind: SVGElement.Kind
-	var parent: SVGElement!
+	var parent: Container!
 	var attributes: [String: String]?
 	var styles: CSSFragment?
 
@@ -19,7 +19,7 @@ class SVGElement {
 	var id: String? { return self.attributes?["id"] }
 	var `class`: String? { return self.attributes?["class"] }
 	
-	init(kind: SVGElement.Kind, parent: SVGElement?) {
+	init(kind: SVGElement.Kind, parent: Container?) {
 		self.kind = kind
 		self.parent = parent
 	}
@@ -27,6 +27,15 @@ class SVGElement {
 	func load(attributes: [String: String]?) {
 		self.attributes = attributes
 		if let style = attributes?["style"] { self.styles = CSSFragment(css: style) }
+	}
+	
+	var root: Root? {
+		var parent = self.parent
+		while true {
+			if let root = parent as? Root { return root }
+			parent = parent?.parent
+			if parent == nil { return nil }
+		}
 	}
 }
 
@@ -57,10 +66,10 @@ extension SVGElement {
 
 extension SVGElement {
 	enum Kind: String { case unknown
-		case svg, path, group = "g", ellipse
+		case svg, path, group = "g", ellipse, circle, rect, defs, use
 		
 		// not yet implemented
-		case defs, use, rect, line, circle, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, tspan, work = "Work", style, desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
+		case line, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, tspan, work = "Work", style, desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
 		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
 		case colorProfile = "color-profile"
 		case animate, animateMotion, animateColor, animateTransform
@@ -68,9 +77,11 @@ extension SVGElement {
 		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
 		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
 
-		func element(in parent: SVGElement?, attributes: [String: String]) -> SVGElement? {
+		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
 			switch self {
 			case .svg: return SVGElement.Root(parent: parent, attributes: attributes)
+			case .defs: return SVGElement.Defs(parent: parent, attributes: attributes)
+			case .use: return SVGElement.Use(parent: parent, attributes: attributes)
 			case .path: return SVGElement.Path(parent: parent, attributes: attributes)
 			case .group: return SVGElement.Group(parent: parent, attributes: attributes)
 			case .text: return SVGElement.Text(parent: parent, attributes: attributes)
