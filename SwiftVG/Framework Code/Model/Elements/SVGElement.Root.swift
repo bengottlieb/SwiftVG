@@ -9,7 +9,7 @@
 import Foundation
 
 extension SVGElement {
-	class Root: Container, CustomStringConvertible {
+	class Root: Container, SetsViewport, CustomStringConvertible {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		
@@ -24,56 +24,11 @@ extension SVGElement {
 		
 		init(parent: SVGElement? = nil, attributes: [String: String]) {
 			super.init(kind: .svg, parent: parent)
+			self.attributes = attributes
 			self.viewBox = attributes["viewBox"]?.viewBox
 			self.size.width = attributes["width"]?.dimension ?? 0
 			self.size.height = attributes["height"]?.dimension ?? 0
 		}
 		
-		public enum ScaleMode { case scaleToFill, scaleAspectFit, scaleAspectFill, none, center, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight
-			
-			init(rawValue: String?) {
-				guard let raw = rawValue else { self = .scaleAspectFit; return }
-				let components = raw.components(separatedBy: " ")
-				if components.count == 0 || components.first == "none" { self = .none; return }
-				
-				if components.count > 1 {
-					if components.last == "meet" { self = .scaleAspectFit; return }
-					if components.last == "slice" { self = .scaleAspectFill; return }
-				}
-				
-				self = .scaleAspectFit
-			}
-		}
-
-		func applyTransform(to ctx: CGContext, in rect: CGRect) {
-			guard let box = self.viewBox else { return }
-			let mode = ScaleMode(rawValue: self.attributes?["preserveAspectRatio"])
-			let myAspect = box.width / box.height
-			var targetRect = rect
-			switch mode {
-			case .scaleAspectFit:
-				if myAspect > 1 {
-					if targetRect.size.height > targetRect.width / myAspect {
-						targetRect.size.height = targetRect.width / myAspect
-					} else {
-						targetRect.size.width = targetRect.height * myAspect
-					}
-				} else {
-					if targetRect.size.width > targetRect.height * myAspect {
-						targetRect.size.width = targetRect.height * myAspect
-					} else {
-						targetRect.size.width = targetRect.width / myAspect
-					}
-				}
-				
-			case .scaleAspectFill: break
-				
-			default: break
-			}
-			
-			let scale = min(targetRect.width / box.width, targetRect.height / box.height)
-			
-			ctx.concatenate(CGAffineTransform(scaleX: scale, y: scale))
-		}
 	}
 }

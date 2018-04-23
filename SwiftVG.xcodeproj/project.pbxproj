@@ -29,6 +29,10 @@
 		B50C26D3208CF1C4007BF209 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26CF208CF0E3007BF209 /* Color+Extension.swift */; };
 		B50C26D5208CF3EC007BF209 /* SVGElement.Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */; };
 		B50C26D6208CF3EC007BF209 /* SVGElement.Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */; };
+		B50C26D8208E4B5F007BF209 /* SVGPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */; };
+		B50C26D9208E4B5F007BF209 /* SVGPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */; };
+		B50C26DB208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */; };
+		B50C26DC208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */; };
 		B53173C11F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */; };
 		B53173C31F5F4CCE00F9C5AB /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
@@ -157,6 +161,8 @@
 		B50C26CB208CB318007BF209 /* SVGElement.Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Generic.swift; sourceTree = "<group>"; };
 		B50C26CF208CF0E3007BF209 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Container.swift; sourceTree = "<group>"; };
+		B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPlacement.swift; sourceTree = "<group>"; };
+		B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+SetsViewport.swift"; sourceTree = "<group>"; };
 		B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftVGUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVGUnitTests.swift; sourceTree = "<group>"; };
 		B53173C21F5F4CCE00F9C5AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 				B5417D70208BFED700C678C5 /* SVGElement.swift */,
 				B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */,
 				B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */,
+				B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */,
 				B50C26CB208CB318007BF209 /* SVGElement.Generic.swift */,
 				B5417D79208C12FD00C678C5 /* SVGElement.Root.swift */,
 				B5417D7C208C182B00C678C5 /* SVGElement.Path.swift */,
@@ -302,6 +309,7 @@
 				B5417D83208D0DE200C678C5 /* SVGElement.Group.swift */,
 				B5417D99208D882A00C678C5 /* SVGElement.Ellipse.swift */,
 				B5417D9C208D8A2000C678C5 /* SVGElement.Rect.swift */,
+				B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -679,6 +687,8 @@
 			files = (
 				B5417D87208D108E00C678C5 /* String+Transform.swift in Sources */,
 				B5417D71208BFED700C678C5 /* SVGElement.swift in Sources */,
+				B50C26D8208E4B5F007BF209 /* SVGPlacement.swift in Sources */,
+				B50C26DB208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */,
 				B5417D7D208C182B00C678C5 /* SVGElement.Path.swift in Sources */,
 				B5417D67208B903B00C678C5 /* SVGImage.swift in Sources */,
 				B50C26CC208CB318007BF209 /* SVGElement.Generic.swift in Sources */,
@@ -708,6 +718,8 @@
 			files = (
 				B5417D88208D108E00C678C5 /* String+Transform.swift in Sources */,
 				B5417D72208BFED700C678C5 /* SVGElement.swift in Sources */,
+				B50C26D9208E4B5F007BF209 /* SVGPlacement.swift in Sources */,
+				B50C26DC208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */,
 				B5417D7E208C182B00C678C5 /* SVGElement.Path.swift in Sources */,
 				B5417D68208B903B00C678C5 /* SVGImage.swift in Sources */,
 				B50C26CD208CB318007BF209 /* SVGElement.Generic.swift in Sources */,
