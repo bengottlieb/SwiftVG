@@ -21,12 +21,15 @@ public class SVGImage: CustomStringConvertible {
 		parser.start(with: self)
 	}
 	
-	public func draw(in ctx: CGContext) {
-		self.document?.root.draw(in: ctx)
-	}
-	
 	public var description: String { return "Image" }
 }
 
 extension SVGImage {
+}
+
+extension CGContext {
+	public func draw(_ image: SVGImage, in: CGRect) {
+		image.document?.root.draw(in: self)
+
+	}
 }

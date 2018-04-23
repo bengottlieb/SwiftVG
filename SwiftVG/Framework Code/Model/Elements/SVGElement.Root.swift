@@ -28,5 +28,37 @@ extension SVGElement {
 			self.size.width = attributes["width"]?.dimension ?? 0
 			self.size.height = attributes["height"]?.dimension ?? 0
 		}
+		
+		public enum ScaleMode { case scaleToFill, scaleAspectFit, scaleAspectFill, none, center, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight
+			
+			init(rawValue: String?) {
+				guard let raw = rawValue else { self = .scaleAspectFit; return }
+				let components = raw.components(separatedBy: " ")
+				if components.count == 0 || components.first == "none" { self = .none; return }
+				
+				if components.count > 1 {
+					if components.last == "meet" { self = .scaleAspectFit; return }
+					if components.last == "slice" { self = .scaleAspectFill; return }
+				}
+				
+				self = .scaleAspectFit
+			}
+		}
+
+		func applyTransform(to ctx: CGContext, in rect: CGRect) {
+			guard let box = self.viewBox else { return }
+			let mode = ScaleMode(rawValue: self.attributes?["preserveAspectRatio"])
+			let myAspect = box.width / box.height
+			let targetApsect = rect.width / rect.height
+			switch mode {
+			case .scaleAspectFit:
+				if (myAspect > 1) == (targetApsect > 1) {
+					
+				}
+			default: break
+			}
+			
+			
+		}
 	}
 }

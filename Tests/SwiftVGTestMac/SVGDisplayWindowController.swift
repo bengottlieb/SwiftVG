@@ -45,7 +45,9 @@ class SVGImageView: NSView {
 	override func draw(_ dirtyRect: NSRect) {
 		let ctx = NSGraphicsContext.current!.cgContext
 
-		self.image?.draw(in: ctx)
+		if let image = self.image {
+			ctx.draw(image, in: self.bounds)
+		}
 	}
 }
 
