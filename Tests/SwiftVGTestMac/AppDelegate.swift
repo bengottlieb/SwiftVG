@@ -16,9 +16,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		let url = Bundle.main.url(forResource: "africa", withExtension: "svg", subdirectory: "Sample Images")!
+		if let previous = UserDefaults.standard.string(forKey: "last-path") {
+			SVGDisplayWindowController(path: previous).showWindow(nil)
+		} else {
+			let url = Bundle.main.url(forResource: "text", withExtension: "svg", subdirectory: "Sample Images")!
 
-		SVGDisplayWindowController(path: url.path).showWindow(nil)
+			SVGDisplayWindowController(path: url.path).showWindow(nil)
+		}
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -31,6 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func application(_ sender: NSApplication, openFiles filenames: [String]) {
 		for file in filenames {
+			UserDefaults.standard.set(file, forKey: "last-path")
 			SVGDisplayWindowController(path: file).showWindow(nil)
 			//print(image?.description ?? "")
 		}

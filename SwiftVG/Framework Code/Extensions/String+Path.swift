@@ -43,26 +43,25 @@ extension String {
 		return nil
 	}
 	
-	func generateBezierPaths() throws -> [CGPath] {
+	func generateBezierPaths() throws -> CGPath {
 		var tokenizer = PathTokenizer(string: self)
-		var paths: [CGPath] = []
-		var path: CGMutablePath!
+		let path = CGMutablePath()
 		var lastPoint = CGPoint.zero
-		var firstPoint: CGPoint?
+		var firstPoint = CGPoint.zero
+		var justMoving = true
 		var previousCurve: PreviousCurve?
 		
 		while true {
 			guard let command = tokenizer.nextCommand() else { break }
 			switch command {
 			case .move, .moveAbs:
-				firstPoint = nil
-				path = CGMutablePath()
-				paths.append(path)
+				justMoving = true
 				while true {
 					guard var point = tokenizer.nextPoint() else { break }
 					if command == .move { point += lastPoint }
-					if firstPoint == nil {
+					if justMoving {
 						firstPoint = point
+						justMoving = false
 						path.move(to: point)
 					} else {
 						path.addLine(to: point)
@@ -112,6 +111,7 @@ extension String {
 				
 			case .closePath, .closePathAbs:
 				path.closeSubpath()
+				lastPoint = firstPoint
 				
 			case .curve, .curveAbs:
 				while true {
@@ -188,7 +188,7 @@ extension String {
 		}
 		if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
 		
-		return paths
+		return path
 	}
 	
 	struct PathTokenizer {

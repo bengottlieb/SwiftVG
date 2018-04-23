@@ -28,4 +28,24 @@ extension SVGElement {
 		if let attr = self.attributes?["stroke-width"] { return CGFloat(Double(attr) ?? 0) }
 		return nil
 	}
+	
+	var cgFont: CGFont? {
+		guard let family = self.styles?[.fontFamily]?.string else { return nil }
+		
+		return CGFont(family as CFString)
+	}
+	
+	var font: SVGFont? {
+		guard let size = self.fontSize else { return nil }
+		guard let family = self.styles?[.fontFamily]?.string else {
+			return SVGFont.systemFont(ofSize: size)
+		}
+
+		return SVGFont(name: family, size: size) ?? SVGFont.systemFont(ofSize: size)
+	}
+	
+	var fontSize: CGFloat? {
+		guard let size = self.styles?[.fontSize]?.float else { return nil }
+		return size
+	}
 }

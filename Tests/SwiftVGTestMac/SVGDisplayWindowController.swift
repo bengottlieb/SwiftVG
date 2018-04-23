@@ -21,6 +21,8 @@ class SVGDisplayWindowController: NSWindowController {
 		self.init(windowNibName: NSNib.Name("SVGDisplayWindowController"))
 		self.image = SVGImage(url: URL(fileURLWithPath: path))
 		
+		self.window?.title = (path as NSString).lastPathComponent
+
 		SVGDisplayWindowController.windows.append(self)
 	}
 	

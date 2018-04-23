@@ -73,6 +73,7 @@ extension SVGElement {
 			case .svg: return SVGElement.Root(parent: parent, attributes: attributes)
 			case .path: return SVGElement.Path(parent: parent, attributes: attributes)
 			case .group: return SVGElement.Group(parent: parent, attributes: attributes)
+			case .text: return SVGElement.Text(parent: parent, attributes: attributes)
 			default: return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
 			}
 		}

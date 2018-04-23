@@ -10,27 +10,32 @@ import Foundation
 
 extension SVGElement {
 	class Path: SVGElement, CustomStringConvertible {
-		var viewBox: CGRect?
-		var size: CGSize = .zero
 		var indicateFirstPoint = false
 		
 		override func draw(in ctx: CGContext) {			
 			guard let data = self.attributes?["d"] else { return }
-			let paths = try! data.generateBezierPaths()
+
+			ctx.saveGState()
+			defer { ctx.restoreGState() }
+
+			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
-			for path in paths {
-				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
-				if let fill = self.fillColor {
-					fill.setFill()
-					ctx.addPath(path)
-					ctx.fillPath()
-				}
-				if let stroke = self.strokeColor {
-					stroke.setStroke()
-					ctx.addPath(path)
-					ctx.strokePath()
-				}
+			let path = try! data.generateBezierPaths()
+			
+			
+			//for path in paths {
+			if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
+			if let fill = self.fillColor {
+				fill.setFill()
+				ctx.addPath(path)
+				ctx.fillPath()
 			}
+			if let stroke = self.strokeColor {
+				stroke.setStroke()
+				ctx.addPath(path)
+				ctx.strokePath()
+			}
+			
 			if self.indicateFirstPoint, let first = data.firstPathPoint {
 				ctx.beginPath()
 				ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)

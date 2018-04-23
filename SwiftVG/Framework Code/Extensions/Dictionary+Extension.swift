@@ -18,4 +18,11 @@ extension Dictionary where Key == String, Value == String {
 		
 		return result + "]"
 	}
+	
+	subscript(float key: String) -> CGFloat? {
+		guard let raw = self[key] else { return nil }
+		guard let dbl = Double(raw) else { return nil }
+		
+		return CGFloat(dbl)
+	}
 }

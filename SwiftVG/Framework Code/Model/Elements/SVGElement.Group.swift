@@ -19,13 +19,10 @@ extension SVGElement {
 		
 		override func draw(in ctx: CGContext) {
 			ctx.saveGState()
+			defer { ctx.restoreGState() }
 			
-			if let transform = self.attributes?["transform"]?.embeddedTransform {
-				ctx.concatenate(transform)
-			}
-			
+			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			super.draw(in: ctx)
-			ctx.restoreGState()
 		}
 	}
 }

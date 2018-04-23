@@ -10,7 +10,7 @@ import Foundation
 
 class CSSFragment {
 	enum Property: String {
-		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight"
+		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight", textAlign = "text-align", lineHeight = "line-height", textIndent = "text-indent", textTransform = "text-transform"
 		case direction, letterSpacing = "letter-spacing", textDecoration = "text-decoration", unicodeBidi = "unicode-bidi", wordSpacing = "word-spacing"
 		case clip, color, cursor, display, overflow, visibility
 		case clipPath = "clip-path", clipRule = "clip-rule", mask, opacity

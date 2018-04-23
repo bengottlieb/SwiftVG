@@ -26,10 +26,19 @@ class CSSValue {
 
 	var float: CGFloat? {
 		if value == nil {
-			let dbl = Double(self.raw) ?? 0
-			self.value = CGFloat(dbl)
+			if let dbl = Double(self.raw) {
+				self.value = CGFloat(dbl)
+			}
+			
+			let filtered = self.raw.trimmingCharacters(in: CharacterSet.decimalDigits.inverted)
+			if let dbl = Double(filtered) {
+				self.value = CGFloat(dbl)
+			}
+
 		}
 		
 		return self.value as? CGFloat
 	}
+	
+	var string: String { return self.raw }
 }
