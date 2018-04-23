@@ -131,7 +131,7 @@ extension String {
 
 
 			case .arc, .arcAbs:
-				guard var rₓ = tokenizer.nextFloat(), var rᵧ = tokenizer.nextFloat(), let φ = tokenizer.nextFloat(), let largeArcFlag = tokenizer.nextBool(), let sweepFlag = tokenizer.nextBool(), var p2 = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
+				guard var rₓ = tokenizer.nextFloat(), var rᵧ = tokenizer.nextFloat(), var φ = tokenizer.nextFloat(), let largeArcFlag = tokenizer.nextBool(), let sweepFlag = tokenizer.nextBool(), var p2 = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
 				
 				if command == .arc { p2 += lastPoint }
 				if rₓ == 0 || rᵧ == 0 {
@@ -139,6 +139,8 @@ extension String {
 					break
 				}
 				
+				φ = φ * 2 * .pi / 360
+				if φ > 2 * .pi { φ -= .pi * 2 }
 				let p1 = lastPoint
 				let cosφ = cos(φ)
 				let sinφ = sin(φ)
