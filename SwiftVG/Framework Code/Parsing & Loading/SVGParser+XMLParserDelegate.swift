@@ -30,6 +30,11 @@ extension SVGParser: XMLParserDelegate {
 			if !elementName.contains(":") { print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")") }
 			return
 		}
+		
+		if let element = (self.currentTree.last as? SVGElement.Container)?.createElement(ofKind: kind, with: attributes) {
+			self.currentTree.append(element)
+			return
+		}
 		guard let element = kind.element(in: self.currentTree.last as? SVGElement.Container, attributes: attributes) else { return }
 		
 		if self.document == nil, let root = element as? SVGElement.Root { self.document = SVGDocument(root: root) }

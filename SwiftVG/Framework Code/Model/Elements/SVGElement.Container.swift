@@ -35,6 +35,10 @@ extension SVGElement {
 			if let result = self.defs?.child(with: search) { return result }
 			return self.parent?.definition(for: search)
 		}
+		
+		func createElement(ofKind: Kind, with attributes: [String: String]) -> SVGElement? {
+			return nil
+		}
 	}
 }
 

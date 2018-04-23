@@ -9,7 +9,7 @@
 import Foundation
 
 extension SVGElement {
-	class Text: SVGElement, ContentElement {
+	class Text: Container, ContentElement {
 		var content = ""
 		
 		init(parent: Container?, attributes: [String: String]) {
@@ -31,11 +31,32 @@ extension SVGElement {
 			var attr: [String: Any] = [NSFontAttributeName: font]
 			if let color = self.fillColor { attr[NSForegroundColorAttributeName] = color }
 			
-			let string = NSAttributedString(string: self.content, attributes: attr)
+			let string = NSAttributedString(string: self.content.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: " "), attributes: attr)
 			let x = self.attributes?[float: "x"] ?? 0
 			let y = self.attributes?[float: "y"] ?? 0
 
-			string.draw(at: CGPoint(x: x, y: y - string.size().height))
+			if x != 0 || y != 0 { ctx.concatenate(CGAffineTransform(translationX: x, y: y))}
+			
+			string.draw(at: CGPoint(x: 0, y: -string.size().height))
+			super.draw(in: ctx)
+		}
+		
+		override func createElement(ofKind kind: Kind, with attributes: [String: String]) -> SVGElement? {
+			if kind == .tspan {
+				return Tspan(in: self)
+			}
+			return nil
+		}
+
+	}
+	
+	class Tspan: SVGElement, ContentElement {
+		init(in parent: Text) {
+			super.init(kind: .tspan, parent: parent)
+		}
+		
+		func append(content: String) {
+			(self.parent as? Text)?.append(content: content)
 		}
 	}
 }
