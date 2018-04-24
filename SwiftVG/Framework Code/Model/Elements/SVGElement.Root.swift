@@ -24,6 +24,16 @@ extension SVGElement {
 			self.viewBox = attributes["viewBox"]?.viewBox
 			self.size.width = attributes["width"]?.dimension ?? 0
 			self.size.height = attributes["height"]?.dimension ?? 0
+			if self.viewBox == nil { self.viewBox = CGRect(origin: .zero, size: self.size) }
+		}
+		
+		override func draw(with ctx: CGContext, in frame: CGRect) {
+			guard let box = self.viewBox else { return }
+			ctx.saveGState()
+			self.applyTransform(to: ctx, in: box)
+			self.drawChildren(with: ctx, in: box)
+			ctx.restoreGState()
+
 		}
 	}
 }

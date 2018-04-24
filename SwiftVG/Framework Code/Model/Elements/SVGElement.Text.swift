@@ -23,7 +23,7 @@ extension SVGElement {
 			if content.hasSuffix(" ") { self.content += " " }
 		}
 		
-		override func draw(in ctx: CGContext) {
+		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard !self.content.isEmpty, let font = self.font else { return }
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
@@ -40,7 +40,7 @@ extension SVGElement {
 			if x != 0 || y != 0 { ctx.concatenate(CGAffineTransform(translationX: x, y: y))}
 			
 			string.draw(at: CGPoint(x: 0, y: -string.size().height))
-			super.draw(in: ctx)
+			super.draw(with: ctx, in: frame)
 		}
 		
 		override func createElement(ofKind kind: Kind, with attributes: [String: String]) -> SVGElement? {

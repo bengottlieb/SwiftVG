@@ -16,7 +16,7 @@ extension SVGElement {
 			parent?.defs = self
 		}
 		
-		override func draw(in ctx: CGContext) { }
+		override func draw(with ctx: CGContext, in frame: CGRect) { }
 	}
 }
 

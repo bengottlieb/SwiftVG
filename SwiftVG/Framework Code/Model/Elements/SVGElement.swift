@@ -14,7 +14,7 @@ class SVGElement {
 	var attributes: [String: String]?
 	var styles: CSSFragment?
 
-	func draw(in ctx: CGContext) {}
+	func draw(with ctx: CGContext, in frame: CGRect) {}
 	
 	var id: String? { return self.attributes?["id"] }
 	var `class`: String? { return self.attributes?["class"] }

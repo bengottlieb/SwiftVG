@@ -17,12 +17,12 @@ extension SVGElement {
 			self.load(attributes: attributes)
 		}
 		
-		override func draw(in ctx: CGContext) {
+		override func draw(with ctx: CGContext, in frame: CGRect) {
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
 			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
-			super.draw(in: ctx)
+			super.draw(with: ctx, in: frame)
 		}
 	}
 }

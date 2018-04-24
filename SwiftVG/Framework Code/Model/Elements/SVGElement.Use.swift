@@ -18,9 +18,9 @@ extension SVGElement {
 			self.ref = attributes["xlink:href"]
 		}
 		
-		override func draw(in ctx: CGContext) {
+		override func draw(with ctx: CGContext, in frame: CGRect) {
 			if let ref = self.ref, let element = self.parent?.definition(for: ref) {
-				element.draw(in: ctx)
+				element.draw(with: ctx, in: frame)
 			}
 		}
 	}

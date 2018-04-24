@@ -15,7 +15,7 @@ extension SVGElement {
 			self.load(attributes: attributes)
 		}
 
-		override func draw(in ctx: CGContext) {
+		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard let cx = self.attributes?[float: "cx"], let cy = self.attributes?[float: "cy"] else { return }
 			
 			ctx.saveGState()

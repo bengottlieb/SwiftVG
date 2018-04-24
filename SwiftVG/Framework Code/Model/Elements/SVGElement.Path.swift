@@ -12,7 +12,7 @@ extension SVGElement {
 	class Path: SVGElement, CustomStringConvertible {
 		var indicateFirstPoint = false
 		
-		override func draw(in ctx: CGContext) {			
+		override func draw(with ctx: CGContext, in frame: CGRect) {			
 			guard let data = self.attributes?["d"] else { return }
 
 			ctx.saveGState()

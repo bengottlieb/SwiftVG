@@ -14,10 +14,10 @@ extension SVGElement {
 		var defs: Defs?
 
 		func append(child: SVGElement) { self.children.append(child) }
-		override func draw(in ctx: CGContext) { self.drawChildren(in: ctx) }
-		func drawChildren(in ctx: CGContext) {
+		override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
+		func drawChildren(with ctx: CGContext, in frame: CGRect) {
 			for child in self.children {
-				child.draw(in: ctx)
+				child.draw(with: ctx, in: frame)
 			}
 		}
 		

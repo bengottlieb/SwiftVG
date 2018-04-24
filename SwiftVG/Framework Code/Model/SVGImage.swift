@@ -29,9 +29,6 @@ extension SVGImage {
 
 extension CGContext {
 	public func draw(_ image: SVGImage, in frame: CGRect) {
-		self.saveGState()
-		image.document?.root.applyTransform(to: self, in: frame)
-		image.document?.root.draw(in: self)
-		self.restoreGState()
+		image.document?.root.draw(with: self, in: frame)
 	}
 }
