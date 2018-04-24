@@ -31,6 +31,7 @@ extension SVGElement {
 			}
 			
 			if let stroke = self.strokeColor {
+				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
 				stroke.setStroke()
 				ctx.stroke(rect)
 			}

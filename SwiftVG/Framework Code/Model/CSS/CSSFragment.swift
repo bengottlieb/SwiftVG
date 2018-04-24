@@ -36,7 +36,7 @@ class CSSFragment {
 			let pieces = component.components(separatedBy: ":")
 			guard pieces.count == 2 else { continue }
 			
-			guard let property = Property(rawValue: pieces[0]) else {
+			guard let property = Property(rawValue: pieces[0].trimmingCharacters(in: .whitespaces)) else {
 				print("Unknown CSS property: \(pieces[0])")
 				continue
 			}

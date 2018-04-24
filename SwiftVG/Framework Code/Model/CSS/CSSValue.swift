@@ -13,7 +13,7 @@ class CSSValue {
 	var value: Any?
 	
 	init?(string: String, for property: CSSFragment.Property) {
-		self.raw = string
+		self.raw = string.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 	
 	var color: SVGColor? {
