@@ -9,13 +9,9 @@
 import Foundation
 
 extension SVGElement {
-	class Root: Container, SetsViewport, CustomStringConvertible {
+	class Root: Container, SetsViewport {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
-		
-		var description: String {
-			return "SVG <\(self.sizeDescription)>"
-		}
 		
 		var sizeDescription: String {
 			if let box = self.viewBox { return "\(box.width)x\(box.height)" }

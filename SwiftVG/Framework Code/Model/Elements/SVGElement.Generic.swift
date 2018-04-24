@@ -10,7 +10,7 @@ import Foundation
 
 
 extension SVGElement {
-	class Generic: Container, CustomStringConvertible, CustomDebugStringConvertible {
+	class Generic: Container {
 		var qualifiedName: String?
 		var nameSpace: String?
 		var content: String = ""
@@ -23,29 +23,6 @@ extension SVGElement {
 		func append(content: String){
 			self.content += content
 		}
-		
-		var description: String {
-			var result = self.kind.rawValue
-			
-			if !self.content.isEmpty { result += ": \(self.content)" }
-			if self.attributes?.isEmpty == false {
-				result += " { "
-				for (key, value) in self.attributes! {
-					result += "\(key): \(value), "
-				}
-				result += "} "
-			}
-			if !self.children.isEmpty {
-				result += " [\n"
-				for kid in self.children {
-					result += "\t \(kid)\n"
-				}
-				result += "]\n"
-			}
-			return result
-		}
-		
-		var debugDescription: String { return self.description }
 	}
 }
 

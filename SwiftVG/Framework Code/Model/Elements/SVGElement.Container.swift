@@ -9,7 +9,7 @@
 import Foundation
 
 extension SVGElement {
-	class Container: SVGElement {
+	class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
 		var children: [SVGElement] = []
 		var defs: Defs?
 
@@ -39,6 +39,29 @@ extension SVGElement {
 		func createElement(ofKind: Kind, with attributes: [String: String]) -> SVGElement? {
 			return nil
 		}
+		
+		var description: String { return self.hierarchicalDescription() }
+		
+		override func hierarchicalDescription(_ level: Int = 0) -> String {
+			var result = self.kind.rawValue
+			let prefix = String(repeating: "\t", count: level)
+			
+			//if let contentable = self as? ContentElement, !contentable.content.isEmpty { result += ": \(contentable.content)" }
+			if self.attributes?.isEmpty == false {
+				result.append(", " + self.attributes!.prettyString)
+			}
+			if !self.children.isEmpty {
+				result += " [\n"
+				for kid in self.children {
+					result += "\(prefix) \(kid.hierarchicalDescription(level + 1))\n"
+				}
+				result += "\(prefix) ]\n"
+			}
+			return result
+		}
+		
+		var debugDescription: String { return self.description }
+
 	}
 }
 

@@ -19,6 +19,8 @@ class SVGElement {
 	var id: String? { return self.attributes?["id"] }
 	var `class`: String? { return self.attributes?["class"] }
 	
+	func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.rawValue)> \(self.attributes?.prettyString ?? "")"}
+	
 	init(kind: SVGElement.Kind, parent: Container?) {
 		self.kind = kind
 		self.parent = parent
