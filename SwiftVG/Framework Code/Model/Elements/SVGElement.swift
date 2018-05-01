@@ -39,6 +39,9 @@ class SVGElement {
 			if parent == nil { return nil }
 		}
 	}
+	
+	func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
+
 }
 
 protocol ContentElement {
@@ -64,6 +67,10 @@ extension SVGElement {
 		}
 		return result + ">\n"
 	}
+}
+
+extension SVGElement {
+	enum Dimension { case width, height }
 }
 
 extension SVGElement {

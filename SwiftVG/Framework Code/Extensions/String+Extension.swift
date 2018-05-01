@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-	var viewBox: CGRect? {
+	func viewBox(in element: SVGElement) -> CGRect? {
 		var components = self.components(separatedBy: ",")
 		if components.count != 4 { components = self.components(separatedBy: .whitespaces) }
 		if components.count != 4 { return nil }
@@ -17,8 +17,14 @@ extension String {
 		return CGRect(x: Double(components[0]) ?? 0, y: Double(components[1]) ?? 0, width: Double(components[2]) ?? 0, height: Double(components[3]) ?? 0)
 	}
 	
-	var dimension: CGFloat? {
+	func dimension(in element: SVGElement, for dim: SVGElement.Dimension) -> CGFloat? {
 		if let dbl = Double(self) { return CGFloat(dbl) }
+		
+		if self.contains("%"),
+		   let percent = Double(self.trimmingCharacters(in: CharacterSet(charactersIn: "%"))),
+		   let parentDim = element.parentDimension(for: dim) {
+			return parentDim * CGFloat(percent / 100)
+		}
 		
 		let filtered = self.trimmingCharacters(in: .letters)
 		if let dbl = Double(filtered) { return CGFloat(dbl) }

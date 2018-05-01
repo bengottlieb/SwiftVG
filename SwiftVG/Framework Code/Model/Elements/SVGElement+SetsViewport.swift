@@ -11,3 +11,13 @@ import Foundation
 protocol SetsViewport: class {
 	var viewBox: CGRect? { get }
 }
+
+extension SetsViewport {
+	func dimension(for dim: SVGElement.Dimension) -> CGFloat? {
+		switch dim {
+		case .width: return self.viewBox?.width
+		case .height: return self.viewBox?.height
+		}
+	}
+}
+
