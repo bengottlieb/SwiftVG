@@ -77,6 +77,8 @@
 		B5417DA1208E694800C678C5 /* SVGElement.Defs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D9F208E694800C678C5 /* SVGElement.Defs.swift */; };
 		B5417DA3208E6A7500C678C5 /* SVGElement.Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */; };
 		B5417DA4208E6A7500C678C5 /* SVGElement.Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */; };
+		B5550AFB20C9DB380053E1AC /* SVGImage+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */; };
+		B5550AFC20C9DB380053E1AC /* SVGImage+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */; };
 		B55523531F5963A7005D026B /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B55523551F5963C1005D026B /* SwiftVG.framework in Copy Libraries */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B583A78A1CB4951C00AF73BA /* SwiftVG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -191,6 +193,7 @@
 		B5417D9C208D8A2000C678C5 /* SVGElement.Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Rect.swift; sourceTree = "<group>"; };
 		B5417D9F208E694800C678C5 /* SVGElement.Defs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Defs.swift; sourceTree = "<group>"; };
 		B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Use.swift; sourceTree = "<group>"; };
+		B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Export.swift"; sourceTree = "<group>"; };
 		B58D64671A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58D64681A898F81005A0002 /* SwiftVG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG.h; sourceTree = "<group>"; };
 		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				B5417D66208B903B00C678C5 /* SVGImage.swift */,
+				B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */,
 				B50C26C8208CB2E4007BF209 /* SVGDocument.swift */,
 				B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */,
 				B5417D8C208D17A600C678C5 /* CSS */,
@@ -708,6 +712,7 @@
 				B5417D74208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B50C26D5208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
 				B5417D8A208D16FF00C678C5 /* CSSFragment.swift in Sources */,
+				B5550AFB20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 				B5417D9D208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
 				B5417D94208D38CD00C678C5 /* SVGElement.Text.swift in Sources */,
 				B5417D84208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
@@ -741,6 +746,7 @@
 				B5417D75208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B50C26D6208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
 				B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */,
+				B5550AFC20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 				B5417D9E208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
 				B5417D95208D38CD00C678C5 /* SVGElement.Text.swift in Sources */,
 				B5417D85208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,

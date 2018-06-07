@@ -8,8 +8,8 @@
 
 import Foundation
 
-class CSSFragment {
-	enum Property: String {
+public class CSSFragment {
+	public enum Property: String {
 		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight", textAlign = "text-align", lineHeight = "line-height", textIndent = "text-indent", textTransform = "text-transform"
 		case direction, letterSpacing = "letter-spacing", textDecoration = "text-decoration", unicodeBidi = "unicode-bidi", wordSpacing = "word-spacing"
 		case clip, color, cursor, display, overflow, visibility
@@ -21,13 +21,13 @@ class CSSFragment {
 		case alignmentBaseline = "alignment-baseline", baselineShift = "baseline-shift", dominantBaseline = "dominant-baseline", glyphOrientationHorizontal = "glyph-orientation-horizontal", glyphOrientationVertical = "glyph-orientation-vertical", kerning, textAnchor = "text-anchor", writingMode = "writing-mode"
 	}
 	
-	let css: String
-	var rules: [Property: CSSValue] = [:]
-	subscript(_ property: Property) -> CSSValue? {
+	public let css: String
+	public var rules: [Property: CSSValue] = [:]
+	public subscript(_ property: Property) -> CSSValue? {
 		return self.rules[property]
 	}
 	
-	init?(css: String?) {
+	public init?(css: String?) {
 		self.css = css ?? ""
 		guard let css = css else { return nil }
 		

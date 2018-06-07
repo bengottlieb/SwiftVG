@@ -8,15 +8,15 @@
 
 import Foundation
 
-class CSSValue {
-	let raw: String
-	var value: Any?
+public class CSSValue {
+	public let raw: String
+	public var value: Any?
 	
-	init?(string: String, for property: CSSFragment.Property) {
+	public init?(string: String, for property: CSSFragment.Property) {
 		self.raw = string.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 	
-	var color: SVGColor? {
+	public var color: SVGColor? {
 		if value == nil {
 			self.value = SVGColor(self.raw)
 		}
@@ -24,7 +24,7 @@ class CSSValue {
 		return self.value as? SVGColor
 	}
 
-	var float: CGFloat? {
+	public var float: CGFloat? {
 		if value == nil {
 			if let dbl = Double(self.raw) {
 				self.value = CGFloat(dbl)
@@ -40,5 +40,5 @@ class CSSValue {
 		return self.value as? CGFloat
 	}
 	
-	var string: String { return self.raw }
+	public var string: String { return self.raw }
 }

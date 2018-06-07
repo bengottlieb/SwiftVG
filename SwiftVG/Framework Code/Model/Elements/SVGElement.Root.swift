@@ -9,7 +9,7 @@
 import Foundation
 
 extension SVGElement {
-	class Root: Container, SetsViewport {
+	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
 		var size: CGSize = .zero
 		var dimensionsSetup = false
@@ -20,7 +20,7 @@ extension SVGElement {
 			return "\(self.size.width)x\(self.size.height)"
 		}
 		
-		override func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? {
+		public override func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? {
 			return 0
 		}
 
@@ -44,7 +44,7 @@ extension SVGElement {
 			
 		}
 		
-		override func draw(with ctx: CGContext, in frame: CGRect) {
+		public override func draw(with ctx: CGContext, in frame: CGRect) {
 			if self.parent == nil, !self.dimensionsSetup {
 				self.dimensionsSetup = true
 				self.size = frame.size

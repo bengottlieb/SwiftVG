@@ -9,9 +9,9 @@
 import Foundation
 
 #if os(OSX)
-	typealias SVGColor = NSColor
+	public typealias SVGColor = NSColor
 #else
-	typealias SVGColor = UIColor
+	public typealias SVGColor = UIColor
 #endif
 
 extension SVGColor {

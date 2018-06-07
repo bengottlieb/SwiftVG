@@ -17,15 +17,17 @@ public class SVGImage: CustomStringConvertible {
 	
 	public var document: SVGDocument! { didSet { self.drawable = true }}
 
-	public init?(url: URL) {
+	public convenience init?(url: URL) {
 		guard let data = try? Data(contentsOf: url) else { return nil }
-		self.data = data
-		let parser = SVGParser(data: data, from: url)
-		parser.start(with: self)
+		self.init(data: data)
 	}
 	
-	public init?(string: String) {
+	public convenience init?(string: String) {
 		guard let data = string.data(using: .utf8) else { return nil }
+		self.init(data: data)
+	}
+	
+	public init?(data: Data) {
 		self.data = data
 		let parser = SVGParser(data: data, from: nil)
 		parser.start(with: self)

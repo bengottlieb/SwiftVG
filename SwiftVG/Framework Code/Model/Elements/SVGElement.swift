@@ -9,29 +9,29 @@
 import Foundation
 
 public class SVGElement {
-	let kind: SVGElement.Kind
-	var parent: Container!
-	var attributes: [String: String]?
-	var styles: CSSFragment?
+	public let kind: SVGElement.Kind
+	public var parent: Container!
+	public var attributes: [String: String]?
+	public var styles: CSSFragment?
 
-	func draw(with ctx: CGContext, in frame: CGRect) {}
+	public func draw(with ctx: CGContext, in frame: CGRect) {}
 	
-	var id: String? { return self.attributes?["id"] }
-	var `class`: String? { return self.attributes?["class"] }
+	public var id: String? { return self.attributes?["id"] }
+	public var `class`: String? { return self.attributes?["class"] }
 	
-	func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.rawValue)> \(self.attributes?.prettyString ?? "")"}
+	public func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.rawValue)> \(self.attributes?.prettyString ?? "")"}
 	
-	init(kind: SVGElement.Kind, parent: Container?) {
+	public init(kind: SVGElement.Kind, parent: Container?) {
 		self.kind = kind
 		self.parent = parent
 	}
 	
-	func load(attributes: [String: String]?) {
+	public func load(attributes: [String: String]?) {
 		self.attributes = attributes
 		if let style = attributes?["style"] { self.styles = CSSFragment(css: style) }
 	}
 	
-	var root: Root? {
+	public var root: Root? {
 		var parent = self.parent
 		while true {
 			if let root = parent as? Root { return root }
@@ -40,7 +40,7 @@ public class SVGElement {
 		}
 	}
 	
-	func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
+	public func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
 
 }
 
@@ -70,11 +70,11 @@ extension SVGElement {
 }
 
 extension SVGElement {
-	enum Dimension { case width, height }
+	public enum Dimension { case width, height }
 }
 
 extension SVGElement {
-	enum Kind: String { case unknown
+	public enum Kind: String { case unknown
 		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan
 		
 		// not yet implemented

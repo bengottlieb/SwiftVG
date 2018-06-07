@@ -9,12 +9,12 @@
 import Foundation
 
 extension SVGElement {
-	class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
-		var children: [SVGElement] = []
-		var defs: Defs?
+	public class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
+		public var children: [SVGElement] = []
+		public var defs: Defs?
 
 		func append(child: SVGElement) { self.children.append(child) }
-		override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
+		public override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
 		func drawChildren(with ctx: CGContext, in frame: CGRect) {
 			for child in self.children {
 				child.draw(with: ctx, in: frame)
@@ -40,9 +40,9 @@ extension SVGElement {
 			return nil
 		}
 		
-		var description: String { return self.hierarchicalDescription() }
+		public var description: String { return self.hierarchicalDescription() }
 		
-		override func hierarchicalDescription(_ level: Int = 0) -> String {
+		public override func hierarchicalDescription(_ level: Int = 0) -> String {
 			var result = self.kind.rawValue
 			let prefix = String(repeating: "\t", count: level)
 			
@@ -60,7 +60,7 @@ extension SVGElement {
 			return result
 		}
 		
-		var debugDescription: String { return self.description }
+		public var debugDescription: String { return self.description }
 
 	}
 }
