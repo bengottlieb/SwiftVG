@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SVGElement {
+public class SVGElement {
 	let kind: SVGElement.Kind
 	var parent: Container!
 	var attributes: [String: String]?

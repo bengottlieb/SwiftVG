@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SVGDocument {
+public class SVGDocument {
 	let root: SVGElement.Root
 	
 	init(root: SVGElement.Root) {
