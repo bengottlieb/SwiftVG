@@ -9,13 +9,13 @@
 import Foundation
 
 public class SVGDocument {
-	let root: SVGElement.Root
+	public let root: SVGElement.Root
 	
 	init(root: SVGElement.Root) {
 		self.root = root
 	}
 	
-	func child(with id: String) -> SVGElement? {
+	public func child(with id: String) -> SVGElement? {
 		return self.root.child(with: id)
 	}
 }
