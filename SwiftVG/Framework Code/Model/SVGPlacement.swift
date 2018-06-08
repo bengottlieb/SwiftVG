@@ -61,7 +61,7 @@ extension SVGElement {
 	
 	func applyTransform(to ctx: CGContext, in rect: CGRect) {
 		guard let box = (self as? SetsViewport)?.viewBox else { return }
-		let placement = Placement(rawValue: self.attributes?["preserveAspectRatio"])
+		let placement = Placement(rawValue: self.attributes["preserveAspectRatio"])
 		let myAspect = box.width / box.height
 		var scaleX: CGFloat = 1
 		var scaleY: CGFloat = 1

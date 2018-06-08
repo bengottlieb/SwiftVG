@@ -9,27 +9,27 @@
 import Foundation
 
 extension SVGElement {
-	func value(for key: String) -> String? {
-		if let value = self.attributes?[key] { return value }
+	public func value(for key: String) -> String? {
+		if let value = self.attributes[key] { return value }
 		if let parent = self.parent { return parent.value(for: key) }
 		return nil
 	}
 	
-	var fillColor: SVGColor? {
+	public var fillColor: SVGColor? {
 		if let color = self.styles?[.fill]?.color { return color }
 		
 		if let attr = self.value(for: "fill") { return SVGColor(attr) }
 		return nil
 	}
 
-	var strokeColor: SVGColor? {
+	public var strokeColor: SVGColor? {
 		if let color = self.styles?[.stroke]?.color { return color }
 		
 		if let attr = self.value(for: "stroke") { return SVGColor(attr) }
 		return nil
 	}
 	
-	var strokeWidth: CGFloat? {
+	public var strokeWidth: CGFloat? {
 		if let width = self.styles?[.strokeWidth]?.float { return width }
 		if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
 		return nil

@@ -13,7 +13,8 @@ extension SVGElement {
 		public var children: [SVGElement] = []
 		public var defs: Defs?
 
-		func append(child: SVGElement) { self.children.append(child) }
+		public func append(child: SVGElement) { self.children.append(child) }
+		public func remove(child: SVGElement) { if let index = self.children.index(of: child) { self.children.remove(at: index) } }
 		public override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
 		func drawChildren(with ctx: CGContext, in frame: CGRect) {
 			for child in self.children {
@@ -21,14 +22,14 @@ extension SVGElement {
 			}
 		}
 		
-		func child(with id: String) -> SVGElement? {
+		public func child(with id: String) -> SVGElement? {
 			for child in self.children {
 				if child.id == id { return child }
 			}
 			return nil
 		}
 		
-		func definition(for id: String) -> SVGElement? {
+		public func definition(for id: String) -> SVGElement? {
 			var search = id
 			if search.hasPrefix("#") { search = search[1...] }
 
@@ -47,8 +48,8 @@ extension SVGElement {
 			let prefix = String(repeating: "\t", count: level)
 			
 			//if let contentable = self as? ContentElement, !contentable.content.isEmpty { result += ": \(contentable.content)" }
-			if self.attributes?.isEmpty == false {
-				result.append(", " + self.attributes!.prettyString)
+			if !self.attributes.isEmpty {
+				result.append(", " + self.attributes.prettyString)
 			}
 			if !self.children.isEmpty {
 				result += " [\n"
@@ -62,7 +63,7 @@ extension SVGElement {
 		
 		public var debugDescription: String { return self.description }
 
-		override func buildXMLString(prefix: String = "") -> String {
+		override open func buildXMLString(prefix: String = "") -> String {
 			if self.children.count == 0, self.content.isEmpty {
 				return self.xmlSelfClosingTag
 			}

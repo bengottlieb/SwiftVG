@@ -8,28 +8,29 @@
 
 import Foundation
 
-public class SVGElement {
+open class SVGElement: Equatable {
 	public let kind: SVGElementKind
 	public var parent: Container!
-	public var attributes: [String: String]?
+	public var attributes: [String: String]
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
 
-	public func draw(with ctx: CGContext, in frame: CGRect) {}
+	open func draw(with ctx: CGContext, in frame: CGRect) {}
 	
-	public var id: String? { return self.attributes?["id"] }
-	public var `class`: String? { return self.attributes?["class"] }
+	public var id: String? { return self.attributes["id"] }
+	open var `class`: String? { return self.attributes["class"] }
 	
-	public func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes?.prettyString ?? "")"}
+	open func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes.isEmpty ? "" : self.attributes.prettyString)"}
 	
 	public init(kind: SVGElementKind, parent: Container?) {
 		self.kind = kind
 		self.parent = parent
+		self.attributes = [:]
 	}
 	
-	public func load(attributes: [String: String]?) {
-		self.attributes = attributes
+	open func load(attributes: [String: String]?) {
+		self.attributes = attributes ?? [:]
 		if let style = attributes?["style"] { self.styles = CSSFragment(css: style) }
 	}
 	
@@ -42,7 +43,7 @@ public class SVGElement {
 		}
 	}
 	
-	public func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
+	open func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
 	
 	public func append(comment: String) {
 		if let current = self.comment {
@@ -52,19 +53,23 @@ public class SVGElement {
 		}
 	}
 
-	func append(content: String) {
+	public func append(content: String) {
 		if content.hasSuffix(" ") && !self.content.hasSuffix(" ") { self.content += " " }
 		self.content += content.trimmingCharacters(in: .whitespacesAndNewlines)
 		if content.hasSuffix(" ") { self.content += " " }
 	}
 	
-	func buildXMLString(prefix: String = "") -> String {
+	open func buildXMLString(prefix: String = "") -> String {
 		if self.content.isEmpty { return self.xmlSelfClosingTag }
 		
 		var xml = self.xmlOpenTag
 		xml += self.content
 		xml += self.xmlCloseTag
 		return xml
+	}
+	
+	static public func ==(lhs: SVGElement, rhs: SVGElement) -> Bool {
+		return lhs === rhs
 	}
 }
 
@@ -73,13 +78,13 @@ protocol ContentElement {
 }
 
 extension SVGElement {
-	func toString(depth: Int = 0) -> String {
+	public func toString(depth: Int = 0) -> String {
 		var result = String(repeating: "\t", count: depth)
 		
 		result += "<" + self.kind.tagName
 		
-		if let attr = self.attributes, attr.count > 0 {
-			result += ", " + attr.prettyString
+		if !self.attributes.isEmpty {
+			result += ", " + self.attributes.prettyString
 		}
 		
 		if let children = (self as? Container)?.children, children.count > 0 {

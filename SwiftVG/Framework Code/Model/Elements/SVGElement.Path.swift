@@ -13,12 +13,12 @@ extension SVGElement {
 		var indicateFirstPoint = false
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {			
-			guard let data = self.attributes?["d"] else { return }
+			guard let data = self.attributes["d"] else { return }
 
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 
-			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
 			let path = try! data.generateBezierPaths()
 			

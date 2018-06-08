@@ -33,6 +33,10 @@ public class SVGImage: CustomStringConvertible {
 		parser.start(with: self)
 	}
 	
+	public init(size: CGSize) {
+		self.document = SVGDocument(root: SVGElement.Root(attributes: SVGElement.Root.generateDefaultAttributes(for: size)))
+	}
+	
 	public var description: String { return "Image" }
 }
 

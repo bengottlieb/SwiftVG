@@ -9,11 +9,11 @@
 import Foundation
 
 extension SVGElement {
-	class Unknown: Container {
-		struct Kind: SVGElementKind {
-			let tagName: String
+	public class Unknown: Container {
+		public struct Kind: SVGElementKind {
+			public let tagName: String
 			
-			func isEqualTo(kind: SVGElementKind?) -> Bool {
+			public func isEqualTo(kind: SVGElementKind?) -> Bool {
 				if let other = kind as? Kind { return self.tagName == other.tagName }
 				return false
 			}
@@ -21,9 +21,9 @@ extension SVGElement {
 			
 		}
 		
-		init(name: String, attributes: [String: String]?, parent: Container?) {
+		public init(name: String, attributes: [String: String]?, parent: Container?) {
 			super.init(kind: Kind(tagName: name), parent: parent)
-			self.attributes = attributes
+			self.attributes = attributes ?? [:]
 		}
 	}
 }

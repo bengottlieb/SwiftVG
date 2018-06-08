@@ -30,13 +30,33 @@ extension SVGElement {
 			self.attributes = attributes
 		}
 		
+		static func generateDefaultAttributes(for size: CGSize) -> [String: String] {
+			let attr: [String: String] = [
+				"version": "1.1",
+				"id": "svg2",
+				"xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+				"xmlns:svg": "http://www.w3.org/2000/svg",
+				"xmlns:cc": "http://creativecommons.org/ns#",
+				"xmlns:dc": "http://purl.org/dc/elements/1.1/",
+				"xmlns": "http://www.w3.org/2000/svg",
+				"xmlns:xlink": "http://www.w3.org/1999/xlink",
+				"x": "0px",
+				"y": "0px",
+				"width": "959px",
+				"height": "593px",
+				"viewBox": "0 0 \(size.width) \(size.height)",
+				"enable-background": "new 0 0 \(size.width) \(size.height)",
+				"xml:space": "preserve",
+			]
+			return attr
+		}
+		
 		func setupDimensions() {
 			if self.dimensionsSetup { return }
 			self.dimensionsSetup = true
-			guard let attributes = self.attributes else { return }
-			self.viewBox = attributes["viewBox"]?.viewBox(in: self)
-			self.size.width = attributes["width"]?.dimension(in: self, for: .width) ?? 0
-			self.size.height = attributes["height"]?.dimension(in: self, for: .height) ?? 0
+			self.viewBox = self.attributes["viewBox"]?.viewBox(in: self)
+			self.size.width = self.attributes["width"]?.dimension(in: self, for: .width) ?? 0
+			self.size.height = self.attributes["height"]?.dimension(in: self, for: .height) ?? 0
 			if self.viewBox == nil { self.viewBox = CGRect(origin: .zero, size: self.size) }
 		}
 		

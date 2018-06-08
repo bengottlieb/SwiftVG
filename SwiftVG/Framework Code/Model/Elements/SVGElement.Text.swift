@@ -20,14 +20,14 @@ extension SVGElement {
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
-			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
 			var attr: [String: Any] = [NSFontAttributeName: font]
 			if let color = self.fillColor { attr[NSForegroundColorAttributeName] = color }
 			
 			let string = NSAttributedString(string: self.content.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
-			let x = self.attributes?[float: "x"] ?? 0
-			let y = self.attributes?[float: "y"] ?? 0
+			let x = self.attributes[float: "x"] ?? 0
+			let y = self.attributes[float: "y"] ?? 0
 
 			if x != 0 || y != 0 { ctx.concatenate(CGAffineTransform(translationX: x, y: y))}
 			

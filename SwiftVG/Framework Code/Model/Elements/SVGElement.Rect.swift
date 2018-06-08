@@ -16,12 +16,12 @@ extension SVGElement {
 		}
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {
-			guard let x = self.attributes?[float: "x"], let y = self.attributes?[float: "y"], let width = self.attributes?[float: "width"], let height = self.attributes?[float: "height"] else { return }
+			guard let x = self.attributes[float: "x"], let y = self.attributes[float: "y"], let width = self.attributes[float: "width"], let height = self.attributes[float: "height"] else { return }
 			
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
-			if let transform = self.attributes?["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
 			let rect = CGRect(x: x, y: y, width: width, height: height)
 			

@@ -9,16 +9,16 @@
 import Foundation
 
 extension SVGElement {
-	var xmlElementContents: String {
+	public var xmlElementContents: String {
 		var xml = self.kind.tagName
 		
-		for (key, value) in self.attributes ?? [:] {
+		for (key, value) in self.attributes {
 			xml += " \(key)=\"\(value)\""
 		}
 		return xml
 	}
 	
-	var xmlOpenTag: String { return "<" + self.xmlElementContents + ">" }
-	var xmlSelfClosingTag: String { return "<" + self.xmlElementContents + " />" }
-	var xmlCloseTag: String { return "</\(self.kind.tagName)>"}
+	public var xmlOpenTag: String { return "<" + self.xmlElementContents + ">" }
+	public var xmlSelfClosingTag: String { return "<" + self.xmlElementContents + " />" }
+	public var xmlCloseTag: String { return "</\(self.kind.tagName)>"}
 }
