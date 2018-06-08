@@ -36,14 +36,14 @@ extension SVGElement {
 			return self.parent?.definition(for: search)
 		}
 		
-		func createElement(ofKind: Kind, with attributes: [String: String]) -> SVGElement? {
+		func createElement(ofKind: SVGElementKind, with attributes: [String: String]) -> SVGElement? {
 			return nil
 		}
 		
 		public var description: String { return self.hierarchicalDescription() }
 		
 		public override func hierarchicalDescription(_ level: Int = 0) -> String {
-			var result = self.kind.rawValue
+			var result = self.kind.tagName
 			let prefix = String(repeating: "\t", count: level)
 			
 			//if let contentable = self as? ContentElement, !contentable.content.isEmpty { result += ": \(contentable.content)" }

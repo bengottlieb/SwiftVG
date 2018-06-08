@@ -49,7 +49,7 @@ extension SVGElement {
 		}
 		
 		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: .path, parent: parent)
+			super.init(kind: NativeKind.path, parent: parent)
 			self.load(attributes: attributes)
 		}
 	}

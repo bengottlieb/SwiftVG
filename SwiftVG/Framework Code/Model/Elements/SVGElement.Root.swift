@@ -26,7 +26,7 @@ extension SVGElement {
 
 		
 		init(parent: Container? = nil, attributes: [String: String]) {
-			super.init(kind: .svg, parent: parent)
+			super.init(kind: NativeKind.svg, parent: parent)
 			self.attributes = attributes
 		}
 		

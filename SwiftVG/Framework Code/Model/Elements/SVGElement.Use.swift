@@ -13,7 +13,7 @@ extension SVGElement {
 		var ref: String?
 		
 		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: .use, parent: parent)
+			super.init(kind: NativeKind.use, parent: parent)
 			self.load(attributes: attributes)
 			self.ref = attributes["xlink:href"]
 		}

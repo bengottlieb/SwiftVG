@@ -11,7 +11,7 @@ import Foundation
 extension SVGElement {
 	public class Defs: Container {
 		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: .defs, parent: parent)
+			super.init(kind: SVGElement.NativeKind.defs, parent: parent)
 			self.load(attributes: attributes)
 			parent?.defs = self
 		}

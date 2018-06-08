@@ -11,7 +11,7 @@ import Foundation
 extension SVGElement {
 	class Rect: SVGElement {		
 		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: .rect, parent: parent)
+			super.init(kind: NativeKind.rect, parent: parent)
 			self.load(attributes: attributes)
 		}
 		

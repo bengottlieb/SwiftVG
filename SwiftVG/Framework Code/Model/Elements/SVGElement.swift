@@ -9,19 +9,20 @@
 import Foundation
 
 public class SVGElement {
-	public let kind: SVGElement.Kind
+	public let kind: SVGElementKind
 	public var parent: Container!
 	public var attributes: [String: String]?
 	public var styles: CSSFragment?
+	public var comment: String?
 
 	public func draw(with ctx: CGContext, in frame: CGRect) {}
 	
 	public var id: String? { return self.attributes?["id"] }
 	public var `class`: String? { return self.attributes?["class"] }
 	
-	public func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.rawValue)> \(self.attributes?.prettyString ?? "")"}
+	public func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes?.prettyString ?? "")"}
 	
-	public init(kind: SVGElement.Kind, parent: Container?) {
+	public init(kind: SVGElementKind, parent: Container?) {
 		self.kind = kind
 		self.parent = parent
 	}
@@ -41,7 +42,14 @@ public class SVGElement {
 	}
 	
 	public func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
-
+	
+	public func append(comment: String) {
+		if let current = self.comment {
+			self.comment = current + comment
+		} else {
+			self.comment = comment
+		}
+	}
 }
 
 protocol ContentElement {
@@ -52,7 +60,7 @@ extension SVGElement {
 	func toString(depth: Int = 0) -> String {
 		var result = String(repeating: "\t", count: depth)
 		
-		result += "<" + self.kind.rawValue
+		result += "<" + self.kind.tagName
 		
 		if let attr = self.attributes, attr.count > 0 {
 			result += ", " + attr.prettyString
@@ -73,8 +81,13 @@ extension SVGElement {
 	public enum Dimension { case width, height }
 }
 
+public protocol SVGElementKind {
+	var tagName: String { get }
+	func isEqualTo(kind: SVGElementKind?) -> Bool
+}
+
 extension SVGElement {
-	public enum Kind: String { case unknown
+	public enum NativeKind: String, SVGElementKind { case unknown
 		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan
 		
 		// not yet implemented
@@ -86,6 +99,11 @@ extension SVGElement {
 		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
 		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
 
+		public var tagName: String { return self.rawValue }
+		public 	func isEqualTo(kind: SVGElementKind?) -> Bool {
+			if let other = kind as? NativeKind { return self == other }
+			return false
+		}
 		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
 			switch self {
 			case .svg: return SVGElement.Root(parent: parent, attributes: attributes)

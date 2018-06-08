@@ -13,7 +13,7 @@ import Foundation
 extension SVGElement {
 	class Group: SVGElement.Container {
 		init(parent: Container? = nil, attributes: [String: String]) {
-			super.init(kind: .group, parent: parent)
+			super.init(kind: NativeKind.group, parent: parent)
 			self.load(attributes: attributes)
 		}
 		

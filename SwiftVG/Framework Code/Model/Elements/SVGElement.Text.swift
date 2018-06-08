@@ -13,7 +13,7 @@ extension SVGElement {
 		var content = ""
 		
 		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: .text, parent: parent)
+			super.init(kind: NativeKind.text, parent: parent)
 			self.load(attributes: attributes)
 		}
 
@@ -43,8 +43,8 @@ extension SVGElement {
 			super.draw(with: ctx, in: frame)
 		}
 		
-		override func createElement(ofKind kind: Kind, with attributes: [String: String]) -> SVGElement? {
-			if kind == .tspan {
+		override func createElement(ofKind kind: SVGElementKind, with attributes: [String: String]) -> SVGElement? {
+			if kind.isEqualTo(kind: NativeKind.tspan) {
 				return Tspan(in: self)
 			}
 			return nil
@@ -54,7 +54,7 @@ extension SVGElement {
 	
 	class Tspan: SVGElement, ContentElement {
 		init(in parent: Text) {
-			super.init(kind: .tspan, parent: parent)
+			super.init(kind: NativeKind.tspan, parent: parent)
 		}
 		
 		func append(content: String) {
