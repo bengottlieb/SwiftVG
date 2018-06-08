@@ -28,22 +28,34 @@ extension SVGElement {
 	}
 
 	public var strokeColor: SVGColor? {
-		if let color = self.styles?[.stroke]?.color { return color }
-		
-		if let attr = self.value(for: "stroke") { return SVGColor(attr) }
-		return nil
+		get {
+			if let color = self.styles?[.stroke]?.color { return color }
+			
+			if let attr = self.value(for: "stroke") { return SVGColor(attr) }
+			return nil
+		}
+		set {
+			self.attributes["stroke"] = newValue?.colorString
+		}
 	}
 	
 	public var strokeWidth: CGFloat? {
-		if let width = self.styles?[.strokeWidth]?.float { return width }
-		if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
-		return nil
+		get {
+			if let width = self.styles?[.strokeWidth]?.float { return width }
+			if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
+			return nil
+		}
+		set {
+			self.attributes["stroke-width"] = newValue == nil ? nil : "\(newValue!)"
+		}
 	}
 	
 	var cgFont: CGFont? {
-		guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else { return nil }
+		get {
+			guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else { return nil }
 		
-		return CGFont(family as CFString)
+			return CGFont(family as CFString)
+		}
 	}
 	
 	var font: SVGFont? {
@@ -56,8 +68,13 @@ extension SVGElement {
 	}
 	
 	var fontSize: CGFloat? {
-		if let size = self.styles?[.fontSize]?.float { return size }
-		if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) }
-		return nil
+		get {
+			if let size = self.styles?[.fontSize]?.float { return size }
+			if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) }
+			return nil
+		}
+		set {
+			self.attributes["font-size"] = newValue == nil ? nil : "\(newValue!)"
+		}
 	}
 }
