@@ -14,4 +14,8 @@ public class SVGDocument {
 	init(root: SVGElement.Root) {
 		self.root = root
 	}
+	
+	func child(with id: String) -> SVGElement? {
+		return self.root.child(with: id)
+	}
 }

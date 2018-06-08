@@ -18,7 +18,6 @@ open class SVGElement: Equatable {
 
 	open func draw(with ctx: CGContext, in frame: CGRect) {}
 	
-	public var id: String? { return self.attributes["id"] }
 	open var `class`: String? { return self.attributes["class"] }
 	
 	open func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes.isEmpty ? "" : self.attributes.prettyString)"}
@@ -66,6 +65,11 @@ open class SVGElement: Equatable {
 		xml += self.content
 		xml += self.xmlCloseTag
 		return xml
+	}
+	
+	open func child(with id: String) -> SVGElement? {
+		if id == self.id { return self }
+		return nil
 	}
 	
 	static public func ==(lhs: SVGElement, rhs: SVGElement) -> Bool {

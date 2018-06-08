@@ -9,6 +9,11 @@
 import Foundation
 
 extension SVGElement {
+	public var id: String? {
+		get { return self.attributes["id"] }
+		set { self.attributes["id"] = newValue }
+	}
+
 	public func value(for key: String) -> String? {
 		if let value = self.attributes[key] { return value }
 		if let parent = self.parent { return parent.value(for: key) }

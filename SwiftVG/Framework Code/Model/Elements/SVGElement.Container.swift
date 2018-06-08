@@ -22,13 +22,6 @@ extension SVGElement {
 			}
 		}
 		
-		public func child(with id: String) -> SVGElement? {
-			for child in self.children {
-				if child.id == id { return child }
-			}
-			return nil
-		}
-		
 		public func definition(for id: String) -> SVGElement? {
 			var search = id
 			if search.hasPrefix("#") { search = search[1...] }
@@ -63,6 +56,14 @@ extension SVGElement {
 		
 		public var debugDescription: String { return self.description }
 
+		open override func child(with id: String) -> SVGElement? {
+			if id == self.id { return self }
+			for child in self.children {
+				if let found = child.child(with: id) { return found }
+			}
+			return nil
+		}
+		
 		override open func buildXMLString(prefix: String = "") -> String {
 			if self.children.count == 0, self.content.isEmpty {
 				return self.xmlSelfClosingTag

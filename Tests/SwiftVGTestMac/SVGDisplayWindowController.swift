@@ -21,8 +21,9 @@ class SVGDisplayWindowController: NSWindowController {
 		self.init(windowNibName: NSNib.Name("SVGDisplayWindowController"))
 		self.image = SVGImage(url: URL(fileURLWithPath: path))
 		
-		let xml = image.buildXMLString(prettily: true)
-		print("XML Rebuilt: \n\(xml)")
+		if let xml = self.image?.buildXMLString(prettily: true) {
+			print("XML Rebuilt: \n\(xml)")
+		}
 		
 		self.window?.title = (path as NSString).lastPathComponent
 		self.window?.representedFilename = path
