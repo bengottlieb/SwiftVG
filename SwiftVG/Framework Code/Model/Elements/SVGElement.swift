@@ -14,6 +14,7 @@ public class SVGElement {
 	public var attributes: [String: String]?
 	public var styles: CSSFragment?
 	public var comment: String?
+	public var content = ""
 
 	public func draw(with ctx: CGContext, in frame: CGRect) {}
 	
@@ -49,6 +50,21 @@ public class SVGElement {
 		} else {
 			self.comment = comment
 		}
+	}
+
+	func append(content: String) {
+		if content.hasSuffix(" ") && !self.content.hasSuffix(" ") { self.content += " " }
+		self.content += content.trimmingCharacters(in: .whitespacesAndNewlines)
+		if content.hasSuffix(" ") { self.content += " " }
+	}
+	
+	func buildXMLString(prefix: String = "") -> String {
+		if self.content.isEmpty { return self.xmlSelfClosingTag }
+		
+		var xml = self.xmlOpenTag
+		xml += self.content
+		xml += self.xmlCloseTag
+		return xml
 	}
 }
 

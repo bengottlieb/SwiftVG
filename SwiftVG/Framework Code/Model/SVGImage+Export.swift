@@ -9,7 +9,7 @@
 import Foundation
 
 extension SVGImage {
-	public func rebuildString() -> String? {
-		return self.string
+	public func buildXMLString(prettily: Bool = false) -> String {
+		return self.document?.root.buildXMLString(prefix: prettily ? "\n" : "") ?? ""
 	}
 }

@@ -83,6 +83,8 @@
 		B5550AFF20CA26360053E1AC /* SVGElement.Unknown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFD20CA26360053E1AC /* SVGElement.Unknown.swift */; };
 		B55523531F5963A7005D026B /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B55523551F5963C1005D026B /* SwiftVG.framework in Copy Libraries */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5816D8720CA89E700F853A2 /* SVGElement+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5816D8620CA89E700F853A2 /* SVGElement+Export.swift */; };
+		B5816D8820CA89E700F853A2 /* SVGElement+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5816D8620CA89E700F853A2 /* SVGElement+Export.swift */; };
 		B583A78A1CB4951C00AF73BA /* SwiftVG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B58D64791A898F89005A0002 /* SwiftVG.h in Headers */ = {isa = PBXBuildFile; fileRef = B58D64681A898F81005A0002 /* SwiftVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B58D64901A899094005A0002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D64881A899094005A0002 /* AppDelegate.swift */; };
@@ -197,6 +199,7 @@
 		B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Use.swift; sourceTree = "<group>"; };
 		B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Export.swift"; sourceTree = "<group>"; };
 		B5550AFD20CA26360053E1AC /* SVGElement.Unknown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Unknown.swift; sourceTree = "<group>"; };
+		B5816D8620CA89E700F853A2 /* SVGElement+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+Export.swift"; sourceTree = "<group>"; };
 		B58D64671A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58D64681A898F81005A0002 /* SwiftVG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG.h; sourceTree = "<group>"; };
 		B58D646A1A898F81005A0002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 			children = (
 				B5417D70208BFED700C678C5 /* SVGElement.swift */,
 				B5550AFD20CA26360053E1AC /* SVGElement.Unknown.swift */,
+				B5816D8620CA89E700F853A2 /* SVGElement+Export.swift */,
 				B5417D90208D294500C678C5 /* SVGElement+Attributes.swift */,
 				B50C26D4208CF3EC007BF209 /* SVGElement.Container.swift */,
 				B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */,
@@ -728,6 +732,7 @@
 				B5417D8E208D1BAE00C678C5 /* CSSValue.swift in Sources */,
 				B50C26C9208CB2E4007BF209 /* SVGDocument.swift in Sources */,
 				B5417D80208C23C400C678C5 /* String+Path.swift in Sources */,
+				B5816D8720CA89E700F853A2 /* SVGElement+Export.swift in Sources */,
 				B5550AFE20CA26360053E1AC /* SVGElement.Unknown.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -738,6 +743,7 @@
 			files = (
 				B5417D88208D108E00C678C5 /* String+Transform.swift in Sources */,
 				B5417D72208BFED700C678C5 /* SVGElement.swift in Sources */,
+				B50C26D6208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
 				B50C26D9208E4B5F007BF209 /* SVGPlacement.swift in Sources */,
 				B50C26DC208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */,
 				B5417D7E208C182B00C678C5 /* SVGElement.Path.swift in Sources */,
@@ -748,10 +754,9 @@
 				B5417D92208D294500C678C5 /* SVGElement+Attributes.swift in Sources */,
 				B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */,
 				B5417DA1208E694800C678C5 /* SVGElement.Defs.swift in Sources */,
+				B5816D8820CA89E700F853A2 /* SVGElement+Export.swift in Sources */,
 				B5417D75208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
-				B50C26D6208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
 				B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */,
-				B5550AFC20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 				B5417D9E208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
 				B5417D95208D38CD00C678C5 /* SVGElement.Text.swift in Sources */,
 				B5417D85208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
@@ -764,6 +769,7 @@
 				B50C26CA208CB2E4007BF209 /* SVGDocument.swift in Sources */,
 				B5417D81208C23C400C678C5 /* String+Path.swift in Sources */,
 				B5550AFF20CA26360053E1AC /* SVGElement.Unknown.swift in Sources */,
+				B5550AFC20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

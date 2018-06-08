@@ -62,6 +62,23 @@ extension SVGElement {
 		
 		public var debugDescription: String { return self.description }
 
+		override func buildXMLString(prefix: String = "") -> String {
+			if self.children.count == 0, self.content.isEmpty {
+				return self.xmlSelfClosingTag
+			}
+			
+			var xml = self.xmlOpenTag + self.content
+			let childPrefix = prefix.isEmpty ? "" : prefix + "\t"
+			
+			for child in self.children {
+				xml += childPrefix
+				xml += child.buildXMLString(prefix: childPrefix)
+			}
+			
+			if !self.children.isEmpty, !prefix.isEmpty { xml += prefix }
+			xml += self.xmlCloseTag
+			return xml
+		}
 	}
 }
 

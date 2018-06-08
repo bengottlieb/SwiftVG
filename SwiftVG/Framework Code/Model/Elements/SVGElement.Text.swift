@@ -9,20 +9,12 @@
 import Foundation
 
 extension SVGElement {
-	class Text: Container, ContentElement {
-		var content = ""
-		
+	class Text: Container, ContentElement {		
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.text, parent: parent)
 			self.load(attributes: attributes)
 		}
 
-		func append(content: String) {
-			if content.hasSuffix(" ") && !self.content.hasSuffix(" ") { self.content += " " }
-			self.content += content.trimmingCharacters(in: .whitespacesAndNewlines)
-			if content.hasSuffix(" ") { self.content += " " }
-		}
-		
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard !self.content.isEmpty, let font = self.font else { return }
 			ctx.saveGState()
@@ -57,7 +49,7 @@ extension SVGElement {
 			super.init(kind: NativeKind.tspan, parent: parent)
 		}
 		
-		func append(content: String) {
+		override func append(content: String) {
 			(self.parent as? Text)?.append(content: content)
 		}
 	}
