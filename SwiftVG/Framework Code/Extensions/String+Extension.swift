@@ -34,13 +34,13 @@ extension String {
 	subscript(_ range: Range<Int>) -> String {
 		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
 		let end = self.index(self.startIndex, offsetBy: range.upperBound)
-		return self[start..<end]
+		return String(self[start..<end])
 	}
 	
 	subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
 		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
 		let end = self.endIndex
-		return self[start..<end]
+		return String(self[start..<end])
 	}
 	
 //	subscript(_ range: CountablePartialRangeTo<Int>) -> String {

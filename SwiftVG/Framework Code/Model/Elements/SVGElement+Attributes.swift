@@ -16,10 +16,15 @@ extension SVGElement {
 	}
 	
 	public var fillColor: SVGColor? {
-		if let color = self.styles?[.fill]?.color { return color }
-		
-		if let attr = self.value(for: "fill") { return SVGColor(attr) }
-		return nil
+		get {
+			if let color = self.styles?[.fill]?.color { return color }
+			
+			if let attr = self.value(for: "fill") { return SVGColor(attr) }
+			return nil
+		}
+		set {
+			self.attributes["fill"] = newValue?.colorString
+		}
 	}
 
 	public var strokeColor: SVGColor? {

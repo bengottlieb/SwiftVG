@@ -10,6 +10,7 @@ import Foundation
 
 #if os(OSX)
 	public typealias SVGColor = NSColor
+	import Cocoa
 #else
 	public typealias SVGColor = UIColor
 #endif
@@ -57,7 +58,13 @@ extension SVGColor {
 		}
 
 		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha) / 255.0)
-
+	}
+	
+	var colorString: String {
+		guard let rgb = self.getRGBA() else { return "#000000" }
+		
+		
+		return String(format: "%02x%02x%02x", arguments: [Int(rgb.r * 255), Int(rgb.g * 255), Int(rgb.b * 255)])
 	}
 	
 	static let colorNames: [String: [CGFloat]] = [
@@ -211,3 +218,19 @@ extension SVGColor {
 	]
 }
 
+extension SVGColor {
+#if os(OSX)
+	func getRGBA() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)? {
+		if self.colorSpaceName != NSColorSpaceName.calibratedRGB { return nil }
+		var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0), a = CGFloat(0)
+		self.getRed(&r, green: &g, blue: &b, alpha: &a)
+		return (r: r, g: g, b: b, a: a)
+}
+#else
+	func getRGBA() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)? {
+		var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0), a = CGFloat(0)
+		if !self.getRed(&r, green: &g, blue: &b, alpha: &a) { return nil }
+		return (r: r, g: g, b: b, a: a)
+	}
+#endif
+}

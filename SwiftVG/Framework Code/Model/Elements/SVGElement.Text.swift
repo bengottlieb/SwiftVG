@@ -22,8 +22,8 @@ extension SVGElement {
 			
 			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
-			var attr: [String: Any] = [NSFontAttributeName: font]
-			if let color = self.fillColor { attr[NSForegroundColorAttributeName] = color }
+			var attr: [NSAttributedStringKey: Any] = [.font: font]
+			if let color = self.fillColor { attr[.foregroundColor] = color }
 			
 			let string = NSAttributedString(string: self.content.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			let x = self.attributes[float: "x"] ?? 0
