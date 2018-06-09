@@ -27,6 +27,10 @@ open class SVGElement: Equatable {
 		return self.class?.components(separatedBy: " ").contains(name) ?? false
 	}
 	
+	public func isKind(of kind: SVGElementKind) -> Bool {
+		return self.kind.isEqualTo(kind: kind)
+	}
+	
 	open func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes.isEmpty ? "" : self.attributes.prettyString)"}
 	
 	public init(kind: SVGElementKind, parent: Container?) {

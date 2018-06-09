@@ -41,6 +41,17 @@ extension SVGElement {
 			return nil
 		}
 		
+		public func children(ofKind kind: SVGElementKind) -> [SVGElement] {
+			return self.children.filter { $0.isKind(of: kind) }
+		}
+		
+		public func firstChild(ofKind kind: SVGElementKind) -> SVGElement? {
+			for child in self.children {
+				if child.isKind(of: kind) { return child }
+			}
+			return nil
+		}
+		
 		public func definition(for id: String) -> SVGElement? {
 			var search = id
 			if search.hasPrefix("#") { search = search[1...] }
