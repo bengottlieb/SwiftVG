@@ -18,7 +18,14 @@ open class SVGElement: Equatable {
 
 	open func draw(with ctx: CGContext, in frame: CGRect) {}
 	
-	open var `class`: String? { return self.attributes["class"] }
+	open var `class`: String? {
+		get { return self.attributes["class"] }
+		set { self.attributes["class"] = newValue }
+	}
+	
+	public func isMemberOf(class name: String) -> Bool {
+		return self.class?.components(separatedBy: " ").contains(name) ?? false
+	}
 	
 	open func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes.isEmpty ? "" : self.attributes.prettyString)"}
 	

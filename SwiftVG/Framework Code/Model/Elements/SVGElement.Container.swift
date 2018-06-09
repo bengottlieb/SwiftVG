@@ -22,6 +22,25 @@ extension SVGElement {
 			}
 		}
 		
+		public func removeAllChildren(ofClass checkClass: String? = nil) {
+			if let check = checkClass {
+				self.children = self.children.filter { !($0.isMemberOf(class: check)) }
+			} else {
+				self.children = []
+			}
+		}
+		
+		public func children(ofClass className: String) -> [SVGElement] {
+			return self.children.filter { $0.isMemberOf(class: className) }
+		}
+		
+		public func firstChild(ofClass className: String) -> SVGElement? {
+			for child in self.children {
+				if child.isMemberOf(class: className) { return child }
+			}
+			return nil
+		}
+		
 		public func definition(for id: String) -> SVGElement? {
 			var search = id
 			if search.hasPrefix("#") { search = search[1...] }
