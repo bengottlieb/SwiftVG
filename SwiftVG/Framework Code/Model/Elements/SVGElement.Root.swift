@@ -33,19 +33,14 @@ extension SVGElement {
 		static func generateDefaultAttributes(for size: CGSize) -> [String: String] {
 			let attr: [String: String] = [
 				"version": "1.1",
-				"id": "svg2",
+				"id": "svg",
 				"xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 				"xmlns:svg": "http://www.w3.org/2000/svg",
 				"xmlns:cc": "http://creativecommons.org/ns#",
 				"xmlns:dc": "http://purl.org/dc/elements/1.1/",
 				"xmlns": "http://www.w3.org/2000/svg",
 				"xmlns:xlink": "http://www.w3.org/1999/xlink",
-				"x": "0px",
-				"y": "0px",
-				"width": "959px",
-				"height": "593px",
 				"viewBox": "0 0 \(size.width) \(size.height)",
-				"enable-background": "new 0 0 \(size.width) \(size.height)",
 				"xml:space": "preserve",
 			]
 			return attr
