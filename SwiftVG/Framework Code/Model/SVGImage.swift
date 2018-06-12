@@ -21,9 +21,10 @@ open class SVGImage: CustomStringConvertible {
 		self.init(data: data)
 	}
 	
-	public convenience init?(string: String) {
+	public init?(string: String) {
 		guard let data = string.data(using: .utf8) else { return nil }
-		self.init(data: data)
+		let parser = SVGParser(data: data, from: nil)
+		parser.start(with: self)
 	}
 	
 	public init?(data: Data) {
