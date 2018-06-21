@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(OSX)
+	import Cocoa
+#else
+	import UIKit
+#endif
+
 open class SVGImage: CustomStringConvertible {
 	public var viewBox: CGRect { return self.document?.root.viewBox ?? .zero }
 	public var size: CGSize { return self.document?.root.size ?? .zero }

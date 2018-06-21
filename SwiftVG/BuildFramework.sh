@@ -16,8 +16,10 @@ PROJECT_NAME="SwiftVG"
 IOS_FRAMEWORKS=/Users/ben/Documents/ManagedProjects/Frameworks/iOS_Builds
 MAC_FRAMEWORKS=/Users/ben/Documents/ManagedProjects/Frameworks/Mac_Builds
 
+
 GIT_BRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"`
 GIT_REV=`git rev-parse --short HEAD`
+
 
 BUILD_DATE=`date "+%c%m%d%H%M%S"`
 BRANCH=`git rev-parse --abbrev-ref HEAD`
