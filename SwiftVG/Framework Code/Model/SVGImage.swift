@@ -16,7 +16,10 @@ import Foundation
 
 open class SVGImage: CustomStringConvertible {
 	public var viewBox: CGRect { return self.document?.root.viewBox ?? .zero }
-	public var size: CGSize { return self.document?.root.size ?? .zero }
+	public var size: CGSize {
+		get { return self.document?.root.size ?? .zero }
+		set { self.document?.root.size = newValue }
+	}
 	public var drawable = false
 	public var data: Data? { return self.document.data }
 	

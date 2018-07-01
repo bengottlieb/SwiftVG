@@ -11,7 +11,10 @@ import Foundation
 extension SVGElement {
 	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
-		var size: CGSize = .zero
+		var size: CGSize = .zero { didSet {
+			self.viewBox = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+			self.attributes["viewBox"] = "0 0 \(self.size.width) \(self.size.height)"
+		}}
 		var dimensionsSetup = false
 		
 		
