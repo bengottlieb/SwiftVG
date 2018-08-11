@@ -13,7 +13,7 @@ extension SVGElement {
 		var xml = self.kind.tagName
 		
 		for key in self.attributes.keys.sorted() {
-			xml += " \(key)=\"\(value)\""
+			xml += " \(key)=\"\(self.attributes[key] ?? "")\""
 		}
 		return xml
 	}
