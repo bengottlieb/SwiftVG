@@ -15,16 +15,20 @@ open class SVGElement: Equatable {
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
+	var classComponents: [String]?
 
 	open func draw(with ctx: CGContext, in frame: CGRect) {}
 	
 	open var `class`: String? {
 		get { return self.attributes["class"] }
-		set { self.attributes["class"] = newValue }
+		set { self.attributes["class"] = newValue; self.classComponents = nil }
 	}
 	
 	public func isMemberOf(class name: String) -> Bool {
-		return self.class?.components(separatedBy: " ").contains(name) ?? false
+		if self.classComponents == nil {
+			self.classComponents = self.class?.components(separatedBy: " ") ?? []
+		}
+		return self.classComponents!.contains(name)
 	}
 	
 	public func isKind(of kind: SVGElementKind) -> Bool {
