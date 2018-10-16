@@ -79,7 +79,6 @@ open class SVGElement: Equatable {
 	}
 	
 	open func child(with id: String) -> SVGElement? {
-		if id == self.id { return self }
 		return nil
 	}
 	

@@ -12,9 +12,18 @@ extension SVGElement {
 	public class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
 		public var children: [SVGElement] = []
 		public var defs: Defs?
+		var cachedChildrenByID: [String: SVGElement]?
 
-		public func append(child: SVGElement) { self.children.append(child) }
-		public func remove(child: SVGElement) { if let index = self.children.index(of: child) { self.children.remove(at: index) } }
+		public func append(child: SVGElement) {
+			self.children.append(child)
+			if let id = child.id { self.cachedChildrenByID?[id] = child }
+		}
+		public func remove(child: SVGElement) {
+			if let index = self.children.index(of: child) {
+				self.children.remove(at: index)
+				if let id = child.id { self.cachedChildrenByID?.removeValue(forKey: id) }
+			}
+		}
 		public override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
 		func drawChildren(with ctx: CGContext, in frame: CGRect) {
 			for child in self.children {
@@ -24,9 +33,11 @@ extension SVGElement {
 		
 		public func removeAllChildren(ofClass checkClass: String? = nil) {
 			if let check = checkClass {
-				self.children = self.children.filter { !($0.isMemberOf(class: check)) }
+				let removed = self.children.filter { ($0.isMemberOf(class: check)) }
+				removed.forEach { self.remove(child: $0) }
 			} else {
 				self.children = []
+				if self.cachedChildrenByID != nil { self.cachedChildrenByID = [:] }
 			}
 		}
 		
@@ -87,11 +98,13 @@ extension SVGElement {
 		public var debugDescription: String { return self.description }
 
 		open override func child(with id: String) -> SVGElement? {
-			if id == self.id { return self }
-			for child in self.children {
-				if let found = child.child(with: id) { return found }
+			if self.cachedChildrenByID == nil {
+				self.cachedChildrenByID = [:]
+				self.children.forEach {
+					if let id = $0.id { self.cachedChildrenByID?[id] = $0 }
+				}
 			}
-			return nil
+			return self.cachedChildrenByID?[id]
 		}
 		
 		override open func buildXMLString(prefix: String = "") -> String {

@@ -18,6 +18,7 @@ public class SVGDocument {
 	}
 	
 	public func child(with id: String) -> SVGElement? {
+		if self.root.id == id { return self.root }
 		return self.root.child(with: id)
 	}
 }
