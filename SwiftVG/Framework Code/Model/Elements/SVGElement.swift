@@ -15,20 +15,41 @@ open class SVGElement: Equatable {
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
-	var classComponents: [String]?
+	var classComponents: [String] {
+		get { return self.attributes["class"]?.components(separatedBy: " ") ?? [] }
+		set { self.attributes["class"] = newValue.joined(separator: " ") }
+	}
 
 	open func draw(with ctx: CGContext, in frame: CGRect) {}
 	
 	open var `class`: String? {
 		get { return self.attributes["class"] }
-		set { self.attributes["class"] = newValue; self.classComponents = nil }
+		set { self.attributes["class"] = newValue; }
+	}
+	
+	public func addClass(_ cls: String) {
+		if self.classComponents.contains(cls) { return }
+		self.classComponents = self.classComponents + [cls]
+	}
+	
+	public func removeClass(_ cls: String) {
+		var components = self.classComponents
+		if let index = components.index(of: cls) {
+			components.remove(at: index)
+			self.classComponents = components
+		}
+	}
+	
+	public func toggleClass(_ cls: String) {
+		if self.isMemberOf(class: cls) {
+			self.removeClass(cls)
+		} else {
+			self.addClass(cls)
+		}
 	}
 	
 	public func isMemberOf(class name: String) -> Bool {
-		if self.classComponents == nil {
-			self.classComponents = self.class?.components(separatedBy: " ") ?? []
-		}
-		return self.classComponents!.contains(name)
+		return self.classComponents.contains(name)
 	}
 	
 	public func isKind(of kind: SVGElementKind) -> Bool {
