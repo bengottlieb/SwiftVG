@@ -18,7 +18,13 @@ public extension SVGImage {
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
 		guard let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else { return nil }
+		
+		context.saveGState()
+		context.scaleBy(x: 1, y: -1)
+		context.translateBy(x: 0, y: -size.height)
+		context.setFillColor(NSColor.clear.cgColor)
 		context.draw(self, in: rect)
+		context.restoreGState()
 		
 		guard let image = context.makeImage() else { return nil }
 		return NSImage(cgImage: image, size: size)
