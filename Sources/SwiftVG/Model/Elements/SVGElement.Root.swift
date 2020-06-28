@@ -32,6 +32,7 @@ extension SVGElement {
 		init(parent: Container? = nil, attributes: [String: String]) {
 			super.init(kind: NativeKind.svg, parent: parent)
 			self.attributes = attributes
+			self.setupDimensions()
 		}
 		
 		static func generateDefaultAttributes(for size: CGSize) -> [String: String] {
@@ -65,9 +66,9 @@ extension SVGElement {
 		
 		public override func draw(with ctx: CGContext, in frame: CGRect) {
 			if self.parent == nil, !self.dimensionsSetup {
-				self.dimensionsSetup = true
-				self.size = frame.size
-				self.viewBox = CGRect(origin: .zero, size: self.size)
+				self.setupDimensions()
+				if self.size == .zero { self.size = frame.size }
+				if self.viewBox == .zero { self.viewBox = CGRect(origin: .zero, size: self.size) }
 			}
 			self.setupDimensions()
 			guard let box = self.viewBox else { return }

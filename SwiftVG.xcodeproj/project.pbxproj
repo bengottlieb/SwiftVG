@@ -36,6 +36,8 @@
 		B527D2C924A80F3C007CAA5E /* Studio in Frameworks */ = {isa = PBXBuildFile; productRef = B527D2C824A80F3C007CAA5E /* Studio */; };
 		B527D2CB24A80F42007CAA5E /* Studio in Frameworks */ = {isa = PBXBuildFile; productRef = B527D2CA24A80F42007CAA5E /* Studio */; };
 		B53173C31F5F4CCE00F9C5AB /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
+		B540AE1424A8325700DFD36D /* SVGImage+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B540AE1324A8325700DFD36D /* SVGImage+Image.swift */; };
+		B540AE1524A8325700DFD36D /* SVGImage+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B540AE1324A8325700DFD36D /* SVGImage+Image.swift */; };
 		B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
 		B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
 		B5417D67208B903B00C678C5 /* SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D66208B903B00C678C5 /* SVGImage.swift */; };
@@ -100,7 +102,6 @@
 		B59311321F58A5CB0056D353 /* SVGDisplayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59311301F58A5CB0056D353 /* SVGDisplayWindowController.swift */; };
 		B59311331F58A5CB0056D353 /* SVGDisplayWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59311311F58A5CB0056D353 /* SVGDisplayWindowController.xib */; };
 		B5A482511AE5DCCC001636BE /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; };
-		B5A482591AE5DE6A001636BE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A482581AE5DE6A001636BE /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+SetsViewport.swift"; sourceTree = "<group>"; };
 		B527D2CC24A8168D007CAA5E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftVGUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B540AE1324A8325700DFD36D /* SVGImage+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Image.swift"; sourceTree = "<group>"; };
 		B5417D63208B8FE300C678C5 /* SVGParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
 		B5417D66208B903B00C678C5 /* SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGImage.swift; sourceTree = "<group>"; };
 		B5417D6A208B90D600C678C5 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = SOURCE_ROOT; };
@@ -217,7 +219,6 @@
 		B593112C1F58A3EB0056D353 /* SwiftVGTestMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftVGTestMac.entitlements; sourceTree = "<group>"; };
 		B59311301F58A5CB0056D353 /* SVGDisplayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGDisplayWindowController.swift; sourceTree = "<group>"; };
 		B59311311F58A5CB0056D353 /* SVGDisplayWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGDisplayWindowController.xib; sourceTree = "<group>"; };
-		B5A482581AE5DE6A001636BE /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A482591AE5DE6A001636BE /* CoreAudio.framework in Frameworks */,
 				B5A482511AE5DCCC001636BE /* SwiftVG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,7 +274,6 @@
 				B58D64691A898F81005A0002 /* SwiftVG_iOS */,
 				B504E6991A896E82001B414B /* SwiftVG Tests */,
 				B504E6141A89230F001B414B /* Products */,
-				B5A482401AE5838F001636BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -363,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				B5417D66208B903B00C678C5 /* SVGImage.swift */,
+				B540AE1324A8325700DFD36D /* SVGImage+Image.swift */,
 				B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */,
 				B50C26C8208CB2E4007BF209 /* SVGDocument.swift */,
 				B50C26D7208E4B5F007BF209 /* SVGPlacement.swift */,
@@ -440,14 +440,6 @@
 				B593112C1F58A3EB0056D353 /* SwiftVGTestMac.entitlements */,
 			);
 			path = SwiftVGTestMac;
-			sourceTree = "<group>";
-		};
-		B5A482401AE5838F001636BE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B5A482581AE5DE6A001636BE /* CoreAudio.framework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -730,6 +722,7 @@
 				B5417DA0208E694800C678C5 /* SVGElement.Defs.swift in Sources */,
 				B5417D74208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B50C26D5208CF3EC007BF209 /* SVGElement.Container.swift in Sources */,
+				B540AE1424A8325700DFD36D /* SVGImage+Image.swift in Sources */,
 				B5417D8A208D16FF00C678C5 /* CSSFragment.swift in Sources */,
 				B5550AFB20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 				B5417D9D208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
@@ -766,6 +759,7 @@
 				B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */,
 				B5417DA1208E694800C678C5 /* SVGElement.Defs.swift in Sources */,
 				B5816D8820CA89E700F853A2 /* SVGElement+Export.swift in Sources */,
+				B540AE1524A8325700DFD36D /* SVGImage+Image.swift in Sources */,
 				B5417D75208BFF3500C678C5 /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */,
 				B5417D9E208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,

@@ -27,8 +27,11 @@ class SVGDisplayWindowController: NSWindowController {
 		
 		self.window?.title = (path as NSString).lastPathComponent
 		self.window?.representedFilename = path
+		self.window?.contentMaxSize = self.image.size
+		self.window?.setContentSize(self.image.size)
 
 		SVGDisplayWindowController.windows.append(self)
+		
 	}
 	
     override func windowDidLoad() {

@@ -17,8 +17,6 @@ extension SVGElement {
 				if let other = kind as? Kind { return self.tagName == other.tagName }
 				return false
 			}
-			
-			
 		}
 		
 		public init(name: String, attributes: [String: String]?, parent: Container?) {
