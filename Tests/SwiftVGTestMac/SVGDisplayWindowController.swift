@@ -15,10 +15,10 @@ class SVGDisplayWindowController: NSWindowController {
 	
 	var image: SVGImage!
 	var data: Data!
-	var webView: WebView!
+	var webView: WKWebView!
 	
 	convenience init(path: String) {
-		self.init(windowNibName: NSNib.Name("SVGDisplayWindowController"))
+		self.init(windowNibName: "SVGDisplayWindowController")
 		self.image = SVGImage(url: URL(fileURLWithPath: path))
 		
 		if let xml = self.image?.buildXMLString(prettily: true) {
@@ -53,22 +53,5 @@ class SVGImageView: NSView {
 		if let image = self.image {
 			ctx.draw(image, in: self.bounds)
 		}
-	}
-}
-
-extension SVGDisplayWindowController: WebFrameLoadDelegate {
-	public func webView(_ sender: WebView!, didStartProvisionalLoadFor frame: WebFrame!) {
-	}
-	
-	public func webView(_ sender: WebView!, didFailProvisionalLoadWithError error: Error!, for frame: WebFrame!) {
-		
-	}
-	
-	public func webView(_ sender: WebView!, didFinishLoadFor frame: WebFrame!) {
-		
-	}
-	
-	public func webView(_ sender: WebView!, didFailLoadWithError error: Error!, for frame: WebFrame!) {
-		
 	}
 }
