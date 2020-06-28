@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if let previous = UserDefaults.standard.string(forKey: "last-path") {
 			SVGDisplayWindowController(path: previous).showWindow(nil)
 		} else {
-			let url = Bundle.main.url(forResource: "virginia", withExtension: "svg", subdirectory: "Sample Images")!
+			let url = Bundle.main.url(forResource: "africa", withExtension: "svg", subdirectory: "Sample Images")!
 
 			SVGDisplayWindowController(path: url.path).showWindow(nil)
 		}

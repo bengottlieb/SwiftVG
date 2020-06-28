@@ -35,7 +35,6 @@
 		B50C26DC208E4B99007BF209 /* SVGElement+SetsViewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */; };
 		B527D2C924A80F3C007CAA5E /* Studio in Frameworks */ = {isa = PBXBuildFile; productRef = B527D2C824A80F3C007CAA5E /* Studio */; };
 		B527D2CB24A80F42007CAA5E /* Studio in Frameworks */ = {isa = PBXBuildFile; productRef = B527D2CA24A80F42007CAA5E /* Studio */; };
-		B53173C11F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */; };
 		B53173C31F5F4CCE00F9C5AB /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B5417D64208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
 		B5417D65208B8FE300C678C5 /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417D63208B8FE300C678C5 /* SVGParser.swift */; };
@@ -176,8 +175,6 @@
 		B50C26DA208E4B99007BF209 /* SVGElement+SetsViewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+SetsViewport.swift"; sourceTree = "<group>"; };
 		B527D2CC24A8168D007CAA5E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftVGUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVGUnitTests.swift; sourceTree = "<group>"; };
-		B53173C21F5F4CCE00F9C5AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5417D63208B8FE300C678C5 /* SVGParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
 		B5417D66208B903B00C678C5 /* SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGImage.swift; sourceTree = "<group>"; };
 		B5417D6A208B90D600C678C5 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = SOURCE_ROOT; };
@@ -276,7 +273,6 @@
 				B58D64661A898F81005A0002 /* SwiftVG_Mac */,
 				B58D64691A898F81005A0002 /* SwiftVG_iOS */,
 				B504E6991A896E82001B414B /* SwiftVG Tests */,
-				B53173BF1F5F4CCE00F9C5AB /* SwiftVGUnitTests */,
 				B504E6141A89230F001B414B /* Products */,
 				B5A482401AE5838F001636BE /* Frameworks */,
 			);
@@ -352,15 +348,6 @@
 				B5417D82208C23C800C678C5 /* Extensions */,
 			);
 			path = SwiftVG;
-			sourceTree = "<group>";
-		};
-		B53173BF1F5F4CCE00F9C5AB /* SwiftVGUnitTests */ = {
-			isa = PBXGroup;
-			children = (
-				B53173C01F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift */,
-				B53173C21F5F4CCE00F9C5AB /* Info.plist */,
-			);
-			path = SwiftVGUnitTests;
 			sourceTree = "<group>";
 		};
 		B5417D62208B8FE300C678C5 /* Parsing & Loading */ = {
@@ -598,7 +585,7 @@
 				TargetAttributes = {
 					B504E6121A89230F001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1150;
 					};
 					B504E6451A8968DC001B414B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -801,7 +788,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B53173C11F5F4CCE00F9C5AB /* SwiftVGUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,7 +970,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1001,7 +987,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.standalone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
