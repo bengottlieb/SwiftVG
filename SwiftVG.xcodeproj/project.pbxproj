@@ -82,6 +82,13 @@
 		B5417DA4208E6A7500C678C5 /* SVGElement.Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */; };
 		B54CA56B24A9793300436713 /* String+PathTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CA56A24A9793300436713 /* String+PathTokenizer.swift */; };
 		B54CA56C24A9793300436713 /* String+PathTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CA56A24A9793300436713 /* String+PathTokenizer.swift */; };
+		B54CA57424A9813D00436713 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CA57324A9813D00436713 /* AppDelegate.swift */; };
+		B54CA57624A9813D00436713 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CA57524A9813D00436713 /* ContentView.swift */; };
+		B54CA57824A9813F00436713 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54CA57724A9813F00436713 /* Assets.xcassets */; };
+		B54CA57B24A9813F00436713 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54CA57A24A9813F00436713 /* Preview Assets.xcassets */; };
+		B54CA57E24A9813F00436713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54CA57C24A9813F00436713 /* Main.storyboard */; };
+		B54CA58424A9814F00436713 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5417D6A208B90D600C678C5 /* Sample Images */; };
+		B54CA58524A981B700436713 /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; };
 		B5550AFB20C9DB380053E1AC /* SVGImage+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */; };
 		B5550AFC20C9DB380053E1AC /* SVGImage+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */; };
 		B5550AFE20CA26360053E1AC /* SVGElement.Unknown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5550AFD20CA26360053E1AC /* SVGElement.Unknown.swift */; };
@@ -103,6 +110,9 @@
 		B593112A1F58A3EB0056D353 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59311281F58A3EB0056D353 /* MainMenu.xib */; };
 		B59311321F58A5CB0056D353 /* SVGDisplayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59311301F58A5CB0056D353 /* SVGDisplayWindowController.swift */; };
 		B59311331F58A5CB0056D353 /* SVGDisplayWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59311311F58A5CB0056D353 /* SVGDisplayWindowController.xib */; };
+		B5A19F5E24A98746008B6896 /* SVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19F5D24A98746008B6896 /* SVGView.swift */; };
+		B5A19F5F24A98746008B6896 /* SVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19F5D24A98746008B6896 /* SVGView.swift */; };
+		B5A19F6124A989DE008B6896 /* SwiftVG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B504E6AF1A898110001B414B /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5A482511AE5DCCC001636BE /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B504E6461A8968DC001B414B /* SwiftVG.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +125,13 @@
 			remoteInfo = SwiftVG_Mac;
 		};
 		B59311341F58A7110056D353 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B504E60B1A89230F001B414B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B504E6AE1A898110001B414B;
+			remoteInfo = SwiftVG_Mac;
+		};
+		B5A19F5B24A98344008B6896 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B504E60B1A89230F001B414B /* Project object */;
 			proxyType = 1;
@@ -150,6 +167,16 @@
 				B55523551F5963C1005D026B /* SwiftVG.framework in Copy Libraries */,
 			);
 			name = "Copy Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A19F6024A989D8008B6896 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B5A19F6124A989DE008B6896 /* SwiftVG.framework in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B5A482541AE5DE2F001636BE /* CopyFiles */ = {
@@ -201,6 +228,14 @@
 		B5417D9F208E694800C678C5 /* SVGElement.Defs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Defs.swift; sourceTree = "<group>"; };
 		B5417DA2208E6A7500C678C5 /* SVGElement.Use.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Use.swift; sourceTree = "<group>"; };
 		B54CA56A24A9793300436713 /* String+PathTokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PathTokenizer.swift"; sourceTree = "<group>"; };
+		B54CA57124A9813D00436713 /* MacTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B54CA57324A9813D00436713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B54CA57524A9813D00436713 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B54CA57724A9813F00436713 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B54CA57A24A9813F00436713 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B54CA57D24A9813F00436713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B54CA57F24A9813F00436713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B54CA58024A9813F00436713 /* MacTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacTest.entitlements; sourceTree = "<group>"; };
 		B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Export.swift"; sourceTree = "<group>"; };
 		B5550AFD20CA26360053E1AC /* SVGElement.Unknown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Unknown.swift; sourceTree = "<group>"; };
 		B5816D8620CA89E700F853A2 /* SVGElement+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+Export.swift"; sourceTree = "<group>"; };
@@ -222,6 +257,7 @@
 		B593112C1F58A3EB0056D353 /* SwiftVGTestMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftVGTestMac.entitlements; sourceTree = "<group>"; };
 		B59311301F58A5CB0056D353 /* SVGDisplayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGDisplayWindowController.swift; sourceTree = "<group>"; };
 		B59311311F58A5CB0056D353 /* SVGDisplayWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGDisplayWindowController.xib; sourceTree = "<group>"; };
+		B5A19F5D24A98746008B6896 /* SVGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +293,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B54CA56E24A9813D00436713 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B54CA58524A981B700436713 /* SwiftVG.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B593111F1F58A3EB0056D353 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,6 +332,7 @@
 				B504E6AF1A898110001B414B /* SwiftVG.framework */,
 				B59311221F58A3EB0056D353 /* SwiftVGTestMac.app */,
 				B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */,
+				B54CA57124A9813D00436713 /* MacTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,6 +340,7 @@
 		B504E6991A896E82001B414B /* SwiftVG Tests */ = {
 			isa = PBXGroup;
 			children = (
+				B54CA57224A9813D00436713 /* MacTest */,
 				B59311231F58A3EB0056D353 /* SwiftVGTestMac */,
 				B58D64871A899094005A0002 /* TestHost */,
 				B504E69C1A896E82001B414B /* SwiftVG_Tests.swift */,
@@ -365,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				B5417D66208B903B00C678C5 /* SVGImage.swift */,
+				B5A19F5D24A98746008B6896 /* SVGView.swift */,
 				B540AE1324A8325700DFD36D /* SVGImage+Image.swift */,
 				B5550AFA20C9DB380053E1AC /* SVGImage+Export.swift */,
 				B50C26C8208CB2E4007BF209 /* SVGDocument.swift */,
@@ -396,6 +443,28 @@
 				B5417D8D208D1BAE00C678C5 /* CSSValue.swift */,
 			);
 			path = CSS;
+			sourceTree = "<group>";
+		};
+		B54CA57224A9813D00436713 /* MacTest */ = {
+			isa = PBXGroup;
+			children = (
+				B54CA57324A9813D00436713 /* AppDelegate.swift */,
+				B54CA57524A9813D00436713 /* ContentView.swift */,
+				B54CA57724A9813F00436713 /* Assets.xcassets */,
+				B54CA57C24A9813F00436713 /* Main.storyboard */,
+				B54CA57F24A9813F00436713 /* Info.plist */,
+				B54CA58024A9813F00436713 /* MacTest.entitlements */,
+				B54CA57924A9813F00436713 /* Preview Content */,
+			);
+			path = MacTest;
+			sourceTree = "<group>";
+		};
+		B54CA57924A9813F00436713 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B54CA57A24A9813F00436713 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		B58D64661A898F81005A0002 /* SwiftVG_Mac */ = {
@@ -550,6 +619,25 @@
 			productReference = B53173BE1F5F4CCE00F9C5AB /* SwiftVGUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B54CA57024A9813D00436713 /* MacTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B54CA58124A9813F00436713 /* Build configuration list for PBXNativeTarget "MacTest" */;
+			buildPhases = (
+				B54CA56D24A9813D00436713 /* Sources */,
+				B54CA56E24A9813D00436713 /* Frameworks */,
+				B54CA56F24A9813D00436713 /* Resources */,
+				B5A19F6024A989D8008B6896 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5A19F5C24A98344008B6896 /* PBXTargetDependency */,
+			);
+			name = MacTest;
+			productName = MacTest;
+			productReference = B54CA57124A9813D00436713 /* MacTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B59311211F58A3EB0056D353 /* SwiftVGTestMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B593112D1F58A3EB0056D353 /* Build configuration list for PBXNativeTarget "SwiftVGTestMac" */;
@@ -575,7 +663,7 @@
 		B504E60B1A89230F001B414B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Stand Alone, inc.";
 				TargetAttributes = {
@@ -601,6 +689,9 @@
 						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 						TestTargetID = B59311211F58A3EB0056D353;
+					};
+					B54CA57024A9813D00436713 = {
+						CreatedOnToolsVersion = 12.0;
 					};
 					B59311211F58A3EB0056D353 = {
 						CreatedOnToolsVersion = 9.0;
@@ -632,6 +723,7 @@
 				B504E6661A89690C001B414B /* Combined Framework */,
 				B59311211F58A3EB0056D353 /* SwiftVGTestMac */,
 				B53173BD1F5F4CCE00F9C5AB /* SwiftVGUnitTests */,
+				B54CA57024A9813D00436713 /* MacTest */,
 			);
 		};
 /* End PBXProject section */
@@ -666,6 +758,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B54CA56F24A9813D00436713 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B54CA57E24A9813F00436713 /* Main.storyboard in Resources */,
+				B54CA58424A9814F00436713 /* Sample Images in Resources */,
+				B54CA57B24A9813F00436713 /* Preview Assets.xcassets in Resources */,
+				B54CA57824A9813F00436713 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +834,7 @@
 				B5550AFB20C9DB380053E1AC /* SVGImage+Export.swift in Sources */,
 				B5417D9D208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
 				B54CA56B24A9793300436713 /* String+PathTokenizer.swift in Sources */,
+				B5A19F5E24A98746008B6896 /* SVGView.swift in Sources */,
 				B5417D94208D38CD00C678C5 /* SVGElement.Text.swift in Sources */,
 				B5417D84208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
 				B5417D9A208D882A00C678C5 /* SVGElement.Ellipse.swift in Sources */,
@@ -769,6 +873,7 @@
 				B5417D8B208D16FF00C678C5 /* CSSFragment.swift in Sources */,
 				B5417D9E208D8A2000C678C5 /* SVGElement.Rect.swift in Sources */,
 				B54CA56C24A9793300436713 /* String+PathTokenizer.swift in Sources */,
+				B5A19F5F24A98746008B6896 /* SVGView.swift in Sources */,
 				B5417D95208D38CD00C678C5 /* SVGElement.Text.swift in Sources */,
 				B5417D85208D0DE200C678C5 /* SVGElement.Group.swift in Sources */,
 				B5417D9B208D882A00C678C5 /* SVGElement.Ellipse.swift in Sources */,
@@ -788,6 +893,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B54CA56D24A9813D00436713 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B54CA57624A9813D00436713 /* ContentView.swift in Sources */,
+				B54CA57424A9813D00436713 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +927,11 @@
 			target = B504E6AE1A898110001B414B /* SwiftVG_Mac */;
 			targetProxy = B59311341F58A7110056D353 /* PBXContainerItemProxy */;
 		};
+		B5A19F5C24A98344008B6896 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B504E6AE1A898110001B414B /* SwiftVG_Mac */;
+			targetProxy = B5A19F5B24A98344008B6896 /* PBXContainerItemProxy */;
+		};
 		B5E0D43F1F5FA9D300E1077C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B59311211F58A3EB0056D353 /* SwiftVGTestMac */;
@@ -821,6 +940,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B54CA57C24A9813F00436713 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B54CA57D24A9813F00436713 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		B58D64891A899094005A0002 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1206,6 +1333,79 @@
 			};
 			name = Release;
 		};
+		B54CA58224A9813F00436713 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Tests/MacTest/MacTest.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"Tests/MacTest/Preview Content\"";
+				DEVELOPMENT_TEAM = YY6CWUX533;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Tests/MacTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.MacTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B54CA58324A9813F00436713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Tests/MacTest/MacTest.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"Tests/MacTest/Preview Content\"";
+				DEVELOPMENT_TEAM = YY6CWUX533;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Tests/MacTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.standalone.MacTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		B593112E1F58A3EB0056D353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1321,6 +1521,15 @@
 			buildConfigurations = (
 				B53173C71F5F4CCE00F9C5AB /* Debug */,
 				B53173C81F5F4CCE00F9C5AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B54CA58124A9813F00436713 /* Build configuration list for PBXNativeTarget "MacTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B54CA58224A9813F00436713 /* Debug */,
+				B54CA58324A9813F00436713 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

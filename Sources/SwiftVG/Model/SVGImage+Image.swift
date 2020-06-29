@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import CoreGraphics
 
-#if canImport(Cocoa)
-import Cocoa
 
 public extension SVGImage {
-	var image: NSImage? {
+	var cgImage: CGImage? {
+		if let cached = self.cachedCGImage { return cached }
 		let size = self.size == .zero ? CGSize(width: 500, height: 500) : self.size
 		let rect = size.rect
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -27,7 +27,37 @@ public extension SVGImage {
 		context.restoreGState()
 		
 		guard let image = context.makeImage() else { return nil }
-		return NSImage(cgImage: image, size: size)
+		self.cachedCGImage = image
+		return image
+	}
+
+}
+
+#if canImport(Cocoa)
+import Cocoa
+
+public extension SVGImage {
+	var image: NSImage? {
+		if let cached = self.cachedNativeImage as? NSImage { return cached }
+		guard let image = self.cgImage else { return nil }
+		let result = NSImage(cgImage: image, size: size)
+		self.cachedNativeImage = result
+		return result
+	}
+}
+#endif
+
+
+#if canImport(UIKit)
+import UIKit
+
+public extension SVGImage {
+	var image: NSImage? {
+		if let cached = self.cachedNativeImage as? UIImage { return cached }
+		guard let image = self.cgImage else { return nil }
+		let result = UIImage(cgImage: image)
+		self.cachedNativeImage = result
+		return result
 	}
 }
 #endif

@@ -66,6 +66,13 @@ extension String {
 				}
 			}
 			
+			var subsequentMissingCommand: Command {
+				switch self {
+				case .move, .moveAbs: return .line
+				default: return self
+				}
+			}
+			
 			var argumentCount: Int {
 				switch self {
 				case .horizontalLineAbs, .horizontalLine, .verticalLine, .verticalLineAbs:
@@ -97,7 +104,7 @@ extension String {
 			
 			while true {
 				let next = parser.nextCommand()
-				let command = next ?? lastCommand
+				let command = next ?? lastCommand?.subsequentMissingCommand
 				if parser.index == parser.tokens.count || command == nil {
 					if next != nil { segments.append(PathSegment(command: next!)) }
 					break
