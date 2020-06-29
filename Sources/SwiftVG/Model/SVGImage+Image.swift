@@ -22,7 +22,7 @@ public extension SVGImage {
 		context.saveGState()
 		context.scaleBy(x: 1, y: -1)
 		context.translateBy(x: 0, y: -size.height)
-		context.setFillColor(NSColor.clear.cgColor)
+		context.setFillColor(Self.defaultBackgroundColor.cgColor)
 		context.draw(self, in: rect)
 		context.restoreGState()
 		
@@ -37,6 +37,7 @@ public extension SVGImage {
 import Cocoa
 
 public extension SVGImage {
+	static var defaultBackgroundColor = NSColor.clear
 	var image: NSImage? {
 		if let cached = self.cachedNativeImage as? NSImage { return cached }
 		guard let image = self.cgImage else { return nil }
@@ -52,7 +53,8 @@ public extension SVGImage {
 import UIKit
 
 public extension SVGImage {
-	var image: NSImage? {
+	static var defaultBackgroundColor = UIColor.clear
+	var image: UIImage? {
 		if let cached = self.cachedNativeImage as? UIImage { return cached }
 		guard let image = self.cgImage else { return nil }
 		let result = UIImage(cgImage: image)

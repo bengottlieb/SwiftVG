@@ -25,6 +25,8 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 	public var data: Data? { return self.document.data }
 	public var url: URL?
 	
+	public static let empty = SVGImage(size: .zero)
+	
 	public var id: String
 	var cachedCGImage: CGImage?
 	var cachedNativeImage: NSObject?
@@ -36,6 +38,12 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 		self.init(data: data)
 		self.url = url
 		self.id = url.absoluteString
+	}
+	
+	convenience public init?(bundleName: String, bundle: Bundle = .main, directory: String? = nil) {
+		guard let url = bundle.url(forResource: bundleName, withExtension: "svg", subdirectory: directory) else { return nil }
+		self.init(url: url)
+		self.id = bundleName
 	}
 	
 	public init?(string: String) {
