@@ -25,6 +25,40 @@ public extension CGContext {
 }
 
 public extension SVGImage {
+
+}
+
+#if canImport(Cocoa)
+import Cocoa
+
+public extension SVGImage {
+	var cgImage: CGImage? {
+		var rect = self.size.rect
+		return self.image?.cgImage(forProposedRect: &rect, context: nil, hints: nil)
+	}
+	static var defaultBackgroundColor = NSColor.clear
+	var image: NSImage? {
+		let image = NSImage(size: self.size, flipped: true) { rect in
+			guard let ctx = NSGraphicsContext.current?.cgContext else { return false }
+			ctx.saveGState()
+			ctx.draw(self, in: rect)
+			ctx.restoreGState()
+			return true
+		}
+
+		self.cachedNativeImage = image
+		return image
+	}
+}
+#endif
+
+
+#if canImport(UIKit)
+import UIKit
+
+public extension SVGImage {
+	static var defaultBackgroundColor = UIColor.clear
+
 	var cgImage: CGImage? {
 		if let cached = self.cachedCGImage { return cached }
 		let size = self.size == .zero ? CGSize(width: 500, height: 500) : self.size
@@ -45,29 +79,6 @@ public extension SVGImage {
 		return image
 	}
 
-}
-
-#if canImport(Cocoa)
-import Cocoa
-
-public extension SVGImage {
-	static var defaultBackgroundColor = NSColor.clear
-	var image: NSImage? {
-		if let cached = self.cachedNativeImage as? NSImage { return cached }
-		guard let image = self.cgImage else { return nil }
-		let result = NSImage(cgImage: image, size: size)
-		self.cachedNativeImage = result
-		return result
-	}
-}
-#endif
-
-
-#if canImport(UIKit)
-import UIKit
-
-public extension SVGImage {
-	static var defaultBackgroundColor = UIColor.clear
 	var image: UIImage? {
 		if let cached = self.cachedNativeImage as? UIImage { return cached }
 		guard let image = self.cgImage else { return nil }

@@ -28,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		window.setFrameAutosaveName("Main Window")
 		window.contentView = NSHostingView(rootView: contentView)
 		window.makeKeyAndOrderFront(nil)
+
+	//	SVGWindowController(path: "africa").showWindow(nil)
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {

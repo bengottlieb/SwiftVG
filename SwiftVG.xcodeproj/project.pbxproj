@@ -92,6 +92,8 @@
 		B5456CA724A9FE9600544C3F /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5456CA624A9FE9600544C3F /* Suite */; };
 		B5A19F6324AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
 		B5A19F6424AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
+		B5A19F6624AA61D2008B6896 /* SVGWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */; };
+		B5A19F6A24AA6383008B6896 /* SVGWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6824AA6383008B6896 /* SVGWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +194,8 @@
 		B5456C7B24A9FE1300544C3F /* SwiftVG_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG_macOS.h; sourceTree = "<group>"; };
 		B5456C7C24A9FE1300544C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5A19F6224AA2269008B6896 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = "<group>"; };
+		B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGWindowController.swift; sourceTree = "<group>"; };
+		B5A19F6824AA6383008B6896 /* SVGWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,6 +397,8 @@
 				B5456C7A24A9FE1300544C3F /* SwiftVG_macOS */,
 				B5456C5B24A9FD4900544C3F /* AppDelegate.swift */,
 				B5456C5D24A9FD4900544C3F /* ContentView.swift */,
+				B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */,
+				B5A19F6824AA6383008B6896 /* SVGWindowController.xib */,
 				B5456C5F24A9FD4B00544C3F /* Assets.xcassets */,
 				B5456C6424A9FD4B00544C3F /* Main.storyboard */,
 				B5456C6724A9FD4B00544C3F /* Info.plist */,
@@ -596,6 +602,7 @@
 			files = (
 				B5456C6624A9FD4B00544C3F /* Main.storyboard in Resources */,
 				B5A19F6424AA2269008B6896 /* Sample Images in Resources */,
+				B5A19F6A24AA6383008B6896 /* SVGWindowController.xib in Resources */,
 				B5456C6324A9FD4B00544C3F /* Preview Assets.xcassets in Resources */,
 				B5456C6024A9FD4B00544C3F /* Assets.xcassets in Resources */,
 			);
@@ -664,6 +671,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A19F6624AA61D2008B6896 /* SVGWindowController.swift in Sources */,
 				B5456C5E24A9FD4900544C3F /* ContentView.swift in Sources */,
 				B5456C5C24A9FD4900544C3F /* AppDelegate.swift in Sources */,
 			);
