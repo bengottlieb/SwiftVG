@@ -11,7 +11,7 @@ import SwiftVG
 
 struct ContentView: View {
     var body: some View {
-		SVGView(bundleName: "heart")
+		Image(svg: SVGImage(bundleName: "heart") ?? .empty)
     }
 }
 

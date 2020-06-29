@@ -45,7 +45,7 @@
 		B5456C3D24A9FA2100544C3F /* SVGElement.Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1C24A9FA2100544C3F /* SVGElement.Group.swift */; };
 		B5456C3E24A9FA2100544C3F /* SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1D24A9FA2100544C3F /* SVGImage.swift */; };
 		B5456C3F24A9FA2100544C3F /* SVGPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1E24A9FA2100544C3F /* SVGPlacement.swift */; };
-		B5456C4024A9FA2100544C3F /* SVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1F24A9FA2100544C3F /* SVGView.swift */; };
+		B5456C4024A9FA2100544C3F /* Image+SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1F24A9FA2100544C3F /* Image+SVGImage.swift */; };
 		B5456C4124A9FA2100544C3F /* SVGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2024A9FA2100544C3F /* SVGDocument.swift */; };
 		B5456C4224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */; };
 		B5456C4324A9FA2100544C3F /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2324A9FA2100544C3F /* SVGParser.swift */; };
@@ -101,7 +101,7 @@
 		B5456C9F24A9FE6D00544C3F /* SVGElement.Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1C24A9FA2100544C3F /* SVGElement.Group.swift */; };
 		B5456CA024A9FE6D00544C3F /* SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1D24A9FA2100544C3F /* SVGImage.swift */; };
 		B5456CA124A9FE6D00544C3F /* SVGPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1E24A9FA2100544C3F /* SVGPlacement.swift */; };
-		B5456CA224A9FE6D00544C3F /* SVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1F24A9FA2100544C3F /* SVGView.swift */; };
+		B5456CA224A9FE6D00544C3F /* Image+SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C1F24A9FA2100544C3F /* Image+SVGImage.swift */; };
 		B5456CA324A9FE6D00544C3F /* SVGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2024A9FA2100544C3F /* SVGDocument.swift */; };
 		B5456CA424A9FE6D00544C3F /* SVGParser+XMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */; };
 		B5456CA524A9FE6D00544C3F /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2324A9FA2100544C3F /* SVGParser.swift */; };
@@ -190,7 +190,7 @@
 		B5456C1C24A9FA2100544C3F /* SVGElement.Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGElement.Group.swift; sourceTree = "<group>"; };
 		B5456C1D24A9FA2100544C3F /* SVGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGImage.swift; sourceTree = "<group>"; };
 		B5456C1E24A9FA2100544C3F /* SVGPlacement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGPlacement.swift; sourceTree = "<group>"; };
-		B5456C1F24A9FA2100544C3F /* SVGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGView.swift; sourceTree = "<group>"; };
+		B5456C1F24A9FA2100544C3F /* Image+SVGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+SVGImage.swift"; sourceTree = "<group>"; };
 		B5456C2024A9FA2100544C3F /* SVGDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGDocument.swift; sourceTree = "<group>"; };
 		B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGParser+XMLParserDelegate.swift"; sourceTree = "<group>"; };
 		B5456C2324A9FA2100544C3F /* SVGParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
@@ -342,6 +342,7 @@
 		B5456BFF24A9FA2100544C3F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5456C1F24A9FA2100544C3F /* Image+SVGImage.swift */,
 				B5456C0024A9FA2100544C3F /* String+Path.swift */,
 				B5456C0124A9FA2100544C3F /* String+PathTokenizer.swift */,
 				B5456C0224A9FA2100544C3F /* String+Extension.swift */,
@@ -356,14 +357,13 @@
 		B5456C0724A9FA2100544C3F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5456C2024A9FA2100544C3F /* SVGDocument.swift */,
 				B5456C0824A9FA2100544C3F /* SVGImage+Image.swift */,
 				B5456C0924A9FA2100544C3F /* CSS */,
 				B5456C0C24A9FA2100544C3F /* SVGImage+Export.swift */,
 				B5456C0D24A9FA2100544C3F /* Elements */,
 				B5456C1D24A9FA2100544C3F /* SVGImage.swift */,
 				B5456C1E24A9FA2100544C3F /* SVGPlacement.swift */,
-				B5456C1F24A9FA2100544C3F /* SVGView.swift */,
-				B5456C2024A9FA2100544C3F /* SVGDocument.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -703,7 +703,7 @@
 				B5456C3724A9FA2100544C3F /* SVGElement.Use.swift in Sources */,
 				B5456C3224A9FA2100544C3F /* SVGElement.Container.swift in Sources */,
 				B5456C3024A9FA2100544C3F /* SVGElement.Ellipse.swift in Sources */,
-				B5456C4024A9FA2100544C3F /* SVGView.swift in Sources */,
+				B5456C4024A9FA2100544C3F /* Image+SVGImage.swift in Sources */,
 				B5456C3D24A9FA2100544C3F /* SVGElement.Group.swift in Sources */,
 				B5456C3E24A9FA2100544C3F /* SVGImage.swift in Sources */,
 				B5456C2724A9FA2100544C3F /* String+Transform.swift in Sources */,
@@ -751,7 +751,7 @@
 				B5456C9924A9FE6D00544C3F /* SVGElement.Use.swift in Sources */,
 				B5456C9424A9FE6D00544C3F /* SVGElement.Container.swift in Sources */,
 				B5456C9224A9FE6D00544C3F /* SVGElement.Ellipse.swift in Sources */,
-				B5456CA224A9FE6D00544C3F /* SVGView.swift in Sources */,
+				B5456CA224A9FE6D00544C3F /* Image+SVGImage.swift in Sources */,
 				B5456C9F24A9FE6D00544C3F /* SVGElement.Group.swift in Sources */,
 				B5456CA024A9FE6D00544C3F /* SVGImage.swift in Sources */,
 				B5456C8924A9FE6D00544C3F /* String+Transform.swift in Sources */,
