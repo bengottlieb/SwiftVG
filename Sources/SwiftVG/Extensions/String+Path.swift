@@ -45,21 +45,20 @@ extension String {
 	}
 	
 	func generateBezierPaths() throws -> CGPath {
-		var tokenizer = PathTokenizer(string: self)
+		let tokenizer = PathTokenizer(string: self)
 		let path = CGMutablePath()
 		var lastPoint = CGPoint.zero
 		var firstPoint = CGPoint.zero
 		var justMoving = true
 		var previousCurve: PreviousCurve?
-		
-		while true {
-			guard let command = tokenizer.nextCommand() else { break }
-			switch command {
+		let segments = tokenizer.segments
+		for var segment in segments {
+			switch segment.command {
 			case .move, .moveAbs:
 				justMoving = true
 				while true {
-					guard var point = tokenizer.nextPoint() else { break }
-					if command == .move { point += lastPoint }
+					guard var point = segment.nextPoint() else { break }
+					if !segment.command.isAbs { point += lastPoint }
 					if justMoving {
 						firstPoint = point
 						justMoving = false
@@ -72,38 +71,38 @@ extension String {
 				
 			case .line, .lineAbs:
 				while true {
-					guard var point = tokenizer.nextPoint() else { break }
-					if command == .line { point += lastPoint }
+					guard var point = segment.nextPoint() else { break }
+					if !segment.command.isAbs { point += lastPoint }
 					path.addLine(to: point)
 					lastPoint = point
 				}
 					
 			case .horizontalLine, .horizontalLineAbs:
-				guard var x = tokenizer.nextFloat() else { throw PathError.failedToGetPoint }
-				if command == .horizontalLine { x += lastPoint.x }
+				guard var x = segment.nextFloat() else { throw PathError.failedToGetPoint }
+				if !segment.command.isAbs { x += lastPoint.x }
 				let point = CGPoint(x: x, y: lastPoint.y)
 				path.addLine(to: point)
 				lastPoint = point
 				
 			case .verticalLine, .verticalLineAbs:
-				guard var y = tokenizer.nextFloat() else { throw PathError.failedToGetPoint }
-				if command == .verticalLine { y += lastPoint.y }
+				guard var y = segment.nextFloat() else { throw PathError.failedToGetPoint }
+				if !segment.command.isAbs { y += lastPoint.y }
 				let point = CGPoint(x: lastPoint.x, y: y)
 				path.addLine(to: point)
 				lastPoint = point
 				
-			case .quadBezier, .quadQuadBezierAbs:
+			case .quadBezier, .quadBezierAbs:
 				while true {
-					guard var control = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { break }
-					if command == .quadBezier { control += lastPoint; point += lastPoint; }
+					guard var control = segment.nextPoint(), var point = segment.nextPoint() else { break }
+					if !segment.command.isAbs { control += lastPoint; point += lastPoint; }
 					path.addQuadCurve(to: point, control: control)
 					lastPoint = point
 				}
 				
 			case .smoothQuadBezier, .smoothQuadBezierAbs:
 				while true {
-					guard var point = tokenizer.nextPoint() else { break }
-					if command == .quadBezier { point += lastPoint; }
+					guard var point = segment.nextPoint() else { break }
+					if !segment.command.isAbs { point += lastPoint; }
 					let control = previousCurve?.mirrored ?? point
 					path.addQuadCurve(to: point, control: control)
 					lastPoint = point
@@ -116,15 +115,15 @@ extension String {
 				
 			case .curve, .curveAbs:
 				while true {
-					guard var control1 = tokenizer.nextPoint(), var control2 = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { break }
-					if command == .curve { control1 += lastPoint; control2 += lastPoint; point += lastPoint }
+					guard var control1 = segment.nextPoint(), var control2 = segment.nextPoint(), var point = segment.nextPoint() else { break }
+					if !segment.command.isAbs { control1 += lastPoint; control2 += lastPoint; point += lastPoint }
 					path.addCurve(to: point, control1: control1, control2: control2)
 					lastPoint = point
 				}
 				
 			case .smoothCurve, .smoothCurveAbs:
-				guard var control = tokenizer.nextPoint(), var point = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
-				if command == .smoothCurve { point += lastPoint; control += lastPoint }
+				guard var control = segment.nextPoint(), var point = segment.nextPoint() else { throw PathError.failedToGetPoint }
+				if !segment.command.isAbs { point += lastPoint; control += lastPoint }
 				let control2 = previousCurve?.control2 ?? lastPoint
 				path.addCurve(to: point, control1: lastPoint, control2: control)
 				lastPoint = point
@@ -132,9 +131,9 @@ extension String {
 
 
 			case .arc, .arcAbs:
-				guard var rₓ = tokenizer.nextFloat(), var rᵧ = tokenizer.nextFloat(), var φ = tokenizer.nextFloat(), let largeArcFlag = tokenizer.nextBool(), let sweepFlag = tokenizer.nextBool(), var p2 = tokenizer.nextPoint() else { throw PathError.failedToGetPoint }
+				guard var rₓ = segment.nextFloat(), var rᵧ = segment.nextFloat(), var φ = segment.nextFloat(), let largeArcFlag = segment.nextBool(), let sweepFlag = segment.nextBool(), var p2 = segment.nextPoint() else { throw PathError.failedToGetPoint }
 				
-				if command == .arc { p2 += lastPoint }
+				if !segment.command.isAbs { p2 += lastPoint }
 				if rₓ == 0 || rᵧ == 0 {
 					path.addLine(to: p2)
 					break
@@ -192,68 +191,5 @@ extension String {
 		if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
 		
 		return path
-	}
-	
-	struct PathTokenizer {
-		enum Command: String {
-			case move = "m", moveAbs = "M"
-			case closePath = "z", closePathAbs = "Z"
-			case line = "l", lineAbs = "L"
-			case horizontalLine = "h", horizontalLineAbs = "H"
-			case verticalLine = "v", verticalLineAbs = "V"
-			case curve = "c", curveAbs = "C"
-			case smoothCurve = "s", smoothCurveAbs = "S"
-			case quadBezier = "q", quadQuadBezierAbs = "Q"
-			case smoothQuadBezier = "t", smoothQuadBezierAbs = "T"
-			case arc = "a", arcAbs = "A"
-		}
-		let tokens: [String]
-		var index = 0
-		
-		init(string: String) {
-			self.tokens = string.tokens
-		}
-		
-		var hasContentLeft: Bool { return self.index < self.tokens.count }
-		
-		mutating func nextCommand() -> Command? {
-			if self.index >= self.tokens.count { return nil }
-			if let command = Command(rawValue: self.tokens[self.index]) {
-				self.index += 1
-				return command
-			}
-			return nil
-		}
-		
-		mutating func nextPoint() -> CGPoint? {
-			if self.index >= (self.tokens.count - 1) { return nil }
-			if let x = Double(self.tokens[self.index]), let y = Double(self.tokens[self.index + 1]) {
-				self.index += 2
-				return CGPoint(x: x, y: y)
-			}
-			return nil
-		}
-
-		mutating func nextFloat() -> CGFloat? {
-			if self.index >= self.tokens.count { return nil }
-			if let f = Double(self.tokens[self.index]) {
-				self.index += 1
-				return CGFloat(f)
-			}
-			return nil
-		}
-
-		mutating func nextBool() -> Bool? {
-			if self.index >= self.tokens.count { return nil }
-			if self.tokens[self.index] == "0" {
-				self.index += 1
-				return false
-			}
-			if self.tokens[self.index] == "1" {
-				self.index += 1
-				return true
-			}
-			return nil
-		}
 	}
 }
