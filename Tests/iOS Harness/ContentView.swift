@@ -11,7 +11,10 @@ import SwiftVG
 
 struct ContentView: View {
     var body: some View {
-		Image(svg: SVGImage(bundleName: "heart") ?? .empty)
+		Image(svg: SVGImage(bundleName: "PreserveAspectRatio", directory: "Sample Images") ?? .empty)
+			.resizable()
+			.aspectRatio(contentMode: .fit)
+			
     }
 }
 

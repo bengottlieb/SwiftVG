@@ -76,8 +76,3 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 extension SVGImage {
 }
 
-extension CGContext {
-	public func draw(_ image: SVGImage, in frame: CGRect) {
-		image.document?.root.draw(with: self, in: frame)
-	}
-}

@@ -49,27 +49,11 @@
 		B5456C4124A9FA2100544C3F /* SVGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2024A9FA2100544C3F /* SVGDocument.swift */; };
 		B5456C4224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */; };
 		B5456C4324A9FA2100544C3F /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2324A9FA2100544C3F /* SVGParser.swift */; };
-		B5456C4D24A9FBF500544C3F /* equatorial-guinea.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4524A9FBF500544C3F /* equatorial-guinea.svg */; };
-		B5456C4E24A9FBF500544C3F /* africa.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4624A9FBF500544C3F /* africa.svg */; };
-		B5456C4F24A9FBF500544C3F /* virginia.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4724A9FBF500544C3F /* virginia.svg */; };
-		B5456C5024A9FBF500544C3F /* PreserveAspectRatio.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4824A9FBF500544C3F /* PreserveAspectRatio.svg */; };
-		B5456C5124A9FBF500544C3F /* united-states.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4924A9FBF500544C3F /* united-states.svg */; };
-		B5456C5224A9FBF500544C3F /* text.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4A24A9FBF500544C3F /* text.svg */; };
-		B5456C5324A9FBF500544C3F /* egypt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4B24A9FBF500544C3F /* egypt.svg */; };
-		B5456C5424A9FBF500544C3F /* heart.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4C24A9FBF500544C3F /* heart.svg */; };
 		B5456C5C24A9FD4900544C3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C5B24A9FD4900544C3F /* AppDelegate.swift */; };
 		B5456C5E24A9FD4900544C3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C5D24A9FD4900544C3F /* ContentView.swift */; };
 		B5456C6024A9FD4B00544C3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5456C5F24A9FD4B00544C3F /* Assets.xcassets */; };
 		B5456C6324A9FD4B00544C3F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5456C6224A9FD4B00544C3F /* Preview Assets.xcassets */; };
 		B5456C6624A9FD4B00544C3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5456C6424A9FD4B00544C3F /* Main.storyboard */; };
-		B5456C6C24A9FD7300544C3F /* equatorial-guinea.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4524A9FBF500544C3F /* equatorial-guinea.svg */; };
-		B5456C6D24A9FD7300544C3F /* africa.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4624A9FBF500544C3F /* africa.svg */; };
-		B5456C6E24A9FD7300544C3F /* virginia.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4724A9FBF500544C3F /* virginia.svg */; };
-		B5456C6F24A9FD7300544C3F /* PreserveAspectRatio.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4824A9FBF500544C3F /* PreserveAspectRatio.svg */; };
-		B5456C7024A9FD7300544C3F /* united-states.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4924A9FBF500544C3F /* united-states.svg */; };
-		B5456C7124A9FD7300544C3F /* text.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4A24A9FBF500544C3F /* text.svg */; };
-		B5456C7224A9FD7300544C3F /* egypt.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4B24A9FBF500544C3F /* egypt.svg */; };
-		B5456C7324A9FD7300544C3F /* heart.svg in Resources */ = {isa = PBXBuildFile; fileRef = B5456C4C24A9FBF500544C3F /* heart.svg */; };
 		B5456C7D24A9FE1300544C3F /* SwiftVG_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = B5456C7B24A9FE1300544C3F /* SwiftVG_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5456C8024A9FE1300544C3F /* SwiftVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5456C7924A9FE1300544C3F /* SwiftVG.framework */; };
 		B5456C8124A9FE1300544C3F /* SwiftVG.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5456C7924A9FE1300544C3F /* SwiftVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -106,6 +90,8 @@
 		B5456CA424A9FE6D00544C3F /* SVGParser+XMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */; };
 		B5456CA524A9FE6D00544C3F /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2324A9FA2100544C3F /* SVGParser.swift */; };
 		B5456CA724A9FE9600544C3F /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5456CA624A9FE9600544C3F /* Suite */; };
+		B5A19F6324AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
+		B5A19F6424AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,14 +180,6 @@
 		B5456C2024A9FA2100544C3F /* SVGDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGDocument.swift; sourceTree = "<group>"; };
 		B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGParser+XMLParserDelegate.swift"; sourceTree = "<group>"; };
 		B5456C2324A9FA2100544C3F /* SVGParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVGParser.swift; sourceTree = "<group>"; };
-		B5456C4524A9FBF500544C3F /* equatorial-guinea.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "equatorial-guinea.svg"; sourceTree = "<group>"; };
-		B5456C4624A9FBF500544C3F /* africa.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = africa.svg; sourceTree = "<group>"; };
-		B5456C4724A9FBF500544C3F /* virginia.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = virginia.svg; sourceTree = "<group>"; };
-		B5456C4824A9FBF500544C3F /* PreserveAspectRatio.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PreserveAspectRatio.svg; sourceTree = "<group>"; };
-		B5456C4924A9FBF500544C3F /* united-states.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "united-states.svg"; sourceTree = "<group>"; };
-		B5456C4A24A9FBF500544C3F /* text.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = text.svg; sourceTree = "<group>"; };
-		B5456C4B24A9FBF500544C3F /* egypt.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = egypt.svg; sourceTree = "<group>"; };
-		B5456C4C24A9FBF500544C3F /* heart.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heart.svg; sourceTree = "<group>"; };
 		B5456C5924A9FD4900544C3F /* SwiftVG_mac_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftVG_mac_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5456C5B24A9FD4900544C3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5456C5D24A9FD4900544C3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,6 +191,7 @@
 		B5456C7924A9FE1300544C3F /* SwiftVG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftVG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5456C7B24A9FE1300544C3F /* SwiftVG_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG_macOS.h; sourceTree = "<group>"; };
 		B5456C7C24A9FE1300544C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5A19F6224AA2269008B6896 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +277,7 @@
 		B5456B9D24A9F87E00544C3F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B5456C4424A9FBF500544C3F /* Sample Images */,
+				B5A19F6224AA2269008B6896 /* Sample Images */,
 				B5456C5A24A9FD4900544C3F /* macOS Harness */,
 				B5456B8824A9F86400544C3F /* iOS Harness */,
 			);
@@ -360,9 +339,9 @@
 				B5456C2024A9FA2100544C3F /* SVGDocument.swift */,
 				B5456C0824A9FA2100544C3F /* SVGImage+Image.swift */,
 				B5456C0924A9FA2100544C3F /* CSS */,
-				B5456C0C24A9FA2100544C3F /* SVGImage+Export.swift */,
 				B5456C0D24A9FA2100544C3F /* Elements */,
 				B5456C1D24A9FA2100544C3F /* SVGImage.swift */,
+				B5456C0C24A9FA2100544C3F /* SVGImage+Export.swift */,
 				B5456C1E24A9FA2100544C3F /* SVGPlacement.swift */,
 			);
 			path = Model;
@@ -407,22 +386,6 @@
 			);
 			path = "Parsing & Loading";
 			sourceTree = "<group>";
-		};
-		B5456C4424A9FBF500544C3F /* Sample Images */ = {
-			isa = PBXGroup;
-			children = (
-				B5456C4524A9FBF500544C3F /* equatorial-guinea.svg */,
-				B5456C4624A9FBF500544C3F /* africa.svg */,
-				B5456C4724A9FBF500544C3F /* virginia.svg */,
-				B5456C4824A9FBF500544C3F /* PreserveAspectRatio.svg */,
-				B5456C4924A9FBF500544C3F /* united-states.svg */,
-				B5456C4A24A9FBF500544C3F /* text.svg */,
-				B5456C4B24A9FBF500544C3F /* egypt.svg */,
-				B5456C4C24A9FBF500544C3F /* heart.svg */,
-			);
-			name = "Sample Images";
-			path = "Tests/Sample Images";
-			sourceTree = SOURCE_ROOT;
 		};
 		B5456C5A24A9FD4900544C3F /* macOS Harness */ = {
 			isa = PBXGroup;
@@ -613,15 +576,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5456C5424A9FBF500544C3F /* heart.svg in Resources */,
-				B5456C5024A9FBF500544C3F /* PreserveAspectRatio.svg in Resources */,
-				B5456C5224A9FBF500544C3F /* text.svg in Resources */,
-				B5456C5124A9FBF500544C3F /* united-states.svg in Resources */,
-				B5456C4D24A9FBF500544C3F /* equatorial-guinea.svg in Resources */,
-				B5456C4F24A9FBF500544C3F /* virginia.svg in Resources */,
 				B5456B9624A9F86600544C3F /* LaunchScreen.storyboard in Resources */,
-				B5456C5324A9FBF500544C3F /* egypt.svg in Resources */,
-				B5456C4E24A9FBF500544C3F /* africa.svg in Resources */,
+				B5A19F6324AA2269008B6896 /* Sample Images in Resources */,
 				B5456B9324A9F86600544C3F /* Preview Assets.xcassets in Resources */,
 				B5456B9024A9F86600544C3F /* Assets.xcassets in Resources */,
 			);
@@ -638,15 +594,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5456C7324A9FD7300544C3F /* heart.svg in Resources */,
-				B5456C6F24A9FD7300544C3F /* PreserveAspectRatio.svg in Resources */,
-				B5456C7124A9FD7300544C3F /* text.svg in Resources */,
-				B5456C7024A9FD7300544C3F /* united-states.svg in Resources */,
-				B5456C6C24A9FD7300544C3F /* equatorial-guinea.svg in Resources */,
-				B5456C6E24A9FD7300544C3F /* virginia.svg in Resources */,
 				B5456C6624A9FD4B00544C3F /* Main.storyboard in Resources */,
-				B5456C7224A9FD7300544C3F /* egypt.svg in Resources */,
-				B5456C6D24A9FD7300544C3F /* africa.svg in Resources */,
+				B5A19F6424AA2269008B6896 /* Sample Images in Resources */,
 				B5456C6324A9FD4B00544C3F /* Preview Assets.xcassets in Resources */,
 				B5456C6024A9FD4B00544C3F /* Assets.xcassets in Resources */,
 			);

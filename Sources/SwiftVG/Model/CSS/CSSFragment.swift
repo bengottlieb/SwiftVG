@@ -37,7 +37,7 @@ public class CSSFragment {
 			guard pieces.count == 2 else { continue }
 			
 			guard let property = Property(rawValue: pieces[0].trimmingCharacters(in: .whitespaces)) else {
-				print("Unknown CSS property: \(pieces[0])")
+				if !pieces[0].hasPrefix("-") { print("Unknown CSS property: \(pieces[0])") }
 				continue
 			}
 			guard let value = CSSValue(string: pieces[1], for: property) else { continue }

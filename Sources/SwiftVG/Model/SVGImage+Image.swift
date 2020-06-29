@@ -9,6 +9,20 @@
 import Foundation
 import CoreGraphics
 
+public extension CGContext {
+	func draw(_ image: SVGImage, in frame: CGRect) {
+		#if os(OSX)
+			let ctx = NSGraphicsContext(cgContext: self, flipped: true)
+			ctx.saveGraphicsState()
+			image.document?.root.draw(with: self, in: frame)
+			ctx.restoreGraphicsState()
+		#else
+			UIGraphicsPushContext(self)
+			image.document?.root.draw(with: self, in: frame)
+			UIGraphicsPopContext()
+		#endif
+	}
+}
 
 public extension SVGImage {
 	var cgImage: CGImage? {
