@@ -1,17 +1,161 @@
-<svg height="100px" version="1.1" viewBox="0 0 100.0 100.0" width="450px" xmlns="http://www.w3.org/2000/svg">    
-	<desc>Example PreserveAspectRatio - illustrates preserveAspectRatio attribute</desc>
-	<rect fill="none" height="98" stroke="blue" width="98" x="1" y="1" />
-		<g transform="translate(25, 25)">
-			<text y="-10">xMin*</text>
-			<rect fill="none" height="29" stroke="blue" width="49" x=".5" y=".5" />
-			<svg height="30" preserveAspectRatio="xMinYMin meet" viewBox="0 0 50.0 30.0" width="50">
-				<rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5" />
-				<g transform="translate(0, 5)">
-					<circle cx="15" cy="15" fill="yellow" r="10" />
-					<circle cx="12" cy="12" fill="black" r="1.5" />
-					<circle cx="17" cy="12" fill="black" r="1.5" />
-					<path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2" />
-				</g>
-			</svg>
-		</g>
+<svg height="300px" version="1.1" viewBox="0 0 450.0 450.0" width="450px" xmlns="http://www.w3.org/2000/svg">
+  <desc>
+    Example PreserveAspectRatio - illustrates preserveAspectRatio attribute
+  </desc>
+  <rect fill="none" height="298" stroke="blue" width="448" x="1" y="1"/>
+  <g font-size="9">
+    <g id="meet-group-2" transform="translate(250, 60)">
+      <text x="0" y="-30">
+        ---------- meet ----------
+      </text>
+      <g>
+        <text y="-10">
+          *YMin
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMinYMin meet" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(50, 0)">
+        <text y="-10">
+          *YMid
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMidYMid meet" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(100, 0)">
+        <text y="-10">
+          *YMax
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMaxYMax meet" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+    </g>
+    <g id="slice-group-1" transform="translate(100, 220)">
+      <text x="0" y="-30">
+        ---------- slice ----------
+      </text>
+      <g>
+        <text y="-10">
+          xMin*
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMinYMin slice" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(50,0)">
+        <text y="-10">
+          xMid*
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(100,0)">
+        <text y="-10">
+          xMax*
+        </text>
+        <rect fill="none" height="59" stroke="blue" width="29" x=".5" y=".5"/>
+        <svg height="60" preserveAspectRatio="xMaxYMax slice" viewBox="0 0 30 40" width="30">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+    </g>
+    <g id="slice-group-2" transform="translate(250, 220)">
+      <text x="0" y="-30">
+        --------------- slice ---------------
+      </text>
+      <g>
+        <text y="-10">
+          *YMin
+        </text>
+        <rect fill="none" height="29" stroke="blue" width="49" x=".5" y=".5"/>
+        <svg height="30" preserveAspectRatio="xMinYMin slice" viewBox="0 0 30 40" width="50">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(70,0)">
+        <text y="-10">
+          *YMid
+        </text>
+        <rect fill="none" height="29" stroke="blue" width="49" x=".5" y=".5"/>
+        <svg height="30" preserveAspectRatio="xMidYMid slice" viewBox="0 0 30 40" width="50">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+      <g transform="translate(140,0)">
+        <text y="-10">
+          *YMax
+        </text>
+        <rect fill="none" height="29" stroke="blue" width="49" x=".5" y=".5"/>
+        <svg height="30" preserveAspectRatio="xMaxYMax slice" viewBox="0 0 30 40" width="50">
+          <rect fill="black" height="39" stroke="red" width="29" x=".5" y=".5"/>
+          <g transform="translate(0, 5)">
+            <circle cx="15" cy="15" fill="yellow" r="10"/>
+            <circle cx="12" cy="12" fill="black" r="1.5"/>
+            <circle cx="17" cy="12" fill="black" r="1.5"/>
+            <path d="M 10 19 A 8 8 0 0 0 20 19" stroke="black" stroke-width="2"/>
+          </g>
+        </svg>
+      </g>
+    </g>
+  </g>
 </svg>
+
+
+

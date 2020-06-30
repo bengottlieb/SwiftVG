@@ -17,9 +17,7 @@ struct ContentView: View {
 	var body: some View {
 		HStack() {
 			if device.isIPhone {
-				//Image(svg: SVGImage(bundleName: "PreserveAspectRatio", directory: "Sample Images")!)
-				Image(svg: SVGImage(bundleName: "aspect_ratio xMinYMin meet", directory: "Sample Images")!)
-				//ImageListView()  { image in  }
+				ImageListView()  { image in  }
 			} else {
 				HStack(spacing: 0) {
 					ImageListView() { image in self.selectedImage = image }

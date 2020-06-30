@@ -9,15 +9,15 @@
 import Foundation
 import CoreGraphics
 
-protocol SetsViewport: class {
+protocol SetsViewport: SVGElement {
 	var viewBox: CGRect? { get }
 }
 
 extension SetsViewport {
 	func dimension(for dim: SVGDimension.Dimension) -> CGFloat? {
 		switch dim {
-		case .width: return self.viewBox?.width
-		case .height: return self.viewBox?.height
+		case .width: return self.dimWidth.dimension
+		case .height: return self.dimHeight.dimension
 		}
 	}
 }

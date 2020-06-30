@@ -19,7 +19,9 @@ open class SVGElement: Equatable {
 	public var comment: String?
 	public var content = ""
 	public var children: [SVGElement]! = []
-	
+
+	var size: CGSize?
+
 	public var briefDescription: String { return "Element" }
 
 	var classComponents: [String] {
@@ -116,6 +118,19 @@ open class SVGElement: Equatable {
 	
 	static public func ==(lhs: SVGElement, rhs: SVGElement) -> Bool {
 		return lhs === rhs
+	}
+
+	func setupDimensions() {
+		if self.dimensionsSetup { return }
+
+		guard let width = self.dimWidth.dimension, let height = self.dimHeight.dimension else { return }
+		self.size = CGSize(width: width, height: height)
+
+		do {
+			try self.validateDimensions()
+		} catch {
+			print("\(self): \(error)")
+		}
 	}
 }
 

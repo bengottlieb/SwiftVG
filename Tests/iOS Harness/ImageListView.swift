@@ -40,10 +40,10 @@ struct SVGRow: View {
 	
 	var body: some View {
 		VStack(spacing: 2) {
-//			Image(svg: image)
-//				.resizable()
-//				.aspectRatio(contentMode: .fit)
-//				.border(Color(white: 0.8), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+			Image(svg: image)
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.border(Color(white: 0.8), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
 			
 			Text(url.deletingPathExtension().lastPathComponent)
 			Text(image.size.dimString).font(.caption)

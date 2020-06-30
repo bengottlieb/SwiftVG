@@ -10,26 +10,32 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
+	var dimensionsSetup: Bool { self.size != nil }
+	var visibleBox: CGRect {
+		//if let box = self.viewBox { return box }
+		return CGRect(x: 0, y: 0, size: self.size ?? .zero)
+	}
+	
+	var sizeDescription: String {
+		guard let size = self.size else { return "" }
+		return "\(size.width)x\(size.height)"
+	}
+
+	func clearDimensions() {
+		
+	}
+
 	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
-		var size: CGSize = .zero { didSet {
-			if self.viewBox == nil {
-				self.viewBox = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-				self.attributes["viewBox"] = "0 0 \(self.size.width) \(self.size.height)"
-			}
-		}}
-		var dimensionsSetup = false
-		
-		
-		var sizeDescription: String {
-			if let box = self.viewBox { return "\(box.width)x\(box.height)" }
-			return "\(self.size.width)x\(self.size.height)"
-		}
 		
 		public override func parentDimension(for dim: SVGDimension.Dimension) -> CGFloat? {
 			return 0
 		}
-
+		
+		override func setupDimensions() {
+			super.setupDimensions()
+			self.viewBox = CGRect(viewBoxString: self.attributes["viewBox"])
+		}
 		
 		init(parent: Container? = nil, attributes: [String: String]) {
 			super.init(kind: NativeKind.svg, parent: parent)
@@ -52,42 +58,18 @@ extension SVGElement {
 			]
 			return attr
 		}
-		
-		func setupDimensions() {
-			if self.dimensionsSetup { return }
-			self.dimensionsSetup = true
-			self.viewBox = self.attributes["viewBox"]?.viewBox(in: self)
-
-			self.size.width = self.dimWidth.dimension ?? 0
-			self.size.height = self.dimHeight.dimension ?? 0
-			if self.viewBox == nil { self.viewBox = CGRect(origin: .zero, size: self.size) }
-			do {
-				try self.validateDimensions()
-			} catch {
-				// hmm. Our viewBox and our size don't match. Assume the smaller is correct for each
-				let width = min(self.size.width, self.viewBox?.width ?? 1000000)
-				let height = min(self.size.height, self.viewBox?.height ?? 1000000)
-				self.size = CGSize(width: width == 0 ? self.size.width : width, height: height == 0 ? self.size.height : height)
-				self.viewBox = CGRect(origin: self.viewBox?.origin ?? .zero, size: self.size)
-			}
-		}
-		
-		func clearDimensions() {
-			
-		}
-		
+				
 		public override func draw(with ctx: CGContext, in frame: CGRect) {
 			if self.parent == nil, !self.dimensionsSetup {
 				self.setupDimensions()
 				if self.size == .zero { self.size = frame.size }
-				if self.viewBox == .zero { self.viewBox = CGRect(origin: .zero, size: self.size) }
 			}
 			self.setupDimensions()
-			guard let box = self.viewBox else { return }
 			ctx.saveGState()
-			ctx.clip(to: box)
-			self.applyTransform(to: ctx, in: box)
-			self.drawChildren(with: ctx, in: box)
+			if let box = self.size?.rect { ctx.clip(to: box) }
+			
+			self.applyTransform(to: ctx, in: self.size?.rect ?? frame)
+			self.drawChildren(with: ctx, in: self.size?.rect ?? frame)
 			ctx.restoreGState()
 
 		}

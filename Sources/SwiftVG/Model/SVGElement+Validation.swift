@@ -9,18 +9,14 @@
 import Foundation
 
 public extension SVGElement {
-	enum SVGValidationError: Error { case viewBoxMismatchWidth, viewBoxMismatchHeight, viewBoxNaN }
+	enum SVGValidationError: Error { case zeroWidthViewBox, zeroHeightViewBox, zeroWidth, zeroHeight }
 	func validateDimensions() throws {
-		if let viewPort = self as? SetsViewport {
-			if self.dimWidth.dimension != viewPort.viewBox?.width { throw SVGValidationError.viewBoxMismatchWidth }
-			if self.dimHeight.dimension != viewPort.viewBox?.height { throw SVGValidationError.viewBoxMismatchHeight }
-			
-			if let box = viewPort.viewBox {
-				if box.origin.x.isNaN { throw SVGValidationError.viewBoxNaN }
-				if box.origin.y.isNaN { throw SVGValidationError.viewBoxNaN }
-				if box.size.width.isNaN { throw SVGValidationError.viewBoxNaN }
-				if box.size.height.isNaN { throw SVGValidationError.viewBoxNaN }
-			}
+		if let box = (self as? SetsViewport)?.viewBox {
+			if box.width == 0 { throw SVGValidationError.zeroWidthViewBox}
+			if box.height == 0 { throw SVGValidationError.zeroHeightViewBox}
 		}
+		
+		if self.dimWidth.dimension == 0 { throw SVGValidationError.zeroWidth }
+		if self.dimHeight.dimension == 0 { throw SVGValidationError.zeroHeight }
 	}
 }

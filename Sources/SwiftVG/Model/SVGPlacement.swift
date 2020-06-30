@@ -61,25 +61,25 @@ extension SVGElement {
 	}
 	
 	func applyTransform(to ctx: CGContext, in rect: CGRect) {
-		guard let box = (self as? SetsViewport)?.viewBox else { return }
+		guard let box = (self as? SetsViewport)?.viewBox, let mySize = self.size else { return }
 		let placement = Placement(rawValue: self.attributes["preserveAspectRatio"])
-		let myAspect = box.width / box.height
+		let myAspect = mySize.width / mySize.height
 		var scaleX: CGFloat = 1
 		var scaleY: CGFloat = 1
 		var targetRect = rect
 		switch placement.scaling {
 		case .scaleAspectFit:
 			if myAspect > 1 {
-				if targetRect.size.height > targetRect.width / myAspect {
+				if targetRect.size.height > (targetRect.width / myAspect) {
 					targetRect.size.height = targetRect.width / myAspect
 				} else {
 					targetRect.size.width = targetRect.height * myAspect
 				}
 			} else {
-				if targetRect.size.width > targetRect.height * myAspect {
+				if targetRect.size.width > (targetRect.height * myAspect) {
 					targetRect.size.width = targetRect.height * myAspect
 				} else {
-					targetRect.size.width = targetRect.width / myAspect
+					targetRect.size.height = targetRect.width / myAspect
 				}
 			}
 			scaleX = min(targetRect.width / box.width, targetRect.height / box.height)
@@ -87,16 +87,16 @@ extension SVGElement {
 
 		case .scaleAspectFill:
 			if myAspect > 1 {
-				if targetRect.size.height < targetRect.width / myAspect {
+				if targetRect.size.height < (targetRect.width / myAspect) {
 					targetRect.size.height = targetRect.width / myAspect
 				} else {
 					targetRect.size.width = targetRect.height * myAspect
 				}
 			} else {
-				if targetRect.size.width < targetRect.height * myAspect {
+				if targetRect.size.width < (targetRect.height * myAspect) {
 					targetRect.size.width = targetRect.height * myAspect
 				} else {
-					targetRect.size.width = targetRect.width / myAspect
+					targetRect.size.height = targetRect.width / myAspect
 				}
 			}
 			scaleX = max(targetRect.width / box.width, targetRect.height / box.height)

@@ -16,7 +16,7 @@ import Combine
 #endif
 
 open class SVGImage: CustomStringConvertible, Identifiable {
-	public var viewBox: CGRect { return self.document?.root.viewBox ?? .zero }
+	public var viewBox: CGRect { return self.document?.root.visibleBox ?? .zero }
 	public var size: CGSize {
 		get { return self.document?.root.size ?? .zero }
 		set { self.document?.root.size = newValue }

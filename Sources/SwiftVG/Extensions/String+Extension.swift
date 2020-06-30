@@ -10,14 +10,6 @@ import Foundation
 import CoreGraphics
 
 extension String {
-	func viewBox(in element: SVGElement) -> CGRect? {
-		var components = self.components(separatedBy: ",")
-		if components.count != 4 { components = self.components(separatedBy: .whitespaces) }
-		if components.count != 4 { return nil }
-		
-		return CGRect(x: Double(components[0]) ?? 0, y: Double(components[1]) ?? 0, width: Double(components[2]) ?? 0, height: Double(components[3]) ?? 0)
-	}
-	
 	subscript(_ range: Range<Int>) -> String {
 		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
 		let end = self.index(self.startIndex, offsetBy: range.upperBound)
