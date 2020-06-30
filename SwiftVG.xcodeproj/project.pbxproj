@@ -94,6 +94,11 @@
 		B5A19F6424AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
 		B5A19F6624AA61D2008B6896 /* SVGWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */; };
 		B5A19F6A24AA6383008B6896 /* SVGWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6824AA6383008B6896 /* SVGWindowController.xib */; };
+		B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
+		B5E2EFA824AAD1E400A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
+		B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */; };
+		B5E2EFAC24AADB0500A1764A /* SVGContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */; };
+		B5E2EFAE24AADE9000A1764A /* SVGTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAD24AADE9000A1764A /* SVGTree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +201,10 @@
 		B5A19F6224AA2269008B6896 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = "<group>"; };
 		B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGWindowController.swift; sourceTree = "<group>"; };
 		B5A19F6824AA6383008B6896 /* SVGWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGWindowController.xib; sourceTree = "<group>"; };
+		B5E2EFA624AAD1E100A1764A /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
+		B5E2EFA924AAD20B00A1764A /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../Suite; sourceTree = "<group>"; };
+		B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGContainer.swift; sourceTree = "<group>"; };
+		B5E2EFAD24AADE9000A1764A /* SVGTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +246,7 @@
 		B5456B7D24A9F86400544C3F = {
 			isa = PBXGroup;
 			children = (
+				B5E2EFA924AAD20B00A1764A /* Suite */,
 				B5456BFD24A9FA2100544C3F /* Sources */,
 				B5456B9D24A9F87E00544C3F /* Tests */,
 				B5456B8724A9F86400544C3F /* Products */,
@@ -262,6 +272,9 @@
 				B5456B8924A9F86400544C3F /* AppDelegate.swift */,
 				B5456B8B24A9F86400544C3F /* SceneDelegate.swift */,
 				B5456B8D24A9F86400544C3F /* ContentView.swift */,
+				B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */,
+				B5E2EFAD24AADE9000A1764A /* SVGTree.swift */,
+				B5E2EFA624AAD1E100A1764A /* ImageListView.swift */,
 				B5456B8F24A9F86600544C3F /* Assets.xcassets */,
 				B5456B9424A9F86600544C3F /* LaunchScreen.storyboard */,
 				B5456B9724A9F86600544C3F /* Info.plist */,
@@ -622,8 +635,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */,
+				B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */,
 				B5456B8A24A9F86400544C3F /* AppDelegate.swift in Sources */,
 				B5456B8C24A9F86400544C3F /* SceneDelegate.swift in Sources */,
+				B5E2EFAE24AADE9000A1764A /* SVGTree.swift in Sources */,
 				B5456B8E24A9F86400544C3F /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +687,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E2EFA824AAD1E400A1764A /* ImageListView.swift in Sources */,
+				B5E2EFAC24AADB0500A1764A /* SVGContainer.swift in Sources */,
 				B5A19F6624AA61D2008B6896 /* SVGWindowController.swift in Sources */,
 				B5456C5E24A9FD4900544C3F /* ContentView.swift in Sources */,
 				B5456C5C24A9FD4900544C3F /* AppDelegate.swift in Sources */,
@@ -875,6 +893,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Tests/iOS Harness/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -896,6 +915,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Tests/iOS Harness/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -11,7 +11,7 @@ import SwiftVG
 
 struct ContentView: View {
     var body: some View {
-		Image(svg: SVGImage(bundleName: "africa", directory: "Sample Images")!)
+		Image(svg: SVGImage(bundleName: "PreserveAspectRatio", directory: "Sample Images")!)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

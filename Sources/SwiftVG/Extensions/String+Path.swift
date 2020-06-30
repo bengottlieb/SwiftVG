@@ -188,7 +188,7 @@ extension String {
 				lastPoint = p2
 			}
 		}
-		if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
+		//if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
 		
 		return path
 	}
