@@ -10,7 +10,9 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
-	class Text: Container, ContentElement {		
+	class Text: Container, ContentElement {
+		override var briefDescription: String { self.content }
+		
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.text, parent: parent)
 			self.load(attributes: attributes)

@@ -11,6 +11,7 @@ import CoreGraphics
 
 extension SVGElement {
 	class Use: SVGElement {
+		override var briefDescription: String { "use" }
 		var ref: String?
 		
 		init(parent: Container?, attributes: [String: String]) {

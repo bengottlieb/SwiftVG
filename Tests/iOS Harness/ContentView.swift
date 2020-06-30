@@ -25,6 +25,8 @@ struct ContentView: View {
 					Divider()
 					Spacer()
 					if selectedImage != nil {
+						SVGTree(svg: selectedImage!)
+							.frame(width: 200)
 						SVGContainer(svg: selectedImage!)
 					}
 					Spacer()

@@ -11,18 +11,19 @@ import CoreGraphics
 
 extension SVGElement {
 	public class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
-		public var children: [SVGElement] = []
+		override public var briefDescription: String { self.svgID ?? "container" }
+		
 		public var defs: Defs?
 		var cachedChildrenByID: [String: SVGElement]?
 
 		public func append(child: SVGElement) {
 			self.children.append(child)
-			if let id = child.id { self.cachedChildrenByID?[id] = child }
+			if let id = child.svgID { self.cachedChildrenByID?[id] = child }
 		}
 		public func remove(child: SVGElement) {
 			if let index = self.children.firstIndex(of: child) {
 				self.children.remove(at: index)
-				if let id = child.id { self.cachedChildrenByID?.removeValue(forKey: id) }
+				if let id = child.svgID { self.cachedChildrenByID?.removeValue(forKey: id) }
 			}
 		}
 		public override func draw(with ctx: CGContext, in frame: CGRect) { self.drawChildren(with: ctx, in: frame) }
@@ -102,7 +103,7 @@ extension SVGElement {
 			if self.cachedChildrenByID == nil {
 				self.cachedChildrenByID = [:]
 				self.children.forEach {
-					if let id = $0.id { self.cachedChildrenByID?[id] = $0 }
+					if let id = $0.svgID { self.cachedChildrenByID?[id] = $0 }
 				}
 			}
 			return self.cachedChildrenByID?[id]

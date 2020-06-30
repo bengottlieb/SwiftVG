@@ -11,6 +11,7 @@ import CoreGraphics
 
 extension SVGElement {
 	class Rect: SVGElement {		
+		override var briefDescription: String { self.svgID ?? "rect" }
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.rect, parent: parent)
 			self.load(attributes: attributes)

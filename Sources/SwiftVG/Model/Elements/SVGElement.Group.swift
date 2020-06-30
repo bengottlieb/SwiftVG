@@ -11,6 +11,7 @@ import CoreGraphics
 
 extension SVGElement {
 	class Group: SVGElement.Container {
+		override var briefDescription: String { self.svgID ?? "group" }
 		init(parent: Container? = nil, attributes: [String: String]) {
 			super.init(kind: NativeKind.group, parent: parent)
 			self.load(attributes: attributes)

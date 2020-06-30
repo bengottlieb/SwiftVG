@@ -11,6 +11,7 @@ import CoreGraphics
 
 extension SVGElement {
 	class Path: SVGElement, CustomStringConvertible {
+		override var briefDescription: String { self.svgID ?? "path" }
 		var indicateFirstPoint = false
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {			

@@ -15,7 +15,9 @@ struct SVGTree: View {
 	let svg: SVGImage
 	
 	var body: some View {
-		Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+		List(self.svg.document.root.children, children: \.children) { item in
+			Text(item.briefDescription)
+		}
 	}
 }
 

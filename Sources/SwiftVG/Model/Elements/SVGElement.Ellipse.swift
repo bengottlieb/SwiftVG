@@ -11,6 +11,8 @@ import CoreGraphics
 
 extension SVGElement {
 	class Ellipse: SVGElement {		
+		override var briefDescription: String { "ellipse" }
+		
 		init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)

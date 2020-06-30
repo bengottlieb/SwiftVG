@@ -8,9 +8,10 @@
 
 import Foundation
 import CoreGraphics
+import SwiftUI
 
-extension SVGElement {
-	public var id: String? {
+extension SVGElement: Identifiable {
+	public var svgID: String? {
 		get { return self.attributes["id"] }
 		set { self.attributes["id"] = newValue }
 	}

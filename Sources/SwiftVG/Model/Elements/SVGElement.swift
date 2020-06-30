@@ -8,14 +8,20 @@
 
 import Foundation
 import CoreGraphics
+import SwiftUI
 
 open class SVGElement: Equatable {
+	public var id = UUID()
 	public let kind: SVGElementKind
 	public var parent: Container!
 	public var attributes: [String: String]
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
+	public var children: [SVGElement]! = []
+	
+	public var briefDescription: String { return "Element" }
+
 	var classComponents: [String] {
 		get { return self.attributes["class"]?.components(separatedBy: " ") ?? [] }
 		set { self.attributes["class"] = newValue.joined(separator: " ") }
