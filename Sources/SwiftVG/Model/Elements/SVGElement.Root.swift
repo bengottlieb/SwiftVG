@@ -67,7 +67,7 @@ extension SVGElement {
 				// hmm. Our viewBox and our size don't match. Assume the smaller is correct for each
 				let width = min(self.size.width, self.viewBox?.width ?? 1000000)
 				let height = min(self.size.height, self.viewBox?.height ?? 1000000)
-				self.size = CGSize(width: width, height: height)
+				self.size = CGSize(width: width == 0 ? self.size.width : width, height: height == 0 ? self.size.height : height)
 				self.viewBox = CGRect(origin: self.viewBox?.origin ?? .zero, size: self.size)
 			}
 		}
@@ -85,6 +85,7 @@ extension SVGElement {
 			self.setupDimensions()
 			guard let box = self.viewBox else { return }
 			ctx.saveGState()
+			ctx.clip(to: box)
 			self.applyTransform(to: ctx, in: box)
 			self.drawChildren(with: ctx, in: box)
 			ctx.restoreGState()
