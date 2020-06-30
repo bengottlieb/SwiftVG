@@ -18,20 +18,6 @@ extension String {
 		return CGRect(x: Double(components[0]) ?? 0, y: Double(components[1]) ?? 0, width: Double(components[2]) ?? 0, height: Double(components[3]) ?? 0)
 	}
 	
-	func dimension(in element: SVGElement, for dim: SVGElement.Dimension) -> CGFloat? {
-		if let dbl = Double(self) { return CGFloat(dbl) }
-		
-		if self.contains("%"),
-		   let percent = Double(self.trimmingCharacters(in: CharacterSet(charactersIn: "%"))),
-		   let parentDim = element.parentDimension(for: dim) {
-			return parentDim * CGFloat(percent / 100)
-		}
-		
-		let filtered = self.trimmingCharacters(in: .letters)
-		if let dbl = Double(filtered) { return CGFloat(dbl) }
-		return nil
-	}
-	
 	subscript(_ range: Range<Int>) -> String {
 		let start = self.index(self.startIndex, offsetBy: range.lowerBound)
 		let end = self.index(self.startIndex, offsetBy: range.upperBound)

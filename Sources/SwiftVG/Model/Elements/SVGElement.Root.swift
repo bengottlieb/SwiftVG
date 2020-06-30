@@ -13,8 +13,10 @@ extension SVGElement {
 	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
 		var size: CGSize = .zero { didSet {
-			self.viewBox = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-			self.attributes["viewBox"] = "0 0 \(self.size.width) \(self.size.height)"
+			if self.viewBox == nil {
+				self.viewBox = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+				self.attributes["viewBox"] = "0 0 \(self.size.width) \(self.size.height)"
+			}
 		}}
 		var dimensionsSetup = false
 		
@@ -24,7 +26,7 @@ extension SVGElement {
 			return "\(self.size.width)x\(self.size.height)"
 		}
 		
-		public override func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? {
+		public override func parentDimension(for dim: SVGDimension.Dimension) -> CGFloat? {
 			return 0
 		}
 
@@ -55,9 +57,19 @@ extension SVGElement {
 			if self.dimensionsSetup { return }
 			self.dimensionsSetup = true
 			self.viewBox = self.attributes["viewBox"]?.viewBox(in: self)
-			self.size.width = self.attributes["width"]?.dimension(in: self, for: .width) ?? 0
-			self.size.height = self.attributes["height"]?.dimension(in: self, for: .height) ?? 0
+
+			self.size.width = self.dimWidth.dimension ?? 0
+			self.size.height = self.dimHeight.dimension ?? 0
 			if self.viewBox == nil { self.viewBox = CGRect(origin: .zero, size: self.size) }
+			do {
+				try self.validateDimensions()
+			} catch {
+				// hmm. Our viewBox and our size don't match. Assume the smaller is correct for each
+				let width = min(self.size.width, self.viewBox?.width ?? 1000000)
+				let height = min(self.size.height, self.viewBox?.height ?? 1000000)
+				self.size = CGSize(width: width, height: height)
+				self.viewBox = CGRect(origin: self.viewBox?.origin ?? .zero, size: self.size)
+			}
 		}
 		
 		func clearDimensions() {

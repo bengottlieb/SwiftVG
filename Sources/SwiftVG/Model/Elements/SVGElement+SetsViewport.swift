@@ -14,7 +14,7 @@ protocol SetsViewport: class {
 }
 
 extension SetsViewport {
-	func dimension(for dim: SVGElement.Dimension) -> CGFloat? {
+	func dimension(for dim: SVGDimension.Dimension) -> CGFloat? {
 		switch dim {
 		case .width: return self.viewBox?.width
 		case .height: return self.viewBox?.height

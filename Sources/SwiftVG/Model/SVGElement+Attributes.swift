@@ -10,7 +10,15 @@ import Foundation
 import CoreGraphics
 import SwiftUI
 
+public typealias SVGAttributes = [String: String]
+
+extension SVGAttributes {
+}
+
 extension SVGElement: Identifiable {
+	var dimWidth: SVGDimension { SVGDimension(self, self.attributes["width"], .width) }
+	var dimHeight: SVGDimension { SVGDimension(self, self.attributes["height"], .height) }
+
 	public var svgID: String? {
 		get { return self.attributes["id"] }
 		set { self.attributes["id"] = newValue }

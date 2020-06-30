@@ -14,7 +14,7 @@ open class SVGElement: Equatable {
 	public var id = UUID()
 	public let kind: SVGElementKind
 	public var parent: Container!
-	public var attributes: [String: String]
+	public var attributes: SVGAttributes
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
@@ -85,7 +85,7 @@ open class SVGElement: Equatable {
 		}
 	}
 	
-	open func parentDimension(for dim: SVGElement.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
+	open func parentDimension(for dim: SVGDimension.Dimension) -> CGFloat? { return (self.parent as? SetsViewport)?.dimension(for: dim) }
 	
 	public func append(comment: String) {
 		if let current = self.comment {
@@ -142,10 +142,6 @@ extension SVGElement {
 		}
 		return result + ">\n"
 	}
-}
-
-extension SVGElement {
-	public enum Dimension { case width, height }
 }
 
 public protocol SVGElementKind {
