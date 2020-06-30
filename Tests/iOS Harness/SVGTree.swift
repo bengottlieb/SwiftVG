@@ -16,7 +16,18 @@ struct SVGTree: View {
 	
 	var body: some View {
 		List(self.svg.document.root.children, children: \.children) { item in
-			Text(item.briefDescription)
+			if item.drawnRect != nil {
+				HStack() {
+					Text(item.briefDescription)
+						.font(.body)
+						.padding()
+					Text(item.drawnRect!.size.dimString)
+						.font(.caption)
+				}
+			} else {
+				Text(item.briefDescription)
+					.padding()
+			}
 		}
 	}
 }

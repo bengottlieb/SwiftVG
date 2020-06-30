@@ -21,6 +21,7 @@ open class SVGElement: Equatable {
 	public var children: [SVGElement]! = []
 
 	var size: CGSize?
+	public var drawnRect: CGRect? { return nil }
 
 	public var briefDescription: String { return "Element" }
 

@@ -14,6 +14,14 @@ extension SVGElement {
 		override var briefDescription: String { self.svgID ?? "path" }
 		var indicateFirstPoint = false
 		
+		override public var drawnRect: CGRect? {
+			guard let path = try? self.attributes["d"]?.generateBezierPaths() else {
+				return nil
+			}
+			
+			return path.boundingBoxOfPath
+		}
+		
 		override func draw(with ctx: CGContext, in frame: CGRect) {			
 			guard let data = self.attributes["d"] else { return }
 
@@ -22,27 +30,31 @@ extension SVGElement {
 
 			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
-			let path = try! data.generateBezierPaths()
-			
-			
-			//for path in paths {
-			if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
-			if let fill = self.fillColor {
-				fill.setFill()
-				ctx.addPath(path)
-				ctx.fillPath()
-			}
-			if let stroke = self.strokeColor {
-				stroke.setStroke()
-				ctx.addPath(path)
-				ctx.strokePath()
-			}
-			
-			if self.indicateFirstPoint, let first = data.firstPathPoint {
-				ctx.beginPath()
-				ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)
-				ctx.closePath()
-				ctx.fillPath()
+			do {
+				let path = try data.generateBezierPaths()
+
+				//for path in paths {
+				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
+				if let fill = self.fillColor {
+					fill.setFill()
+					ctx.addPath(path)
+					ctx.fillPath()
+				}
+				if let stroke = self.strokeColor {
+					stroke.setStroke()
+					ctx.addPath(path)
+					ctx.strokePath()
+				}
+				
+				if self.indicateFirstPoint, let first = data.firstPathPoint {
+					ctx.beginPath()
+					ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+					ctx.closePath()
+					ctx.fillPath()
+				}
+			} catch {
+				print("Error when generating paths: \(error)")
+				return
 			}
 		}
 		

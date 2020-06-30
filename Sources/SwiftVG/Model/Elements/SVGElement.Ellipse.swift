@@ -17,25 +17,28 @@ extension SVGElement {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)
 		}
+		
+		override public var drawnRect: CGRect? { self.rect }
+		
+		var rect: CGRect? {
+			guard let cx = self.attributes[float: "cx"], let cy = self.attributes[float: "cy"] else { return nil }
+
+			if let r = self.attributes[float: "r"] {
+				return CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2)
+			} else if let rx = self.attributes[float: "rx"], let ry = self.attributes[float: "ry"] {
+				return CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2)
+			}
+			return nil
+		}
 
 		override func draw(with ctx: CGContext, in frame: CGRect) {
-			guard let cx = self.attributes[float: "cx"], let cy = self.attributes[float: "cy"] else { return }
-			
+			guard let rect = self.rect else { return }
+
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
 			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 
-			let rect: CGRect
-
-			if let r = self.attributes[float: "r"] {
-				rect = CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2)
-			} else if let rx = self.attributes[float: "rx"], let ry = self.attributes[float: "ry"] {
-				rect = CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2)
-			} else {
-				return
-			}
-			
 			if let fill = self.fillColor {
 				fill.setFill()
 				ctx.fillEllipse(in: rect)

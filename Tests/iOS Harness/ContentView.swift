@@ -17,7 +17,7 @@ struct ContentView: View {
 	var body: some View {
 		HStack() {
 			if device.isIPhone {
-				ImageListView()  { image in  }
+				ImageListView() { image in  }
 			} else {
 				HStack(spacing: 0) {
 					ImageListView() { image in self.selectedImage = image }

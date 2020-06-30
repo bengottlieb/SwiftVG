@@ -17,15 +17,20 @@ extension SVGElement {
 			self.load(attributes: attributes)
 		}
 		
+		override public var drawnRect: CGRect? { self.rect }
+
+		var rect: CGRect? {
+			guard let x = self.attributes[float: "x"], let y = self.attributes[float: "y"], let width = self.dimWidth.dimension, let height = self.dimHeight.dimension else { return nil }
+			return CGRect(x: x, y: y, width: width, height: height)
+		}
+		
 		override func draw(with ctx: CGContext, in frame: CGRect) {
-			guard let x = self.attributes[float: "x"], let y = self.attributes[float: "y"], let width = self.attributes[float: "width"], let height = self.attributes[float: "height"] else { return }
-			
+			guard let rect = self.rect else { return }
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
 			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
 			
-			let rect = CGRect(x: x, y: y, width: width, height: height)
 			
 			if let fill = self.fillColor {
 				fill.setFill()

@@ -17,6 +17,22 @@ extension SVGElement {
 			self.load(attributes: attributes)
 		}
 		
+		override public var drawnRect: CGRect? {
+			if self.children.isEmpty { return nil }
+			
+			var rect: CGRect?
+			
+			for child in self.children {
+				let childRect = child.drawnRect
+				if let actual = rect, let actualChild = childRect {
+					rect = actual.union(actualChild)
+				} else {
+					rect = childRect
+				}
+			}
+			return rect
+		}
+				
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
