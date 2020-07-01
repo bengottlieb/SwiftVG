@@ -17,7 +17,9 @@ struct ContentView: View {
 	var body: some View {
 		HStack() {
 			if device.isIPhone {
-				ImageListView() { image in  }
+				SVGView(svg: SVGImage(bundleName: "africa", directory: "Sample Images")!)
+					.padding()
+				//ImageListView() { image in  }
 			} else {
 				HStack(spacing: 0) {
 					ImageListView() { image in self.selectedImage = image }

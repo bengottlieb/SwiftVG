@@ -19,8 +19,8 @@ struct SVGContainer: View {
 	
 	var body: some View {
 		ZStack {
-			Image(svg: svg)
-				.resizable()
+			SVGView(svg: svg)
+				.scaleEffect(0.25)
 				.aspectRatio(contentMode: .fit)
 			
 			VStack {

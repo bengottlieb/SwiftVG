@@ -9,23 +9,38 @@
 import Foundation
 import CoreGraphics
 
-extension String {
-	var embeddedTransform: CGAffineTransform? {
-		if self.hasPrefix("translate("), let pt = self[9...].extractedPoint {
+extension SVGElement {
+	var translation: CGSize {
+		guard let transform = self.attributes["transform"] else { return .zero }
+		
+		if transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+			return CGSize(width: pt.x, height: pt.y)
+		}
+		
+		return .zero
+	}
+
+	var transform: CGAffineTransform? {
+		guard let transform = self.attributes["transform"] else { return nil }
+		
+		if transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
 			return CGAffineTransform(translationX: pt.x, y: pt.y)
 		}
 
-		if self.hasPrefix("rotate("), let angle = Double(self[6...]) {
+		if transform.hasPrefix("rotate("), let angle = Double(transform[6...]) {
 			let rad = (angle * 2 * .pi) / 360.0
 			return CGAffineTransform(rotationAngle: CGFloat(rad))
 		}
 		
-		if self.hasPrefix("scale("), let pt = self[5...].extractedPoint {
+		if transform.hasPrefix("scale("), let pt = transform[5...].extractedPoint {
 			return CGAffineTransform(scaleX: pt.x, y: pt.y)
 		}
 		return nil
 	}
 	
+}
+
+extension String {
 	var extractedPoint: CGPoint? {
 		let filtered = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
 		let components = filtered.components(separatedBy: ",")

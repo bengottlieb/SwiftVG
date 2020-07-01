@@ -18,17 +18,21 @@ extension SVGElement {
 			self.load(attributes: attributes)
 		}
 
+		var text: String {
+			self.content
+		}
+
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard !self.content.isEmpty, let font = self.font else { return }
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
-			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			var attr: [NSAttributedString.Key: Any] = [.font: font]
 			if let color = self.fillColor { attr[.foregroundColor] = color }
 			
-			let string = NSAttributedString(string: self.content.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
+			let string = NSAttributedString(string: text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			let x = self.attributes[float: "x"] ?? 0
 			let y = self.attributes[float: "y"] ?? 0
 

@@ -37,7 +37,7 @@ extension SVGElement {
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 			
-			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.transform { ctx.concatenate(transform) }
 			super.draw(with: ctx, in: frame)
 		}
 	}

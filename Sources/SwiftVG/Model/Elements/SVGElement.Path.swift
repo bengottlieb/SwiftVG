@@ -14,12 +14,12 @@ extension SVGElement {
 		override var briefDescription: String { self.svgID ?? "path" }
 		var indicateFirstPoint = false
 		
+		var path: CGPath? {
+			return try? self.attributes["d"]?.generateBezierPaths()
+		}
+		
 		override public var drawnRect: CGRect? {
-			guard let path = try? self.attributes["d"]?.generateBezierPaths() else {
-				return nil
-			}
-			
-			return path.boundingBoxOfPath
+			return path?.boundingBoxOfPath
 		}
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {			
@@ -28,7 +28,7 @@ extension SVGElement {
 			ctx.saveGState()
 			defer { ctx.restoreGState() }
 
-			if let transform = self.attributes["transform"]?.embeddedTransform { ctx.concatenate(transform) }
+			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			do {
 				let path = try data.generateBezierPaths()
