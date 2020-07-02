@@ -19,9 +19,10 @@ struct SVGContainer: View {
 	
 	var body: some View {
 		ZStack {
-			SVGView(svg: svg)
-				.scaleEffect(0.25)
+			ScrollView() {
+				SVGView(svg: svg)
 				.aspectRatio(contentMode: .fit)
+			}
 			
 			VStack {
 				Spacer()

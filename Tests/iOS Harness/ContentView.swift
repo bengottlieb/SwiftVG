@@ -14,11 +14,18 @@ struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
 	
+	let svg = SVGImage(bundleName: "aspect_ratio xMidYMin meet", directory: "Sample Images")!
+	
 	var body: some View {
 		HStack() {
 			if device.isIPhone {
-				SVGView(svg: SVGImage(bundleName: "africa", directory: "Sample Images")!)
-					.padding()
+				VStack() {
+					SVGView(svg: svg)
+						.padding()
+
+					Image(svg: svg)
+						.padding()
+				}
 				//ImageListView() { image in  }
 			} else {
 				HStack(spacing: 0) {

@@ -8,6 +8,7 @@
 
 import Foundation
 import Studio
+import SwiftUI
 
 #if os(OSX)
 	import Cocoa
@@ -204,6 +205,7 @@ extension SVGColor {
 
 extension SVGColor {
 #if os(OSX)
+	var swiftUIColor: Color { Color(self) }
 	func getRGBA() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)? {
 		if self.type != .componentBased { return nil }
 		var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0), a = CGFloat(0)
@@ -211,6 +213,7 @@ extension SVGColor {
 		return (r: r, g: g, b: b, a: a)
 }
 #else
+	var swiftUIColor: Color { Color(self) }
 	func getRGBA() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)? {
 		var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0), a = CGFloat(0)
 		if !self.getRed(&r, green: &g, blue: &b, alpha: &a) { return nil }
