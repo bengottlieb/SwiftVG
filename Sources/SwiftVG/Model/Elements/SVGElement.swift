@@ -133,6 +133,20 @@ open class SVGElement: Equatable {
 			print("\(self): \(error)")
 		}
 	}
+
+	var translation: CGSize {
+		var translation = CGSize.zero
+		
+		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+			translation = CGSize(width: pt.x, height: pt.y)
+		}
+		
+		translation.width += self.attributes[float: "x"] ?? 0
+		translation.height += self.attributes[float: "y"] ?? 0
+
+		
+		return translation
+	}
 }
 
 protocol ContentElement {

@@ -20,6 +20,15 @@ extension SVGElement {
 		
 		override public var drawnRect: CGRect? { self.rect }
 		
+		override var translation: CGSize {
+			get {
+				let rect = self.rect
+				let trans = super.translation
+				
+				return CGSize(width: trans.width + (rect?.origin.x ?? 0), height: trans.height + (rect?.origin.y ?? 0))
+			}
+		}
+		
 		var rect: CGRect? {
 			guard let cx = self.attributes[float: "cx"], let cy = self.attributes[float: "cy"] else { return nil }
 
