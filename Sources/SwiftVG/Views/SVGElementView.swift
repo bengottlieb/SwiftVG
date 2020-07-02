@@ -44,7 +44,7 @@ struct SVGElementView: View {
 					.fill(Color.green)
 			}
 		}
-		.offset(element.translation)
+		.offset(element.swiftUIOffset)
 		//.frame(width: element.size.width, height: element.size.height)
 	}
 }

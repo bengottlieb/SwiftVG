@@ -22,6 +22,14 @@ extension SVGElement {
 			self.content
 		}
 
+		override var swiftUIOffset: CGSize {
+			get {
+				let trans = self.translation
+				
+				return CGSize(width: trans.width, height: trans.height - self.fontSize * 0.5)
+			}
+		}
+		
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard !self.content.isEmpty else { return }
 			ctx.saveGState()

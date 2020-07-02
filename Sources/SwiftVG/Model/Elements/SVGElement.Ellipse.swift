@@ -20,10 +20,10 @@ extension SVGElement {
 		
 		override public var drawnRect: CGRect? { self.rect }
 		
-		override var translation: CGSize {
+		override var swiftUIOffset: CGSize {
 			get {
 				let rect = self.rect
-				let trans = super.translation
+				let trans = self.translation
 				
 				return CGSize(width: trans.width + (rect?.origin.x ?? 0), height: trans.height + (rect?.origin.y ?? 0))
 			}

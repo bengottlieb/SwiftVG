@@ -74,7 +74,7 @@ extension SVGElement: Identifiable {
 	}
 	
 	var font: SVGFont {
-		let size = self.fontSize ?? 12
+		let size = self.fontSize
 		guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else {
 			return SVGFont.systemFont(ofSize: size)
 		}
@@ -82,14 +82,14 @@ extension SVGElement: Identifiable {
 		return SVGFont(name: family, size: size) ?? SVGFont.systemFont(ofSize: size)
 	}
 	
-	var fontSize: CGFloat? {
+	var fontSize: CGFloat {
 		get {
 			if let size = self.styles?[.fontSize]?.float { return size }
 			if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) }
-			return nil
+			return 16
 		}
 		set {
-			self.attributes["font-size"] = newValue == nil ? nil : "\(newValue!)"
+			self.attributes["font-size"] = "\(newValue)"
 		}
 	}
 }
