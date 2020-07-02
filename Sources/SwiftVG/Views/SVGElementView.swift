@@ -16,22 +16,23 @@ struct SVGElementView: View {
 			if let pathElement = element as? SVGElement.Path {
 				if let path = pathElement.path {
 					Path(path)
-						.stroke(Color.gray)
+						.applyStyles(from: element)
 				}
 			} else if let rectElement = element as? SVGElement.Rect {
 				if let rect = rectElement.rect {
 					Rectangle()
-						.stroke(Color.gray)
+						.applyStyles(from: element)
 						.frame(width: rect.width, height: rect.height)
 				}
 			} else if let ellipseElement = element as? SVGElement.Ellipse {
 				if let rect = ellipseElement.rect {
 					Ellipse()
-						.stroke(Color.gray)
+						.applyStyles(from: element)
 						.frame(width: rect.width, height: rect.height)
 				}
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)
+					.font(element.font.swiftUIFont)
 			} else if let container = element as? SVGElement.Container {
 				ZStack(alignment: .topLeading) {
 					ForEach(container.children) { child in

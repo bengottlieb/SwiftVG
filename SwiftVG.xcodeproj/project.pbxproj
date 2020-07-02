@@ -109,6 +109,8 @@
 		B5E2EFAE24AADE9000A1764A /* SVGTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAD24AADE9000A1764A /* SVGTree.swift */; };
 		B5E2EFB324AB75E500A1764A /* CoreGraphics+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */; };
 		B5E2EFB424AB75E500A1764A /* CoreGraphics+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */; };
+		B5FE67FB24ADF28900844229 /* SVGElementView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */; };
+		B5FE67FC24ADF28900844229 /* SVGElementView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +222,7 @@
 		B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGContainer.swift; sourceTree = "<group>"; };
 		B5E2EFAD24AADE9000A1764A /* SVGTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGTree.swift; sourceTree = "<group>"; };
 		B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extension.swift"; sourceTree = "<group>"; };
+		B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElementView+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,7 @@
 			children = (
 				B5966CC424ACA16E00E1943A /* SVGView.swift */,
 				B5966CC724ACA32500E1943A /* SVGElementView.swift */,
+				B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -688,6 +692,7 @@
 				B5966CC824ACA32500E1943A /* SVGElementView.swift in Sources */,
 				B5456C3C24A9FA2100544C3F /* SVGElement.Unknown.swift in Sources */,
 				B5456C3324A9FA2100544C3F /* SVGElement.Path.swift in Sources */,
+				B5FE67FB24ADF28900844229 /* SVGElementView+Style.swift in Sources */,
 				B5456C3A24A9FA2100544C3F /* SVGElement+Attributes.swift in Sources */,
 				B5456C2C24A9FA2100544C3F /* CSSFragment.swift in Sources */,
 				B5456C2924A9FA2100544C3F /* Font+Extension.swift in Sources */,
@@ -744,6 +749,7 @@
 				B5966CC924ACA32500E1943A /* SVGElementView.swift in Sources */,
 				B5456C9E24A9FE6D00544C3F /* SVGElement.Unknown.swift in Sources */,
 				B5456C9524A9FE6D00544C3F /* SVGElement.Path.swift in Sources */,
+				B5FE67FC24ADF28900844229 /* SVGElementView+Style.swift in Sources */,
 				B5456C9C24A9FE6D00544C3F /* SVGElement+Attributes.swift in Sources */,
 				B5456C8E24A9FE6D00544C3F /* CSSFragment.swift in Sources */,
 				B5456C8B24A9FE6D00544C3F /* Font+Extension.swift in Sources */,

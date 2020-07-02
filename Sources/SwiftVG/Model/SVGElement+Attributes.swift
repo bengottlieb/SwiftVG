@@ -73,8 +73,8 @@ extension SVGElement: Identifiable {
 		}
 	}
 	
-	var font: SVGFont? {
-		guard let size = self.fontSize else { return nil }
+	var font: SVGFont {
+		let size = self.fontSize ?? 12
 		guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else {
 			return SVGFont.systemFont(ofSize: size)
 		}

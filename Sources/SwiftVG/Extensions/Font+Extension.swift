@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 #if os(OSX)
 	import Cocoa
@@ -17,7 +19,7 @@ import Foundation
 #endif
 
 extension SVGFont {
-	
+	var swiftUIFont: Font { Font(self) }
 }
 
 

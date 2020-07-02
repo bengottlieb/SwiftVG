@@ -11,13 +11,17 @@ import CoreGraphics
 
 extension SVGElement {
 	var translation: CGSize {
-		guard let transform = self.attributes["transform"] else { return .zero }
+		var translation = CGSize.zero
 		
-		if transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
-			return CGSize(width: pt.x, height: pt.y)
+		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+			translation = CGSize(width: pt.x, height: pt.y)
 		}
 		
-		return .zero
+		translation.width += self.attributes[float: "x"] ?? 0
+		translation.height += self.attributes[float: "y"] ?? 0
+
+		
+		return translation
 	}
 
 	var transform: CGAffineTransform? {
@@ -45,7 +49,9 @@ extension String {
 		let filtered = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
 		let components = filtered.components(separatedBy: ",")
 		if components.count != 2 { return nil }
-		guard let x = Double(components[0].trimmingCharacters(in: .whitespaces)), let y = Double(components[1].trimmingCharacters(in: .whitespaces)) else { return nil }
-		return CGPoint(x: x, y: y)
+		let x = Double(components[0].trimmingCharacters(in: .whitespaces))
+		let y = Double(components[1].trimmingCharacters(in: .whitespaces))
+		if x != nil || y != nil { return CGPoint(x: x ?? 0, y: y ?? 0) }
+		return nil
 	}
 }

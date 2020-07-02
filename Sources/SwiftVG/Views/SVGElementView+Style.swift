@@ -8,14 +8,47 @@
 
 import SwiftUI
 
-struct SVGElementView_Style: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct SVGStyleFill: ViewModifier {
+	let element: SVGElement
+	
+	func body(content: Content) -> some View {
+		Group() {
+			if element.fillColor?.swiftUIColor != nil {
+				content.background(element.fillColor!.swiftUIColor)
+			} else {
+				content
+			}
+		}
+	}
 }
 
-struct SVGElementView_Style_Previews: PreviewProvider {
-    static var previews: some View {
-        SVGElementView_Style()
-    }
+struct SVGStyleStroke: ViewModifier {
+	let element: SVGElement
+	
+	func body(content: Content) -> some View {
+		Group() {
+			if element.strokeColor?.swiftUIColor != nil {
+				content.foregroundColor(element.strokeColor!.swiftUIColor)
+			} else {
+				content
+			}
+		}
+	}
 }
+
+extension Shape {
+	func applyStyles(from element: SVGElement) -> some View {
+		ZStack() {
+			if element.fillColor?.swiftUIColor != nil {
+				self.fill(element.fillColor!.swiftUIColor)
+			}
+
+			if element.strokeColor?.swiftUIColor != nil {
+				self.stroke(element.strokeColor!.swiftUIColor)
+			}
+		}
+	}
+}
+
+
+
