@@ -34,18 +34,16 @@ extension SVGElement {
 				let path = try data.generateBezierPaths()
 
 				//for path in paths {
-				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
-				if let fill = self.fillColor {
-					fill.setFill()
-					ctx.addPath(path)
-					ctx.fillPath()
-				}
-				if let stroke = self.strokeColor {
-					stroke.setStroke()
-					ctx.addPath(path)
-					ctx.strokePath()
-				}
-				
+				ctx.setLineWidth(strokeWidth)
+				fillColor.setFill()
+				ctx.addPath(path)
+				ctx.fillPath()
+
+				ctx.setLineWidth(strokeWidth)
+				strokeColor.setStroke()
+				ctx.addPath(path)
+				ctx.strokePath()
+
 				if self.indicateFirstPoint, let first = data.firstPathPoint {
 					ctx.beginPath()
 					ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)

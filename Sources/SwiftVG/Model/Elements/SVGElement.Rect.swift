@@ -32,16 +32,12 @@ extension SVGElement {
 			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			
-			if let fill = self.fillColor {
-				fill.setFill()
-				ctx.fill(rect)
-			}
+			self.fillColor.setFill()
+			ctx.fill(rect)
 			
-			if let stroke = self.strokeColor {
-				if let strokeWidth = self.strokeWidth { ctx.setLineWidth(strokeWidth) }
-				stroke.setStroke()
-				ctx.stroke(rect)
-			}
+			ctx.setLineWidth(strokeWidth)
+			self.strokeColor.setStroke()
+			ctx.stroke(rect)
 		}
 	}
 }

@@ -30,46 +30,46 @@ extension SVGElement: Identifiable {
 		return nil
 	}
 	
-	public var fillColor: SVGColor? {
+	public var fillColor: SVGColor {
 		get {
 			if let color = self.styles?[.fill]?.color { return color }
 			
-			if let attr = self.value(for: "fill") { return SVGColor(attr) }
-			return nil
+			if let attr = self.value(for: "fill"), let color = SVGColor(attr) { return color }
+			return .black
 		}
 		set {
-			self.attributes["fill"] = newValue?.colorString
+			self.attributes["fill"] = newValue.colorString
 		}
 	}
 
-	public var strokeColor: SVGColor? {
+	public var strokeColor: SVGColor {
 		get {
 			if let color = self.styles?[.stroke]?.color { return color }
 			
-			if let attr = self.value(for: "stroke") { return SVGColor(attr) }
-			return nil
+			if let attr = self.value(for: "stroke"), let color = SVGColor(attr) { return color }
+			return .black
 		}
 		set {
-			self.attributes["stroke"] = newValue?.colorString
+			self.attributes["stroke"] = newValue.colorString
 		}
 	}
 	
-	public var strokeWidth: CGFloat? {
+	public var strokeWidth: CGFloat {
 		get {
 			if let width = self.styles?[.strokeWidth]?.float { return width }
 			if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
-			return nil
+			return 1
 		}
 		set {
-			self.attributes["stroke-width"] = newValue == nil ? nil : "\(newValue!)"
+			self.attributes["stroke-width"] = "\(newValue)"
 		}
 	}
 	
-	var cgFont: CGFont? {
+	var cgFont: CGFont {
 		get {
-			guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else { return nil }
+			if let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family"), let font = CGFont(family as CFString) { return font }
 		
-			return CGFont(family as CFString)
+			return CGFont("NewYork" as CFString)!
 		}
 	}
 	

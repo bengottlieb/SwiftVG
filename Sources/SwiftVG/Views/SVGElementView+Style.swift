@@ -13,11 +13,7 @@ struct SVGStyleFill: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		Group() {
-			if element.fillColor?.swiftUIColor != nil {
-				content.background(element.fillColor!.swiftUIColor)
-			} else {
-				content
-			}
+			content.background(element.fillColor.swiftUIColor)
 		}
 	}
 }
@@ -27,11 +23,7 @@ struct SVGStyleStroke: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		Group() {
-			if element.strokeColor?.swiftUIColor != nil {
-				content.foregroundColor(element.strokeColor!.swiftUIColor)
-			} else {
-				content
-			}
+			content.foregroundColor(element.strokeColor.swiftUIColor)
 		}
 	}
 }
@@ -39,13 +31,8 @@ struct SVGStyleStroke: ViewModifier {
 extension Shape {
 	func applyStyles(from element: SVGElement) -> some View {
 		ZStack() {
-			if element.fillColor?.swiftUIColor != nil {
-				self.fill(element.fillColor!.swiftUIColor)
-			}
-
-			if element.strokeColor?.swiftUIColor != nil {
-				self.stroke(element.strokeColor!.swiftUIColor)
-			}
+			self.fill(element.fillColor.swiftUIColor)
+			self.stroke(element.strokeColor.swiftUIColor)
 		}
 	}
 }

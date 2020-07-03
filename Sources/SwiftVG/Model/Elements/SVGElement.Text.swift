@@ -38,7 +38,7 @@ extension SVGElement {
 			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			var attr: [NSAttributedString.Key: Any] = [.font: self.font]
-			if let color = self.fillColor { attr[.foregroundColor] = color }
+			attr[.foregroundColor] = self.fillColor
 			
 			let string = NSAttributedString(string: text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			
