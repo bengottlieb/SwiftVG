@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreGraphics
+import Suite
 
 extension SVGElement {
 	var dimensionsSetup: Bool { self.size != nil }
@@ -27,9 +28,15 @@ extension SVGElement {
 
 	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
+		override var shouldClip: Bool { return true }
 		
 		public override func parentDimension(for dim: SVGDimension.Dimension) -> CGFloat? {
 			return 0
+		}
+		
+		public override var drawnRect: CGRect? {
+			if let size = self.size { return CGRect(origin: self.translation.point, size: size) }
+			return nil
 		}
 		
 		override func setupDimensions() {

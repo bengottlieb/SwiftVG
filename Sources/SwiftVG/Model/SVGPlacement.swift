@@ -10,6 +10,7 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
+	var placement: Placement? { Placement(rawValue: self.attributes["preserveAspectRatio"]) }
 	public struct Placement {
 		var scaling: Scaling
 		var position: Positioning
@@ -61,8 +62,7 @@ extension SVGElement {
 	}
 	
 	func applyTransform(to ctx: CGContext, in rect: CGRect) {
-		guard let box = (self as? SetsViewport)?.viewBox, let mySize = self.size else { return }
-		let placement = Placement(rawValue: self.attributes["preserveAspectRatio"])
+		guard let box = (self as? SetsViewport)?.viewBox, let mySize = self.size, let placement = self.placement else { return }
 		let myAspect = mySize.width / mySize.height
 		var scaleX: CGFloat = 1
 		var scaleY: CGFloat = 1

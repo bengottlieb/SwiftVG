@@ -41,6 +41,7 @@ struct SVGElementView: View {
 					}
 				}
 				.frame(width: element.drawnRect?.width, height: element.drawnRect?.height)
+				.if(element.shouldClip) { $0.clipped() }
 			} else {
 				Rectangle()
 					.stroke(Color.green)
