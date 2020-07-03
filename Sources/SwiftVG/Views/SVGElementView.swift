@@ -33,6 +33,7 @@ struct SVGElementView: View {
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
+					.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
 			} else if let container = element as? SVGElement.Container {
 				ZStack(alignment: .topLeading) {
 					ForEach(container.children) { child in

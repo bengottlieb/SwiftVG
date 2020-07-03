@@ -11,6 +11,8 @@ import SwiftUI
 public struct SVGView: View {
 	public let svg: SVGImage
 	
+	public static var drawElementBorders = false
+	
 	public init(svg: SVGImage) {
 		self.svg = svg
 	}

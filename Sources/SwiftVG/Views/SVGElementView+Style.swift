@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Suite
 
 struct SVGStyleFill: ViewModifier {
 	let element: SVGElement
@@ -33,6 +34,7 @@ extension Shape {
 		ZStack(alignment: .topLeading) {
 			self.fill(element.fillColor.swiftUIColor)
 			self.stroke(element.strokeColor.swiftUIColor)
+				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
 		}
 	}
 }
