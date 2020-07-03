@@ -12,7 +12,8 @@ import CoreGraphics
 extension SVGElement {
 	public class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
 		override public var briefDescription: String { self.svgID ?? "container" }
-		
+		override public var isDisplayable: Bool { return true }
+
 		public var defs: Defs?
 		var cachedChildrenByID: [String: SVGElement]?
 

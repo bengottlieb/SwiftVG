@@ -18,7 +18,7 @@ public struct SVGView: View {
 	public var body: some View {
 		ZStack(alignment: .topLeading) {
 			ForEach(svg.document.root.children) { child in
-				SVGElementView(element: child)
+				if child.isDisplayable { SVGElementView(element: child) }
 			}
 		}
     }

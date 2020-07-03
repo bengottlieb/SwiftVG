@@ -12,10 +12,12 @@ import CoreGraphics
 extension SVGElement {
 	class Ellipse: SVGElement {		
 		override var briefDescription: String { "ellipse" }
-		
+		override public var isDisplayable: Bool { return true }
+
 		init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)
+			if self.size == nil { self.size = self.rect?.size }
 		}
 		
 		override public var drawnRect: CGRect? { self.rect }

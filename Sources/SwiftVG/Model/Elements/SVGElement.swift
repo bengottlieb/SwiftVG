@@ -19,6 +19,7 @@ open class SVGElement: Equatable {
 	public var comment: String?
 	public var content = ""
 	public var children: [SVGElement]! = []
+	public var isDisplayable: Bool { return false }
 
 	var size: CGSize?
 	public var drawnRect: CGRect? { return nil }

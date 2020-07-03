@@ -36,16 +36,17 @@ struct SVGElementView: View {
 			} else if let container = element as? SVGElement.Container {
 				ZStack(alignment: .topLeading) {
 					ForEach(container.children) { child in
-						SVGElementView(element: child)
+						if child.isDisplayable { SVGElementView(element: child) }
 					}
 				}
+				.frame(width: element.drawnRect?.width, height: element.drawnRect?.height)
 			} else {
 				Rectangle()
-					.fill(Color.green)
+					.stroke(Color.green)
+					.frame(width: element.size?.width, height: element.size?.height)
 			}
 		}
 		.offset(element.swiftUIOffset)
-		//.frame(width: element.size.width, height: element.size.height)
 	}
 }
 

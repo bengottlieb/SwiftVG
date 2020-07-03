@@ -12,7 +12,8 @@ import CoreGraphics
 extension SVGElement {
 	class Text: Container, ContentElement {
 		override var briefDescription: String { self.content }
-		
+		override public var isDisplayable: Bool { return true }
+
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.text, parent: parent)
 			self.load(attributes: attributes)

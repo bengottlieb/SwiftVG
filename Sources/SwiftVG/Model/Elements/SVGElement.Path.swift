@@ -12,6 +12,7 @@ import CoreGraphics
 extension SVGElement {
 	class Path: SVGElement, CustomStringConvertible {
 		override var briefDescription: String { self.svgID ?? "path" }
+		override public var isDisplayable: Bool { return true }
 		var indicateFirstPoint = false
 		
 		var path: CGPath? {

@@ -12,9 +12,12 @@ import CoreGraphics
 extension SVGElement {
 	class Rect: SVGElement {		
 		override var briefDescription: String { self.svgID ?? "rect" }
+		override public var isDisplayable: Bool { return true }
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.rect, parent: parent)
 			self.load(attributes: attributes)
+			
+			if self.size == nil { self.size = self.rect?.size }
 		}
 		
 		override public var drawnRect: CGRect? { self.rect }

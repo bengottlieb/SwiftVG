@@ -402,7 +402,6 @@
 			children = (
 				B5456C1524A9FA2100544C3F /* SVGElement.swift */,
 				B5456C0E24A9FA2100544C3F /* SVGElement.Text.swift */,
-				B5456C0F24A9FA2100544C3F /* SVGElement.Ellipse.swift */,
 				B5456C1124A9FA2100544C3F /* SVGElement.Container.swift */,
 				B5456C1224A9FA2100544C3F /* SVGElement.Path.swift */,
 				B5456C1324A9FA2100544C3F /* SVGElement.Generic.swift */,
@@ -411,6 +410,7 @@
 				B5456C1724A9FA2100544C3F /* SVGElement+SetsViewport.swift */,
 				B5456C1824A9FA2100544C3F /* SVGElement.Defs.swift */,
 				B5456C1A24A9FA2100544C3F /* SVGElement.Rect.swift */,
+				B5456C0F24A9FA2100544C3F /* SVGElement.Ellipse.swift */,
 				B5456C1B24A9FA2100544C3F /* SVGElement.Unknown.swift */,
 				B5456C1C24A9FA2100544C3F /* SVGElement.Group.swift */,
 			);

@@ -13,7 +13,8 @@ extension SVGElement {
 	class Generic: Container {
 		var qualifiedName: String?
 		var nameSpace: String?
-		
+		override public var isDisplayable: Bool { return false }
+
 		init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent)
 			self.load(attributes: attributes)
