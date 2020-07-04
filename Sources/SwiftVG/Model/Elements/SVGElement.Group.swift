@@ -11,7 +11,6 @@ import CoreGraphics
 
 extension SVGElement {
 	class Group: SVGElement.Container {
-		override var briefDescription: String { self.svgID ?? "group" }
 		override public var isDisplayable: Bool { return true }
 
 		override public var drawnRect: CGRect? {

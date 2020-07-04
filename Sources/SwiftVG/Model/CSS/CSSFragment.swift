@@ -40,7 +40,7 @@ public class CSSFragment: CustomStringConvertible {
 		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight", textAlign = "text-align", lineHeight = "line-height", textIndent = "text-indent", textTransform = "text-transform"
 		case direction, letterSpacing = "letter-spacing", textDecoration = "text-decoration", unicodeBidi = "unicode-bidi", wordSpacing = "word-spacing"
 		case clip, color, cursor, display, overflow, visibility
-		case clipPath = "clip-path", clipRule = "clip-rule", mask, opacity
+		case clipPath = "clip-path", clipRule = "clip-rule", mask, opacity, filter
 		case stopColor = "stop-color", stopOpacity = "stop-opacity"
 		
 		case colorInterpolation = "color-interpolation", colorInterpolationFilters = "color-interpolation-filters", colorProfile = "color-profile", colorRendering = "color-rendering", fill, fillOpacity = "fill-opacity", fillRule = "fill-rule", imageRendering = "image-rendering", marker, markerEnd = "markerEnd", markerMid = "marker-mid", markerStart = "marker-start", shapeRendering = "shape-rendering", stroke, strokeDashArray = "stroke-dasharray", strokeDashOffset = "stroke-dashoffset", strokeLineCap = "stroke-linecap", strokeLineJoin = "stroke-linejoin", strokeMiterLimit = "stroke-miterlimit", strokeOpacity = "stroke-opacity", strokeWidth = "stroke-width", textRendering = "text-rendering"

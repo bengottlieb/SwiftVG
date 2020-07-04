@@ -10,6 +10,14 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
+	var previousSibling: SVGElement? {
+		let siblings = self.parent.resolvedChildren
+		if let index = siblings.index(of: self), index > 0 {
+			return siblings[index - 1]
+		}
+		return nil
+	}
+	
 	var placement: Placement? { Placement(rawValue: self.attributes["preserveAspectRatio"]) }
 	public struct Placement {
 		var scaling: Scaling

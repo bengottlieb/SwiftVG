@@ -14,20 +14,55 @@ struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
 	
+	@State var index = 0
+	@State var showingImage = false
+	let urls = Bundle.main.directory(named: "Sample Images")!.urls
+	
 	let svg = SVGImage(bundleName: "poll_results_min", directory: "Sample Images")!
 //	let svg = SVGImage(bundleName: "aspect_ratio xMidYMin meet", directory: "Sample Images")!
 
 	var body: some View {
-		HStack() {
+		Group() {
 			if device.isIPhone {
-				VStack() {
-					SVGView(svg: svg)
+				ZStack() {
+					HStack() {
+						Group() {
+							if showingImage {
+								SVGView(svg: SVGImage(url: urls[index])!)
+							} else {
+								Image(svg: SVGImage(url: urls[index])!)
+									.resizable()
+									.aspectRatio(contentMode: .fit)
+							}
+						}
 						.padding()
+					}
+					
+					VStack() {
+						Spacer()
+						HStack() {
+							Button(action: {
+								if self.index > 0 { self.index -= 1 }
+							}) { Image(.arrow_left) }
+							.disabled(index == 0)
 
-//					Image(svg: svg)
-//						.padding()
+							Spacer()
+							VStack() {
+								Toggle("", isOn: $showingImage)
+								.labelsHidden()
+								Text(urls[index].lastPathComponent)
+							}
+							Spacer()
+							Button(action: {
+								if self.index < (self.urls.count - 1) { self.index += 1 }
+							}) { Image(.arrow_right) }
+							.disabled(index == (urls.count - 1))
+						}
+						.font(.headline)
+						.padding()
+					}
+					.layoutPriority(1)
 				}
-				//ImageListView() { image in  }
 			} else {
 				HStack(spacing: 0) {
 					ImageListView() { image in self.selectedImage = image }

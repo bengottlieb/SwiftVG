@@ -20,18 +20,19 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public var content = ""
 	public var children: [SVGElement]! = []
 	public var `class`: String?
-	public var elementName: String { "" }
+	public var elementName: String { self.kind.tagName }
 	public var svgID: String?
 	
-	public var description: String { self.elementName }
+	public var description: String { (self.svgID ?? "") + " - " + self.kind.tagName }
 
 	var isDisplayable: Bool { return false }
 	var shouldClip: Bool { return false }
 
+	var resolved: SVGElement { self }
 	var size: CGSize?
 	public var drawnRect: CGRect? { return nil }
 
-	public var briefDescription: String { return "Element" }
+	public var briefDescription: String { return self.kind.tagName }
 
 	var classComponents: [String] {
 		get { return self.attributes["class"]?.components(separatedBy: " ") ?? [] }
@@ -198,15 +199,15 @@ extension SVGElement {
 		}
 		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
 			switch self {
-			case .svg: return SVGElement.Root(kind: NativeKind.svg, parent: parent, attributes: attributes)
-			case .defs: return SVGElement.Defs(kind: NativeKind.defs, parent: parent, attributes: attributes)
-			case .use: return SVGElement.Use(kind: NativeKind.use, parent: parent, attributes: attributes)
-			case .path: return SVGElement.Path(kind: NativeKind.path, parent: parent, attributes: attributes)
-			case .group: return SVGElement.Group(kind: NativeKind.group, parent: parent, attributes: attributes)
-			case .text: return SVGElement.Text(kind: NativeKind.text, parent: parent, attributes: attributes)
-			case .style: return SVGElement.Style(kind: NativeKind.style, parent: parent, attributes: attributes)
-			case .circle, .ellipse: return SVGElement.Ellipse(kind: NativeKind.ellipse, parent: parent, attributes: attributes)
-			case .rect: return SVGElement.Rect(kind: NativeKind.rect, parent: parent, attributes: attributes)
+			case .svg: return SVGElement.Root(kind: self, parent: parent, attributes: attributes)
+			case .defs: return SVGElement.Defs(kind: self, parent: parent, attributes: attributes)
+			case .use: return SVGElement.Use(kind: self, parent: parent, attributes: attributes)
+			case .path: return SVGElement.Path(kind: self, parent: parent, attributes: attributes)
+			case .group: return SVGElement.Group(kind: self, parent: parent, attributes: attributes)
+			case .text, .tspan: return SVGElement.Text(kind: self, parent: parent, attributes: attributes)
+			case .style: return SVGElement.Style(kind: self, parent: parent, attributes: attributes)
+			case .circle, .ellipse: return SVGElement.Ellipse(kind: self, parent: parent, attributes: attributes)
+			case .rect: return SVGElement.Rect(kind: self, parent: parent, attributes: attributes)
 			default:
 				return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
 			}

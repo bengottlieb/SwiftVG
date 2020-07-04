@@ -11,8 +11,6 @@ import CoreGraphics
 
 extension SVGElement {
 	class Ellipse: SVGElement {		
-		override public var elementName: String { "ellipse" }
-		override var briefDescription: String { "ellipse" }
 		override public var isDisplayable: Bool { return true }
 
 		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {

@@ -20,9 +20,19 @@ extension Dictionary where Key == String, Value == String {
 		return result + "]"
 	}
 	
-	subscript(float key: String) -> CGFloat? {
+	static let notNumbersSet = CharacterSet(charactersIn: "1234567890-").inverted
+	
+	subscript(float key: String, basedOn element: SVGElement? = nil) -> CGFloat? {
 		guard let raw = self[key] else { return nil }
-		guard let dbl = Double(raw) else { return nil }
+		guard let dbl = Double(raw) else {
+			guard let number = Double(raw.trimmingCharacters(in: Self.notNumbersSet)) else { return nil }
+			
+			if raw.contains("em"), let fontSize = element?.fontSize {			// use em-units
+				return CGFloat(number) * fontSize
+			}
+			
+			return CGFloat(number)
+		}
 		
 		return CGFloat(dbl)
 	}

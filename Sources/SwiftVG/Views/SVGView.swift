@@ -19,10 +19,11 @@ public struct SVGView: View {
 	
 	public var body: some View {
 		ZStack(alignment: .topLeading) {
-			ForEach(svg.document.root.children) { child in
+			ForEach(svg.document.root.resolvedChildren) { child in
 				if child.isDisplayable { SVGElementView(element: child) }
 			}
 		}
+		.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
     }
 }
 

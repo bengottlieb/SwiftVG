@@ -12,7 +12,7 @@ struct SVGElementView: View {
 	let element: SVGElement
 	
 	var body: some View {
-		Group() {
+		ZStack(alignment: .topLeading) {
 			if let pathElement = element as? SVGElement.Path {
 				if let path = pathElement.path {
 					Path(path)
@@ -34,21 +34,21 @@ struct SVGElementView: View {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
 					.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
-			} else if let container = element as? SVGElement.Container {
+			}
+			
+			if let container = element as? SVGElement.Container {
 				ZStack(alignment: .topLeading) {
-					ForEach(container.children) { child in
+					ForEach(container.resolvedChildren) { child in
 						if child.isDisplayable { SVGElementView(element: child) }
 					}
 				}
 				.frame(width: element.drawnRect?.width, height: element.drawnRect?.height)
 				.if(element.shouldClip) { $0.clipped() }
-			} else {
-				Rectangle()
-					.stroke(Color.green)
-					.frame(width: element.size?.width, height: element.size?.height)
 			}
+			
 		}
 		.offset(element.swiftUIOffset)
+		.if(SVGView.drawElementBorders) { $0.border(Color.gray.opacity(0.5), width: 0.5) }
 	}
 }
 

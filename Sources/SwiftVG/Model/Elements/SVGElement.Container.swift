@@ -11,7 +11,6 @@ import CoreGraphics
 
 extension SVGElement {
 	public class Container: SVGElement {
-		override public var briefDescription: String { self.svgID ?? "container" }
 		override public var isDisplayable: Bool { return true }
 
 		public var defs: Defs?
@@ -127,6 +126,10 @@ extension SVGElement {
 			xml += self.xmlCloseTag
 			return xml
 		}
+	}
+	
+	var resolvedChildren: [SVGElement] {
+		self.children.map { $0.resolved }
 	}
 }
 

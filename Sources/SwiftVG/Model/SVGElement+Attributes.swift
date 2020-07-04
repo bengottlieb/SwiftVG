@@ -42,7 +42,7 @@ extension SVGElement: Identifiable {
 			if let color = self.computedStyles[.stroke]?.color { return color }
 			
 			if let attr = self.value(for: "stroke"), let color = SVGColor(attr) { return color }
-			return .black
+			return .clear
 		}
 		set {
 			self.attributes["stroke"] = newValue.colorString
@@ -70,12 +70,15 @@ extension SVGElement: Identifiable {
 	
 	var font: SVGFont {
 		let size = self.fontSize
-		let fam = self.computedStyles[.fontFamily]?.string ?? self.value(for: "font-family")
+		let fam = self.value(for: "font-family") ?? self.computedStyles[.fontFamily]?.string
 
 		guard let family = fam else { return SVGFont.systemFont(ofSize: size) }
-		if let font = SVGFont(name: family, size: size) { return font }
 		
-		if let fontName = fontReplacements[family], let font = SVGFont(name: fontName, size: size) { return font }
+		for name in family.components(separatedBy: ",") {
+			if let font = SVGFont(name: name, size: size) { return font }
+			
+			if let fontName = fontReplacements[name], let font = SVGFont(name: fontName, size: size) { return font }
+		}
 
 		return SVGFont(name: family, size: size) ?? SVGFont.systemFont(ofSize: size)
 	}

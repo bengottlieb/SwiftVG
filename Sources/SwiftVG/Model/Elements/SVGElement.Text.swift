@@ -11,14 +11,19 @@ import CoreGraphics
 
 extension SVGElement {
 	class Text: Container, ContentElement {
-		override var briefDescription: String { self.content }
+		override var briefDescription: String { "Text: " + self.content }
 		override public var isDisplayable: Bool { return true }
 		var attributedString: NSAttributedString!
+		override var elementName: String { "text" }
 
 		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
-			super.init(kind: NativeKind.text, parent: parent, attributes: attributes)
+			super.init(kind: kind, parent: parent, attributes: attributes)
+		}
+		
+		override func didLoad() {
 			self.attributedString = NSAttributedString(string: self.content, attributes: self.stringAttributes)
 			self.size = self.attributedString.size()
+			self.size?.height = self.fontSize * 0.7
 		}
 		
 		var stringAttributes: [NSAttributedString.Key: Any] {
@@ -33,9 +38,10 @@ extension SVGElement {
 
 		override var swiftUIOffset: CGSize {
 			get {
-				let trans = self.translation
+				var trans = self.translation
 				
-				return CGSize(width: trans.width, height: trans.height - (self.size?.height ?? 0))
+				trans.height -= (self.size?.height ?? 0)
+				return trans
 			}
 		}
 		
@@ -57,12 +63,10 @@ extension SVGElement {
 		
 		override func createElement(ofKind kind: SVGElementKind, with attributes: [String: String]) -> SVGElement? {
 			if kind.isEqualTo(kind: NativeKind.tspan) {
-				return Tspan(in: self)
+				return nil// Tspan(in: self)
 			}
 			return nil
 		}
-
-		override public var elementName: String { "text" }
 	}
 	
 	class Tspan: SVGElement, ContentElement {

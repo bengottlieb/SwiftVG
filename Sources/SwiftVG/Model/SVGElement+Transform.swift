@@ -36,10 +36,17 @@ extension SVGElement {
 			translation = CGSize(width: pt.x, height: pt.y)
 		}
 		
-		translation.width += self.attributes[float: "x"] ?? 0
-		translation.height += self.attributes[float: "y"] ?? 0
-
+		translation.width += self.attributes[float: "x", basedOn: self] ?? 0
+		translation.height += self.attributes[float: "y", basedOn: self] ?? 0
 		
+		if let dx = self.attributes[float: "dx", basedOn: self] {
+			translation.width = (self.previousSibling?.translation.width ?? 0) + dx
+		}
+
+		if let dy = self.attributes[float: "dy", basedOn: self] {
+			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy
+		}
+
 		return translation
 	}
 }
