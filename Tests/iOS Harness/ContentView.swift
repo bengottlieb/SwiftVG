@@ -14,12 +14,16 @@ struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
 	
-	@State var index = 0
-	@State var showingImage = false
+	@State var index = Settings.instance.imageIndex
+	@State var showingSVGView = !Settings.instance.showingImages
 	@State var id = UUID().uuidString
 	
 	var showOutlines: Binding<Bool> {
-		Binding<Bool>(get: { SVGView.drawElementBorders }, set: { SVGView.drawElementBorders = $0; id = UUID().uuidString })
+		Binding<Bool>(get: { SVGView.drawElementBorders }, set: {
+			SVGView.drawElementBorders = $0;
+			id = UUID().uuidString
+			Settings.instance.showingOutlines = $0
+		})
 	}
 	let urls = Bundle.main.directory(named: "Sample Images")!.urls
 	
@@ -32,7 +36,7 @@ struct ContentView: View {
 				ZStack() {
 					HStack() {
 						Group() {
-							if showingImage {
+							if showingSVGView {
 								SVGView(svg: SVGImage(url: urls[index])!)
 							} else {
 								Image(svg: SVGImage(url: urls[index])!)
@@ -44,24 +48,28 @@ struct ContentView: View {
 					}
 					
 					VStack() {
-						Toggle("", isOn: showOutlines)
-						.labelsHidden()
+						if self.showingSVGView {
+							Toggle("", isOn: showOutlines)
+								.labelsHidden()
+						}
 						Spacer()
 						HStack() {
 							Button(action: {
 								if self.index > 0 { self.index -= 1 }
+								Settings.instance.imageIndex = self.index
 							}) { Image(.arrow_left) }
 							.disabled(index == 0)
 
 							Spacer()
 							VStack() {
-								Toggle("", isOn: $showingImage)
+								Toggle("", isOn: $showingSVGView.whenChanged { show in Settings.instance.showingImages = !show })
 								.labelsHidden()
 								Text(urls[index].lastPathComponent)
 							}
 							Spacer()
 							Button(action: {
 								if self.index < (self.urls.count - 1) { self.index += 1 }
+								Settings.instance.imageIndex = self.index
 							}) { Image(.arrow_right) }
 							.disabled(index == (urls.count - 1))
 						}
@@ -84,7 +92,11 @@ struct ContentView: View {
 					Spacer()
 				}
 			}
-		}.id(id)
+		}
+		.onAppear {
+	//		self.showOutlines.wrappedValue = Settings.instance.showingOutlines
+		}
+		.id(id)
 	}
 }
 
