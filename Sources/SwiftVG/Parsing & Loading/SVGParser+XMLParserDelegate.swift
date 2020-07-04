@@ -30,7 +30,7 @@ extension SVGParser: XMLParserDelegate {
 		guard let kind = SVGElement.NativeKind(rawValue: elementName) else {
 			if !elementName.contains(":") { print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")") }
 			
-			let element = SVGElement.Unknown(kind: SVGElement.NativeKind.unknown, parent: currentParent, attributes: attributes)
+			let element = SVGElement.Unknown(kind: SVGElement.UnknownKind(tagName: elementName), parent: currentParent, attributes: attributes)
 			currentParent?.append(child: element)
 			self.currentTree.append(element)
 			return

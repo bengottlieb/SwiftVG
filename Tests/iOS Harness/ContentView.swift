@@ -27,7 +27,7 @@ struct ContentView: View {
 	}
 	let urls = Bundle.main.directory(named: "Sample Images")!.urls
 	
-	let svg = SVGImage(bundleName: "poll_results_min", directory: "Sample Images")!
+//	let svg = SVGImage(bundleName: "poll_results_min", directory: "Sample Images")!
 //	let svg = SVGImage(bundleName: "aspect_ratio xMidYMin meet", directory: "Sample Images")!
 
 	var body: some View {

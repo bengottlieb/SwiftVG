@@ -15,6 +15,14 @@ public protocol SVGElementKind {
 }
 
 extension SVGElement {
+	public struct UnknownKind: SVGElementKind {
+		public let tagName: String
+		
+		public func isEqualTo(kind: SVGElementKind?) -> Bool {
+			kind?.tagName == self.tagName
+		}
+	}
+	
 	public enum NativeKind: String, SVGElementKind { case unknown
 		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style
 		
