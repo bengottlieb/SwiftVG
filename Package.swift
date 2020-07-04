@@ -7,7 +7,7 @@ let package = Package(
     name: "SwiftVG",
      platforms: [
               .macOS(.v10_13),
-              .iOS(.v10),
+              .iOS(.v13),
               .watchOS(.v5)
          ],
     products: [
@@ -17,12 +17,12 @@ let package = Package(
             targets: ["SwiftVG"]),
     ],
     dependencies: [
-		  .package(url: "https://github.com/bengottlieb/Suite.git", from: "0.9.48"),
+		  .package(url: "https://github.com/bengottlieb/Suite.git", from: "0.9.50"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "SwiftVG", dependencies: ["Studio"]),
+        .target(name: "SwiftVG", dependencies: ["Suite"]),
         
  //       .testTarget(name: "SwiftVGTests", dependencies: ["SwiftVG"]),
     ]

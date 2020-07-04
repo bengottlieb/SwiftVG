@@ -32,7 +32,7 @@ extension SVGElement: Identifiable {
 	
 	public var fillColor: SVGColor {
 		get {
-			if let color = self.styles?[.fill]?.color { return color }
+			if let color = self.computedStyles[.fill]?.color { return color }
 			
 			if let attr = self.value(for: "fill"), let color = SVGColor(attr) { return color }
 			return .black
@@ -44,7 +44,7 @@ extension SVGElement: Identifiable {
 
 	public var strokeColor: SVGColor {
 		get {
-			if let color = self.styles?[.stroke]?.color { return color }
+			if let color = self.computedStyles[.stroke]?.color { return color }
 			
 			if let attr = self.value(for: "stroke"), let color = SVGColor(attr) { return color }
 			return .black
@@ -56,7 +56,7 @@ extension SVGElement: Identifiable {
 	
 	public var strokeWidth: CGFloat {
 		get {
-			if let width = self.styles?[.strokeWidth]?.float { return width }
+			if let width = self.computedStyles[.strokeWidth]?.float { return width }
 			if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
 			return 1
 		}
@@ -75,7 +75,7 @@ extension SVGElement: Identifiable {
 	
 	var font: SVGFont {
 		let size = self.fontSize
-		let fam = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family")
+		let fam = self.computedStyles[.fontFamily]?.string ?? self.value(for: "font-family")
 
 		guard let family = fam else { return SVGFont.systemFont(ofSize: size) }
 		if let font = SVGFont(name: family, size: size) { return font }
@@ -87,7 +87,7 @@ extension SVGElement: Identifiable {
 	
 	var fontSize: CGFloat {
 		get {
-			if let size = self.styles?[.fontSize]?.float { return size }
+			if let size = self.computedStyles[.fontSize]?.float { return size }
 			if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) }
 			return 16
 		}

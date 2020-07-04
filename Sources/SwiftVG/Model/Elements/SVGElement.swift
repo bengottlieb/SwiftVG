@@ -22,7 +22,6 @@ open class SVGElement: Equatable {
 	
 	var isDisplayable: Bool { return false }
 	var shouldClip: Bool { return false }
-	
 
 	var size: CGSize?
 	public var drawnRect: CGRect? { return nil }

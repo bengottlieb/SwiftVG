@@ -14,7 +14,7 @@ struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
 	
-	let svg = SVGImage(bundleName: "decimal", directory: "Sample Images")!
+	let svg = SVGImage(bundleName: "poll_results_min", directory: "Sample Images")!
 //	let svg = SVGImage(bundleName: "aspect_ratio xMidYMin meet", directory: "Sample Images")!
 
 	var body: some View {
@@ -24,8 +24,8 @@ struct ContentView: View {
 					SVGView(svg: svg)
 						.padding()
 
-					Image(svg: svg)
-						.padding()
+//					Image(svg: svg)
+//						.padding()
 				}
 				//ImageListView() { image in  }
 			} else {

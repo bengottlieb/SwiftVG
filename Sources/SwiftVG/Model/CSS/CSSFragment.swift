@@ -8,6 +8,30 @@
 
 import Foundation
 
+extension SVGElement {
+	var computedStyles: CSSFragment {
+		let ancestry = Array(self.ancestry.reversed()) + [self]
+		let styles = CSSFragment(fragment: nil)
+		
+		for element in ancestry {
+			styles.add(from: element.styles)
+		}
+		
+		return styles
+	}
+	
+	var ancestry: [SVGElement] {
+		var ancestry: [SVGElement] = []
+		var parent = self.parent
+		
+		while parent != nil {
+			ancestry.append(parent!)
+			parent = parent?.parent
+		}
+		return ancestry
+	}
+}
+
 public class CSSFragment {
 	public enum Property: String {
 		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight", textAlign = "text-align", lineHeight = "line-height", textIndent = "text-indent", textTransform = "text-transform"
@@ -21,10 +45,24 @@ public class CSSFragment {
 		case alignmentBaseline = "alignment-baseline", baselineShift = "baseline-shift", dominantBaseline = "dominant-baseline", glyphOrientationHorizontal = "glyph-orientation-horizontal", glyphOrientationVertical = "glyph-orientation-vertical", kerning, textAnchor = "text-anchor", writingMode = "writing-mode"
 	}
 	
-	public let css: String
+	public var css: String
 	public var rules: [Property: CSSValue] = [:]
 	public subscript(_ property: Property) -> CSSValue? {
 		return self.rules[property]
+	}
+	
+	init(fragment: CSSFragment?) {
+		self.css = fragment?.css ?? ""
+		self.rules = fragment?.rules ?? [:]
+	}
+	
+	func add(from styles: CSSFragment?) {
+		guard let styles = styles else { return }
+		
+		self.css += css
+		for (prop, val) in styles.rules {
+			self.rules[prop] = val
+		}
 	}
 	
 	public init?(css: String?) {

@@ -1,0 +1,96 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" 
+     width="600px" height="388px">
+	<title>
+		Poll Finds Faith in Obama, Mixed With Patience
+	</title>
+	<desc>
+		Poll results on Americans and their view of the state of the economy.
+	</desc>
+	
+	<defs>
+		<rect id="bar" width="196" height="21" fill="#88A4B9" stroke-fill="#DEE9EF" stroke-width="1"/>
+		
+		<line id="standard-pointer" x1="0" y1="0" x2="0" y2="14" stroke="black" stroke-width="1"/>
+		
+		<style type="text/css">
+			text {
+				font-size: 9pt;
+				font-family: sans-serif;
+			}
+			
+			.percentage,
+			.date,
+			.title {
+				font-weight: bold;
+			}
+			
+			.source {
+				font-style: italic;
+				font-size: 7pt;
+			}
+			
+			.publisher {
+				text-transform: uppercase;
+				font-size: 7pt;
+				font-family: Georgia, "Times New Roman", Times, serif;
+			}
+			
+			.bar-section {
+				fill: #C4CDD2;
+				stroke-fill: #E3E7EA;
+				stroke-width: 1;
+			}
+			
+			.graph-line {
+				stroke-dasharray: 1 2;
+				stroke: #B2B2B2;
+			}
+			
+			.tick {
+				stroke: black;
+				stroke-width: 0.5;
+			}
+		</style>
+	</defs>
+	
+	<!-- Looking Back Section -->
+	<g transform="translate(95, 4)">
+		<g>
+			<text class="title" x="0" y="13">Looking back</text>
+	
+			<text class="content" transform="translate(0, 21)">
+				<tspan x="0" dy="1.1em">Compare the way things are going in</tspan>
+				<tspan x="0" dy="1.1em">the United States with how they were</tspan>
+				<tspan x="0" dy="1.1em">going five years ago.</tspan>
+			</text>
+		</g>
+
+		<g transform="translate(0, 99)">
+			<text class="date" transform="translate(-49, -5)">
+				<tspan x="0" dy="1.1em">Apr.</tspan>
+				<tspan x="0" dy="1.1em">2008</tspan>
+			</text>
+	
+			<use xlink:href="#bar" x="0" y="0"/>
+			<rect class="bar-section" x="9" y="0" width="34" height="21"/>
+	
+			<text x="1" y="15">4</text>
+			<text x="18" y="15">17</text>
+	
+			<use xlink:href="#standard-pointer" transform="translate(4, -10)"/>
+			<text x="1" y="-12">Better</text>
+	
+			<text class="percentage" x="163" y="15">78%</text>
+	
+			<use xlink:href="#standard-pointer" transform="translate(177, -10)"/>
+			<text x="158" y="-12">Worse</text>
+		</g>
+	
+
+	</g>
+</svg>
