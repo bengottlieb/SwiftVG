@@ -19,11 +19,6 @@ extension SVGElement: Identifiable {
 	var dimWidth: SVGDimension { SVGDimension(self, self.attributes["width"], .width) }
 	var dimHeight: SVGDimension { SVGDimension(self, self.attributes["height"], .height) }
 
-	public var svgID: String? {
-		get { return self.attributes["id"] }
-		set { self.attributes["id"] = newValue }
-	}
-
 	public func value(for key: String) -> String? {
 		if let value = self.attributes[key] { return value }
 		if let parent = self.parent { return parent.value(for: key) }

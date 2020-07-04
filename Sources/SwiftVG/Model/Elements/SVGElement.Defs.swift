@@ -11,11 +11,13 @@ import CoreGraphics
 
 extension SVGElement {
 	public class Defs: Container {
-		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: SVGElement.NativeKind.defs, parent: parent)
-			self.load(attributes: attributes)
+		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
+			super.init(kind: kind, parent: parent, attributes: attributes)
 			parent?.defs = self
 		}
+		
+		var styleSheet: SVGElement.Style?
+		var css: CSSSheet? { self.styleSheet?.css }
 		
 		public override func draw(with ctx: CGContext, in frame: CGRect) { }
 	}

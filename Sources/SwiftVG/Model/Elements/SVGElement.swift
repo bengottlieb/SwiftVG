@@ -10,16 +10,21 @@ import Foundation
 import CoreGraphics
 import SwiftUI
 
-open class SVGElement: Equatable {
+open class SVGElement: Equatable, CustomStringConvertible {
 	public var id = UUID()
 	public let kind: SVGElementKind
 	public var parent: Container!
-	public var attributes: SVGAttributes
+	public var attributes: SVGAttributes = [:]
 	public var styles: CSSFragment?
 	public var comment: String?
 	public var content = ""
 	public var children: [SVGElement]! = []
+	public var `class`: String?
+	public var elementName: String { "" }
+	public var svgID: String?
 	
+	public var description: String { self.elementName }
+
 	var isDisplayable: Bool { return false }
 	var shouldClip: Bool { return false }
 
@@ -34,11 +39,6 @@ open class SVGElement: Equatable {
 	}
 
 	open func draw(with ctx: CGContext, in frame: CGRect) {}
-	
-	open var `class`: String? {
-		get { return self.attributes["class"] }
-		set { self.attributes["class"] = newValue; }
-	}
 	
 	public func addClass(_ cls: String) {
 		if self.classComponents.contains(cls) { return }
@@ -71,15 +71,18 @@ open class SVGElement: Equatable {
 	
 	open func hierarchicalDescription(_ level: Int = 0) -> String { return "<\(self.kind.tagName)> \(self.attributes.isEmpty ? "" : self.attributes.prettyString)"}
 	
-	public init(kind: SVGElementKind, parent: Container?) {
+	public required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 		self.kind = kind
 		self.parent = parent
-		self.attributes = [:]
+		self.attributes = attributes
+		self.load(attributes: attributes)
 	}
 	
-	open func load(attributes: [String: String]?) {
-		self.attributes = attributes ?? [:]
-		if let style = attributes?["style"] { self.styles = CSSFragment(css: style) }
+	open func load(attributes: [String: String]) {
+		self.attributes = attributes
+		self.class = self.attributes["class"]
+		self.svgID = self.attributes["id"]
+		if let style = attributes["style"] { self.styles = CSSFragment(css: style) }
 	}
 	
 	public var root: Root? {
@@ -138,6 +141,11 @@ open class SVGElement: Equatable {
 	}
 	
 	var swiftUIOffset: CGSize { self.translation }
+	
+	func didLoad() { }
+	func copy() -> Self {
+		Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
+	}
 }
 
 protocol ContentElement {
@@ -172,10 +180,10 @@ public protocol SVGElementKind {
 
 extension SVGElement {
 	public enum NativeKind: String, SVGElementKind { case unknown
-		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan
+		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style
 		
 		// not yet implemented
-		case line, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, work = "Work", style, desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
+		case line, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, work = "Work", desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
 		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
 		case colorProfile = "color-profile"
 		case animate, animateMotion, animateColor, animateTransform
@@ -190,15 +198,17 @@ extension SVGElement {
 		}
 		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
 			switch self {
-			case .svg: return SVGElement.Root(parent: parent, attributes: attributes)
-			case .defs: return SVGElement.Defs(parent: parent, attributes: attributes)
-			case .use: return SVGElement.Use(parent: parent, attributes: attributes)
-			case .path: return SVGElement.Path(parent: parent, attributes: attributes)
-			case .group: return SVGElement.Group(parent: parent, attributes: attributes)
-			case .text: return SVGElement.Text(parent: parent, attributes: attributes)
-			case .circle, .ellipse: return SVGElement.Ellipse(kind: self, parent: parent, attributes: attributes)
-			case .rect: return SVGElement.Rect(parent: parent, attributes: attributes)
-			default: return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
+			case .svg: return SVGElement.Root(kind: NativeKind.svg, parent: parent, attributes: attributes)
+			case .defs: return SVGElement.Defs(kind: NativeKind.defs, parent: parent, attributes: attributes)
+			case .use: return SVGElement.Use(kind: NativeKind.use, parent: parent, attributes: attributes)
+			case .path: return SVGElement.Path(kind: NativeKind.path, parent: parent, attributes: attributes)
+			case .group: return SVGElement.Group(kind: NativeKind.group, parent: parent, attributes: attributes)
+			case .text: return SVGElement.Text(kind: NativeKind.text, parent: parent, attributes: attributes)
+			case .style: return SVGElement.Style(kind: NativeKind.style, parent: parent, attributes: attributes)
+			case .circle, .ellipse: return SVGElement.Ellipse(kind: NativeKind.ellipse, parent: parent, attributes: attributes)
+			case .rect: return SVGElement.Rect(kind: NativeKind.rect, parent: parent, attributes: attributes)
+			default:
+				return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
 			}
 		}
 	}

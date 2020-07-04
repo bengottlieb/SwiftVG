@@ -14,6 +14,9 @@ extension SVGElement {
 		let styles = CSSFragment(fragment: nil)
 		
 		for element in ancestry {
+			if let fromSheet = (element as? SVGElement.Container)?.defs?.styleSheet?.css?.styles(for: self) {
+				styles.add(from: fromSheet)
+			}
 			styles.add(from: element.styles)
 		}
 		
@@ -48,7 +51,7 @@ public class CSSFragment: CustomStringConvertible {
 	public var description: String {
 		var results = ""
 		for (key, value) in rules {
-			results = "\(key): \(value);\n"
+			results += "\(key.rawValue): \(value);\n"
 		}
 		return results.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
@@ -72,7 +75,7 @@ public class CSSFragment: CustomStringConvertible {
 			self.rules[prop] = val
 		}
 	}
-	
+
 	public init?(css: String?) {
 		self.css = css ?? ""
 		guard let css = css else { return nil }

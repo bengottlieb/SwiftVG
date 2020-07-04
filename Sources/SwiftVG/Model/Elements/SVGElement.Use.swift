@@ -14,10 +14,14 @@ extension SVGElement {
 		override var briefDescription: String { "use" }
 		var ref: String?
 		
-		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: NativeKind.use, parent: parent)
-			self.load(attributes: attributes)
+		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
+			super.init(kind: kind, parent: parent, attributes: attributes)
 			self.ref = attributes["xlink:href"]
+		}
+		
+		var resolved: SVGElement? {
+			if let ref = self.ref, let element = self.parent?.definition(for: ref) { return element }
+			return nil
 		}
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {

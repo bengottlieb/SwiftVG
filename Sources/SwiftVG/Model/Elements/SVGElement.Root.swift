@@ -44,9 +44,8 @@ extension SVGElement {
 			self.viewBox = CGRect(viewBoxString: self.attributes["viewBox"])
 		}
 		
-		init(parent: Container? = nil, attributes: [String: String]) {
-			super.init(kind: NativeKind.svg, parent: parent)
-			self.attributes = attributes
+		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
+			super.init(kind: kind, parent: parent, attributes: attributes)
 			self.setupDimensions()
 		}
 		

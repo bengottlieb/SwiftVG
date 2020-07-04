@@ -63,7 +63,7 @@ class CSSTests: XCTestCase {
     func testSheet() throws {
 		let sheet = CSSSheet(string: css)
 		
-		XCTAssert(sheet.numberOfRules == 1, "incorrect number of rules")
+		XCTAssert(sheet.numberOfRules == 14, "incorrect number of rules")
 		
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

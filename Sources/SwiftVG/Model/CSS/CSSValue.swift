@@ -9,9 +9,11 @@
 import Foundation
 import CoreGraphics
 
-public class CSSValue {
+public class CSSValue: CustomStringConvertible {
 	public let raw: String
 	public var value: Any?
+	
+	public var description: String { raw }
 	
 	public init?(string: String, for property: CSSFragment.Property) {
 		self.raw = string.trimmingCharacters(in: .whitespacesAndNewlines)

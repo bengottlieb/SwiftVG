@@ -19,9 +19,8 @@ extension SVGElement {
 			}
 		}
 		
-		public init(name: String, attributes: [String: String]?, parent: Container?) {
-			super.init(kind: Kind(tagName: name), parent: parent)
-			self.attributes = attributes ?? [:]
+		convenience init(kind: SVGElementKind, parent: Container?, attributes: [String: String], name: String) {
+			self.init(kind: Kind(tagName: name), parent: parent, attributes: attributes)
 		}
 	}
 }

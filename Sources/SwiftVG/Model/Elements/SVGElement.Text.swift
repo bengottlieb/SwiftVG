@@ -15,9 +15,8 @@ extension SVGElement {
 		override public var isDisplayable: Bool { return true }
 		var attributedString: NSAttributedString!
 
-		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: NativeKind.text, parent: parent)
-			self.load(attributes: attributes)
+		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
+			super.init(kind: NativeKind.text, parent: parent, attributes: attributes)
 			self.attributedString = NSAttributedString(string: self.content, attributes: self.stringAttributes)
 			self.size = self.attributedString.size()
 		}
@@ -63,11 +62,12 @@ extension SVGElement {
 			return nil
 		}
 
+		override public var elementName: String { "text" }
 	}
 	
 	class Tspan: SVGElement, ContentElement {
-		init(in parent: Text) {
-			super.init(kind: NativeKind.tspan, parent: parent)
+		convenience init(in parent: Text) {
+			self.init(kind: NativeKind.tspan, parent: parent, attributes: [:])
 		}
 		
 		override func append(content: String) {

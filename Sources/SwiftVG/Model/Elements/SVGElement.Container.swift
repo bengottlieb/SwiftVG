@@ -10,7 +10,7 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
-	public class Container: SVGElement, CustomStringConvertible, CustomDebugStringConvertible {
+	public class Container: SVGElement {
 		override public var briefDescription: String { self.svgID ?? "container" }
 		override public var isDisplayable: Bool { return true }
 
@@ -78,7 +78,7 @@ extension SVGElement {
 			return nil
 		}
 		
-		public var description: String { return self.hierarchicalDescription() }
+		override public var description: String { return self.hierarchicalDescription() }
 		
 		public override func hierarchicalDescription(_ level: Int = 0) -> String {
 			var result = self.kind.tagName

@@ -10,8 +10,7 @@ import Foundation
 import CoreGraphics
 
 extension SVGElement {
-	class Path: SVGElement, CustomStringConvertible {
-		override var briefDescription: String { self.svgID ?? "path" }
+	class Path: SVGElement {
 		override public var isDisplayable: Bool { return true }
 		var indicateFirstPoint = false
 		
@@ -55,15 +54,6 @@ extension SVGElement {
 				print("Error when generating paths: \(error)")
 				return
 			}
-		}
-		
-		var description: String {
-			return "Path"
-		}
-		
-		init(parent: Container?, attributes: [String: String]) {
-			super.init(kind: NativeKind.path, parent: parent)
-			self.load(attributes: attributes)
 		}
 	}
 }

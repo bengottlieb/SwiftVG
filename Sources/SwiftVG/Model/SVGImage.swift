@@ -66,7 +66,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 	
 	public init(size: CGSize) {
 		self.id = UUID().uuidString
-		self.document = SVGDocument(root: SVGElement.Root(attributes: SVGElement.Root.generateDefaultAttributes(for: size)), data: nil)
+		self.document = SVGDocument(root: SVGElement.Root(kind: SVGElement.NativeKind.svg, parent: nil, attributes: SVGElement.Root.generateDefaultAttributes(for: size)), data: nil)
 	}
 	
 	open var description: String { return "Image" }
