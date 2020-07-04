@@ -13,10 +13,19 @@ extension SVGElement {
 	class Text: Container, ContentElement {
 		override var briefDescription: String { self.content }
 		override public var isDisplayable: Bool { return true }
+		var attributedString: NSAttributedString!
 
 		init(parent: Container?, attributes: [String: String]) {
 			super.init(kind: NativeKind.text, parent: parent)
 			self.load(attributes: attributes)
+			self.attributedString = NSAttributedString(string: self.content, attributes: self.stringAttributes)
+			self.size = self.attributedString.size()
+		}
+		
+		var stringAttributes: [NSAttributedString.Key: Any] {
+			let attr: [NSAttributedString.Key: Any] = [.foregroundColor: self.strokeColor, .backgroundColor: self.fillColor, .font: self.font ]
+			
+			return attr
 		}
 
 		var text: String {
@@ -27,7 +36,7 @@ extension SVGElement {
 			get {
 				let trans = self.translation
 				
-				return CGSize(width: trans.width, height: trans.height - self.fontSize * 0.5)
+				return CGSize(width: trans.width, height: trans.height - (self.size?.height ?? 0))
 			}
 		}
 		

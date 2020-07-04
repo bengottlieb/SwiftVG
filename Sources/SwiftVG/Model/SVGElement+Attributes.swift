@@ -65,19 +65,22 @@ extension SVGElement: Identifiable {
 		}
 	}
 	
-	var cgFont: CGFont {
-		get {
-			if let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family"), let font = CGFont(family as CFString) { return font }
-		
-			return CGFont("NewYork" as CFString)!
-		}
-	}
+	var fontReplacements: [String: String] { [
+		"sans-serif": "HelveticaNeue",
+		"serif": "TimesNewRomanPSMT",
+		"monospace": "Courier",
+		"cursive": "ChalkboardSE-Regular",
+		"fantasy": "Zapfino",
+	] }
 	
 	var font: SVGFont {
 		let size = self.fontSize
-		guard let family = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family") else {
-			return SVGFont.systemFont(ofSize: size)
-		}
+		let fam = self.styles?[.fontFamily]?.string ?? self.value(for: "font-family")
+
+		guard let family = fam else { return SVGFont.systemFont(ofSize: size) }
+		if let font = SVGFont(name: family, size: size) { return font }
+		
+		if let fontName = fontReplacements[family], let font = SVGFont(name: fontName, size: size) { return font }
 
 		return SVGFont(name: family, size: size) ?? SVGFont.systemFont(ofSize: size)
 	}

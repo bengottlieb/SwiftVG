@@ -68,7 +68,11 @@ extension SVGParser: XMLParserDelegate {
 	}
 	
 	func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
-		print("Found CDATA: \(String(data: CDATABlock, encoding: .utf8) ?? "unparsable")")
+		if let string = String(data: CDATABlock, encoding: .utf8) {
+			self.parser(parser, foundCharacters: string)
+		} else {
+			print("Found CDATA: \(CDATABlock.count) bytes")
+		}
 	}
 	
 	func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
