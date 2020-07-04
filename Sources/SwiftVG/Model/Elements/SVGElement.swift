@@ -147,70 +147,25 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	func copy() -> Self {
 		Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
 	}
-}
 
-protocol ContentElement {
-	func append(content: String)
-}
-
-extension SVGElement {
-	public func toString(depth: Int = 0) -> String {
-		var result = String(repeating: "\t", count: depth)
+	var translation: CGSize {
+		var translation = CGSize.zero
 		
-		result += "<" + self.kind.tagName
-		
-		if !self.attributes.isEmpty {
-			result += ", " + self.attributes.prettyString
+		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+			translation = CGSize(width: pt.x, height: pt.y)
 		}
 		
-		if let children = (self as? Container)?.children, children.count > 0 {
-			result += ": [\n"
-			for child in children {
-				result += child.toString(depth: depth + 1)
-			}
-			result += "]"
-		}
-		return result + ">\n"
-	}
-}
-
-public protocol SVGElementKind {
-	var tagName: String { get }
-	func isEqualTo(kind: SVGElementKind?) -> Bool
-}
-
-extension SVGElement {
-	public enum NativeKind: String, SVGElementKind { case unknown
-		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style
+		translation.width += self.attributes[float: "x", basedOn: self] ?? 0
+		translation.height += self.attributes[float: "y", basedOn: self] ?? 0
 		
-		// not yet implemented
-		case line, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, work = "Work", desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
-		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
-		case colorProfile = "color-profile"
-		case animate, animateMotion, animateColor, animateTransform
-		case font, fontFace = "font-face", fontFaceSrc = "font-face-src", fontFaceURI = "font-face-uri"
-		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, a, em, code
-		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
+		if let dx = self.attributes[float: "dx", basedOn: self] {
+			translation.width = (self.previousSibling?.translation.width ?? 0) + dx
+		}
 
-		public var tagName: String { return self.rawValue }
-		public 	func isEqualTo(kind: SVGElementKind?) -> Bool {
-			if let other = kind as? NativeKind { return self == other }
-			return false
+		if let dy = self.attributes[float: "dy", basedOn: self] {
+			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy
 		}
-		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
-			switch self {
-			case .svg: return SVGElement.Root(kind: self, parent: parent, attributes: attributes)
-			case .defs: return SVGElement.Defs(kind: self, parent: parent, attributes: attributes)
-			case .use: return SVGElement.Use(kind: self, parent: parent, attributes: attributes)
-			case .path: return SVGElement.Path(kind: self, parent: parent, attributes: attributes)
-			case .group: return SVGElement.Group(kind: self, parent: parent, attributes: attributes)
-			case .text, .tspan: return SVGElement.Text(kind: self, parent: parent, attributes: attributes)
-			case .style: return SVGElement.Style(kind: self, parent: parent, attributes: attributes)
-			case .circle, .ellipse: return SVGElement.Ellipse(kind: self, parent: parent, attributes: attributes)
-			case .rect: return SVGElement.Rect(kind: self, parent: parent, attributes: attributes)
-			default:
-				return SVGElement.Generic(kind: self, parent: parent, attributes: attributes)
-			}
-		}
+
+		return translation
 	}
 }

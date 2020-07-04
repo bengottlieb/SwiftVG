@@ -12,7 +12,7 @@ import CoreGraphics
 extension SVGElement {
 	var previousSibling: SVGElement? {
 		let siblings = self.parent.resolvedChildren
-		if let index = siblings.index(of: self), index > 0 {
+		if let index = siblings.firstIndex(of: self), index > 0 {
 			return siblings[index - 1]
 		}
 		return nil

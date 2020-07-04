@@ -35,6 +35,17 @@ extension SVGElement {
 		var text: String {
 			self.content
 		}
+		
+		override var translation: CGSize {
+			var trans = super.translation
+			
+			if self.attributes["text-anchor"] == "middle", let size  = self.size {
+				trans.width -= size.width / 2
+				trans.height -= size.height / 2
+			}
+			
+			return trans
+		}
 
 		override var swiftUIOffset: CGSize {
 			get {
