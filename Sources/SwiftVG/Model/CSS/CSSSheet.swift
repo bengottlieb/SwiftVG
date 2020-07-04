@@ -19,20 +19,22 @@ public class CSSSheet {
 		}
 	}
 	
+	var numberOfRules: Int { selectors.reduce(0) { $0 + $1.value.rules.count }}
 	var selectors: [[CSSSelector]: CSSFragment] = [:]
 	
-	struct CSSSelector: Hashable {
-		enum Kind: Int { case element, cls, id }
+	struct CSSSelector: Hashable, CustomStringConvertible {
+		enum Kind: String { case element = "", cls = ".", id = "#" }
 		let sel: String
 		let kind: Kind
 		
+		var description: String { "\(kind.rawValue)\(sel)" }
 		func hash(into hasher: inout Hasher) {
 			sel.hash(into: &hasher)
 			kind.rawValue.hash(into: &hasher)
 		}
 		
 		init?(_ raw: String) {
-			let filtered = raw.trimmingCharacters(in: CharacterSet(charactersIn: "{}"))
+			let filtered = raw.trimmingCharacters(in: CharacterSet(charactersIn: "{}")).trimmingCharacters(in: .whitespaces)
 			
 			if filtered.hasPrefix(".") {
 				kind = .cls
@@ -56,11 +58,13 @@ class CSSParser {
 	enum CSSError: Error { case emptySelectors, selectorStackUnderflow }
 	let css: String
 	var index: String.Index
+	let lastIndex: String.Index
 	var position = 0
 	
 	init(css: String) {
 		self.css = css
 		index = css.startIndex
+		lastIndex = css.endIndex
 	}
 	
 	func parse() throws -> [[CSSSheet.CSSSelector]: CSSFragment]{
@@ -70,8 +74,13 @@ class CSSParser {
 		
 		while true {
 			let chr = css[index]
+			index = css.index(after: index)
+			position += 1
+			if index == lastIndex { break }
 			
 			switch chr {
+			case "\n": continue
+				
 			case "{":
 				let selectors = currentLine.components(separatedBy: ",").compactMap( { CSSSheet.CSSSelector($0) })
 				if selectors.count > 0 { selectorStack.append(selectors) }
@@ -92,5 +101,7 @@ class CSSParser {
 				currentLine += "\(chr)"
 			}
 		}
+		
+		return results
 	}
 }

@@ -32,7 +32,7 @@ extension SVGElement {
 	}
 }
 
-public class CSSFragment {
+public class CSSFragment: CustomStringConvertible {
 	public enum Property: String {
 		case font, fontFamily = "font-family", fontSize = "font-size", fontSizeAdjust = "font-size-adjust", fontStretch = "font-stretch", fontStyle = "font-style", fontVariant = "font-variant", fontWeight = "font-weight", textAlign = "text-align", lineHeight = "line-height", textIndent = "text-indent", textTransform = "text-transform"
 		case direction, letterSpacing = "letter-spacing", textDecoration = "text-decoration", unicodeBidi = "unicode-bidi", wordSpacing = "word-spacing"
@@ -43,6 +43,14 @@ public class CSSFragment {
 		case colorInterpolation = "color-interpolation", colorInterpolationFilters = "color-interpolation-filters", colorProfile = "color-profile", colorRendering = "color-rendering", fill, fillOpacity = "fill-opacity", fillRule = "fill-rule", imageRendering = "image-rendering", marker, markerEnd = "markerEnd", markerMid = "marker-mid", markerStart = "marker-start", shapeRendering = "shape-rendering", stroke, strokeDashArray = "stroke-dasharray", strokeDashOffset = "stroke-dashoffset", strokeLineCap = "stroke-linecap", strokeLineJoin = "stroke-linejoin", strokeMiterLimit = "stroke-miterlimit", strokeOpacity = "stroke-opacity", strokeWidth = "stroke-width", textRendering = "text-rendering"
 		
 		case alignmentBaseline = "alignment-baseline", baselineShift = "baseline-shift", dominantBaseline = "dominant-baseline", glyphOrientationHorizontal = "glyph-orientation-horizontal", glyphOrientationVertical = "glyph-orientation-vertical", kerning, textAnchor = "text-anchor", writingMode = "writing-mode"
+	}
+	
+	public var description: String {
+		var results = ""
+		for (key, value) in rules {
+			results = "\(key): \(value);\n"
+		}
+		return results.trimmingCharacters(in: .whitespacesAndNewlines)
 	}
 	
 	public var css: String
@@ -71,7 +79,7 @@ public class CSSFragment {
 		
 		let components = css.components(separatedBy: ";")
 		for component in components {
-			let pieces = component.components(separatedBy: ":")
+			let pieces = component.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ":")
 			guard pieces.count == 2 else { continue }
 			
 			guard let property = Property(rawValue: pieces[0].trimmingCharacters(in: .whitespaces)) else {
