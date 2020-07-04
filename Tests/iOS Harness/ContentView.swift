@@ -16,6 +16,11 @@ struct ContentView: View {
 	
 	@State var index = 0
 	@State var showingImage = false
+	@State var id = UUID().uuidString
+	
+	var showOutlines: Binding<Bool> {
+		Binding<Bool>(get: { SVGView.drawElementBorders }, set: { SVGView.drawElementBorders = $0; id = UUID().uuidString })
+	}
 	let urls = Bundle.main.directory(named: "Sample Images")!.urls
 	
 	let svg = SVGImage(bundleName: "poll_results_min", directory: "Sample Images")!
@@ -39,6 +44,8 @@ struct ContentView: View {
 					}
 					
 					VStack() {
+						Toggle("", isOn: showOutlines)
+						.labelsHidden()
 						Spacer()
 						HStack() {
 							Button(action: {
@@ -77,7 +84,7 @@ struct ContentView: View {
 					Spacer()
 				}
 			}
-		}
+		}.id(id)
 	}
 }
 
