@@ -14,6 +14,8 @@
 		B53F69D224B1411B00B6A878 /* SVGElement+Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D124B1411B00B6A878 /* SVGElement+Kind.swift */; };
 		B53F69D324B1411B00B6A878 /* SVGElement+Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D124B1411B00B6A878 /* SVGElement+Kind.swift */; };
 		B53F69D724B143E100B6A878 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D424B1437400B6A878 /* Settings.swift */; };
+		B53F69D924B14E3300B6A878 /* SVGView+Resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */; };
+		B53F69DA24B14E3300B6A878 /* SVGView+Resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */; };
 		B5456B8A24A9F86400544C3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8924A9F86400544C3F /* AppDelegate.swift */; };
 		B5456B8C24A9F86400544C3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8B24A9F86400544C3F /* SceneDelegate.swift */; };
 		B5456B8E24A9F86400544C3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8D24A9F86400544C3F /* ContentView.swift */; };
@@ -178,6 +180,7 @@
 		B53F69CE24B1410B00B6A878 /* SVGElement+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+Content.swift"; sourceTree = "<group>"; };
 		B53F69D124B1411B00B6A878 /* SVGElement+Kind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElement+Kind.swift"; sourceTree = "<group>"; };
 		B53F69D424B1437400B6A878 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGView+Resizable.swift"; sourceTree = "<group>"; };
 		B5456B8624A9F86400544C3F /* SwiftVG_iOS_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftVG_iOS_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5456B8924A9F86400544C3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5456B8B24A9F86400544C3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -517,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				B5966CC424ACA16E00E1943A /* SVGView.swift */,
+				B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */,
 				B5966CC724ACA32500E1943A /* SVGElementView.swift */,
 				B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */,
 			);
@@ -768,6 +772,7 @@
 				B5456C2F24A9FA2100544C3F /* SVGElement.Text.swift in Sources */,
 				B5456C2424A9FA2100544C3F /* String+Path.swift in Sources */,
 				B5456C2A24A9FA2100544C3F /* Dictionary+Extension.swift in Sources */,
+				B53F69D924B14E3300B6A878 /* SVGView+Resizable.swift in Sources */,
 				B5456C3524A9FA2100544C3F /* SVGElement.Root.swift in Sources */,
 				B5949F9524AB49BE004672ED /* SVGDimension.swift in Sources */,
 				B5456C2824A9FA2100544C3F /* Color+Extension.swift in Sources */,
@@ -829,6 +834,7 @@
 				B5456C9124A9FE6D00544C3F /* SVGElement.Text.swift in Sources */,
 				B5456C8624A9FE6D00544C3F /* String+Path.swift in Sources */,
 				B5456C8C24A9FE6D00544C3F /* Dictionary+Extension.swift in Sources */,
+				B53F69DA24B14E3300B6A878 /* SVGView+Resizable.swift in Sources */,
 				B5456C9724A9FE6D00544C3F /* SVGElement.Root.swift in Sources */,
 				B5949F9624AB49BE004672ED /* SVGDimension.swift in Sources */,
 				B5456C8A24A9FE6D00544C3F /* Color+Extension.swift in Sources */,

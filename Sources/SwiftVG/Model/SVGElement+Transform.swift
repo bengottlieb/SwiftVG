@@ -22,15 +22,36 @@ extension SVGElement {
 			return CGAffineTransform(rotationAngle: CGFloat(rad))
 		}
 		
-		if transform.hasPrefix("scale("), let pt = transform[5...].extractedPoint {
-			return CGAffineTransform(scaleX: pt.x, y: pt.y)
+		if let scale = self.scale {
+			return CGAffineTransform(scaleX: scale.x, y: scale.y)
 		}
+		
+		return nil
+	}
+	
+	var scale: CGPoint? {
+		guard let transform = self.attributes["transform"] else { return nil }
+
+		if transform.hasPrefix("scale(") {
+			if let pt = transform[5...].extractedPoint {
+				return CGPoint(x: pt.x, y: pt.y)
+			} else if let amount = transform[5...].extractedFloat {
+				return CGPoint(x: CGFloat(amount), y: CGFloat(amount))
+			}
+		}
+		
 		return nil
 	}
 	
 }
 
 extension String {
+	var extractedFloat: CGFloat? {
+		guard let components = self.components(separatedBy: "(").last else { return nil }
+		guard let dbl = Double(components.trimmingCharacters(in: .punctuationCharacters)) else { return nil }
+		return CGFloat(dbl)
+	}
+
 	var extractedPoint: CGPoint? {
 		let filtered = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
 		let components = filtered.components(separatedBy: ",")
