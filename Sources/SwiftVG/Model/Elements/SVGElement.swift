@@ -143,7 +143,11 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		}
 	}
 	
-	var swiftUIOffset: CGSize { self.translation }
+	var swiftUIOffset: CGSize {
+		let origin = self.origin
+		let translation = self.translation
+		return CGSize(width: translation.width + origin.x, height: translation.height + origin.y)
+	}
 	
 	func didLoad() { }
 	func copy() -> Self {
@@ -170,5 +174,9 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		}
 
 		return translation
+	}
+	
+	var resolvedChildren: [SVGElement] {
+		self.children.map { $0.resolved }
 	}
 }

@@ -47,25 +47,11 @@
 
   <g>
     <title>Bench</title>
-    <use xlink:href="#foot" x="56.5" y="213.5"/>
-    <use xlink:href="#foot" x="276.5" y="213.5"/>
-
-    <use xlink:href="#post" x="70" y="50"/>
-    <use xlink:href="#post" x="290" y="50"/>
-
-    <use xlink:href="#foot" x="40" y="160"/>
-    <use xlink:href="#foot" x="260" y="160"/>
-
     <use xlink:href="#back" x="40" y="60"/>
     <use xlink:href="#back" x="40" y="80"/>
     <use xlink:href="#back" x="40" y="100"/>
-
-    <use xlink:href="#seat" x="40" y="140"/>
-    <use xlink:href="#seat" x="30" y="148"/>
-    <use xlink:href="#seat" x="20" y="156"/>
   </g>
 
   <g>
-    <use xlink:href="#box"  x="225" y="140"/>
   </g>
 </svg>

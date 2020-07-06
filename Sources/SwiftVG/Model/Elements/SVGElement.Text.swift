@@ -48,15 +48,13 @@ extension SVGElement {
 		}
 
 		override var swiftUIOffset: CGSize {
-			get {
-				var trans = self.translation
-				let origin = self.origin
-				trans.width += origin.x
-				trans.height += origin.y
-				
-				trans.height -= (self.size?.height ?? 0)
-				return trans
-			}
+			var trans = self.translation
+			let origin = self.origin
+			trans.width += origin.x
+			trans.height += origin.y
+			
+			trans.height -= (self.size?.height ?? 0)
+			return trans
 		}
 		
 		override func draw(with ctx: CGContext, in frame: CGRect) {

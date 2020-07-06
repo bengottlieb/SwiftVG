@@ -127,9 +127,5 @@ extension SVGElement {
 			return xml
 		}
 	}
-	
-	var resolvedChildren: [SVGElement] {
-		self.children.map { $0.resolved }
-	}
 }
 

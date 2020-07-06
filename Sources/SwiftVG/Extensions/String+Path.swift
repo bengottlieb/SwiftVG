@@ -36,16 +36,16 @@ extension String {
 		}
 	}
 	
-	var firstPathPoint: CGPoint? {
-		var tokenizer = PathTokenizer(string: self)
-		guard let first = tokenizer.nextCommand() else { return nil }
-		
-		if first == .move || first == .moveAbs { return tokenizer.nextPoint() }
-		return nil
-	}
+//	var firstPathPoint: CGPoint? {
+//		var tokenizer = PathTokenizer(string: self)
+//		guard let first = tokenizer.nextCommand() else { return nil }
+//
+//		if first == .move || first == .moveAbs { return tokenizer.nextPoint() }
+//		return nil
+//	}
 	
-	func generateBezierPaths() throws -> CGPath {
-		let tokenizer = PathTokenizer(string: self)
+	func generateBezierPaths(from origin: CGPoint) throws -> CGPath {
+		let tokenizer = PathTokenizer(string: self, origin: origin)
 		let path = CGMutablePath()
 		var lastPoint = CGPoint.zero
 		var firstPoint = CGPoint.zero

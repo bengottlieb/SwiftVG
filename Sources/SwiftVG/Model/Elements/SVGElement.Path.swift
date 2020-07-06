@@ -15,7 +15,7 @@ extension SVGElement {
 		var indicateFirstPoint = false
 		
 		var path: CGPath? {
-			return try? self.attributes["d"]?.generateBezierPaths()
+			return try? self.attributes["d"]?.generateBezierPaths(from: self.origin)
 		}
 		
 		override public var drawnRect: CGRect? {
@@ -31,7 +31,7 @@ extension SVGElement {
 			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			do {
-				let path = try data.generateBezierPaths()
+				let path = try data.generateBezierPaths(from: self.origin)
 
 				//for path in paths {
 				ctx.setLineWidth(strokeWidth)
@@ -44,12 +44,12 @@ extension SVGElement {
 				ctx.addPath(path)
 				ctx.strokePath()
 
-				if self.indicateFirstPoint, let first = data.firstPathPoint {
-					ctx.beginPath()
-					ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)
-					ctx.closePath()
-					ctx.fillPath()
-				}
+//				if self.indicateFirstPoint, let first = data.firstPathPoint {
+//					ctx.beginPath()
+//					ctx.addArc(center: first, radius: 10, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+//					ctx.closePath()
+//					ctx.fillPath()
+//				}
 			} catch {
 				print("Error when generating paths: \(error)")
 				return

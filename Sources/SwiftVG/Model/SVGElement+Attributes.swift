@@ -27,9 +27,8 @@ extension SVGElement: Identifiable {
 	
 	public var fillColor: SVGColor {
 		get {
-			if let color = self.computedStyles[.fill]?.color { return color }
-			
 			if let attr = self.value(for: "fill"), let color = SVGColor(attr) { return color }
+			if let color = self.computedStyles[.fill]?.color { return color }
 			return .black
 		}
 		set {
@@ -39,9 +38,8 @@ extension SVGElement: Identifiable {
 
 	public var strokeColor: SVGColor {
 		get {
-			if let color = self.computedStyles[.stroke]?.color { return color }
-			
 			if let attr = self.value(for: "stroke"), let color = SVGColor(attr) { return color }
+			if let color = self.computedStyles[.stroke]?.color { return color }
 			return .clear
 		}
 		set {

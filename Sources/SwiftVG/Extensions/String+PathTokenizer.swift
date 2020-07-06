@@ -15,12 +15,13 @@ extension String {
 			var command: Command
 			var arguments: [String] = []
 			var index = 0
+			let origin: CGPoint
 			
 			mutating func nextPoint() -> CGPoint? {
 				if self.index >= (self.arguments.count - 1) { return nil }
 				if let x = Double(self.arguments[self.index]), let y = Double(self.arguments[self.index + 1]) {
 					self.index += 2
-					return CGPoint(x: x, y: y)
+					return CGPoint(x: x, y: y) + self.origin
 				}
 				return nil
 			}
@@ -92,10 +93,12 @@ extension String {
 			}
 		}
 		let tokens: [String]
+		let origin: CGPoint
 		var index = 0
 		
-		init(string: String) {
+		init(string: String, origin: CGPoint) {
 			self.tokens = string.tokens
+			self.origin = origin
 		}
 		
 		var segments: [PathSegment] {
@@ -107,12 +110,12 @@ extension String {
 				let next = parser.nextCommand()
 				let command = next ?? lastCommand?.subsequentMissingCommand
 				if parser.index == parser.tokens.count || command == nil {
-					if next != nil { segments.append(PathSegment(command: next!)) }
+					if next != nil { segments.append(PathSegment(command: next!, origin: self.origin)) }
 					break
 				}
 				let argCount = command!.argumentCount
 				lastCommand = command
-				segments.append(PathSegment(command: command!, arguments: parser.nextNArguments(argCount)))
+				segments.append(PathSegment(command: command!, arguments: parser.nextNArguments(argCount), origin: self.origin))
 			}
 			
 			return segments

@@ -40,11 +40,15 @@ extension SVGColor {
 			return
 		}
 		
-		guard let values = string.extractedHexValues else {
-			self.init(white: 0, alpha: 0)
-			return nil
+		if string.hasPrefix("rgb("), let values = string.trimmingCharacters(in: .punctuationCharacters).components(separatedBy: "(").last?.components(separatedBy: ",").compactMap({ Int($0) }), values.count == 3 {
+			self.init(red: CGFloat(values[0]) / 256, green: CGFloat(values[1]) / 256, blue: CGFloat(values[2]) / 256, alpha: 1.0)
+			return
+		} else if let values = string.extractedHexValues {
+			self.init(red: CGFloat(values[0]), green: CGFloat(values[1]), blue: CGFloat(values[2]), alpha: CGFloat(values.count > 3 ? values[3] : 1.0))
+			return
 		}
-		self.init(red: CGFloat(values[0]), green: CGFloat(values[1]), blue: CGFloat(values[2]), alpha: CGFloat(values.count > 3 ? values[3] : 1.0))
+		self.init(white: 0, alpha: 0)
+		return nil
 	}
 	
 	var colorString: String {
