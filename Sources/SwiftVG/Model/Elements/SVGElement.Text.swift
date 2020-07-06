@@ -50,6 +50,9 @@ extension SVGElement {
 		override var swiftUIOffset: CGSize {
 			get {
 				var trans = self.translation
+				let origin = self.origin
+				trans.width += origin.x
+				trans.height += origin.y
 				
 				trans.height -= (self.size?.height ?? 0)
 				return trans
@@ -68,7 +71,9 @@ extension SVGElement {
 			
 			let string = NSAttributedString(string: text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			
-			string.draw(at: CGPoint(x: 0, y: -string.size().height / 2))
+			var origin = self.origin
+			origin.y -= string.size().height / 2
+			string.draw(at: origin)
 			super.draw(with: ctx, in: frame)
 		}
 		

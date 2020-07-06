@@ -150,16 +150,17 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
 	}
 
+	var origin: CGPoint {
+		CGPoint(x: self.attributes[float: "x", basedOn: self] ?? 0, y: self.attributes[float: "y", basedOn: self] ?? 0)
+	}
+	
 	var translation: CGSize {
 		var translation = CGSize.zero
 		
 		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
 			translation = CGSize(width: pt.x, height: pt.y)
 		}
-		
-		translation.width += self.attributes[float: "x", basedOn: self] ?? 0
-		translation.height += self.attributes[float: "y", basedOn: self] ?? 0
-		
+				
 		if let dx = self.attributes[float: "dx", basedOn: self] {
 			translation.width = (self.previousSibling?.translation.width ?? 0) + dx
 		}

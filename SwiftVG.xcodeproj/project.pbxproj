@@ -99,6 +99,8 @@
 		B5456CA424A9FE6D00544C3F /* SVGParser+XMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift */; };
 		B5456CA524A9FE6D00544C3F /* SVGParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456C2324A9FA2100544C3F /* SVGParser.swift */; };
 		B5456CA724A9FE9600544C3F /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5456CA624A9FE9600544C3F /* Suite */; };
+		B55C300824B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */; };
+		B55C300924B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */; };
 		B57F25E824B0A17500915A8E /* CSSSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25E724B0A17500915A8E /* CSSSheet.swift */; };
 		B57F25E924B0A17500915A8E /* CSSSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25E724B0A17500915A8E /* CSSSheet.swift */; };
 		B57F25F124B0AA2400915A8E /* iOS_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25F024B0AA2400915A8E /* iOS_Tests.swift */; };
@@ -235,6 +237,7 @@
 		B5456C7924A9FE1300544C3F /* SwiftVG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftVG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5456C7B24A9FE1300544C3F /* SwiftVG_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG_macOS.h; sourceTree = "<group>"; };
 		B5456C7C24A9FE1300544C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Polyline.swift; sourceTree = "<group>"; };
 		B57F25E624B0966A00915A8E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B57F25E724B0A17500915A8E /* CSSSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSSheet.swift; sourceTree = "<group>"; };
 		B57F25EE24B0AA2400915A8E /* iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -449,6 +452,7 @@
 				B5456C0E24A9FA2100544C3F /* SVGElement.Text.swift */,
 				B5456C1124A9FA2100544C3F /* SVGElement.Container.swift */,
 				B5456C1224A9FA2100544C3F /* SVGElement.Path.swift */,
+				B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */,
 				B5456C1324A9FA2100544C3F /* SVGElement.Generic.swift */,
 				B5456C1424A9FA2100544C3F /* SVGElement.Root.swift */,
 				B5456C1624A9FA2100544C3F /* SVGElement.Use.swift */,
@@ -776,6 +780,7 @@
 				B5456C3524A9FA2100544C3F /* SVGElement.Root.swift in Sources */,
 				B5949F9524AB49BE004672ED /* SVGDimension.swift in Sources */,
 				B5456C2824A9FA2100544C3F /* Color+Extension.swift in Sources */,
+				B55C300824B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */,
 				B53F69CF24B1410B00B6A878 /* SVGElement+Content.swift in Sources */,
 				B5456C3924A9FA2100544C3F /* SVGElement.Defs.swift in Sources */,
 				B5456C4324A9FA2100544C3F /* SVGParser.swift in Sources */,
@@ -838,6 +843,7 @@
 				B5456C9724A9FE6D00544C3F /* SVGElement.Root.swift in Sources */,
 				B5949F9624AB49BE004672ED /* SVGDimension.swift in Sources */,
 				B5456C8A24A9FE6D00544C3F /* Color+Extension.swift in Sources */,
+				B55C300924B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */,
 				B53F69D024B1410B00B6A878 /* SVGElement+Content.swift in Sources */,
 				B5456C9B24A9FE6D00544C3F /* SVGElement.Defs.swift in Sources */,
 				B5456CA524A9FE6D00544C3F /* SVGParser.swift in Sources */,

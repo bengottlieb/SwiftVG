@@ -63,4 +63,11 @@ extension String {
 		if x != nil || y != nil { return CGPoint(x: x ?? 0, y: y ?? 0) }
 		return nil
 	}
+		
+	var extractedPoints: [CGPoint]? {
+		let filtered = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
+		let components = filtered.components(separatedBy: " ")
+		
+		return components.compactMap { $0.extractedPoint }
+	}
 }

@@ -24,10 +24,10 @@ extension SVGElement {
 	}
 	
 	public enum NativeKind: String, SVGElementKind { case unknown
-		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style
+		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style, polyline
 		
 		// not yet implemented
-		case line, polygon, polyline, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, work = "Work", desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
+		case line, polygon, title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", image, work = "Work", desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
 		case filter, feFlood, feComposite, feOffset, feGaussianBlur, feMerge, feMergeNode, feBlend, feColorMatrix, feComponentTransfer, feFuncR, feFuncG, feFuncB, feFuncA, feImage, feDiffuseLighting, feDistantLight, feConvolveMatrix, feDisplacementMatrix, fePointLight, feSpotLight, feSpecularLighting, feMorphology, feTile, feTurbulence, feDisplacementMap
 		case colorProfile = "color-profile"
 		case animate, animateMotion, animateColor, animateTransform
@@ -46,6 +46,7 @@ extension SVGElement {
 			case .defs: return SVGElement.Defs(kind: self, parent: parent, attributes: attributes)
 			case .use: return SVGElement.Use(kind: self, parent: parent, attributes: attributes)
 			case .path: return SVGElement.Path(kind: self, parent: parent, attributes: attributes)
+			case .polyline: return SVGElement.Polyline(kind: self, parent: parent, attributes: attributes)
 			case .group: return SVGElement.Group(kind: self, parent: parent, attributes: attributes)
 			case .text, .tspan: return SVGElement.Text(kind: self, parent: parent, attributes: attributes)
 			case .style: return SVGElement.Style(kind: self, parent: parent, attributes: attributes)
