@@ -68,7 +68,7 @@ extension SVGElement {
 			
 			let string = NSAttributedString(string: text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			
-			string.draw(at: CGPoint(x: 0, y: -string.size().height))
+			string.draw(at: CGPoint(x: 0, y: -string.size().height / 2))
 			super.draw(with: ctx, in: frame)
 		}
 		

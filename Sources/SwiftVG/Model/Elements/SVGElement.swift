@@ -131,9 +131,11 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	func setupDimensions() {
 		if self.dimensionsSetup { return }
 
-		guard let width = self.dimWidth.dimension, let height = self.dimHeight.dimension else { return }
-		self.size = CGSize(width: width, height: height)
-
+		if let width = self.dimWidth.dimension, let height = self.dimHeight.dimension {
+			self.size = CGSize(width: width, height: height)
+		} else if let raw = self.attributes["viewBox"], let box = CGRect(viewBoxString: raw) {
+			self.size = box.size
+		}
 		do {
 			try self.validateDimensions()
 		} catch {

@@ -11,12 +11,14 @@ import CoreGraphics
 
 extension SVGElement {
 	var transform: CGAffineTransform? {
+		if self.translation != .zero { return CGAffineTransform(translationX: translation.width, y: translation.height) }
+
 		guard let transform = self.attributes["transform"] else { return nil }
 		
-		if transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
-			return CGAffineTransform(translationX: pt.x, y: pt.y)
-		}
-
+//		if transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+//			return CGAffineTransform(translationX: pt.x, y: pt.y)
+//		}
+		
 		if transform.hasPrefix("rotate("), let angle = Double(transform[6...]) {
 			let rad = (angle * 2 * .pi) / 360.0
 			return CGAffineTransform(rotationAngle: CGFloat(rad))
