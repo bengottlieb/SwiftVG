@@ -19,7 +19,59 @@ import SwiftUI
 #endif
 
 extension SVGFont {
+	enum SVGWeight: String { case normal, bold, bolder, lighter
+		var fontWeight: UIFont.Weight? {
+			switch self {
+			case .normal: return nil
+			case .bold: return .bold
+			case .bolder: return .heavy
+			case .lighter: return .light
+			}
+		}
+	}
+	enum SVGStyle: String { case normal, italic, oblique
+		var traits: UIFontDescriptor.SymbolicTraits? {
+			switch self {
+			case .italic: return .traitItalic
+			case .oblique: return .traitBold
+			case .normal: return nil
+			}
+		}
+	}
+	
 	var swiftUIFont: Font { Font(self) }
+	
+	static func font(named name: String, size: CGFloat, weight rawWeight: String?, style rawStyle: String?) -> SVGFont? {
+		let weight = SVGWeight(rawValue: rawWeight ?? "") ?? .normal
+		let style = SVGStyle(rawValue: rawStyle ?? "") ?? .normal
+
+		#if os(iOS)
+		if style != .normal || weight != .normal {
+			var descriptor: UIFontDescriptor? = UIFontDescriptor(fontAttributes: [ .family: name, .size: size ])
+			if var traits = descriptor?.symbolicTraits {
+				switch style {
+				case .oblique: traits.insert(.traitBold)
+				case .italic: traits.insert(.traitItalic)
+				default: break
+				}
+				descriptor = UIFontDescriptor().withSymbolicTraits(traits)
+			}
+			
+			if let weightTrait = weight.fontWeight {
+				let weights = [UIFontDescriptor.TraitKey.weight: weightTrait] // UIFontWeightBold / UIFontWeightRegular
+				descriptor = descriptor?.addingAttributes([.traits: weights])
+			}
+			if let desc = descriptor { return SVGFont(descriptor: desc, size: size) }
+		}
+		
+//		let traits = [UIFontWeightTrait: UIFontWeightLight] // UIFontWeightBold / UIFontWeightRegular
+//		let imgFontDescriptor = UIFontDescriptor(fontAttributes: [UIFontDescriptorFamilyAttribute: "Helvetica"])
+//		imgFontDescriptor = imgFontDescriptor.fontDescriptorByAddingAttributes([UIFontDescriptorTraitsAttribute: traits])
+
+		#endif
+		
+		return self.init(name: name, size: size)
+	}
 }
 
 

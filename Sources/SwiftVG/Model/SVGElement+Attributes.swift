@@ -69,13 +69,15 @@ extension SVGElement: Identifiable {
 	var font: SVGFont {
 		let size = self.fontSize
 		let fam = self.value(for: "font-family") ?? self.computedStyles[.fontFamily]?.string
+		let weight = self.value(for: "font-weight") ?? self.computedStyles[.fontWeight]?.string
+		let style = self.value(for: "font-style") ?? self.computedStyles[.fontStyle]?.string
 
 		guard let family = fam else { return SVGFont.systemFont(ofSize: size) }
 		
 		for name in family.components(separatedBy: ",") {
 			if let font = SVGFont(name: name, size: size) { return font }
 			
-			if let fontName = fontReplacements[name], let font = SVGFont(name: fontName, size: size) { return font }
+			if let fontName = fontReplacements[name], let font = SVGFont.font(named: fontName, size: size, weight: weight, style: style) { return font }
 		}
 
 		return SVGFont(name: family, size: size) ?? SVGFont.systemFont(ofSize: size)
