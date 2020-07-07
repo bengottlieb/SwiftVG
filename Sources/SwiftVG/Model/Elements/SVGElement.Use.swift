@@ -20,8 +20,9 @@ extension SVGElement {
 		
 		override var resolved: SVGElement {
 			if let ref = self.ref, let element = self.parent?.definition(for: ref) {
-				element.attributes.addItems(from: self.attributes)
-				return element
+				let copy = element.copy()
+				copy.attributes.addItems(from: self.attributes)
+				return copy
 			}
 			return self
 		}

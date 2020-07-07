@@ -151,7 +151,9 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	
 	func didLoad() { }
 	func copy() -> Self {
-		Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
+		let copy = Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
+		copy.children = self.children.map { $0.copy() }
+		return copy
 	}
 
 	var origin: CGPoint {
