@@ -43,11 +43,13 @@ extension SVGFont {
 	
 	static func font(named name: String, size: CGFloat, weight rawWeight: String?, style rawStyle: String?) -> SVGFont? {
 		let weight = SVGWeight(rawValue: rawWeight ?? "") ?? .normal
-		let style = SVGStyle(rawValue: rawStyle ?? "") ?? .normal
-
+		var style = SVGStyle(rawValue: rawStyle ?? "") ?? .normal
+		if style == .normal, weight == .bold { style = .oblique }
+		
 		#if os(iOS)
-		if style != .normal || weight != .normal {
-			var descriptor: UIFontDescriptor? = UIFontDescriptor(fontAttributes: [ .family: name, .size: size ])
+		if style != .normal {
+			let attributes: [UIFontDescriptor.AttributeName: Any] = [ .face: name, .size: size ]
+			var descriptor: UIFontDescriptor? = UIFontDescriptor(fontAttributes: attributes)
 			if var traits = descriptor?.symbolicTraits {
 				switch style {
 				case .oblique: traits.insert(.traitBold)
@@ -56,11 +58,7 @@ extension SVGFont {
 				}
 				descriptor = UIFontDescriptor().withSymbolicTraits(traits)
 			}
-			
-			if let weightTrait = weight.fontWeight {
-				let weights = [UIFontDescriptor.TraitKey.weight: weightTrait] // UIFontWeightBold / UIFontWeightRegular
-				descriptor = descriptor?.addingAttributes([.traits: weights])
-			}
+
 			if let desc = descriptor { return SVGFont(descriptor: desc, size: size) }
 		}
 		
