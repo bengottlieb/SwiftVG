@@ -25,20 +25,20 @@ extension SVGElement {
 		}
 		
 		if let scale = self.scale {
-			return CGAffineTransform(scaleX: scale.x, y: scale.y)
+			return CGAffineTransform(scaleX: scale.width, y: scale.height)
 		}
 		
 		return nil
 	}
 	
-	var scale: CGPoint? {
+	var scale: CGSize? {
 		guard let transform = self.attributes["transform"] else { return nil }
 
 		if transform.hasPrefix("scale(") {
 			if let pt = transform[5...].extractedPoint {
-				return CGPoint(x: pt.x, y: pt.y)
+				return CGSize(width: pt.x, height: pt.y)
 			} else if let amount = transform[5...].extractedFloat {
-				return CGPoint(x: CGFloat(amount), y: CGFloat(amount))
+				return CGSize(width: CGFloat(amount), height: CGFloat(amount))
 			}
 		}
 		

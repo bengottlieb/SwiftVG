@@ -34,20 +34,17 @@ struct ContentView: View {
 		Group() {
 			if device.isIPhone {
 				ZStack() {
-					HStack(alignment: .center) {
-						Group() {
-							if showingSVGView {
-								SVGView(svg: SVGImage(url: urls[index])!)
-									.resizable()
-									.border(Color.black, width: 2)
-							} else {
-								Image(svg: SVGImage(url: urls[index])!)
-									.resizable()
-									.aspectRatio(contentMode: .fit)
-									.border(Color.black, width: 2)
-							}
-						}
-						.padding()
+					VStack(alignment: .center) {
+						if showingSVGView {
+							SVGView(svg: SVGImage(url: urls[index])!)
+								.resizable()
+								.border(Color.black, width: 2)
+						} //else {
+							Image(svg: SVGImage(url: urls[index])!)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.border(Color.black, width: 2)
+						//}
 					}
 					
 					VStack() {

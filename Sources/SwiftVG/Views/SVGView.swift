@@ -24,6 +24,7 @@ public struct SVGView: View {
 			}
 		}
 		.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
+		.frame(width: svg.size.width, height: svg.size.height)
     }
 }
 
