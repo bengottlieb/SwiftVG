@@ -15,7 +15,7 @@ extension SVGElement {
 		
 		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent, attributes: attributes)
-			(parent as? SVGElement.Defs)?.styleSheet = self
+			self.root?.styleSheet = self
 		}
 		
 		override func didLoad() {

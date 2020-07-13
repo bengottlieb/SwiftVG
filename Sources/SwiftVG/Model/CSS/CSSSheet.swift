@@ -39,56 +39,109 @@ public class CSSSheet {
 	}
 	
 	struct CSSSelector: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
-		enum Kind: String { case element = "", cls = ".", id = "#" }
-		let sel: String
-		let kind: Kind
-		
-		var description: String { "\(kind.rawValue)\(sel)" }
-		var debugDescription: String { "\(kind.rawValue)\(sel)" }
-		func hash(into hasher: inout Hasher) {
-			sel.hash(into: &hasher)
-			kind.rawValue.hash(into: &hasher)
-		}
-		
-		init?(_ raw: String) {
-			let filtered = raw.trimmingCharacters(in: CharacterSet(charactersIn: "{}")).trimmingCharacters(in: .whitespaces)
+		struct Component: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
+			enum Kind: String { case element = "", cls = ".", id = "#" }
+			let sel: String
+			let kind: Kind
 			
-			if filtered.hasPrefix(".") {
-				kind = .cls
-				sel = String(filtered[1...])
-			} else if filtered.hasPrefix("#") {
-				kind = .id
-				sel = String(filtered[1...])
-			} else if !filtered.isEmpty {
-				kind = .element
-				sel = filtered
-			} else {
-				kind = .element
-				sel = ""
-				return nil
+			var description: String { "\(kind.rawValue)\(sel)" }
+			var debugDescription: String { "\(kind.rawValue)\(sel)" }
+			func hash(into hasher: inout Hasher) {
+				sel.hash(into: &hasher)
+				kind.rawValue.hash(into: &hasher)
+			}
+			
+			init?(_ raw: String) {
+				let filtered = raw.trimmingCharacters(in: CharacterSet(charactersIn: "{}")).trimmingCharacters(in: .whitespaces)
+				
+				if filtered.hasPrefix(".") {
+					kind = .cls
+					sel = String(filtered[1...])
+				} else if filtered.hasPrefix("#") {
+					kind = .id
+					sel = String(filtered[1...])
+				} else if !filtered.isEmpty {
+					kind = .element
+					sel = filtered
+				} else {
+					kind = .element
+					sel = ""
+					return nil
+				}
 			}
 		}
+		
+		var description: String { components.map({ $0.description }).joined(separator: " > ") }
+		var debugDescription: String { self.description }
+
+		init?(_ raw: String) {
+			let parts = raw.components(separatedBy: ">")
+			self.components = parts.compactMap { part in
+				Component(part.trimmingCharacters(in: .whitespaces))
+			}
+			if components.count == 0 { return nil }
+		}
+		let components: [Component]
+		func hash(into hasher: inout Hasher) { self.components.hash(into: &hasher) }
+		
+	}
+}
+
+extension CSSSheet.CSSSelector.Component {
+	func matches(class cls: String) -> Bool {
+		if self.kind != .cls { return false }
+		
+		for subclass in cls.components(separatedBy: .whitespaces) {
+			if self.sel == subclass { return true }
+		}
+		return false
+	}
+	func matches(id: String) -> Bool { return self.kind == .id && self.sel == id }
+	func matches(name: String) -> Bool { return self.kind == .element && self.sel == name }
+	
+	func matches(element: SVGElement) -> Bool {
+		if let cls = element.class, self.matches(class: cls) { return true }
+		if let id = element.svgID, self.matches(id: id) { return true }
+		if self.matches(name: element.elementName) { return true }
+		return false
+	}
+}
+
+extension CSSSheet.CSSSelector {
+	func matches(_ element: SVGElement) -> Bool {
+		var target: SVGElement? = element
+		
+		for sel in self.components.reversed() {
+			if target == nil || !sel.matches(element: target!) { return false }
+			target = target?.parent
+		}
+		return true
 	}
 }
 
 extension Array where Element == CSSSheet.CSSSelector {
 	func matches(_ element: SVGElement) -> Bool {
-		if let cls = element.class {
-			for sel in self {
-				if sel.kind == .cls, sel.sel == cls { return true }
-			}
-		}
-
-		if let id = element.svgID {
-			for sel in self {
-				if sel.kind == .id, sel.sel == id { return true }
-			}
-		}
-		
-		let elem = element.elementName
 		for sel in self {
-			if sel.kind == .element, sel.sel == elem { return true }
+			if sel.matches(element) {
+				return true
+			}
 		}
+//		if let cls = element.class {
+//			for sel in self {
+//				//if sel.kind == .cls, sel.sel == cls { return true }
+//			}
+//		}
+//
+//		if let id = element.svgID {
+//			for sel in self {
+//				//if sel.kind == .id, sel.sel == id { return true }
+//			}
+//		}
+//
+//		let elem = element.elementName
+//		for sel in self {
+//			//if sel.kind == .element, sel.sel == elem { return true }
+//		}
 		
 		return false
 	}

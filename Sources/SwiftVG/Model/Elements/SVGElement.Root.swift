@@ -28,6 +28,9 @@ extension SVGElement {
 
 	public class Root: Container, SetsViewport {
 		var viewBox: CGRect?
+		var styleSheet: SVGElement.Style?
+		var css: CSSSheet? { self.styleSheet?.css }
+
 		override var shouldClip: Bool { return true }
 		
 		public override func parentDimension(for dim: SVGDimension.Dimension) -> CGFloat? {

@@ -40,7 +40,7 @@ extension SVGColor {
 			return
 		}
 		
-		if string.hasPrefix("rgb("), let values = string.trimmingCharacters(in: .punctuationCharacters).components(separatedBy: "(").last?.components(separatedBy: ",").compactMap({ Int($0) }), values.count == 3 {
+		if string.hasPrefix("rgb("), let values = string.trimmingCharacters(in: .punctuationCharacters).components(separatedBy: "(").last?.components(separatedBy: ",").compactMap({ Int($0.trimmingCharacters(in: .whitespaces))}), values.count == 3 {
 			self.init(red: CGFloat(values[0]) / 256, green: CGFloat(values[1]) / 256, blue: CGFloat(values[2]) / 256, alpha: 1.0)
 			return
 		} else if let values = string.extractedHexValues {

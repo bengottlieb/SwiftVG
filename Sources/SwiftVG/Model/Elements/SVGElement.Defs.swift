@@ -16,8 +16,6 @@ extension SVGElement {
 			parent?.defs = self
 		}
 		
-		var styleSheet: SVGElement.Style?
-		var css: CSSSheet? { self.styleSheet?.css }
 		override var resolvedChildren: [SVGElement] { return [] }
 		
 		public override func draw(with ctx: CGContext, in frame: CGRect) { }
