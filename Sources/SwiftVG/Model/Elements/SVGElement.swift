@@ -22,6 +22,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public var `class`: String?
 	public var elementName: String { self.kind.tagName }
 	public var svgID: String?
+	var _cachedStyles: CSSFragment?
 	
 	public var description: String { (self.svgID ?? "") + " - " + self.kind.tagName }
 

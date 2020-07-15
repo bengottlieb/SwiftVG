@@ -23,29 +23,46 @@ public class CSSSheet {
 	var selectors: [[CSSSelector]: CSSFragment] = [:]
 	
 	func styles(for element: SVGElement) -> CSSFragment? {
-		var result: CSSFragment?
+		let result = CSSFragment()
+		var classFrags: [CSSFragment] = []
+		var nameFrags: [CSSFragment] = []
+		var idFrags: [CSSFragment] = []
 		
 		for (sels, rules) in self.selectors {
-			if sels.matches(element) {
-				if result == nil {
-					result = CSSFragment(fragment: rules)
-				} else {
-					result?.add(from: rules)
+			if let matchKind = sels.matches(element) {
+				switch matchKind {
+				case .id: idFrags.append(rules)
+				case .element: nameFrags.append(rules)
+				case .cls: classFrags.append(rules)
 				}
 			}
 		}
 		
-		return result
+		nameFrags.forEach { result.add(from: $0) }
+		classFrags.forEach { result.add(from: $0) }
+		idFrags.forEach { result.add(from: $0) }
+
+		return result.isEmpty ? nil : result
 	}
 	
 	struct CSSSelector: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
+		enum Kind: Int, Comparable {
+			case element, cls, id
+			var stringValue: String {
+				switch self {
+				case .element: return ""
+				case .cls: return "."
+				case .id: return "#"
+				}
+			}
+			static func <(lhs: Kind, rhs: Kind) -> Bool { lhs.rawValue < rhs.rawValue }
+		}
 		struct Component: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
-			enum Kind: String { case element = "", cls = ".", id = "#" }
 			let sel: String
 			let kind: Kind
 			
-			var description: String { "\(kind.rawValue)\(sel)" }
-			var debugDescription: String { "\(kind.rawValue)\(sel)" }
+			var description: String { "\(kind.stringValue)\(sel)" }
+			var debugDescription: String { "\(kind.stringValue)\(sel)" }
 			func hash(into hasher: inout Hasher) {
 				sel.hash(into: &hasher)
 				kind.rawValue.hash(into: &hasher)
@@ -99,51 +116,53 @@ extension CSSSheet.CSSSelector.Component {
 	func matches(id: String) -> Bool { return self.kind == .id && self.sel == id }
 	func matches(name: String) -> Bool { return self.kind == .element && self.sel == name }
 	
-	func matches(element: SVGElement) -> Bool {
-		if let cls = element.class, self.matches(class: cls) { return true }
-		if let id = element.svgID, self.matches(id: id) { return true }
-		if self.matches(name: element.elementName) { return true }
-		return false
+	func matches(element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
+		var matchKind: CSSSheet.CSSSelector.Kind?
+		
+		if self.kind == .element {
+			if !self.matches(name: element.elementName) { return nil }
+			matchKind = .element
+		}
+
+		if self.kind == .cls, let cls = element.class {
+			if !self.matches(class: cls) { return nil }
+			matchKind = .cls
+		}
+		
+		if self.kind == .id, let id = element.svgID {
+			if !self.matches(id: id) { return nil }
+			matchKind = .id
+		}
+		return matchKind
 	}
 }
 
 extension CSSSheet.CSSSelector {
-	func matches(_ element: SVGElement) -> Bool {
+	func matches(_ element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
 		var target: SVGElement? = element
-		
+		var matchKind: CSSSheet.CSSSelector.Kind?
+
 		for sel in self.components.reversed() {
-			if target == nil || !sel.matches(element: target!) { return false }
+			guard let tgt = target else { return matchKind }
+			guard let newMatchKind = sel.matches(element: tgt) else { return nil }
+			if matchKind == nil || newMatchKind < matchKind! { matchKind = newMatchKind }
 			target = target?.parent
 		}
-		return true
+		return matchKind
 	}
 }
 
 extension Array where Element == CSSSheet.CSSSelector {
-	func matches(_ element: SVGElement) -> Bool {
+	func matches(_ element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
+		var matchKind: CSSSheet.CSSSelector.Kind?
+		
 		for sel in self {
-			if sel.matches(element) {
-				return true
+			if let newKind = sel.matches(element), (matchKind == nil || newKind > matchKind!) {
+				matchKind = newKind
 			}
 		}
-//		if let cls = element.class {
-//			for sel in self {
-//				//if sel.kind == .cls, sel.sel == cls { return true }
-//			}
-//		}
-//
-//		if let id = element.svgID {
-//			for sel in self {
-//				//if sel.kind == .id, sel.sel == id { return true }
-//			}
-//		}
-//
-//		let elem = element.elementName
-//		for sel in self {
-//			//if sel.kind == .element, sel.sel == elem { return true }
-//		}
-		
-		return false
+
+		return matchKind
 	}
 }
 

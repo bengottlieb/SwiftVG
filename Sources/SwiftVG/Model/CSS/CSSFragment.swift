@@ -10,6 +10,7 @@ import Foundation
 
 extension SVGElement {
 	var computedStyles: CSSFragment {
+		if let style = _cachedStyles { return style }
 		let ancestry = Array(self.ancestry.reversed()) + [self]
 		let styles = CSSFragment(fragment: nil)
 		let css = self.root?.styleSheet?.css
@@ -21,6 +22,7 @@ extension SVGElement {
 			styles.add(from: element.styles)
 		}
 		
+		_cachedStyles = styles
 		return styles
 	}
 	
@@ -77,6 +79,13 @@ public class CSSFragment: CustomStringConvertible {
 			self.rules[prop] = val
 		}
 	}
+	
+	init() {
+		self.css = ""
+		self.rules = [:]
+	}
+	
+	var isEmpty: Bool { self.rules.isEmpty }
 
 	public init?(css: String?) {
 		self.css = css ?? ""
