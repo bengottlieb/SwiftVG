@@ -66,7 +66,7 @@ public class CSSFragment: CustomStringConvertible {
 		return self.rules[property]
 	}
 	
-	init(fragment: CSSFragment?) {
+	init(fragment: CSSFragment? = nil) {
 		self.css = fragment?.css ?? ""
 		self.rules = fragment?.rules ?? [:]
 	}
@@ -79,13 +79,8 @@ public class CSSFragment: CustomStringConvertible {
 			self.rules[prop] = val
 		}
 	}
-	
-	init() {
-		self.css = ""
-		self.rules = [:]
-	}
-	
-	var isEmpty: Bool { self.rules.isEmpty }
+
+	var isEmpty: Bool { rules.isEmpty }
 
 	public init?(css: String?) {
 		self.css = css ?? ""

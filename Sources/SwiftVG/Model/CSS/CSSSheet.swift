@@ -20,7 +20,7 @@ public class CSSSheet {
 	}
 	
 	var numberOfRules: Int { selectors.reduce(0) { $0 + $1.value.rules.count }}
-	var selectors: [[CSSSelector]: CSSFragment] = [:]
+	var selectors: [[Selector]: CSSFragment] = [:]
 	
 	func styles(for element: SVGElement) -> CSSFragment? {
 		let result = CSSFragment()
@@ -45,7 +45,7 @@ public class CSSSheet {
 		return result.isEmpty ? nil : result
 	}
 	
-	struct CSSSelector: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
+	struct Selector: Hashable, CustomStringConvertible, CustomDebugStringConvertible {
 		enum Kind: Int, Comparable {
 			case element, cls, id
 			var stringValue: String {
@@ -104,7 +104,7 @@ public class CSSSheet {
 	}
 }
 
-extension CSSSheet.CSSSelector.Component {
+extension CSSSheet.Selector.Component {
 	func matches(class cls: String) -> Bool {
 		if self.kind != .cls { return false }
 		
@@ -116,8 +116,8 @@ extension CSSSheet.CSSSelector.Component {
 	func matches(id: String) -> Bool { return self.kind == .id && self.sel == id }
 	func matches(name: String) -> Bool { return self.kind == .element && self.sel == name }
 	
-	func matches(element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
-		var matchKind: CSSSheet.CSSSelector.Kind?
+	func matches(element: SVGElement) -> CSSSheet.Selector.Kind? {
+		var matchKind: CSSSheet.Selector.Kind?
 		
 		if self.kind == .element {
 			if !self.matches(name: element.elementName) { return nil }
@@ -137,10 +137,10 @@ extension CSSSheet.CSSSelector.Component {
 	}
 }
 
-extension CSSSheet.CSSSelector {
-	func matches(_ element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
+extension CSSSheet.Selector {
+	func matches(_ element: SVGElement) -> CSSSheet.Selector.Kind? {
 		var target: SVGElement? = element
-		var matchKind: CSSSheet.CSSSelector.Kind?
+		var matchKind: CSSSheet.Selector.Kind?
 
 		for sel in self.components.reversed() {
 			guard let tgt = target else { return matchKind }
@@ -152,9 +152,9 @@ extension CSSSheet.CSSSelector {
 	}
 }
 
-extension Array where Element == CSSSheet.CSSSelector {
-	func matches(_ element: SVGElement) -> CSSSheet.CSSSelector.Kind? {
-		var matchKind: CSSSheet.CSSSelector.Kind?
+extension Array where Element == CSSSheet.Selector {
+	func matches(_ element: SVGElement) -> CSSSheet.Selector.Kind? {
+		var matchKind: CSSSheet.Selector.Kind?
 		
 		for sel in self {
 			if let newKind = sel.matches(element), (matchKind == nil || newKind > matchKind!) {
@@ -179,10 +179,10 @@ class CSSParser {
 		lastIndex = css.endIndex
 	}
 	
-	func parse() throws -> [[CSSSheet.CSSSelector]: CSSFragment]{
-		var selectorStack: [[CSSSheet.CSSSelector]] = []
+	func parse() throws -> [[CSSSheet.Selector]: CSSFragment]{
+		var selectorStack: [[CSSSheet.Selector]] = []
 		var currentLine = ""
-		var results: [[CSSSheet.CSSSelector]: CSSFragment] = [:]
+		var results: [[CSSSheet.Selector]: CSSFragment] = [:]
 		
 		while index < lastIndex {
 			let chr = css[index]
@@ -193,7 +193,7 @@ class CSSParser {
 			case "\n", "\t": continue
 				
 			case "{":
-				let selectors = currentLine.components(separatedBy: ",").compactMap( { CSSSheet.CSSSelector($0) })
+				let selectors = currentLine.components(separatedBy: ",").compactMap( { CSSSheet.Selector($0) })
 				if selectors.count > 0 { selectorStack.append(selectors) }
 				currentLine = ""
 				
