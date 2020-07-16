@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+class SVGUserInterface: ObservableObject {
+	static let instance = SVGUserInterface()
+	
+	@Published var selectedID: String?
+}
+
 public struct SVGView: View {
 	public let svg: SVGImage
 	
@@ -23,6 +29,7 @@ public struct SVGView: View {
 				if child.isDisplayable { SVGElementView(element: child) }
 			}
 		}
+		.environmentObject(SVGUserInterface.instance)
 		.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
 		.frame(width: svg.size.width, height: svg.size.height)
     }

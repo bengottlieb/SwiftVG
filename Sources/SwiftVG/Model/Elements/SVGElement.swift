@@ -11,7 +11,7 @@ import CoreGraphics
 import SwiftUI
 
 open class SVGElement: Equatable, CustomStringConvertible {
-	public var id = UUID()
+	public var id = UUID().uuidString
 	public let kind: SVGElementKind
 	public var parent: Container!
 	public var attributes: SVGAttributes = [:]

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SVGElementView: View {
+	@EnvironmentObject var ui: SVGUserInterface
 	let element: SVGElement
 	
 	var scale: CGSize { element.scale ?? CGSize(width: 1, height: 1) }
@@ -18,24 +19,29 @@ struct SVGElementView: View {
 				if let path = pathElement.path {
 					Path(path)
 						.applyStyles(from: element)
+						.onTapGesture { print(element) }
 				}
 			} else if let rectElement = element as? SVGElement.Rect {
 				if let rect = rectElement.rect {
 					Rectangle()
 						.applyStyles(from: element)
 						.frame(width: rect.width, height: rect.height)
+						.if(ui.selectedID == element.id) { $0.overlay(Color.red) }
+						.onTapGesture { ui.selectedID = element.id }
 				}
 			} else if let ellipseElement = element as? SVGElement.Ellipse {
 				if let rect = ellipseElement.rect {
 					Ellipse()
 						.applyStyles(from: element)
 						.frame(width: rect.width, height: rect.height)
+						.onTapGesture { print(element) }
 				}
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
 					.foregroundColor(Color(element.fillColor))
 					.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
+					.onTapGesture { print(element) }
 			}
 			
 			if let container = element as? SVGElement.Container {
