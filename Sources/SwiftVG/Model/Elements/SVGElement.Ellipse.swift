@@ -30,11 +30,11 @@ extension SVGElement {
 		}
 		
 		var rect: CGRect? {
-			guard let cx = self.attributes[float: "cx"], let cy = self.attributes[float: "cy"] else { return nil }
+			guard let cx = attributeDim("cx"), let cy = attributeDim("cy") else { return nil }
 
-			if let r = self.attributes[float: "r"] {
+			if let r = attributeDim("r") {
 				return CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2)
-			} else if let rx = self.attributes[float: "rx"], let ry = self.attributes[float: "ry"] {
+			} else if let rx = attributeDim("rx"), let ry = attributeDim("ry") {
 				return CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2)
 			}
 			return nil

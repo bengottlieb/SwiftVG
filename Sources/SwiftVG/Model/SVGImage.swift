@@ -24,6 +24,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 	public var drawable = false
 	public var data: Data? { return self.document.data }
 	public var url: URL?
+	public var scale: CGFloat = 1
 	
 	public static let empty = SVGImage(size: .zero)
 	
@@ -67,6 +68,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 	public init(size: CGSize) {
 		self.id = UUID().uuidString
 		self.document = SVGDocument(root: SVGElement.Root(kind: SVGElement.NativeKind.svg, parent: nil, attributes: SVGElement.Root.generateDefaultAttributes(for: size)), data: nil)
+		self.document.root.svg = self
 	}
 	
 	open var description: String { return "Image" }

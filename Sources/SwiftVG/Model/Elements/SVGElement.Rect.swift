@@ -20,8 +20,8 @@ extension SVGElement {
 		override public var drawnRect: CGRect? { self.rect }
 
 		var rect: CGRect? {
-			let x = self.attributes[float: "x"] ?? 0
-			let y = self.attributes[float: "y"] ?? 0
+			let x = attributeDim("x") ?? 0
+			let y = attributeDim("y") ?? 0
 			guard let width = self.dimWidth.dimension, let height = self.dimHeight.dimension else { return nil }
 			return CGRect(x: x, y: y, width: width, height: height)
 		}

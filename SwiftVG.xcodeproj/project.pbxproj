@@ -450,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				B5456C1524A9FA2100544C3F /* SVGElement.swift */,
+				B5456C1424A9FA2100544C3F /* SVGElement.Root.swift */,
 				B53F69CE24B1410B00B6A878 /* SVGElement+Content.swift */,
 				B53F69D124B1411B00B6A878 /* SVGElement+Kind.swift */,
 				B5456C0E24A9FA2100544C3F /* SVGElement.Text.swift */,
@@ -458,7 +459,6 @@
 				B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */,
 				B5F4BA1624B5DE17009DBCD5 /* SVGElement.Line.swift */,
 				B5456C1324A9FA2100544C3F /* SVGElement.Generic.swift */,
-				B5456C1424A9FA2100544C3F /* SVGElement.Root.swift */,
 				B5456C1624A9FA2100544C3F /* SVGElement.Use.swift */,
 				B5456C1724A9FA2100544C3F /* SVGElement+SetsViewport.swift */,
 				B5456C1824A9FA2100544C3F /* SVGElement.Defs.swift */,

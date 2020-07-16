@@ -22,6 +22,8 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public var `class`: String?
 	public var elementName: String { self.kind.tagName }
 	public var svgID: String?
+	
+	var svg: SVGImage!
 	var _cachedStyles: CSSFragment?
 	
 	public var description: String { (self.svgID ?? "") + " - " + self.kind.tagName }
@@ -76,6 +78,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 		self.kind = kind
 		self.parent = parent
+		self.svg = parent?.svg
 		self.attributes = attributes
 		self.load(attributes: attributes)
 	}
@@ -157,8 +160,13 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		return copy
 	}
 
+	func attributeDim(_ name: String) -> CGFloat? {
+		guard let raw = self.attributes[float: name, basedOn: self] else { return nil }
+		return raw * svg.scale
+	}
+	
 	var origin: CGPoint {
-		CGPoint(x: self.attributes[float: "x", basedOn: self] ?? 0, y: self.attributes[float: "y", basedOn: self] ?? 0)
+		CGPoint(x: attributeDim("x") ?? 0, y: attributeDim("y") ?? 0)
 	}
 	
 	var translation: CGSize {
@@ -168,11 +176,11 @@ open class SVGElement: Equatable, CustomStringConvertible {
 			translation = CGSize(width: pt.x, height: pt.y)
 		}
 				
-		if let dx = self.attributes[float: "dx", basedOn: self] {
+		if let dx = self.attributeDim("dx") {
 			translation.width = (self.previousSibling?.translation.width ?? 0) + dx
 		}
 
-		if let dy = self.attributes[float: "dy", basedOn: self] {
+		if let dy = self.attributeDim("dy") {
 			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy
 		}
 

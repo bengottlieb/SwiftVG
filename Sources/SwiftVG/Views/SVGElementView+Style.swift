@@ -33,8 +33,8 @@ extension Shape {
 	func applyStyles(from element: SVGElement) -> some View {
 		ZStack(alignment: .topLeading) {
 			self.fill(element.fillColor.swiftUIColor)
-			self.stroke(element.strokeColor.swiftUIColor)
-				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
+			self.stroke(element.strokeColor.swiftUIColor, lineWidth: 1)
+				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: element.strokeWidth) }
 		}
 	}
 }

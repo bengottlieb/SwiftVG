@@ -16,8 +16,8 @@ extension SVGAttributes {
 }
 
 extension SVGElement: Identifiable {
-	var dimWidth: SVGDimension { SVGDimension(self, self.attributes["width"], .width) }
-	var dimHeight: SVGDimension { SVGDimension(self, self.attributes["height"], .height) }
+	var dimWidth: SVGDimension { SVGDimension(self, attributeDim("width"), .width) }
+	var dimHeight: SVGDimension { SVGDimension(self, attributeDim("height"), .height) }
 
 	public func value(for key: String) -> String? {
 		if let value = self.attributes[key] { return value }
@@ -49,12 +49,12 @@ extension SVGElement: Identifiable {
 	
 	public var strokeWidth: CGFloat {
 		get {
-			if let width = self.computedStyles[.strokeWidth]?.float { return width }
-			if let attr = self.value(for: "stroke-width") { return CGFloat(Double(attr) ?? 0) }
-			return 1
+			if let width = self.computedStyles[.strokeWidth]?.float { return width * svg.scale }
+			if let dim = attributeDim("stroke-width") { return dim }
+			return svg.scale
 		}
 		set {
-			self.attributes["stroke-width"] = "\(newValue)"
+			self.attributes["stroke-width"] = "\(newValue / svg.scale)"
 		}
 	}
 	

@@ -40,9 +40,9 @@ extension SVGElement {
 			if let other = kind as? NativeKind { return self == other }
 			return false
 		}
-		func element(in parent: Container?, attributes: [String: String]) -> SVGElement? {
+		func element(in parent: Container?, attributes: [String: String], svg: SVGImage) -> SVGElement? {
 			switch self {
-			case .svg: return SVGElement.Root(kind: self, parent: parent, attributes: attributes)
+			case .svg: return SVGElement.Root(kind: self, svg: svg, attributes: attributes)
 			case .defs: return SVGElement.Defs(kind: self, parent: parent, attributes: attributes)
 			case .use: return SVGElement.Use(kind: self, parent: parent, attributes: attributes)
 			case .path: return SVGElement.Path(kind: self, parent: parent, attributes: attributes)

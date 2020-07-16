@@ -13,12 +13,12 @@ import CoreGraphics
 extension SVGElement {
 	class Line: SVGElement.Path {
 		override var path: CGPath? {
-			let x1 = self.attributes[float: "x1"] ?? 0
-			let x2 = self.attributes[float: "x2"] ?? 0
+			let x1 = self.attributeDim("x1") ?? 0
+			let x2 = self.attributeDim("x2") ?? 0
 
 			guard
-				let y1 = self.attributes[float: "y1"],
-				let y2 = self.attributes[float: "y2"]
+				let y1 = self.attributeDim("y1"),
+				let y2 = self.attributeDim("y2")
 			else { return nil }
 			
 			let path = CGMutablePath()

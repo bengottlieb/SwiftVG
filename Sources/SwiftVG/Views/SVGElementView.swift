@@ -40,17 +40,20 @@ struct SVGElementView: View {
 			
 			if let container = element as? SVGElement.Container {
 				ZStack(alignment: .topLeading) {
+					Rectangle()
+						.fill(Color.clear)
 					ForEach(container.resolvedChildren) { child in
 						if child.isDisplayable { SVGElementView(element: child) }
 					}
 				}
-				.frame(width: element.drawnRect?.width, height: element.drawnRect?.height)
+				.frame(width: element.dimWidth.dimension, height: element.dimHeight.dimension)
 				.if(element.shouldClip) { $0.clipped() }
 			}
 			
 		}
+		.frame(width: element.dimWidth.dimension, height: element.dimHeight.dimension)
 		.offset(element.swiftUIOffset)
-		.scaleEffect(self.scale)
+		//.scaleEffect(self.scale)
 		.if(SVGView.drawElementBorders) { $0.border(Color.gray.opacity(0.5), width: 0.5) }
 	}
 }
