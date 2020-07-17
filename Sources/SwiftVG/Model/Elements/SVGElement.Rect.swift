@@ -14,7 +14,7 @@ extension SVGElement {
 		override public var isDisplayable: Bool { return true }
 		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent, attributes: attributes)
-			if self.size == nil { self.size = self.rect?.size }
+			//if self.size == nil { self.size = self.rect?.size }
 		}
 		
 		override public var drawnRect: CGRect? { self.rect }

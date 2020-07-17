@@ -38,7 +38,7 @@ extension SVGElement {
 			if let pt = transform[5...].extractedPoint {
 				return CGSize(width: pt.x, height: pt.y)
 			} else if let amount = transform[5...].extractedFloat {
-				return CGSize(width: CGFloat(amount), height: CGFloat(amount))
+				return CGSize(width: CGFloat(amount) * self.svg.scale, height: CGFloat(amount) * self.svg.scale)
 			}
 		}
 		

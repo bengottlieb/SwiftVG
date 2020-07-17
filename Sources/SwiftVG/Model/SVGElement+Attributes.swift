@@ -85,12 +85,12 @@ extension SVGElement: Identifiable {
 	
 	var fontSize: CGFloat {
 		get {
-			if let size = self.computedStyles[.fontSize]?.float { return size }
-			if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) }
-			return 16
+			if let size = self.computedStyles[.fontSize]?.float { return size * self.svg.scale }
+			if let size = self.value(for: "font-size"), let dbl = Double(size) { return CGFloat(dbl) * self.svg.scale }
+			return 16 * self.svg.scale
 		}
 		set {
-			self.attributes["font-size"] = "\(newValue)"
+			self.attributes["font-size"] = "\(newValue / self.svg.scale)"
 		}
 	}
 }

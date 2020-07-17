@@ -138,7 +138,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		if let width = self.dimWidth.dimension, let height = self.dimHeight.dimension {
 			self.size = CGSize(width: width, height: height)
 		} else if let raw = self.attributes["viewBox"], let box = CGRect(viewBoxString: raw) {
-			self.size = box.size
+			self.size = box.size.scaled(by: self.svg.scale)
 		}
 		do {
 			try self.validateDimensions()
@@ -173,15 +173,15 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		var translation = CGSize.zero
 		
 		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
-			translation = CGSize(width: pt.x, height: pt.y)
+			translation = CGSize(width: pt.x * self.svg.scale, height: pt.y * self.svg.scale)
 		}
 				
 		if let dx = self.attributeDim("dx") {
-			translation.width = (self.previousSibling?.translation.width ?? 0) + dx
+			translation.width = (self.previousSibling?.translation.width ?? 0) + dx * self.svg.scale
 		}
 
 		if let dy = self.attributeDim("dy") {
-			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy
+			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy * self.svg.scale
 		}
 
 		return translation

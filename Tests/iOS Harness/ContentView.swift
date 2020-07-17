@@ -38,6 +38,7 @@ struct ContentView: View {
 						if showingSVGView {
 							SVGView(svg: SVGImage(url: urls[index])!)
 								.resizable()
+								.padding(2)
 								.border(Color.black, width: 2)
 						} //else {
 							Image(svg: SVGImage(url: urls[index])!)
