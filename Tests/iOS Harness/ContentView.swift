@@ -33,71 +33,75 @@ struct ContentView: View {
 	var body: some View {
 		Group() {
 			if device.isIPhone {
-				ZStack() {
-					VStack(alignment: .center) {
-						if showingSVGView {
-							SVGView(svg: SVGImage(url: urls[index])!)
-								.resizable()
-								.padding(2)
-								.border(Color.black, width: 2)
-						} //else {
-							Image(svg: SVGImage(url: urls[index])!)
-								.resizable()
-								.aspectRatio(contentMode: .fit)
-								.border(Color.black, width: 2)
-						//}
-					}
-					
-					VStack() {
-						if self.showingSVGView {
-							Toggle("", isOn: showOutlines)
-								.labelsHidden()
-						}
-						Spacer()
-						HStack() {
-							Button(action: {
-								if self.index > 0 { self.index -= 1 }
-								Settings.instance.imageIndex = self.index
-							}) { Image(.arrow_left) }
-							.disabled(index == 0)
-
-							Spacer()
-							VStack() {
-								Toggle("", isOn: $showingSVGView.whenChanged { show in Settings.instance.showingImages = !show })
-								.labelsHidden()
-								Text(urls[index].lastPathComponent)
-							}
-							Spacer()
-							Button(action: {
-								if self.index < (self.urls.count - 1) { self.index += 1 }
-								Settings.instance.imageIndex = self.index
-							}) { Image(.arrow_right) }
-							.disabled(index == (urls.count - 1))
-						}
-						.font(.headline)
-						.padding()
-					}
-					.layoutPriority(1)
-				}
+				iPhoneBody
 			} else {
-				HStack(spacing: 0) {
-					ImageListView() { image in self.selectedImage = image }
-						.frame(width: 150)
-					Divider()
-					Spacer()
-					if selectedImage != nil {
-						SVGTree(svg: selectedImage!)
-							.frame(width: 200)
-						SVGContainer(svg: selectedImage!)
-					}
-					Spacer()
-				}
+				macBody
 			}
 		}
-		.onAppear {
-	//		self.showOutlines.wrappedValue = Settings.instance.showingOutlines
-		}
 		.id(id)
+	}
+	
+	var macBody: some View {
+		HStack(spacing: 0) {
+			ImageListView() { image in self.selectedImage = image }
+				.frame(width: 150)
+			Divider()
+			Spacer()
+			if selectedImage != nil {
+				SVGTree(svg: selectedImage!)
+					.frame(width: 200)
+				SVGContainer(svg: selectedImage!)
+			}
+			Spacer()
+		}
+	}
+	
+	var iPhoneBody: some View {
+		ZStack() {
+			VStack(alignment: .center) {
+				if showingSVGView {
+					SVGView(svg: SVGImage(url: urls[index])!)
+						.resizable()
+						.padding(2)
+						.border(Color.black, width: 2)
+				}
+				Image(svg: SVGImage(url: urls[index])!)
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.border(Color.black, width: 2)
+			}
+			
+			VStack() {
+				if self.showingSVGView {
+					Toggle("", isOn: showOutlines)
+						.labelsHidden()
+				}
+				Spacer()
+				HStack() {
+					Button(action: {
+						if self.index > 0 { self.index -= 1 }
+						Settings.instance.imageIndex = self.index
+					}) { Image(.arrow_left) }
+					.disabled(index == 0)
+
+					Spacer()
+					VStack() {
+						Toggle("", isOn: $showingSVGView.onChange { show in Settings.instance.showingImages = !show })
+						.labelsHidden()
+						Text(urls[index].lastPathComponent)
+					}
+					Spacer()
+					Button(action: {
+						if self.index < (self.urls.count - 1) { self.index += 1 }
+						Settings.instance.imageIndex = self.index
+					}) { Image(.arrow_right) }
+					.disabled(index == (urls.count - 1))
+				}
+				.font(.headline)
+				.padding()
+			}
+			.layoutPriority(1)
+		}
 	}
 }
 
