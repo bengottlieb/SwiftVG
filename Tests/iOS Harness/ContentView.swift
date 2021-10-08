@@ -13,6 +13,7 @@ import Suite
 struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
+	let fixedImage: String? = "world-map"
 	
 	@State var index = Settings.instance.imageIndex
 	@State var showingSVGView = !Settings.instance.showingImages
@@ -32,7 +33,9 @@ struct ContentView: View {
 
 	var body: some View {
 		Group() {
-			if device.isIPhone {
+			if let fixed = fixedImage, let url = Bundle.main.url(forResource: fixed, withExtension: "svg", subdirectory: "Sample Images"), let svg = SVGImage(url: url) {
+				ScrollingSVGImageView(svg: svg)
+			} else if device.isIPhone {
 				iPhoneBody
 			} else {
 				macBody

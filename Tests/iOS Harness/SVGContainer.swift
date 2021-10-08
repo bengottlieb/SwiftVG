@@ -11,6 +11,9 @@ import SwiftVG
 
 struct SVGContainer: View {
 	let svg: SVGImage
+	@State var scale = 1.0
+	var maxScale = 2.0
+	@State var previousScale = 1.0
 	
 	func printDescription() {
 		let text = self.svg.buildXMLString(prettily: true)
@@ -19,11 +22,22 @@ struct SVGContainer: View {
 	
 	var body: some View {
 		ZStack {
-			ScrollView() {
-				SVGView(svg: svg)
-				.aspectRatio(contentMode: .fit)
+			ScrollView([.horizontal, .vertical]) {
+				SVGView(svg: svg, scale: scale)
+					.highPriorityGesture(MagnificationGesture().onChanged { val in
+						print(val)
+						let delta = val / self.previousScale
+						self.previousScale = val
+						var newScale = self.scale * delta
+						if newScale < 1.0 {
+							newScale = 1.0
+						}
+						scale = newScale
+					}.onEnded{val in
+						previousScale = 1
+					}
+					)
 			}
-			
 			VStack {
 				Spacer()
 				HStack() {

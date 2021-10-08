@@ -16,11 +16,13 @@ class SVGUserInterface: ObservableObject {
 
 public struct SVGView: View {
 	public let svg: SVGImage
+	var scale: Double = 1
 	
 	public static var drawElementBorders = true
 	
-	public init(svg: SVGImage) {
+	public init(svg: SVGImage, scale: Double = 1) {
 		self.svg = svg
+		self.scale = scale
 	}
 	
 	public var body: some View {
@@ -30,8 +32,8 @@ public struct SVGView: View {
 			}
 		}
 		.environmentObject(SVGUserInterface.instance)
+		.frame(width: svg.size.width * scale, height: svg.size.height * scale)
 		.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
-		.frame(width: svg.size.width, height: svg.size.height)
     }
 }
 
