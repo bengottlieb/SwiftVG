@@ -9,16 +9,16 @@
 import Studio
 import CoreGraphics
 
-extension SVGElement {
+public extension SVGElement {
 	class Path: SVGElement {
 		override public var isDisplayable: Bool { return true }
 		var indicateFirstPoint = false
 		
-		var path: CGPath? {
+		public var path: CGPath? {
 			return try? self.attributes["d"]?.generateBezierPaths(from: self.origin)
 		}
 		
-		override var boundingSize: CGSize? {
+		public override var boundingSize: CGSize? {
 			try? self.attributes["d"]?.generateBezierPaths(from: self.origin).boundingSize
 		}
 		
@@ -26,7 +26,7 @@ extension SVGElement {
 			return path?.boundingBoxOfPath
 		}
 		
-		override func draw(with ctx: CGContext, in frame: CGRect) {
+		public override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard let path = self.path else { return }
 
 			ctx.saveGState()
