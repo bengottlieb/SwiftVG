@@ -13,7 +13,7 @@ import Suite
 struct ContentView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
-	let fixedImage: String? = "world-map"
+	let fixedImage: String? = "world-map3"
 	
 	@State var index = Settings.instance.imageIndex
 	@State var showingSVGView = !Settings.instance.showingImages

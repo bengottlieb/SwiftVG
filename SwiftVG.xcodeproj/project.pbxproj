@@ -256,7 +256,6 @@
 		B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGWindowController.swift; sourceTree = "<group>"; };
 		B5A19F6824AA6383008B6896 /* SVGWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGWindowController.xib; sourceTree = "<group>"; };
 		B5E2EFA624AAD1E100A1764A /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
-		B5E2EFA924AAD20B00A1764A /* Suite */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Suite; path = ../Suite; sourceTree = "<group>"; };
 		B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGContainer.swift; sourceTree = "<group>"; };
 		B5E2EFAD24AADE9000A1764A /* SVGTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGTree.swift; sourceTree = "<group>"; };
 		B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extension.swift"; sourceTree = "<group>"; };
@@ -311,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				B57F25E624B0966A00915A8E /* Package.swift */,
-				B5E2EFA924AAD20B00A1764A /* Suite */,
 				B5456BFD24A9FA2100544C3F /* Sources */,
 				B5456B9D24A9F87E00544C3F /* Tests */,
 				B5456B8724A9F86400544C3F /* Products */,
