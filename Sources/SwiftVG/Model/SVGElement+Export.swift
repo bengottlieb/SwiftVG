@@ -11,6 +11,9 @@ import Foundation
 extension SVGElement {
 	public var xmlElementContents: String {
 		var xml = self.kind.tagName
+		var attr = self.attributes
+		
+		if let id = svgID { attr["id"] = id }
 		
 		for key in self.attributes.keys.sorted() {
 			xml += " \(key)=\"\(self.attributes[key] ?? "")\""

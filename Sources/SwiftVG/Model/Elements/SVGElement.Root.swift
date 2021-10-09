@@ -61,7 +61,7 @@ extension SVGElement {
 		static func generateDefaultAttributes(for size: CGSize) -> [String: String] {
 			let attr: [String: String] = [
 				"version": "1.1",
-				"id": "svg",
+				"id": "SVG_ID",
 				"xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 				"xmlns:svg": "http://www.w3.org/2000/svg",
 				"xmlns:cc": "http://creativecommons.org/ns#",

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Stand Alone, inc. All rights reserved.
 //
 
-import Foundation
+import Studio
 import CoreGraphics
 
 extension SVGElement {
@@ -16,6 +16,10 @@ extension SVGElement {
 		
 		var path: CGPath? {
 			return try? self.attributes["d"]?.generateBezierPaths(from: self.origin)
+		}
+		
+		override var boundingSize: CGSize? {
+			try? self.attributes["d"]?.generateBezierPaths(from: self.origin).boundingSize
 		}
 		
 		override public var drawnRect: CGRect? {

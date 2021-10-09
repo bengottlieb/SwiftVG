@@ -22,6 +22,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public var `class`: String?
 	public var elementName: String { self.kind.tagName }
 	public var svgID: String?
+	public var boundingSize: CGSize? { nil }
 	
 	var svg: SVGImage!
 	var _cachedStyles: CSSFragment?
