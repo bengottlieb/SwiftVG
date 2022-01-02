@@ -48,10 +48,12 @@ extension String {
 			}
 			
 			if chr == "-" {
-				if !currentChunk.isEmpty, (!inNumber || currentChunk.last != "e") { result.append(currentChunk) }
-				currentChunk = "-"
-				inNumber = true
-				continue
+				if !inNumber || currentChunk.last != "e" {
+					if !currentChunk.isEmpty { result.append(currentChunk) }
+					currentChunk = "-"
+					inNumber = true
+					continue
+				}
 			}
 			
 			if nowInNumber {

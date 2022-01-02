@@ -21,7 +21,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 		get { return self.document?.root.size ?? .zero }
 		set { self.document?.root.size = newValue }
 	}
-	public var drawable = false
+	public var isDrawable: Bool { document?.root != nil }
 	public var data: Data? { return self.document.data }
 	public var url: URL?
 	public var scale: CGFloat = 1
@@ -32,7 +32,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 	var cachedCGImage: CGImage?
 	var cachedNativeImage: NSObject?
 	
-	public var document: SVGDocument! { didSet { self.drawable = true }}
+	public var document: SVGDocument!
 
 	public convenience init?(url: URL) {
 		guard let data = try? Data(contentsOf: url) else { return nil }
@@ -45,6 +45,7 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 		guard let url = bundle.url(forResource: bundleName, withExtension: "svg", subdirectory: directory) else { return nil }
 		self.init(url: url)
 		self.id = bundleName
+		if !isDrawable { return nil }
 	}
 	
 	public init?(string: String) {
@@ -52,17 +53,20 @@ open class SVGImage: CustomStringConvertible, Identifiable {
 		let parser = SVGParser(data: data, from: nil)
 		self.id = "\(data.hashValue)"
 		parser.start(with: self)
+		if !isDrawable { return nil }
 	}
 	
 	public init?(data: Data) {
 		let parser = SVGParser(data: data, from: nil)
 		self.id = "\(data.hashValue)"
 		parser.start(with: self)
+		if !isDrawable { return nil }
 	}
 	
 	public init?(document: SVGDocument) {
 		self.id = "\(document.data?.hashValue ?? 0)"
 		self.document = document
+		if !isDrawable { return nil }
 	}
 	
 	public init(size: CGSize) {

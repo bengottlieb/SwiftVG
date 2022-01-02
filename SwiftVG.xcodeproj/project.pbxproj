@@ -18,7 +18,7 @@
 		B53F69DA24B14E3300B6A878 /* SVGView+Resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */; };
 		B5456B8A24A9F86400544C3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8924A9F86400544C3F /* AppDelegate.swift */; };
 		B5456B8C24A9F86400544C3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8B24A9F86400544C3F /* SceneDelegate.swift */; };
-		B5456B8E24A9F86400544C3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8D24A9F86400544C3F /* ContentView.swift */; };
+		B5456B8E24A9F86400544C3F /* BuiltInImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456B8D24A9F86400544C3F /* BuiltInImagesView.swift */; };
 		B5456B9024A9F86600544C3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5456B8F24A9F86600544C3F /* Assets.xcassets */; };
 		B5456B9324A9F86600544C3F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5456B9224A9F86600544C3F /* Preview Assets.xcassets */; };
 		B5456B9624A9F86600544C3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5456B9424A9F86600544C3F /* LaunchScreen.storyboard */; };
@@ -101,6 +101,11 @@
 		B5456CA724A9FE9600544C3F /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5456CA624A9FE9600544C3F /* Suite */; };
 		B55C300824B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */; };
 		B55C300924B32D0E00CF615C /* SVGElement.Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */; };
+		B57848BD27821BA700C6C56D /* SVGURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57848BC27821BA700C6C56D /* SVGURLView.swift */; };
+		B57848BE27821BA700C6C56D /* SVGURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57848BC27821BA700C6C56D /* SVGURLView.swift */; };
+		B57848C52782202A00C6C56D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57848BF27821E8B00C6C56D /* ContentView.swift */; };
+		B57848C62782206300C6C56D /* URLImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57848C227821EC300C6C56D /* URLImagesView.swift */; };
+		B57848C9278225AF00C6C56D /* SingleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57848C72782254000C6C56D /* SingleImageView.swift */; };
 		B57F25E824B0A17500915A8E /* CSSSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25E724B0A17500915A8E /* CSSSheet.swift */; };
 		B57F25E924B0A17500915A8E /* CSSSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25E724B0A17500915A8E /* CSSSheet.swift */; };
 		B57F25F124B0AA2400915A8E /* iOS_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F25F024B0AA2400915A8E /* iOS_Tests.swift */; };
@@ -189,7 +194,7 @@
 		B5456B8624A9F86400544C3F /* SwiftVG_iOS_Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftVG_iOS_Harness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5456B8924A9F86400544C3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5456B8B24A9F86400544C3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B5456B8D24A9F86400544C3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B5456B8D24A9F86400544C3F /* BuiltInImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInImagesView.swift; sourceTree = "<group>"; };
 		B5456B8F24A9F86600544C3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5456B9224A9F86600544C3F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5456B9524A9F86600544C3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -241,6 +246,10 @@
 		B5456C7B24A9FE1300544C3F /* SwiftVG_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftVG_macOS.h; sourceTree = "<group>"; };
 		B5456C7C24A9FE1300544C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Polyline.swift; sourceTree = "<group>"; };
+		B57848BC27821BA700C6C56D /* SVGURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGURLView.swift; sourceTree = "<group>"; };
+		B57848BF27821E8B00C6C56D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B57848C227821EC300C6C56D /* URLImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImagesView.swift; sourceTree = "<group>"; };
+		B57848C72782254000C6C56D /* SingleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageView.swift; sourceTree = "<group>"; };
 		B57F25E624B0966A00915A8E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B57F25E724B0A17500915A8E /* CSSSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSSheet.swift; sourceTree = "<group>"; };
 		B57F25EE24B0AA2400915A8E /* iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,8 +344,11 @@
 				B5456BA424A9F8C200544C3F /* SwiftVG_iOS */,
 				B5456B8924A9F86400544C3F /* AppDelegate.swift */,
 				B53F69D424B1437400B6A878 /* Settings.swift */,
+				B57848BF27821E8B00C6C56D /* ContentView.swift */,
+				B57848C72782254000C6C56D /* SingleImageView.swift */,
+				B57848C227821EC300C6C56D /* URLImagesView.swift */,
 				B5456B8B24A9F86400544C3F /* SceneDelegate.swift */,
-				B5456B8D24A9F86400544C3F /* ContentView.swift */,
+				B5456B8D24A9F86400544C3F /* BuiltInImagesView.swift */,
 				B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */,
 				B5E2EFAD24AADE9000A1764A /* SVGTree.swift */,
 				B5E2EFA624AAD1E100A1764A /* ImageListView.swift */,
@@ -529,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				B5966CC424ACA16E00E1943A /* SVGView.swift */,
+				B57848BC27821BA700C6C56D /* SVGURLView.swift */,
 				B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */,
 				B5966CC724ACA32500E1943A /* SVGElementView.swift */,
 				B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */,
@@ -764,13 +777,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */,
+				B57848C9278225AF00C6C56D /* SingleImageView.swift in Sources */,
 				B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */,
 				B5456B8A24A9F86400544C3F /* AppDelegate.swift in Sources */,
 				B5456B8C24A9F86400544C3F /* SceneDelegate.swift in Sources */,
 				B53F69D724B143E100B6A878 /* Settings.swift in Sources */,
+				B57848C52782202A00C6C56D /* ContentView.swift in Sources */,
 				B5E2EFAE24AADE9000A1764A /* SVGTree.swift in Sources */,
 				B5988D33270E950200F73A4C /* ScrollingSVGImageView.swift in Sources */,
-				B5456B8E24A9F86400544C3F /* ContentView.swift in Sources */,
+				B57848C62782206300C6C56D /* URLImagesView.swift in Sources */,
+				B5456B8E24A9F86400544C3F /* BuiltInImagesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +811,7 @@
 				B5456C3C24A9FA2100544C3F /* SVGElement.Unknown.swift in Sources */,
 				B5456C3324A9FA2100544C3F /* SVGElement.Path.swift in Sources */,
 				B5FE67FB24ADF28900844229 /* SVGElementView+Style.swift in Sources */,
+				B57848BD27821BA700C6C56D /* SVGURLView.swift in Sources */,
 				B5456C3A24A9FA2100544C3F /* SVGElement+Attributes.swift in Sources */,
 				B5456C2C24A9FA2100544C3F /* CSSFragment.swift in Sources */,
 				B5456C2924A9FA2100544C3F /* Font+Extension.swift in Sources */,
@@ -859,6 +876,7 @@
 				B5456C9E24A9FE6D00544C3F /* SVGElement.Unknown.swift in Sources */,
 				B5456C9524A9FE6D00544C3F /* SVGElement.Path.swift in Sources */,
 				B5FE67FC24ADF28900844229 /* SVGElementView+Style.swift in Sources */,
+				B57848BE27821BA700C6C56D /* SVGURLView.swift in Sources */,
 				B5456C9C24A9FE6D00544C3F /* SVGElement+Attributes.swift in Sources */,
 				B5456C8E24A9FE6D00544C3F /* CSSFragment.swift in Sources */,
 				B5456C8B24A9FE6D00544C3F /* Font+Extension.swift in Sources */,
@@ -990,7 +1008,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1045,7 +1063,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1065,7 +1083,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Tests/iOS Harness/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1087,7 +1105,7 @@
 				DEVELOPMENT_TEAM = YY6CWUX533;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Tests/iOS Harness/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1374,7 +1392,7 @@
 			repositoryURL = "https://github.com/bengottlieb/Suite.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
+				minimumVersion = 1.0.30;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
