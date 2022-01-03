@@ -30,7 +30,6 @@ public extension SVGView {
 		GeometryReader() { proxy in
 			HStack() {
 				self
-					.border(Color.red)
 					.scaleEffect(self.scale(from: proxy))
 			}
 			.frame(width: self.size.width * self.scale(from: proxy), height: self.size.height * self.scale(from: proxy))
