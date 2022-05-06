@@ -31,6 +31,11 @@ extension Dictionary where Key == String, Value == String {
 				return CGFloat(number) * fontSize
 			}
 			
+			if raw.contains("%") {
+				if let parentValue = element?.parent?.attributeDim(key) {
+					return CGFloat(number) * parentValue / 100
+				}
+			}
 			return CGFloat(number)
 		}
 		
