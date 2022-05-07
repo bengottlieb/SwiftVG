@@ -42,6 +42,7 @@ public struct SVGView: View {
 						if child.isDisplayable { SVGElementView(element: child) }
 					}
 				}
+				.preference(key: SVGNativeSizePreferenceKey.self, value: svg.size)
 				.environmentObject(SVGUserInterface.instance)
 				.frame(width: svg.size.width * scale, height: svg.size.height * scale)
 				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }

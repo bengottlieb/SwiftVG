@@ -9,12 +9,47 @@
 import SwiftUI
 import Suite
 
-public extension SVGView {
-	var size: CGSize { self.svg?.size ?? .zero }
+struct SVGNativeSizePreferenceKey: PreferenceKey {
+	static var defaultValue: CGSize?
 	
-	func scale(from proxy: GeometryProxy) -> CGFloat {
-		guard let svg = svg else { return 0.5 }
-		let size = svg.size
+	static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
+		value = value ?? nextValue()
+	}
+}
+
+public extension SVGView {
+	func resizable(onlyDown: Bool = false) -> some View {
+		ResizableSVGView(svgView: self, onlyDown: onlyDown)
+	}
+}
+
+struct ResizableSVGView: View {
+	@State var nativeSize: CGSize?
+	@State var scale: Double?
+	let svgView: SVGView
+	let onlyDown: Bool
+	
+	var body: some View {
+		if let scale = scale, let size = nativeSize {
+			let full = size.scaled(by: scale)
+			HStack() {
+				svgView
+					.scaleEffect(scale)
+			}
+			.frame(width: full.width, height: full.height)
+		} else {
+			GeometryReader() { proxy in
+				svgView
+					.onPreferenceChange(SVGNativeSizePreferenceKey.self) { size in
+						nativeSize = size
+						scale = calculateScale(from: proxy, using: size)
+					}
+			}
+		}
+	}
+	
+	func calculateScale(from proxy: GeometryProxy, using size: CGSize?) -> Double? {
+		guard let size = size else { return nil }
 		let availableAspect = proxy.size.aspectRatio
 		let myAspect = size.aspectRatio
 		let scale: CGFloat
@@ -24,16 +59,7 @@ public extension SVGView {
 		} else {
 			scale = proxy.size.width / size.width
 		}
-		return min(1, scale)
+		return onlyDown ? min(1, scale) : scale
 	}
-
-	func resizable() -> some View {
-		GeometryReader() { proxy in
-			HStack() {
-				self
-					.scaleEffect(self.scale(from: proxy))
-			}
-			.frame(width: self.size.width * self.scale(from: proxy), height: self.size.height * self.scale(from: proxy))
-		}
-	}
+	
 }
