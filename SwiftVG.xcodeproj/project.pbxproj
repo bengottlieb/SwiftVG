@@ -1392,7 +1392,7 @@
 			repositoryURL = "https://github.com/bengottlieb/Suite.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.30;
+				minimumVersion = 1.0.50;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
