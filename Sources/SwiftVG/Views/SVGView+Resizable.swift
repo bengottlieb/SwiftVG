@@ -10,10 +10,11 @@ import SwiftUI
 import Suite
 
 public extension SVGView {
-	var size: CGSize { self.svg.size }
+	var size: CGSize { self.svg?.size ?? .zero }
 	
 	func scale(from proxy: GeometryProxy) -> CGFloat {
-		let size = self.svg.size
+		guard let svg = svg else { return 0.5 }
+		let size = svg.size
 		let availableAspect = proxy.size.aspectRatio
 		let myAspect = size.aspectRatio
 		let scale: CGFloat

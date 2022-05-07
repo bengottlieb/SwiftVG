@@ -30,6 +30,7 @@ struct SVGStyleStroke: ViewModifier {
 }
 
 extension Shape {
+	@MainActor
 	func applyStyles(from element: SVGElement) -> some View {
 		ZStack(alignment: .topLeading) {
 			self.fill(element.fillColor.swiftUIColor)
