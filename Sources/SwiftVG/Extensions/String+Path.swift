@@ -52,8 +52,9 @@ extension String {
 		var justMoving = true
 		var previousCurve: PreviousCurve?
 		let segments = tokenizer.segments
-		for var segment in segments {
-			switch segment.command {
+ 		for var segment in segments {
+			let command = segment.command
+			switch command {
 			case .move, .moveAbs:
 				justMoving = true
 				while true {
@@ -115,19 +116,24 @@ extension String {
 				
 			case .curve, .curveAbs:
 				while true {
-					guard var control1 = segment.nextPoint(), var control2 = segment.nextPoint(), var point = segment.nextPoint() else { break }
-					if !segment.command.isAbs { control1 += lastPoint; control2 += lastPoint; point += lastPoint }
-					path.addCurve(to: point, control1: control1, control2: control2)
-					lastPoint = point
+					guard var control1 = segment.nextPoint(), var control2 = segment.nextPoint(), var destination = segment.nextPoint() else { break }
+					if !segment.command.isAbs { control1 += lastPoint; control2 += lastPoint; destination += lastPoint }
+					previousCurve = PreviousCurve(point: destination, control1: control1, control2: control2)
+					path.addCurve(to: destination, control1: control1, control2: control2)
+					lastPoint = destination
 				}
 				
 			case .smoothCurve, .smoothCurveAbs:
-				guard var control = segment.nextPoint(), var point = segment.nextPoint() else { throw PathError.failedToGetPoint }
-				if !segment.command.isAbs { point += lastPoint; control += lastPoint }
-				let control2 = previousCurve?.control2 ?? lastPoint
-				path.addCurve(to: point, control1: lastPoint, control2: control)
-				lastPoint = point
-				previousCurve = PreviousCurve(point: point, control1: control, control2: control2)
+				guard var control2 = segment.nextPoint(), var destination = segment.nextPoint() else { throw PathError.failedToGetPoint }
+				if !segment.command.isAbs { control2 += lastPoint; destination += lastPoint }
+				var control1 = lastPoint
+				if let previousControl2 = previousCurve?.control2, let lastEnd = previousCurve?.point {
+					control1 = CGPoint(x: 2 * lastEnd.x - previousControl2.x, y: 2 * lastEnd.y - previousControl2.y)
+				}
+	//			path.addQuadCurve(to: destination, control: control)
+				path.addCurve(to: destination, control1: control1, control2: control2)
+				lastPoint = destination
+				previousCurve = PreviousCurve(point: destination, control1: control1, control2: control2)
 
 
 			case .arc, .arcAbs:

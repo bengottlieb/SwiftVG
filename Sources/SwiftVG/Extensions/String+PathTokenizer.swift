@@ -122,8 +122,9 @@ extension String {
 		}
 		
 		mutating func nextNArguments(_ n: Int) -> [String] {
-			if n == 0 { return [] }
-			let result = Array(tokens[self.index..<(self.index + n)])
+			if n == 0 || n >= tokens.count { return [] }
+			let end = Swift.min(index + n, tokens.count)
+			let result = Array(tokens[index..<end])
 			index += result.count
 			return result
 		}

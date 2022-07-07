@@ -12,7 +12,8 @@ struct ContentView: View {
     var body: some View {
 		 TabView() {
 	//		 SingleImageView(name: "btc.com")
-			 URLImagesView()
+	//		 URLImagesView()
+			 LogoImagesView()
 	//		 BuiltInImagesView()
 		 }
     }
