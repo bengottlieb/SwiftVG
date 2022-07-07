@@ -37,7 +37,7 @@ struct LogoImagesView: View {
 				
 					Spacer()
 					HStack() {
-						Button("<-") { index -= 1 }
+						Button("<-") { index = max(index - 1, 0) }
 							.padding()
 
 						Button("->") { index += 1 }

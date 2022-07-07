@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
+//		let transformString = "matrix(.8 0 0 -.8 871.47 498.22)"
+//		let found = SVGElement.RawTransform.transforms(from: transformString)
+//		print(found)
 		let test = SVGImage(string: "")
 		print(String(describing: test))
 		return true

@@ -123,6 +123,8 @@
 		B5A19F6424AA2269008B6896 /* Sample Images in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6224AA2269008B6896 /* Sample Images */; };
 		B5A19F6624AA61D2008B6896 /* SVGWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */; };
 		B5A19F6A24AA6383008B6896 /* SVGWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6824AA6383008B6896 /* SVGWindowController.xib */; };
+		B5B190072876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */; };
+		B5B190082876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */; };
 		B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFA824AAD1E400A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */; };
@@ -264,6 +266,7 @@
 		B5A19F6224AA2269008B6896 /* Sample Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Images"; sourceTree = "<group>"; };
 		B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGWindowController.swift; sourceTree = "<group>"; };
 		B5A19F6824AA6383008B6896 /* SVGWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGWindowController.xib; sourceTree = "<group>"; };
+		B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Samples.swift"; sourceTree = "<group>"; };
 		B5E2EFA624AAD1E100A1764A /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
 		B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGContainer.swift; sourceTree = "<group>"; };
 		B5E2EFAD24AADE9000A1764A /* SVGTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGTree.swift; sourceTree = "<group>"; };
@@ -435,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				B5456C1D24A9FA2100544C3F /* SVGImage.swift */,
+				B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */,
 				B5456C2024A9FA2100544C3F /* SVGDocument.swift */,
 				B5456C0824A9FA2100544C3F /* SVGImage+Image.swift */,
 				B5456C1024A9FA2100544C3F /* SVGElement+Export.swift */,
@@ -833,6 +837,7 @@
 				B5F4BA1724B5DE17009DBCD5 /* SVGElement.Line.swift in Sources */,
 				B5949F8F24AB47E8004672ED /* SVGElement+Validation.swift in Sources */,
 				B5456C3024A9FA2100544C3F /* SVGElement.Ellipse.swift in Sources */,
+				B5B190072876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */,
 				B5456C4024A9FA2100544C3F /* Image+SVGImage.swift in Sources */,
 				B57F25E824B0A17500915A8E /* CSSSheet.swift in Sources */,
 				B5456C3D24A9FA2100544C3F /* SVGElement.Group.swift in Sources */,
@@ -898,6 +903,7 @@
 				B5F4BA1824B5DE17009DBCD5 /* SVGElement.Line.swift in Sources */,
 				B5949F9024AB47E8004672ED /* SVGElement+Validation.swift in Sources */,
 				B5456C9224A9FE6D00544C3F /* SVGElement.Ellipse.swift in Sources */,
+				B5B190082876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */,
 				B5456CA224A9FE6D00544C3F /* Image+SVGImage.swift in Sources */,
 				B57F25E924B0A17500915A8E /* CSSSheet.swift in Sources */,
 				B5456C9F24A9FE6D00544C3F /* SVGElement.Group.swift in Sources */,

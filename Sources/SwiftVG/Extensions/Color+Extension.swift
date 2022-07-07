@@ -36,7 +36,7 @@ extension SVGColor {
 		}
 		
 		if let rgb = SVGColor.colorNames[string] {
-			self.init(red: CGFloat(rgb[0]) / 255.0, green: CGFloat(rgb[1]) / 255.0, blue: CGFloat(rgb[2]) / 255.0, alpha: 1)
+			self.init(red: CGFloat(rgb[0]) / 255.0, green: CGFloat(rgb[1]) / 255.0, blue: CGFloat(rgb[2]) / 255.0, alpha: rgb.count < 4 ? 1 : CGFloat(rgb[3]))
 			return
 		}
 		
@@ -59,6 +59,7 @@ extension SVGColor {
 	}
 	
 	static let colorNames: [String: [CGFloat]] = [
+		"transparent": [0, 0, 0, 0],
 		"aliceblue": [240, 248, 255],
 		"antiquewhite": [250, 235, 215],
 		"aqua": [ 0, 255, 255],

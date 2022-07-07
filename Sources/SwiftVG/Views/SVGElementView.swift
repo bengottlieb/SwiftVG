@@ -14,6 +14,8 @@ struct SVGElementView: View {
 	
 	var scale: CGSize { element.scale ?? CGSize(width: 1, height: 1) }
 	var body: some View {
+		let transform = element.transform
+		
 		ZStack(alignment: .topLeading) {
 			if let pathElement = element as? SVGElement.Path {
 				if let path = pathElement.path {
@@ -59,6 +61,7 @@ struct SVGElementView: View {
 		}
 		.frame(width: element.dimWidth.dimension, height: element.dimHeight.dimension)
 		.offset(element.swiftUIOffset)
+		.transformEffect(transform ?? .identity)
 		//.scaleEffect(self.scale)
 		.if(SVGView.drawElementBorders) { $0.border(Color.gray.opacity(0.5), width: 0.5) }
 	}

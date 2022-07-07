@@ -173,7 +173,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	var translation: CGSize {
 		var translation = CGSize.zero
 		
-		if let transform = self.attributes["transform"], transform.hasPrefix("translate("), let pt = transform[9...].extractedPoint {
+		if let transform = self.rawTransform, transform.name == "translate", let pt = transform.point(at: 0) {
 			translation = CGSize(width: pt.x * self.svg.scale, height: pt.y * self.svg.scale)
 		}
 				

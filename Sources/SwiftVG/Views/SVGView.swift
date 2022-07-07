@@ -7,6 +7,7 @@
 //
 
 import Suite
+import SwiftUI
 
 class SVGUserInterface: ObservableObject {
 	static let instance = SVGUserInterface()
@@ -65,8 +66,9 @@ public struct SVGView: View {
 }
 
 struct SVGView_Previews: PreviewProvider {
-    static var previews: some View {
-		SVGView(svg: .empty)
-    }
+	static var previews: some View {
+		SVGView(svg: .smoothCurveCircle2)
+			.border(Color.red)
+	}
 }
 
