@@ -18,6 +18,18 @@ extension SVGAttributes {
 extension SVGElement: Identifiable {
 	var dimWidth: SVGDimension { SVGDimension(self, attributeDim("width"), .width) }
 	var dimHeight: SVGDimension { SVGDimension(self, attributeDim("height"), .height) }
+	
+	var evenOddFill: Bool? {
+		guard let fillRule = attributes["fill-rule"] else { return nil }
+		return fillRule == "evenodd"
+	}
+	
+	var inheritedEvenOddFill: Bool {
+		for element in self.ancestry {
+			if let rule = element.evenOddFill { return rule }
+		}
+		return false
+	}
 
 	public func value(for key: String) -> String? {
 		if let value = self.attributes[key] { return value }
