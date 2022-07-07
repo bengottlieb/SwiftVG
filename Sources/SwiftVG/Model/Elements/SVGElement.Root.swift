@@ -13,6 +13,7 @@ import Suite
 extension SVGElement {
 	var dimensionsSetup: Bool { self.size != nil }
 	var visibleBox: CGRect {
+		if let viewBox = attributes["viewBox"], let rect = CGRect(viewBoxString: viewBox) { return rect }
 		//if let box = self.viewBox { return box }
 		return CGRect(x: 0, y: 0, size: self.size ?? .zero)
 	}

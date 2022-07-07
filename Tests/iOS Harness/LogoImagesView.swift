@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftVG
+import Suite
 
 struct LogoImagesView: View {
 	@State var index = 0
@@ -34,6 +35,7 @@ struct LogoImagesView: View {
 						.border(Color.red)
 						.backgroundColor(.gray)
 						.id(url)
+						.sizeDisplaying()
 				
 					Spacer()
 					HStack() {

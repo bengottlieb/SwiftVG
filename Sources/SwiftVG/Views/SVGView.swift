@@ -67,7 +67,7 @@ public struct SVGView: View {
 
 struct SVGView_Previews: PreviewProvider {
 	static var previews: some View {
-		SVGView(svg: .smoothCurveCircle2)
+		SVGView(svg: .sampleTransform)
 			.border(Color.red)
 	}
 }

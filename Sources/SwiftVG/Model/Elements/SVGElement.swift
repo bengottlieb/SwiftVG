@@ -135,8 +135,10 @@ open class SVGElement: Equatable, CustomStringConvertible {
 
 	func setupDimensions() {
 		if self.dimensionsSetup { return }
-
-		if let width = self.dimWidth.dimension, let height = self.dimHeight.dimension {
+		
+		if let size = (self as? SetsViewport)?.visibleBox.size {
+			self.size = size
+		} else if let width = self.dimWidth.dimension, let height = self.dimHeight.dimension {
 			self.size = CGSize(width: width, height: height)
 		} else if let raw = self.attributes["viewBox"], let box = CGRect(viewBoxString: raw) {
 			self.size = box.size.scaled(by: self.svg.scale)
