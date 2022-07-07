@@ -35,12 +35,19 @@ extension String {
 		
 		for chr in self {
 			let nowInNumber = (chr >= "0" && chr <= "9") || chr == "." || chr == "-" || chr == "e"
-			if chr == " " ||  chr == "," {
+			if chr == " " || chr == "," {
 				inNumber = false
 				if !currentChunk.isEmpty { result.append(currentChunk) }
 				currentChunk = ""
 				continue
 			}
+			
+			if chr == ".", currentChunk.contains(".") {
+				result.append(currentChunk)
+				currentChunk = "0."
+				continue
+			}
+			
 			if currentChunk == "" {
 				currentChunk = String(chr)
 				inNumber = nowInNumber

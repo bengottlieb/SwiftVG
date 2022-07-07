@@ -15,7 +15,12 @@ public extension SVGElement {
 		var indicateFirstPoint = false
 		
 		public var path: CGPath? {
-			return try? self.attributes["d"]?.generateBezierPaths(from: self.origin)
+			do {
+				return try self.attributes["d"]?.generateBezierPaths(from: self.origin)
+			} catch {
+				print("Failed to build path: \(error)")
+				return nil
+			}
 		}
 		
 		public override var boundingSize: CGSize? {
