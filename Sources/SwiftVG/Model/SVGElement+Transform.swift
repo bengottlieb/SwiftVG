@@ -49,28 +49,28 @@ extension SVGElement {
 	}
 
 	var transform: CGAffineTransform? {
-		guard let transform = rawTransform else { return nil }
-
-		if transform.name == "matrix" {
-			if transform.coordinates.count == 6 {
-				return CGAffineTransform(a: transform.coordinates[0], b: transform.coordinates[1], c: transform.coordinates[2], d: transform.coordinates[3], tx: transform.coordinates[4], ty: transform.coordinates[5])
+		if let transform = rawTransform {
+			if transform.name == "matrix" {
+				if transform.coordinates.count == 6 {
+					return CGAffineTransform(a: transform.coordinates[0], b: transform.coordinates[1], c: transform.coordinates[2], d: transform.coordinates[3], tx: transform.coordinates[4], ty: transform.coordinates[5])
+				}
+				print("Failed to extract Transform: \(transform)")
 			}
-			print("Failed to extract Transform: \(transform)")
+			
+			if transform.name == "translate", let point = transform.point(at: 0) {
+				return CGAffineTransform(translationX: point.x, y: point.y)
+			}
+			
+			if transform.name == "rotate", let angle = transform.coordinates.first {
+				let rad = (angle * 2 * .pi) / 360.0
+				return CGAffineTransform(rotationAngle: CGFloat(rad))
+			}
+			
+			if transform.name == "scale", let pt = transform.point(at: 0) {
+				return CGAffineTransform(scaleX: pt.x, y: pt.y)
+			}
 		}
-		
-		if transform.name == "translate", let point = transform.point(at: 0) {
-			return CGAffineTransform(translationX: point.x, y: point.y)
-		}
-		
-		if transform.name == "rotate", let angle = transform.coordinates.first {
-			let rad = (angle * 2 * .pi) / 360.0
-			return CGAffineTransform(rotationAngle: CGFloat(rad))
-		}
-		
-		if transform.name == "scale", let pt = transform.point(at: 0) {
-			return CGAffineTransform(scaleX: pt.x, y: pt.y)
-		}
-		
+
 		if let translation = translation {
 			return CGAffineTransform(translationX: translation.width, y: translation.height)
 		}
@@ -95,18 +95,16 @@ extension SVGElement {
 }
 
 extension CharacterSet {
-	static let disallowedNumberPunctuationCharacters: CharacterSet = {
-		var set = CharacterSet.punctuationCharacters
-		set.remove(".")
-		set.remove("-")
-		return set
+	static let disallowedNumberCharacters: CharacterSet = {
+		var set = CharacterSet(charactersIn: "0123456789.-")
+		return set.inverted
 	}()
 }
 
 extension String {
 	var extractedFloat: CGFloat? {
 		guard let components = self.components(separatedBy: "(").last else { return nil }
-		guard let dbl = Double(components.trimmingCharacters(in: .disallowedNumberPunctuationCharacters)) else { return nil }
+		guard let dbl = Double(components.trimmingCharacters(in: .disallowedNumberCharacters)) else { return nil }
 	//	if self.hasPrefix("-") { return -1 * CGFloat(dbl) }
 		return CGFloat(dbl)
 	}

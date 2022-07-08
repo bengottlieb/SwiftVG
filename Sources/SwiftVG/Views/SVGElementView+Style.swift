@@ -37,8 +37,8 @@ extension Shape {
 				.fill(element.fillColor.swiftUIColor, style: FillStyle(eoFill: element.inheritedEvenOddFill, antialiased: false))
 				
 			self
-				.stroke(element.strokeColor.swiftUIColor, lineWidth: 1)
-				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: element.strokeWidth) }
+				.stroke(element.strokeColor.swiftUIColor, lineWidth: element.strokeWidth)
+				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 		}
 	}
 }

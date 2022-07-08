@@ -24,11 +24,22 @@ extension SVGElement {
 			guard let cx = attributeDim("cx"), let cy = attributeDim("cy") else { return nil }
 
 			if let r = attributeDim("r") {
-				return CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2)
+				return CGRect(x: cx - (r), y: cy - (r), width: r * 2, height: r * 2)
 			} else if let rx = attributeDim("rx"), let ry = attributeDim("ry") {
 				return CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2)
 			}
 			return nil
+		}
+		
+		override var translation: CGSize? {
+			var size = super.translation ?? .zero
+			
+			if let rect = rect {
+				size.width += rect.origin.x
+				size.height += rect.origin.y
+			}
+			
+			return size == .zero ? nil : size
 		}
 
 		override func draw(with ctx: CGContext, in frame: CGRect) {
