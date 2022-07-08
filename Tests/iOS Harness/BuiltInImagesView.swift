@@ -19,11 +19,23 @@ struct BuiltInImagesView: View {
 	@State var showingSVGView = !Settings.instance.showingImages
 	@State var id = UUID().uuidString
 	
+	var outlineColor: Binding<Color?> {
+		Binding(
+			get: { SVGView.elementBorderColor },
+			set: {
+				SVGView.elementBorderColor = $0;
+				id = UUID().uuidString
+				Settings.instance.showingOutlines = $0 != nil
+			})
+	}
+
 	var showOutlines: Binding<Bool> {
-		Binding<Bool>(get: { SVGView.drawElementBorders }, set: {
-			SVGView.drawElementBorders = $0;
-			id = UUID().uuidString
-			Settings.instance.showingOutlines = $0
+		Binding(
+			get: { outlineColor.wrappedValue != nil },
+			set: {
+				outlineColor.wrappedValue = $0 ? .red : nil
+				id = UUID().uuidString
+				Settings.instance.showingOutlines = $0
 		})
 	}
 	let urls = Bundle.main.directory(named: "Sample Images")!.urls

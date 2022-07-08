@@ -22,7 +22,7 @@ public struct SVGView: View {
 	let url: URL?
 	var scale: Double = 1
 	
-	public static var drawElementBorders = true
+	public static var elementBorderColor: Color?
 	
 	public init(svg: SVGImage, scale: Double = 1) {
 		_svg = State(initialValue: svg)
@@ -46,7 +46,7 @@ public struct SVGView: View {
 				.preference(key: SVGNativeSizePreferenceKey.self, value: svg.size)
 				.environmentObject(SVGUserInterface.instance)
 				.frame(width: svg.size.width * scale, height: svg.size.height * scale)
-				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
+				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 			}
 		}
 		.task { await setup() }

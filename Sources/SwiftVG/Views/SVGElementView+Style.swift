@@ -38,7 +38,7 @@ extension Shape {
 				
 			self
 				.stroke(element.strokeColor.swiftUIColor, lineWidth: 1)
-				.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: element.strokeWidth) }
+				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: element.strokeWidth) }
 		}
 	}
 }

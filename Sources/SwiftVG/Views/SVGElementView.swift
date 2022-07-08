@@ -15,6 +15,7 @@ struct SVGElementView: View {
 	var scale: CGSize { element.scale ?? CGSize(width: 1, height: 1) }
 	var body: some View {
 		let transform = element.transform
+		let _ = print("Transform: \(String(describing: transform))")
 		
 		ZStack(alignment: .topLeading) {
 			if let pathElement = element as? SVGElement.Path {
@@ -42,7 +43,7 @@ struct SVGElementView: View {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
 					.foregroundColor(Color(element.fillColor))
-					.if(SVGView.drawElementBorders) { $0.border(Color.gray, width: 1) }
+					.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 					//.onTapGesture { print(element) }
 			}
 			
@@ -63,7 +64,7 @@ struct SVGElementView: View {
 		.offset(element.swiftUIOffset)
 		.transformEffect(transform ?? .identity)
 		//.scaleEffect(self.scale)
-		.if(SVGView.drawElementBorders) { $0.border(Color.gray.opacity(0.5), width: 0.5) }
+		.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 	}
 }
 
