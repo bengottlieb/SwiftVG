@@ -39,7 +39,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	public var briefDescription: String { return self.kind.tagName }
 
 	var classComponents: [String] {
-		get { return self.attributes["class"]?.components(separatedBy: " ") ?? [] }
+		get { return self.attribute("class")?.components(separatedBy: " ") ?? [] }
 		set { self.attributes["class"] = newValue.joined(separator: " ") }
 	}
 
@@ -86,9 +86,9 @@ open class SVGElement: Equatable, CustomStringConvertible {
 	
 	open func load(attributes: [String: String]) {
 		self.attributes = attributes
-		self.class = self.attributes["class"]
-		self.svgID = self.attributes["id"]
-		if let style = attributes["style"] { self.styles = CSSFragment(css: style) }
+		self.class = self.attribute("class")
+		self.svgID = self.attribute("id")
+		if let style = attribute("style") { self.styles = CSSFragment(css: style) }
 	}
 	
 	public var root: Root? {
@@ -140,7 +140,7 @@ open class SVGElement: Equatable, CustomStringConvertible {
 			self.size = size
 		} else if let width = self.dimWidth.dimension, let height = self.dimHeight.dimension {
 			self.size = CGSize(width: width, height: height)
-		} else if let raw = self.attributes["viewBox"], let box = CGRect(viewBoxString: raw) {
+		} else if let raw = self.attribute("viewBox"), let box = CGRect(viewBoxString: raw) {
 			self.size = box.size.scaled(by: self.svg.scale)
 		}
 		do {

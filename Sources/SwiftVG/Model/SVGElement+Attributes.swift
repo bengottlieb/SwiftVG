@@ -20,7 +20,7 @@ extension SVGElement: Identifiable {
 	var dimHeight: SVGDimension { SVGDimension(self, attributeDim("height"), .height) }
 	
 	var evenOddFill: Bool? {
-		guard let fillRule = attributes["fill-rule"] else { return nil }
+		guard let fillRule = attribute("fill-rule") else { return nil }
 		return fillRule == "evenodd"
 	}
 	
@@ -32,7 +32,7 @@ extension SVGElement: Identifiable {
 	}
 
 	public func value(for key: String) -> String? {
-		if let value = self.attributes[key] { return value }
+		if let value = self.attribute(key) { return value }
 		if let parent = self.parent { return parent.value(for: key) }
 		return nil
 	}

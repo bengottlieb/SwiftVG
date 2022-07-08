@@ -22,7 +22,7 @@ public struct SVGView: View {
 	let url: URL?
 	var scale: Double = 1
 	
-	public static var drawElementBorders = false
+	public static var drawElementBorders = true
 	
 	public init(svg: SVGImage, scale: Double = 1) {
 		_svg = State(initialValue: svg)

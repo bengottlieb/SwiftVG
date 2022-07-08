@@ -35,7 +35,7 @@ struct LogoImagesView: View {
 						.border(Color.red)
 						.backgroundColor(.gray)
 						.id(url)
-						.sizeDisplaying()
+					//	.sizeDisplaying()
 				
 					Spacer()
 					HStack() {

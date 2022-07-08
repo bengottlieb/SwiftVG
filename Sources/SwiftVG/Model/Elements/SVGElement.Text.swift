@@ -39,7 +39,7 @@ extension SVGElement {
 		override var translation: CGSize {
 			var trans = super.translation
 			
-			if self.attributes["text-anchor"] == "middle", let size  = self.size {
+			if self.attribute("text-anchor") == "middle", let size  = self.size {
 				trans.width -= size.width / 2
 				trans.height -= size.height / 2
 			}

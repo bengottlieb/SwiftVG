@@ -19,7 +19,7 @@ extension SVGElement {
 		}
 		
 		override func didLoad() {
-			if attributes["type"] == "text/css" {
+			if attribute("type") == "text/css" {
 				self.css = CSSSheet(string: self.content)
 			}
 		}

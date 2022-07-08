@@ -43,7 +43,7 @@ public extension SVGElement {
 
 extension SVGElement {
 	var rawTransform: RawTransform? {
-		guard let string = self.attributes["transform"], let transform = RawTransform.transforms(from: string).first else { return nil }
+		guard let string = self.attribute("transform"), let transform = RawTransform.transforms(from: string).first else { return nil }
 		
 		return transform
 	}

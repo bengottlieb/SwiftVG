@@ -12,8 +12,13 @@ import Suite
 
 extension SVGElement {
 	var dimensionsSetup: Bool { self.size != nil }
+	
+	func attribute(_ name: String) -> String? {
+		attributes[name] ?? attributes[name.lowercased()]
+	}
+	
 	var visibleBox: CGRect {
-		if let viewBox = attributes["viewBox"], let rect = CGRect(viewBoxString: viewBox) { return rect }
+		if let viewBox = attribute("viewBox"), let rect = CGRect(viewBoxString: viewBox) { return rect }
 		//if let box = self.viewBox { return box }
 		return CGRect(x: 0, y: 0, size: self.size ?? .zero)
 	}
@@ -45,7 +50,7 @@ extension SVGElement {
 		
 		override func setupDimensions() {
 			super.setupDimensions()
-			self.viewBox = CGRect(viewBoxString: self.attributes["viewBox"])
+			self.viewBox = CGRect(viewBoxString: self.attribute("viewBox"))
 		}
 		
 		init(kind: SVGElementKind, svg: SVGImage, attributes: [String: String]) {

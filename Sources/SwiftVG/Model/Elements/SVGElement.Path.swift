@@ -16,7 +16,7 @@ public extension SVGElement {
 		
 		public var path: CGPath? {
 			do {
-				return try self.attributes["d"]?.generateBezierPaths(from: self.origin)
+				return try self.attribute("d")?.generateBezierPaths(from: self.origin)
 			} catch {
 				print("Failed to build path: \(error)")
 				return nil
@@ -24,7 +24,7 @@ public extension SVGElement {
 		}
 		
 		public override var boundingSize: CGSize? {
-			try? self.attributes["d"]?.generateBezierPaths(from: self.origin).boundingSize
+			try? self.attribute("d")?.generateBezierPaths(from: self.origin).boundingSize
 		}
 		
 		override public var drawnRect: CGRect? {

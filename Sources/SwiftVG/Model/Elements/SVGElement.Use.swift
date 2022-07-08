@@ -15,7 +15,7 @@ extension SVGElement {
 		
 		required init(kind: SVGElementKind, parent: Container?, attributes: [String: String]) {
 			super.init(kind: kind, parent: parent, attributes: attributes)
-			self.ref = attributes["xlink:href"]
+			self.ref = attribute("xlink:href")
 		}
 		
 		override var resolved: SVGElement {
