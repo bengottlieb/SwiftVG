@@ -20,7 +20,13 @@ extension SVGElement {
 	var visibleBox: CGRect {
 		if let viewBox = attribute("viewBox"), let rect = CGRect(viewBoxString: viewBox) { return rect }
 		//if let box = self.viewBox { return box }
-		return CGRect(x: 0, y: 0, size: self.size ?? .zero)
+		if let size = size { return CGRect(x: 0, y: 0, size: size)
+		}
+		
+		if let width = attribute("width")?.extractedFloat, let height = attribute("height")?.extractedFloat {
+			return CGRect(x: 0, y: 0, width: width, height: height)
+		}
+		return .zero
 	}
 	
 	var sizeDescription: String {
