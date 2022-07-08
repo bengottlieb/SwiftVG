@@ -44,7 +44,7 @@ extension SVGElement {
 		}
 		
 		public override var drawnRect: CGRect? {
-			if let size = self.size { return CGRect(origin: self.translation.point, size: size) }
+			if let size = self.size { return CGRect(origin: self.translation?.point ?? .zero, size: size) }
 			return nil
 		}
 		

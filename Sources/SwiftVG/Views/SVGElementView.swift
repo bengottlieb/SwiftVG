@@ -15,7 +15,6 @@ struct SVGElementView: View {
 	var scale: CGSize { element.scale ?? CGSize(width: 1, height: 1) }
 	var body: some View {
 		let transform = element.transform
-		let _ = print("Transform: \(String(describing: transform))")
 		
 		ZStack(alignment: .topLeading) {
 			if let pathElement = element as? SVGElement.Path {
@@ -61,7 +60,6 @@ struct SVGElementView: View {
 			
 		}
 		.frame(width: element.dimWidth.dimension, height: element.dimHeight.dimension)
-		.offset(element.swiftUIOffset)
 		.transformEffect(transform ?? .identity)
 		//.scaleEffect(self.scale)
 		.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }

@@ -150,12 +150,6 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		}
 	}
 	
-	var swiftUIOffset: CGSize {
-		let origin = self.origin
-		let translation = self.translation
-		return CGSize(width: translation.width + origin.x, height: translation.height + origin.y)
-	}
-	
 	func didLoad() { }
 	func copy() -> Self {
 		let copy = Self.init(kind: self.kind, parent: self.parent, attributes: self.attributes)
@@ -172,22 +166,18 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		CGPoint(x: attributeDim("x") ?? 0, y: attributeDim("y") ?? 0)
 	}
 	
-	var translation: CGSize {
+	var translation: CGSize? {
 		var translation = CGSize.zero
 		
-		if let transform = self.rawTransform, transform.name == "translate", let pt = transform.point(at: 0) {
-			translation = CGSize(width: pt.x * self.svg.scale, height: pt.y * self.svg.scale)
-		}
-				
 		if let dx = self.attributeDim("dx") {
-			translation.width = (self.previousSibling?.translation.width ?? 0) + dx * self.svg.scale
+			translation.width = (self.previousSibling?.translation?.width ?? 0) + dx * self.svg.scale
 		}
 
 		if let dy = self.attributeDim("dy") {
-			translation.height = (self.previousSibling?.translation.height ?? self.parent.translation.height) + dy * self.svg.scale
+			translation.height = (self.previousSibling?.translation?.height ?? self.parent.translation?.height ?? 0) + dy * self.svg.scale
 		}
 
-		return translation
+		return translation == .zero ? nil : translation
 	}
 	
 	var resolvedChildren: [SVGElement] {

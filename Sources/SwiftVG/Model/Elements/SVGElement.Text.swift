@@ -36,27 +36,17 @@ extension SVGElement {
 			self.content
 		}
 		
-		override var translation: CGSize {
-			var trans = super.translation
+		override var translation: CGSize? {
+			var trans = super.translation ?? .zero
 			
 			if self.attribute("text-anchor") == "middle", let size  = self.size {
 				trans.width -= size.width / 2
 				trans.height -= size.height / 2
 			}
 			
-			return trans
+			return trans == .zero ? nil : trans
 		}
 
-		override var swiftUIOffset: CGSize {
-			var trans = self.translation
-			let origin = self.origin
-			trans.width += origin.x
-			trans.height += origin.y
-			
-			trans.height -= (self.size?.height ?? 0)
-			return trans
-		}
-		
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard !self.content.isEmpty else { return }
 			ctx.saveGState()

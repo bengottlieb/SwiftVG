@@ -51,8 +51,6 @@ extension SVGElement {
 	var transform: CGAffineTransform? {
 		guard let transform = rawTransform else { return nil }
 
-		if self.translation != .zero { return CGAffineTransform(translationX: translation.width, y: translation.height) }
-
 		if transform.name == "matrix" {
 			if transform.coordinates.count == 6 {
 				return CGAffineTransform(a: transform.coordinates[0], b: transform.coordinates[1], c: transform.coordinates[2], d: transform.coordinates[3], tx: transform.coordinates[4], ty: transform.coordinates[5])
@@ -71,6 +69,10 @@ extension SVGElement {
 		
 		if transform.name == "scale", let pt = transform.point(at: 0) {
 			return CGAffineTransform(scaleX: pt.x, y: pt.y)
+		}
+		
+		if let translation = translation {
+			return CGAffineTransform(translationX: translation.width, y: translation.height)
 		}
 		
 		return nil
