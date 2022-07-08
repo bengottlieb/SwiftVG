@@ -20,11 +20,17 @@ extension SVGElement: Identifiable {
 	var dimHeight: SVGDimension { SVGDimension(self, attributeDim("height"), .height) }
 	
 	var evenOddFill: Bool? {
-		guard let fillRule = attribute("fill-rule") else { return nil }
-		return fillRule == "evenodd"
+		if let fillRule = attribute("fill-rule") { return fillRule == "evenodd" }
+		if let style = styles {
+			if let fillRule = style[.fillRule] {
+				return fillRule.raw == "evenodd"
+			}
+		}
+		return false
 	}
 	
 	var inheritedEvenOddFill: Bool {
+		if let rule = evenOddFill { return rule }
 		for element in self.ancestry {
 			if let rule = element.evenOddFill { return rule }
 		}
