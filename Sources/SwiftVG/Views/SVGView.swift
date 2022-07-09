@@ -37,15 +37,15 @@ public struct SVGView: View {
 	
 	public var body: some View {
 		HStack() {
-			if let svg = svg, svg.isDrawable {
+			if let image = svg, image.isDrawable {
 				ZStack(alignment: .topLeading) {
-					ForEach(svg.document.root.resolvedChildren) { child in
+					ForEach(image.document.root.resolvedChildren) { child in
 						if child.isDisplayable { SVGElementView(element: child) }
 					}
 				}
-				.preference(key: SVGNativeSizePreferenceKey.self, value: svg.size)
+				.preference(key: SVGNativeSizePreferenceKey.self, value: image.size)
 				.environmentObject(SVGUserInterface.instance)
-				.frame(width: svg.size.width * scale, height: svg.size.height * scale)
+				.frame(width: image.size.width * scale, height: image.size.height * scale)
 				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 			}
 		}

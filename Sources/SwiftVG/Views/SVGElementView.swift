@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CrossPlatformKit
 
 struct SVGElementView: View {
 	@EnvironmentObject var ui: SVGUserInterface
@@ -44,6 +45,10 @@ struct SVGElementView: View {
 					.foregroundColor(Color(element.fillColor))
 					.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 					//.onTapGesture { print(element) }
+			} else if let elem = (element as? SVGElement.Image), let image = elem.image {
+				Image(uxImage: image)
+					.resizable()
+					.aspectRatio(contentMode: elem.resizeAspectRatio)
 			}
 			
 			if let container = element as? SVGElement.Container {

@@ -127,6 +127,8 @@
 		B5A19F6A24AA6383008B6896 /* SVGWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5A19F6824AA6383008B6896 /* SVGWindowController.xib */; };
 		B5B190072876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */; };
 		B5B190082876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */; };
+		B5BF666D2878D9A700EC064B /* SVGElement.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */; };
+		B5BF666E2878D9A700EC064B /* SVGElement.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */; };
 		B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFA824AAD1E400A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */; };
@@ -270,6 +272,7 @@
 		B5A19F6524AA61D2008B6896 /* SVGWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGWindowController.swift; sourceTree = "<group>"; };
 		B5A19F6824AA6383008B6896 /* SVGWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SVGWindowController.xib; sourceTree = "<group>"; };
 		B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGImage+Samples.swift"; sourceTree = "<group>"; };
+		B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Image.swift; sourceTree = "<group>"; };
 		B5E2EFA624AAD1E100A1764A /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
 		B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGContainer.swift; sourceTree = "<group>"; };
 		B5E2EFAD24AADE9000A1764A /* SVGTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGTree.swift; sourceTree = "<group>"; };
@@ -478,6 +481,7 @@
 				B5456C1124A9FA2100544C3F /* SVGElement.Container.swift */,
 				B5456C1224A9FA2100544C3F /* SVGElement.Path.swift */,
 				B55C300724B32D0E00CF615C /* SVGElement.Polyline.swift */,
+				B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */,
 				B54B18CA28784D1D00C1123F /* SVGElement.Polygon.swift */,
 				B5F4BA1624B5DE17009DBCD5 /* SVGElement.Line.swift */,
 				B5456C1324A9FA2100544C3F /* SVGElement.Generic.swift */,
@@ -636,6 +640,8 @@
 				B5456C7F24A9FE1300544C3F /* PBXTargetDependency */,
 			);
 			name = SwiftVG_mac_Harness;
+			packageProductDependencies = (
+			);
 			productName = SwiftVG_mac_Harness;
 			productReference = B5456C5924A9FD4900544C3F /* SwiftVG_mac_Harness.app */;
 			productType = "com.apple.product-type.application";
@@ -718,6 +724,7 @@
 			mainGroup = B5456B7D24A9F86400544C3F;
 			packageReferences = (
 				B5456BF724A9F93F00544C3F /* XCRemoteSwiftPackageReference "Suite" */,
+				B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */,
 			);
 			productRefGroup = B5456B8724A9F86400544C3F /* Products */;
 			projectDirPath = "";
@@ -847,6 +854,7 @@
 				B57F25E824B0A17500915A8E /* CSSSheet.swift in Sources */,
 				B5456C3D24A9FA2100544C3F /* SVGElement.Group.swift in Sources */,
 				B5456C3E24A9FA2100544C3F /* SVGImage.swift in Sources */,
+				B5BF666D2878D9A700EC064B /* SVGElement.Image.swift in Sources */,
 				B5456C2724A9FA2100544C3F /* SVGElement+Transform.swift in Sources */,
 				B5456C4224A9FA2100544C3F /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B53F69D224B1411B00B6A878 /* SVGElement+Kind.swift in Sources */,
@@ -914,6 +922,7 @@
 				B57F25E924B0A17500915A8E /* CSSSheet.swift in Sources */,
 				B5456C9F24A9FE6D00544C3F /* SVGElement.Group.swift in Sources */,
 				B5456CA024A9FE6D00544C3F /* SVGImage.swift in Sources */,
+				B5BF666E2878D9A700EC064B /* SVGElement.Image.swift in Sources */,
 				B5456C8924A9FE6D00544C3F /* SVGElement+Transform.swift in Sources */,
 				B5456CA424A9FE6D00544C3F /* SVGParser+XMLParserDelegate.swift in Sources */,
 				B53F69D324B1411B00B6A878 /* SVGElement+Kind.swift in Sources */,
@@ -1405,6 +1414,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.50;
+			};
+		};
+		B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/crossplatformkit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
