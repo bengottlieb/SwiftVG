@@ -70,7 +70,8 @@ extension String {
 			
 			var subsequentMissingCommand: Command {
 				switch self {
-				case .move, .moveAbs: return .line
+				case .move: return .line
+				case .moveAbs: return .lineAbs
 				default: return self
 				}
 			}

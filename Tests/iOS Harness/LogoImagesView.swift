@@ -32,8 +32,7 @@ struct LogoImagesView: View {
 						.padding()
 					Spacer()
 					SVGView(url: url)
-						.border(Color.red)
-						.backgroundColor(.gray)
+						.backgroundColor(.white)
 						.id(url)
 					//	.sizeDisplaying()
 				

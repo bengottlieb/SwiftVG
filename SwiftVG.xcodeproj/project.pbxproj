@@ -129,6 +129,8 @@
 		B5B190082876F3C80076D2F5 /* SVGImage+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B190062876F3C80076D2F5 /* SVGImage+Samples.swift */; };
 		B5BF666D2878D9A700EC064B /* SVGElement.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */; };
 		B5BF666E2878D9A700EC064B /* SVGElement.Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF666C2878D9A700EC064B /* SVGElement.Image.swift */; };
+		B5BF667A2879AB5700EC064B /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5BF66792879AB5700EC064B /* CrossPlatformKit */; };
+		B5BF667C2879AB5C00EC064B /* CrossPlatformKit in Frameworks */ = {isa = PBXBuildFile; productRef = B5BF667B2879AB5C00EC064B /* CrossPlatformKit */; };
 		B5E2EFA724AAD1E100A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFA824AAD1E400A1764A /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFA624AAD1E100A1764A /* ImageListView.swift */; };
 		B5E2EFAB24AADB0500A1764A /* SVGContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFAA24AADB0500A1764A /* SVGContainer.swift */; };
@@ -295,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5456BFC24A9F96B00544C3F /* Suite in Frameworks */,
+				B5BF667A2879AB5700EC064B /* CrossPlatformKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5456CA724A9FE9600544C3F /* Suite in Frameworks */,
+				B5BF667C2879AB5C00EC064B /* CrossPlatformKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +624,7 @@
 			name = SwiftVG_iOS;
 			packageProductDependencies = (
 				B5456BFB24A9F96B00544C3F /* Suite */,
+				B5BF66792879AB5700EC064B /* CrossPlatformKit */,
 			);
 			productName = SwiftVG_iOS;
 			productReference = B5456BA324A9F8C200544C3F /* SwiftVG.framework */;
@@ -662,6 +667,7 @@
 			name = SwiftVG_macOS;
 			packageProductDependencies = (
 				B5456CA624A9FE9600544C3F /* Suite */,
+				B5BF667B2879AB5C00EC064B /* CrossPlatformKit */,
 			);
 			productName = SwiftVG_macOS;
 			productReference = B5456C7924A9FE1300544C3F /* SwiftVG.framework */;
@@ -1436,6 +1442,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B5456BF724A9F93F00544C3F /* XCRemoteSwiftPackageReference "Suite" */;
 			productName = Suite;
+		};
+		B5BF66792879AB5700EC064B /* CrossPlatformKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */;
+			productName = CrossPlatformKit;
+		};
+		B5BF667B2879AB5C00EC064B /* CrossPlatformKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */;
+			productName = CrossPlatformKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

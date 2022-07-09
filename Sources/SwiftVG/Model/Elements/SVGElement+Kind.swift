@@ -34,6 +34,7 @@ extension SVGElement {
 		case font, fontFace = "font-face", fontFaceSrc = "font-face-src", fontFaceURI = "font-face-uri"
 		case unorderedList = "ul", orderedList = "ol", listItem = "li", strong, tref, span, p, em, code
 		case glyph, glyphRef, missingGlyph = "missing-glyph", altGlyph, altGlyphDef, altGlyphItem, foreignObject
+		case html, head, body, clippath
 
 		public var tagName: String { return self.rawValue }
 		public 	func isEqualTo(kind: SVGElementKind?) -> Bool {
