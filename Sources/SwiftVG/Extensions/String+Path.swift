@@ -50,6 +50,7 @@ extension String {
 		var lastPoint = CGPoint.zero
 		var firstPoint = CGPoint.zero
 		var justMoving = true
+		let logCommands = true
 		var previousCurve: PreviousCurve?
 		let segments = tokenizer.segments
  		for var segment in segments {
@@ -63,12 +64,15 @@ extension String {
 					if justMoving {
 						firstPoint = point
 						justMoving = false
+						if logCommands { print("move(to: \(point))") }
 						path.move(to: point)
 					} else {
+						if logCommands { print("line(to: \(point))") }
 						path.addLine(to: point)
 					}
 					lastPoint = point
 				}
+				previousCurve = nil
 				
 			case .line, .lineAbs:
 				while true {
@@ -76,28 +80,37 @@ extension String {
 					if !segment.command.isAbs { point += lastPoint }
 					path.addLine(to: point)
 					lastPoint = point
+					if logCommands { print("line(to: \(point))") }
 				}
+				previousCurve = nil
 					
 			case .horizontalLine, .horizontalLineAbs:
-				guard var x = segment.nextFloat() else { throw PathError.failedToGetPoint }
-				if !segment.command.isAbs { x += lastPoint.x }
-				let point = CGPoint(x: x, y: lastPoint.y)
-				path.addLine(to: point)
-				lastPoint = point
-				
+				while var x = segment.nextFloat() {
+					if !segment.command.isAbs { x += lastPoint.x }
+					let point = CGPoint(x: x, y: lastPoint.y)
+					path.addLine(to: point)
+					lastPoint = point
+					if logCommands { print("hline(to: \(point))") }
+				}
+				previousCurve = nil
+
 			case .verticalLine, .verticalLineAbs:
-				guard var y = segment.nextFloat() else { throw PathError.failedToGetPoint }
-				if !segment.command.isAbs { y += lastPoint.y }
-				let point = CGPoint(x: lastPoint.x, y: y)
-				path.addLine(to: point)
-				lastPoint = point
-				
+				while var y = segment.nextFloat() {
+					if !segment.command.isAbs { y += lastPoint.y }
+					let point = CGPoint(x: lastPoint.x, y: y)
+					path.addLine(to: point)
+					lastPoint = point
+					if logCommands { print("vline(to: \(point))") }
+				}
+				previousCurve = nil
+
 			case .quadBezier, .quadBezierAbs:
 				while true {
 					guard var control = segment.nextPoint(), var point = segment.nextPoint() else { break }
 					if !segment.command.isAbs { control += lastPoint; point += lastPoint; }
 					path.addQuadCurve(to: point, control: control)
 					lastPoint = point
+					if logCommands { print("quadBezier(to: \(point), cp: \(control)") }
 				}
 				
 			case .smoothQuadBezier, .smoothQuadBezierAbs:
@@ -108,32 +121,39 @@ extension String {
 					path.addQuadCurve(to: point, control: control)
 					lastPoint = point
 					previousCurve = PreviousCurve(point: point, control1: control, control2: nil)
+					if logCommands { print("smoothQuadBezier(to: \(point), cp: \(control))") }
 				}
 				
 			case .closePath, .closePathAbs:
 				path.closeSubpath()
 				lastPoint = firstPoint
-				
+				previousCurve = nil
+				if logCommands { print("closePath") }
+
 			case .curve, .curveAbs:
 				while true {
 					guard var control1 = segment.nextPoint(), var control2 = segment.nextPoint(), var destination = segment.nextPoint() else { break }
 					if !segment.command.isAbs { control1 += lastPoint; control2 += lastPoint; destination += lastPoint }
 					previousCurve = PreviousCurve(point: destination, control1: control1, control2: control2)
 					path.addCurve(to: destination, control1: control1, control2: control2)
+					if logCommands { print("Curve from \(lastPoint) to \(destination), cp1: \(control1), cp2: \(control2)") }
 					lastPoint = destination
 				}
 				
 			case .smoothCurve, .smoothCurveAbs:
-				guard var control2 = segment.nextPoint(), var destination = segment.nextPoint() else { throw PathError.failedToGetPoint }
-				if !segment.command.isAbs { control2 += lastPoint; destination += lastPoint }
-				var control1 = lastPoint
-				if let previousControl2 = previousCurve?.control2, let lastEnd = previousCurve?.point {
-					control1 = CGPoint(x: 2 * lastEnd.x - previousControl2.x, y: 2 * lastEnd.y - previousControl2.y)
+				while true {
+					guard var control2 = segment.nextPoint(), var destination = segment.nextPoint() else { break }
+					if !segment.command.isAbs { control2 += lastPoint; destination += lastPoint }
+					var control1 = lastPoint
+					if let previousControl2 = previousCurve?.control2, let lastEnd = previousCurve?.point {
+						control1 = CGPoint(x: 2 * lastEnd.x - previousControl2.x, y: 2 * lastEnd.y - previousControl2.y)
+					}
+					//			path.addLine(to: destination)
+					path.addCurve(to: destination, control1: control1, control2: control2)
+					if logCommands { print("Smooth Curve from \(lastPoint) to \(destination), cp1: \(control1), cp2: \(control2)") }
+					lastPoint = destination
+					previousCurve = PreviousCurve(point: destination, control1: control1, control2: control2)
 				}
-	//			path.addQuadCurve(to: destination, control: control)
-				path.addCurve(to: destination, control1: control1, control2: control2)
-				lastPoint = destination
-				previousCurve = PreviousCurve(point: destination, control1: control1, control2: control2)
 
 
 			case .arc, .arcAbs:
@@ -191,8 +211,11 @@ extension String {
 				let inverted = CGAffineTransform(translationX: cₓ, y: cᵧ).rotated(by: φ).scaledBy(x: rₓ, y: rᵧ)
 				path.addRelativeArc(center: .zero, radius: 1, startAngle: startAngle, delta: angle, transform: inverted)
 
+				if logCommands { print("arc(to: \(startAngle), delta: \(angle))") }
 				lastPoint = p2
 			}
+			previousCurve = nil
+
 		}
 		//if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
 		
