@@ -24,6 +24,11 @@ struct SVGElementView: View {
 						.applyStyles(from: element)
 						//.onTapGesture { print(element) }
 				}
+			} else if let ellipseElement = element as? SVGElement.Ellipse {
+				if let path = ellipseElement.path {
+					Path(path)
+						.applyStyles(from: element)
+				}
 			} else if let rectElement = element as? SVGElement.Rect {
 				if let rect = rectElement.rect {
 					Rectangle()
@@ -31,13 +36,6 @@ struct SVGElementView: View {
 						.frame(width: rect.width, height: rect.height)
 						.if(ui.selectedID == element.id) { $0.overlay(Color.red) }
 						//.onTapGesture { ui.selectedID = element.id }
-				}
-			} else if let ellipseElement = element as? SVGElement.Ellipse {
-				if let rect = ellipseElement.rect {
-					Ellipse()
-						.applyStyles(from: element)
-						.frame(width: rect.width, height: rect.height)
-						//.onTapGesture { print(element) }
 				}
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)

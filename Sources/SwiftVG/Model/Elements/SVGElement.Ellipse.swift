@@ -31,6 +31,15 @@ extension SVGElement {
 			return nil
 		}
 		
+		var path: CGPath? {
+			let path = CGMutablePath()
+			if let rect = rect {
+				path.addEllipse(in: rect)
+			}
+			path.closeSubpath()
+			return path
+		}
+		
 		override var translation: CGSize? {
 			var size = super.translation ?? .zero
 			
