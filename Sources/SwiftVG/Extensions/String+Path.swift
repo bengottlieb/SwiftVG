@@ -50,7 +50,7 @@ extension String {
 		var lastPoint = CGPoint.zero
 		var firstPoint = CGPoint.zero
 		var justMoving = true
-		let logCommands = true
+		let logCommands = false
 		var previousCurve: PreviousCurve?
 		let segments = tokenizer.segments
  		for var segment in segments {
