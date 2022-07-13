@@ -44,13 +44,12 @@ extension String {
 //		return nil
 //	}
 	
-	func generateBezierPaths(from origin: CGPoint) throws -> CGPath {
+	func generateBezierPaths(from origin: CGPoint, logCommands: Bool = false) throws -> CGPath {
 		let tokenizer = PathTokenizer(string: self, origin: origin)
 		let path = CGMutablePath()
 		var lastPoint = CGPoint.zero
 		var firstPoint = CGPoint.zero
 		var justMoving = true
-		let logCommands = false
 		var previousCurve: PreviousCurve?
 		let segments = tokenizer.segments
  		for var segment in segments {
@@ -213,8 +212,8 @@ extension String {
 
 				if logCommands { print("arc(to: \(startAngle), delta: \(angle))") }
 				lastPoint = p2
+				previousCurve = nil
 			}
-			previousCurve = nil
 
 		}
 		//if tokenizer.hasContentLeft { print("\(tokenizer.index) / \(tokenizer.tokens.count)") }
