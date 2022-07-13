@@ -40,17 +40,6 @@ extension SVGElement {
 			return path
 		}
 		
-		override var translation: CGSize? {
-			var size = super.translation ?? .zero
-			
-			if let rect = rect {
-				size.width += rect.origin.x
-				size.height += rect.origin.y
-			}
-			
-			return size == .zero ? nil : size
-		}
-
 		override func draw(with ctx: CGContext, in frame: CGRect) {
 			guard let rect = self.rect else { return }
 

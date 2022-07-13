@@ -15,7 +15,7 @@ struct LogoImagesView: View {
 	@State var oneAtAtTime = true
 	
 	var urls: [URL] {
-		let root = Bundle.main.url(forResource: "Sample Images", withExtension: nil)!.appendingPathComponent("Logos").appendingPathComponent("Bad")
+		let root = Bundle.main.url(forResource: "Sample Images", withExtension: nil)!.appendingPathComponent("Logos").appendingPathComponent("Good")
 		let files = try! FileManager.default.contentsOfDirectory(at: root, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 		return files.sorted { $0.lastPathComponent < $1.lastPathComponent }
 	}
