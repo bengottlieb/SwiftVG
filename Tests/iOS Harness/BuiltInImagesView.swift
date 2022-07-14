@@ -13,7 +13,7 @@ import Suite
 struct BuiltInImagesView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
-	let fixedImage: String? = "world-map3"
+	var fixedImage: String?// = "gaussian3.svg"
 	
 	@State var index = Settings.instance.imageIndex
 	@State var showingSVGView = !Settings.instance.showingImages
@@ -80,10 +80,10 @@ struct BuiltInImagesView: View {
 						.padding(2)
 						.border(Color.black, width: 2)
 				}
-				Image(svg: SVGImage(url: urls[index])!)
-					.resizable()
-					.aspectRatio(contentMode: .fit)
-					.border(Color.black, width: 2)
+//				Image(svg: SVGImage(url: urls[index])!)
+//					.resizable()
+//					.aspectRatio(contentMode: .fit)
+//					.border(Color.black, width: 2)
 			}
 			
 			VStack() {

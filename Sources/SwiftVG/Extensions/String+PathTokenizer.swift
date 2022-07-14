@@ -76,6 +76,7 @@ extension String {
 				switch self {
 				case .move, .moveAbs, .curve, .curveAbs, .smoothCurve, .smoothCurveAbs: return true
 				case .line, .lineAbs, .verticalLine, .horizontalLine: return true
+				case .arc, .arcAbs: return true
 				default: return false
 				}
 			}
