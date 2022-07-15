@@ -156,63 +156,65 @@ extension String {
 
 
 			case .arc, .arcAbs:
-				guard var rₓ = segment.nextFloat(), var rᵧ = segment.nextFloat(), var φ = segment.nextFloat(), let largeArcFlag = segment.nextBool(), let sweepFlag = segment.nextBool(), var p2 = segment.nextPoint() else { throw PathError.failedToGetPoint }
-				
-				if !segment.command.isAbs { p2 += lastPoint }
-				if rₓ == 0 || rᵧ == 0 {
-					path.addLine(to: p2)
-					break
-				}
-				
-				φ = φ * 2 * .pi / 360
-				if φ > 2 * .pi { φ -= .pi * 2 }
-				let p1 = lastPoint
-				let cosφ = cos(φ)
-				let sinφ = sin(φ)
-				let x1ʹ = cosφ * (p1.x - p2.x) * 0.5 + sinφ * (p1.y - p2.y) * 0.5
-				let y1ʹ = -sinφ * (p1.x - p2.x) * 0.5 + cosφ * (p1.y - p2.y) * 0.5
-				
-				var rₓ² = rₓ * rₓ
-				var rᵧ² = rᵧ * rᵧ
-				let xʹ² = x1ʹ * x1ʹ
-				let yʹ² = y1ʹ * y1ʹ
-				
-				let delta = xʹ²/rₓ² + yʹ²/rᵧ²
-				if delta > 1.0 {
-					rₓ *= sqrt(delta)
-					rᵧ *= sqrt(delta)
+				while true {
+					guard var rₓ = segment.nextFloat(), var rᵧ = segment.nextFloat(), var φ = segment.nextFloat(), let largeArcFlag = segment.nextBool(), let sweepFlag = segment.nextBool(), var p2 = segment.nextPoint() else { break }
 					
-					rₓ² = rₓ * rₓ
-					rᵧ² = rᵧ * rᵧ
+					if !segment.command.isAbs { p2 += lastPoint }
+					if rₓ == 0 || rᵧ == 0 {
+						path.addLine(to: p2)
+						break
+					}
+					
+					φ = φ * 2 * .pi / 360
+					if φ > 2 * .pi { φ -= .pi * 2 }
+					let p1 = lastPoint
+					let cosφ = cos(φ)
+					let sinφ = sin(φ)
+					let x1ʹ = cosφ * (p1.x - p2.x) * 0.5 + sinφ * (p1.y - p2.y) * 0.5
+					let y1ʹ = -sinφ * (p1.x - p2.x) * 0.5 + cosφ * (p1.y - p2.y) * 0.5
+					
+					var rₓ² = rₓ * rₓ
+					var rᵧ² = rᵧ * rᵧ
+					let xʹ² = x1ʹ * x1ʹ
+					let yʹ² = y1ʹ * y1ʹ
+					
+					let delta = xʹ²/rₓ² + yʹ²/rᵧ²
+					if delta > 1.0 {
+						rₓ *= sqrt(delta)
+						rᵧ *= sqrt(delta)
+						
+						rₓ² = rₓ * rₓ
+						rᵧ² = rᵧ * rᵧ
+					}
+					
+					let sign: CGFloat = (largeArcFlag == sweepFlag) ? -1 : 1
+					let rise = max(0, rₓ² * rᵧ² - rₓ² * yʹ² - rᵧ² * xʹ²)
+					let range = rₓ² * yʹ² + rᵧ² * xʹ²
+					let coefficient = sign * sqrt(rise / range)
+					
+					let cₓʹ = coefficient * (rₓ * y1ʹ) / rᵧ
+					let cᵧʹ = coefficient * -((rᵧ * x1ʹ) / rₓ)
+					let cₓ = cosφ * cₓʹ - sinφ * cᵧʹ + (p2.x + p1.x) / 2
+					let cᵧ = sinφ * cₓʹ + cosφ * cᵧʹ + (p2.y + p1.y) / 2
+					
+					let transform = CGAffineTransform(scaleX: 1 / rₓ, y: 1/rᵧ).rotated(by: -φ).translatedBy(x: -cₓ, y: -cᵧ)
+					let arc1 = p1.applying(transform)
+					let arc2 = p2.applying(transform)
+					let startAngle = atan2(arc1.y, arc1.x)
+					let endAngle = atan2(arc2.y, arc2.x)
+					var angle = endAngle - startAngle
+					if sweepFlag {
+						if angle < 0 { angle += 2 * .pi }
+					} else {
+						if angle > 0 { angle -= 2 * .pi }
+					}
+					let inverted = CGAffineTransform(translationX: cₓ, y: cᵧ).rotated(by: φ).scaledBy(x: rₓ, y: rᵧ)
+					path.addRelativeArc(center: .zero, radius: 1, startAngle: startAngle, delta: angle, transform: inverted)
+					
+					if logCommands { print("arc(from: \(lastPoint) to: \(p2), angle: \(startAngle), delta: \(angle))") }
+					lastPoint = p2
+					previousCurve = nil
 				}
-				
-				let sign: CGFloat = (largeArcFlag == sweepFlag) ? -1 : 1
-				let rise = max(0, rₓ² * rᵧ² - rₓ² * yʹ² - rᵧ² * xʹ²)
-				let range = rₓ² * yʹ² + rᵧ² * xʹ²
-				let coefficient = sign * sqrt(rise / range)
-				
-				let cₓʹ = coefficient * (rₓ * y1ʹ) / rᵧ
-				let cᵧʹ = coefficient * -((rᵧ * x1ʹ) / rₓ)
-				let cₓ = cosφ * cₓʹ - sinφ * cᵧʹ + (p2.x + p1.x) / 2
-				let cᵧ = sinφ * cₓʹ + cosφ * cᵧʹ + (p2.y + p1.y) / 2
-				
-				let transform = CGAffineTransform(scaleX: 1 / rₓ, y: 1/rᵧ).rotated(by: -φ).translatedBy(x: -cₓ, y: -cᵧ)
-				let arc1 = p1.applying(transform)
-				let arc2 = p2.applying(transform)
-				let startAngle = atan2(arc1.y, arc1.x)
-				let endAngle = atan2(arc2.y, arc2.x)
-				var angle = endAngle - startAngle
-				if sweepFlag {
-					if angle < 0 { angle += 2 * .pi }
-				} else {
-					if angle > 0 { angle -= 2 * .pi }
-				}
-				let inverted = CGAffineTransform(translationX: cₓ, y: cᵧ).rotated(by: φ).scaledBy(x: rₓ, y: rᵧ)
-				path.addRelativeArc(center: .zero, radius: 1, startAngle: startAngle, delta: angle, transform: inverted)
-
-				if logCommands { print("arc(to: \(startAngle), delta: \(angle))") }
-				lastPoint = p2
-				previousCurve = nil
 			}
 
 		}
