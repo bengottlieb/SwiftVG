@@ -40,12 +40,12 @@ public extension SVGElement {
 			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			ctx.setLineWidth(strokeWidth)
-			fillColor.setFill()
+			fillColor?.setFill()
 			ctx.addPath(path)
 			ctx.fillPath()
 
 			ctx.setLineWidth(strokeWidth)
-			strokeColor.setStroke()
+			strokeColor?.setStroke()
 			ctx.addPath(path)
 			ctx.strokePath()
 		}

@@ -61,7 +61,8 @@ public extension SVGImage {
 
 	var cgImage: CGImage? {
 		if let cached = self.cachedCGImage { return cached }
-		let size = self.size == .zero ? CGSize(width: 500, height: 500) : self.size
+		var size: CGSize! = self.size
+		if size == nil || size == .zero { size = CGSize(width: 500, height: 500) }
 		let rect = size.rect
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
 		let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)

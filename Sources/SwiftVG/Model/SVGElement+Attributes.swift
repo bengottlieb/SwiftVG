@@ -43,25 +43,29 @@ extension SVGElement: Identifiable {
 		return nil
 	}
 	
-	public var fillColor: SVGColor {
+	public var fillColor: SVGColor? {
 		get {
 			if let attr = self.value(for: "fill"), let color = SVGColor(attr) { return color }
 			if let color = self.computedStyles[.fill]?.color { return color }
 			return .black
 		}
 		set {
-			self.attributes["fill"] = newValue.colorString
+			if let string = newValue?.colorString {
+				self.attributes["fill"] = string
+			}
 		}
 	}
 
-	public var strokeColor: SVGColor {
+	public var strokeColor: SVGColor? {
 		get {
 			if let attr = self.value(for: "stroke"), let color = SVGColor(attr) { return color }
 			if let color = self.computedStyles[.stroke]?.color { return color }
 			return .clear
 		}
 		set {
-			self.attributes["stroke"] = newValue.colorString
+			if let string = newValue?.colorString {
+				self.attributes["stroke"] = string
+			}
 		}
 	}
 	
@@ -74,6 +78,20 @@ extension SVGElement: Identifiable {
 		set {
 			self.attributes["stroke-width"] = "\(newValue / svg.scale)"
 		}
+	}
+	
+	public var strokeOpacity: Double? {
+		if let strokeOpacity = self.computedStyles[.strokeOpacity]?.float { return strokeOpacity }
+		if let dim = attributeDim("stroke-opacity") { return dim }
+		return 1
+	}
+	
+	public var fillOpacity: Double? {
+		if let fillOpacity = self.computedStyles[.fillOpacity]?.float { return fillOpacity }
+		if let fillOpacity = self.computedStyles[.opacity]?.float { return fillOpacity }
+		if let dim = attributeDim("fill-opacity") { return dim }
+		if let dim = attributeDim("opacity") { return dim }
+		return 1
 	}
 	
 	var fontReplacements: [String: String] { [

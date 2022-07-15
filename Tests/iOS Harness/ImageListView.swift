@@ -46,7 +46,7 @@ struct SVGRow: View {
 				.border(Color(white: 0.8), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
 			
 			Text(url.deletingPathExtension().lastPathComponent)
-			Text(image.size.dimString).font(.caption)
+			Text(image.size?.dimString ?? "undefined size").font(.caption)
 		}
 		.padding(.horizontal, 5)
 	}

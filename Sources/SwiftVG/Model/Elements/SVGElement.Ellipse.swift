@@ -48,11 +48,11 @@ extension SVGElement {
 			
 			if let transform = self.transform { ctx.concatenate(transform) }
 
-			self.fillColor.setFill()
+			self.fillColor?.setFill()
 			ctx.fillEllipse(in: rect)
 			
 			ctx.setLineWidth(strokeWidth)
-			self.strokeColor.setStroke()
+			self.strokeColor?.setStroke()
 			ctx.strokeEllipse(in: rect)
 		}
 	}

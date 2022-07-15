@@ -21,19 +21,17 @@ struct ScrollingSVGImageView: View {
 			GeometryReader(content: { geometry in
 				Color.clear.frame(width: 1, height: 1).onAppear(perform: {
 					print("calculating geo for image")
-					print(svg.size)
-					print(geometry.size)
-					if svg.size.width >= svg.size.height {
-						if svg.size.width > geometry.size.width {
-							originalScale = 1 - ((svg.size.width - geometry.size.width) / svg.size.width)
+					if let size = svg.size, size.width >= size.height {
+						if size.width > geometry.size.width {
+							originalScale = 1 - ((size.width - geometry.size.width) / size.width)
 							scale = originalScale
 						} else {
 							originalScale = 1
 							scale = 1
 						}
 					} else {
-						if svg.size.height > geometry.size.height {
-							originalScale = 1 - ((svg.size.height - geometry.size.height) / svg.size.height)
+						if let size = svg.size, size.height > geometry.size.height {
+							originalScale = 1 - ((size.height - geometry.size.height) / size.height)
 							scale = originalScale
 						} else {
 							originalScale = 1
@@ -62,7 +60,8 @@ struct ScrollingSVGImageView: View {
 							lastScaleValue = 1
 						})
 					
-				}.frame(width: svg.size.width * scale, height: svg.size.height * scale, alignment: .center)
+				}
+				.frame(width: svg.size == nil ? nil : svg.size!.width * scale, height: svg.size == nil ? nil : svg.size!.height * scale, alignment: .center)
 			}.background(Color(.systemBackground).edgesIgnoringSafeArea(.all))
 		}.edgesIgnoringSafeArea(.all)
 	}

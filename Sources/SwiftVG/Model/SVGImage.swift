@@ -17,9 +17,12 @@ import Combine
 
 open class SVGImage: CustomStringConvertible, Identifiable {
 	public var viewBox: CGRect { return self.document?.root.visibleBox ?? .zero }
-	public var size: CGSize {
-		get { return self.document?.root.size ?? .zero }
-		set { self.document?.root.size = newValue }
+	public var size: CGSize? {
+		get { return self.document?.root.size }
+		set {
+			if let size = newValue {
+				self.document?.root.size = size }
+		}
 	}
 	public var isDrawable: Bool { document?.root != nil }
 	public var data: Data? { return self.document.data }

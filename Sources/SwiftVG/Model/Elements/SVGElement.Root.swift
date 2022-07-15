@@ -17,7 +17,7 @@ extension SVGElement {
 		attributes[name] ?? attributes[name.lowercased()]
 	}
 	
-	var visibleBox: CGRect {
+	var visibleBox: CGRect? {
 		if let viewBox = attribute("viewBox"), let rect = CGRect(viewBoxString: viewBox) { return rect }
 		//if let box = self.viewBox { return box }
 		if let size = size { return CGRect(x: 0, y: 0, size: size)
@@ -26,7 +26,7 @@ extension SVGElement {
 		if let width = attribute("width")?.extractedFloat, let height = attribute("height")?.extractedFloat {
 			return CGRect(x: 0, y: 0, width: width, height: height)
 		}
-		return .zero
+		return nil
 	}
 	
 	var sizeDescription: String {

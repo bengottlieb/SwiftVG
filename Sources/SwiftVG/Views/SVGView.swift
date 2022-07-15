@@ -45,7 +45,7 @@ public struct SVGView: View {
 				}
 				.preference(key: SVGNativeSizePreferenceKey.self, value: image.size)
 				.environmentObject(SVGUserInterface.instance)
-				.frame(width: image.size.width * scale, height: image.size.height * scale)
+				.frame(width: image.size == nil ? nil : image.size!.width * scale, height: image.size == nil ? nil : image.size!.height * scale)
 				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 			}
 		}

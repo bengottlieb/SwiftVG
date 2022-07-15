@@ -54,6 +54,7 @@ struct ResizableSVGView: View {
 		let myAspect = size.aspectRatio
 		let scale: CGFloat
 		
+		if size == .zero { return 1 }
 		if availableAspect > myAspect {
 			scale = proxy.size.height / size.height
 		} else {

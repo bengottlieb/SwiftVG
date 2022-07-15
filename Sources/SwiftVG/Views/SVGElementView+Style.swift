@@ -14,7 +14,7 @@ struct SVGStyleFill: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		Group() {
-			content.background(element.fillColor.swiftUIColor)
+			content.background(element.fillColor?.swiftUIColor ?? .black)
 		}
 	}
 }
@@ -24,7 +24,7 @@ struct SVGStyleStroke: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		Group() {
-			content.foregroundColor(element.strokeColor.swiftUIColor)
+			content.foregroundColor(element.strokeColor?.swiftUIColor ?? .black)
 		}
 	}
 }
@@ -33,12 +33,18 @@ extension Shape {
 	@MainActor
 	func applyStyles(from element: SVGElement) -> some View {
 		ZStack(alignment: .topLeading) {
-			self
-				.fill(element.fillColor.swiftUIColor, style: FillStyle(eoFill: element.inheritedEvenOddFill, antialiased: false))
+			if let fill = element.fillColor {
+					self
+				.fill(fill.swiftUIColor, style: FillStyle(eoFill: element.inheritedEvenOddFill, antialiased: false))
+				.opacity(element.fillOpacity ?? 1)
+			}
 				
-			self
-				.stroke(element.strokeColor.swiftUIColor, lineWidth: element.strokeWidth)
-				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
+			if let stroke = element.strokeColor {
+				self
+					.stroke(stroke.swiftUIColor, lineWidth: element.strokeWidth)
+					.opacity(element.strokeOpacity ?? 1)
+					.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
+			}
 		}
 	}
 }

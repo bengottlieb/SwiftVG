@@ -34,11 +34,11 @@ extension SVGElement {
 			if let transform = self.transform { ctx.concatenate(transform) }
 			
 			
-			self.fillColor.setFill()
+			self.fillColor?.setFill()
 			ctx.fill(rect)
 			
 			ctx.setLineWidth(strokeWidth)
-			self.strokeColor.setStroke()
+			self.strokeColor?.setStroke()
 			ctx.stroke(rect)
 		}
 	}

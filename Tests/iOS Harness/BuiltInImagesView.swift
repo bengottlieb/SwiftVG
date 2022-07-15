@@ -13,7 +13,7 @@ import Suite
 struct BuiltInImagesView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
-	var fixedImage: String?// = "gaussian3.svg"
+	var fixedImage: String? = "circles.svg"
 	
 	@State var index = Settings.instance.imageIndex
 	@State var showingSVGView = !Settings.instance.showingImages
@@ -71,14 +71,38 @@ struct BuiltInImagesView: View {
 		}
 	}
 	
-	var iPhoneBody: some View {
+	@ViewBuilder var iPhoneBody: some View {
+		ZStack() {
+			if let image = SVGImage(url: urls[index]) {
+				SVGView(svg: image)
+					.resizable()
+					.padding(2)
+					.border(Color.black, width: 2)
+					.id(index)
+			} else {
+				Text("Could not display \(urls[index].lastPathComponent)")
+			}
+				
+			VStack() {
+				Spacer()
+				buttons
+					.padding(.horizontal)
+			}
+		}
+	}
+	
+	var full_iPhoneBody: some View {
 		ZStack() {
 			VStack(alignment: .center) {
 				if showingSVGView {
-					SVGView(svg: SVGImage(url: urls[index])!)
-						.resizable()
-						.padding(2)
-						.border(Color.black, width: 2)
+					if let image = SVGImage(url: urls[index]) {
+						SVGView(svg: image)
+							.resizable()
+							.padding(2)
+							.border(Color.black, width: 2)
+					} else {
+						Text("Could not display \(urls[index].lastPathComponent)")
+					}
 				}
 //				Image(svg: SVGImage(url: urls[index])!)
 //					.resizable()
@@ -92,30 +116,34 @@ struct BuiltInImagesView: View {
 						.labelsHidden()
 				}
 				Spacer()
-				HStack() {
-					Button(action: {
-						if self.index > 0 { self.index -= 1 }
-						Settings.instance.imageIndex = self.index
-					}) { Image(.arrow_left) }
-					.disabled(index == 0)
-
-					Spacer()
-					VStack() {
-						Toggle("", isOn: $showingSVGView.onChange { show in Settings.instance.showingImages = !show })
-						.labelsHidden()
-						Text(urls[index].lastPathComponent)
-					}
-					Spacer()
-					Button(action: {
-						if self.index < (self.urls.count - 1) { self.index += 1 }
-						Settings.instance.imageIndex = self.index
-					}) { Image(.arrow_right) }
-					.disabled(index == (urls.count - 1))
-				}
+				buttons
 				.font(.headline)
 				.padding()
 			}
-			.layoutPriority(1)
+			//.layoutPriority(1)
+		}
+	}
+	
+	@ViewBuilder var buttons: some View {
+		HStack() {
+			Button(action: {
+				if self.index > 0 { self.index -= 1 }
+				Settings.instance.imageIndex = self.index
+			}) { Image(.arrow_left) }
+				.disabled(index == 0)
+			
+			Spacer()
+			VStack() {
+				Toggle("", isOn: $showingSVGView.onChange { show in Settings.instance.showingImages = !show })
+					.labelsHidden()
+				Text(urls[index].lastPathComponent)
+			}
+			Spacer()
+			Button(action: {
+				if self.index < (self.urls.count - 1) { self.index += 1 }
+				Settings.instance.imageIndex = self.index
+			}) { Image(.arrow_right) }
+				.disabled(index == (urls.count - 1))
 		}
 	}
 }

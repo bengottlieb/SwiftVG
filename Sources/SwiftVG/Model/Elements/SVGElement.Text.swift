@@ -27,7 +27,7 @@ extension SVGElement {
 		}
 		
 		var stringAttributes: [NSAttributedString.Key: Any] {
-			let attr: [NSAttributedString.Key: Any] = [.foregroundColor: self.strokeColor, .backgroundColor: self.fillColor, .font: self.font ]
+			let attr: [NSAttributedString.Key: Any] = [.foregroundColor: self.strokeColor ?? .black, .backgroundColor: self.fillColor ?? .black, .font: self.font ]
 			
 			return attr
 		}
