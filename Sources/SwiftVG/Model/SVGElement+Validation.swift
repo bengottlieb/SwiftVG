@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 public extension SVGElement {
 	enum SVGValidationError: Error { case zeroWidthViewBox, zeroHeightViewBox, zeroWidth, zeroHeight }
