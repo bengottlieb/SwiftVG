@@ -16,7 +16,6 @@ struct SVGElementView: View {
 	var scale: CGSize { element.scale ?? CGSize(width: 1, height: 1) }
 	var body: some View {
 		let transform = element.transform
-		
 		ZStack(alignment: .topLeading) {
 			if let pathElement = element as? SVGElement.Path {
 				if let path = pathElement.path {
@@ -40,6 +39,7 @@ struct SVGElementView: View {
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
+					.offset(y: -element.fontSize)
 					.foregroundColor(Color(element.fillColor ?? .black))
 					.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 					//.onTapGesture { print(element) }
@@ -65,6 +65,7 @@ struct SVGElementView: View {
 		.frame(width: element.dimWidth.dimension, height: element.dimHeight.dimension)
 		.transformEffect(transform ?? .identity)
 		//.scaleEffect(self.scale)
+		.iflet(element.origin) { v, p in v.offset(x: p.x, y: p.y) }
 		.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 	}
 }

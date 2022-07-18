@@ -59,7 +59,7 @@ extension SVGElement {
 			
 			let string = NSAttributedString(string: text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\n", with: ""), attributes: attr)
 			
-			var origin = self.origin
+			var origin = self.origin ?? .zero
 			origin.y -= string.size().height / 2
 			string.draw(at: origin)
 			super.draw(with: ctx, in: frame)

@@ -162,8 +162,14 @@ open class SVGElement: Equatable, CustomStringConvertible {
 		return raw * svg.scale
 	}
 	
-	var origin: CGPoint {
-		CGPoint(x: attributeDim("x") ?? 0, y: attributeDim("y") ?? 0)
+	var origin: CGPoint? {
+		let x = attributeDim("x")
+		let y = attributeDim("y")
+		
+		if x != nil || y != nil {
+			return CGPoint(x: x ?? 0, y: y ?? 0)
+		}
+		return nil
 	}
 	
 	var translation: CGSize? {
