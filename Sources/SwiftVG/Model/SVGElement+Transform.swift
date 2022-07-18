@@ -22,6 +22,12 @@ public extension SVGElement {
 			return CGPoint(x: x, y: y)
 		}
 		
+		func float(at index: Int) -> CGFloat? {
+			guard coordinates.count > index else { return nil }
+			
+			return coordinates[index]
+		}
+
 		static let attributesRegex = "(\\w+)\\(((\\-?\\.?\\d+\\.?\\d*e?\\-?\\d*\\s*,?\\s*)+)\\)"
 		public static func transforms(from raw: String) -> [RawTransform] {
 			let regex = try! NSRegularExpression(pattern: attributesRegex, options: .caseInsensitive)
@@ -66,8 +72,9 @@ extension SVGElement {
 				return CGAffineTransform(rotationAngle: CGFloat(rad))
 			}
 			
-			if transform.name == "scale", let pt = transform.point(at: 0) {
-				return CGAffineTransform(scaleX: pt.x, y: pt.y)
+			if transform.name == "scale" {
+				if let pt = transform.point(at: 0) { return CGAffineTransform(scaleX: pt.x, y: pt.y) }
+				if let scale = transform.float(at: 0) { return CGAffineTransform(scaleX: scale, y: scale) }
 			}
 		}
 
