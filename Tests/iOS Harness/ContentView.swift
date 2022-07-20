@@ -13,8 +13,8 @@ struct ContentView: View {
 		 TabView() {
 	//		 SingleImageView(name: "btc.com")
 	//		 URLImagesView()
-	//		 LogoImagesView()
-			 BuiltInImagesView()
+			 LogoImagesView()
+	//		 BuiltInImagesView()
 		 }
     }
 }

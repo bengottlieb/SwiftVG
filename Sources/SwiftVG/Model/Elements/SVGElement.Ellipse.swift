@@ -21,7 +21,8 @@ extension SVGElement {
 		override public var drawnRect: CGRect? { self.rect }
 		
 		var rect: CGRect? {
-			guard let cx = attributeDim("cx"), let cy = attributeDim("cy") else { return nil }
+			let cx = attributeDim("cx") ?? 0
+			let cy = attributeDim("cy") ?? 0
 
 			if let r = attributeDim("r") {
 				return CGRect(x: cx - (r), y: cy - (r), width: r * 2, height: r * 2)

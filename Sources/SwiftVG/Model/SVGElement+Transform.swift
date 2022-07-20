@@ -48,45 +48,55 @@ public extension SVGElement {
 
 
 extension SVGElement {
-	var rawTransform: RawTransform? {
-		guard let string = self.attribute("transform"), let transform = RawTransform.transforms(from: string).first else { return nil }
+	var rawTransforms: [RawTransform] {
+		guard let string = self.attribute("transform") else { return [] }
 		
-		return transform
+		return RawTransform.transforms(from: string)
 	}
 
 	var transform: CGAffineTransform? {
-		if let transform = rawTransform {
+		var components: [CGAffineTransform] = []
+		
+		for transform in rawTransforms {
 			if transform.name == "matrix" {
 				if transform.coordinates.count == 6 {
-					return CGAffineTransform(a: transform.coordinates[0], b: transform.coordinates[1], c: transform.coordinates[2], d: transform.coordinates[3], tx: transform.coordinates[4], ty: transform.coordinates[5])
+					components.append(CGAffineTransform(a: transform.coordinates[0], b: transform.coordinates[1], c: transform.coordinates[2], d: transform.coordinates[3], tx: transform.coordinates[4], ty: transform.coordinates[5]))
+				} else {
+					print("Failed to extract Transform: \(transform)")
 				}
-				print("Failed to extract Transform: \(transform)")
 			}
 			
 			if transform.name == "translate", let point = transform.point(at: 0) {
-				return CGAffineTransform(translationX: point.x, y: point.y)
+				components.append(CGAffineTransform(translationX: point.x, y: point.y))
 			}
 			
 			if transform.name == "rotate", let angle = transform.coordinates.first {
 				let rad = (angle * 2 * .pi) / 360.0
-				return CGAffineTransform(rotationAngle: CGFloat(rad))
+				components.append(CGAffineTransform(rotationAngle: CGFloat(rad)))
 			}
 			
 			if transform.name == "scale" {
-				if let pt = transform.point(at: 0) { return CGAffineTransform(scaleX: pt.x, y: pt.y) }
-				if let scale = transform.float(at: 0) { return CGAffineTransform(scaleX: scale, y: scale) }
+				if let pt = transform.point(at: 0) {
+					components.append(CGAffineTransform(scaleX: pt.x, y: pt.y))
+				} else if let scale = transform.float(at: 0) {
+					components.append(CGAffineTransform(scaleX: scale, y: scale))
+				}
 			}
 		}
 
 		if let translation = translation {
-			return CGAffineTransform(translationX: translation.width, y: translation.height)
+			components.append(CGAffineTransform(translationX: translation.width, y: translation.height))
 		}
 		
-		return nil
+		var transform = CGAffineTransform.identity
+		for sub in components.reversed() {
+			transform = transform.concatenating(sub)
+		}
+		return transform
 	}
 	
 	var scale: CGSize? {
-		guard let transform = rawTransform else { return nil }
+		guard let transform = rawTransforms.first else { return nil }
 
 		if transform.name == "scale" {
 			if let pt = transform.point(at: 0) {
@@ -127,9 +137,26 @@ extension String {
 	}
 		
 	var extractedPoints: [CGPoint]? {
-		let filtered = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
-		let components = filtered.components(separatedBy: " ")
+		let parenthesedPairs = self.trimmingCharacters(in: CharacterSet(charactersIn: "()"))
+		if parenthesedPairs.isNotEmpty {
+			let components = parenthesedPairs.components(separatedBy: " ")
+			
+			let points = components.compactMap { $0.extractedPoint }
+			if !points.isEmpty { return points }
+		}
 		
-		return components.compactMap { $0.extractedPoint }
+		let pairs = self.components(separatedBy: .whitespacesAndNewlines).filter { $0.isNotEmpty && $0 != "," }
+		if pairs.isNotEmpty {
+			return (0..<(pairs.count / 2)).compactMap { n in
+				guard
+					let x = pairs[n * 2].extractedFloat,
+					let y = pairs[n * 2 + 1].extractedFloat
+				else { return nil }
+				
+				return CGPoint(x: x, y: y)
+			}
+		}
+		
+		return nil
 	}
 }
