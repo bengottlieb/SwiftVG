@@ -35,6 +35,15 @@ public struct SVGView: View {
 		self.url = url
 	}
 	
+	var viewBoxTransform: CGAffineTransform {
+		guard let box = svg?.viewBox else { return .identity }
+		
+		if box.origin.x != 0 || box.origin.y != 0 {
+			return CGAffineTransform(translationX: -box.origin.x, y: -box.origin.y)
+		}
+		return .identity
+	}
+	
 	public var body: some View {
 		HStack() {
 			if let image = svg, image.isDrawable {
@@ -46,6 +55,7 @@ public struct SVGView: View {
 				.preference(key: SVGNativeSizePreferenceKey.self, value: image.size)
 				.environmentObject(SVGUserInterface.instance)
 				.frame(width: image.size == nil ? nil : image.size!.width * scale, height: image.size == nil ? nil : image.size!.height * scale)
+				.transformEffect(viewBoxTransform)
 				.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 			}
 		}

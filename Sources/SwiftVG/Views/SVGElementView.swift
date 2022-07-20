@@ -39,7 +39,7 @@ struct SVGElementView: View {
 			} else if let text = element as? SVGElement.Text {
 				Text(text.text)
 					.font(element.font.swiftUIFont)
-					.offset(y: -element.fontSize)
+					.offset(y: -element.fontSize * 0.8)
 					.foregroundColor(Color(element.fillColor ?? .black))
 					.iflet(SVGView.elementBorderColor) { v, c in v.border(c, width: 1) }
 					//.onTapGesture { print(element) }
