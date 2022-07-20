@@ -21,6 +21,7 @@ public struct SVGView: View {
 	@State private var isSetUp = false
 	let url: URL?
 	var scale: Double = 1
+	var recentered = true
 	
 	public static var elementBorderColor: Color?
 	
@@ -36,7 +37,7 @@ public struct SVGView: View {
 	}
 	
 	var viewBoxTransform: CGAffineTransform {
-		guard let box = svg?.viewBox else { return .identity }
+		guard recentered, let box = svg?.viewBox else { return .identity }
 		
 		if box.origin.x != 0 || box.origin.y != 0 {
 			return CGAffineTransform(translationX: -box.origin.x, y: -box.origin.y)
