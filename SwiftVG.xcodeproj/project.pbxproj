@@ -140,6 +140,9 @@
 		B5E2EFB424AB75E500A1764A /* CoreGraphics+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */; };
 		B5E5083F2881987C00C1A88F /* String+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E5083E2881987C00C1A88F /* String+Conversion.swift */; };
 		B5E508402881987C00C1A88F /* String+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E5083E2881987C00C1A88F /* String+Conversion.swift */; };
+		B5E50865288D8E0200C1A88F /* CachedSVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E50864288D8E0200C1A88F /* CachedSVGView.swift */; };
+		B5E50866288D8E0200C1A88F /* CachedSVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E50864288D8E0200C1A88F /* CachedSVGView.swift */; };
+		B5E50869288D90D900C1A88F /* Convey in Frameworks */ = {isa = PBXBuildFile; productRef = B5E50868288D90D900C1A88F /* Convey */; };
 		B5F4BA1724B5DE17009DBCD5 /* SVGElement.Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4BA1624B5DE17009DBCD5 /* SVGElement.Line.swift */; };
 		B5F4BA1824B5DE17009DBCD5 /* SVGElement.Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4BA1624B5DE17009DBCD5 /* SVGElement.Line.swift */; };
 		B5FE67FB24ADF28900844229 /* SVGElementView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */; };
@@ -283,6 +286,8 @@
 		B5E2EFB224AB75E500A1764A /* CoreGraphics+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extension.swift"; sourceTree = "<group>"; };
 		B5E5083E2881987C00C1A88F /* String+Conversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Conversion.swift"; sourceTree = "<group>"; };
 		B5E5084128819BBB00C1A88F /* Suite */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Suite; path = ../Suite; sourceTree = "<group>"; };
+		B5E50864288D8E0200C1A88F /* CachedSVGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedSVGView.swift; sourceTree = "<group>"; };
+		B5E5086A288D934C00C1A88F /* Convey */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Convey; path = ../Convey; sourceTree = "<group>"; };
 		B5F4BA1624B5DE17009DBCD5 /* SVGElement.Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGElement.Line.swift; sourceTree = "<group>"; };
 		B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGElementView+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,6 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E50869288D90D900C1A88F /* Convey in Frameworks */,
 				B5456BFC24A9F96B00544C3F /* Suite in Frameworks */,
 				B5BF667A2879AB5700EC064B /* CrossPlatformKit in Frameworks */,
 			);
@@ -335,6 +341,7 @@
 		B5456B7D24A9F86400544C3F = {
 			isa = PBXGroup;
 			children = (
+				B5E5086A288D934C00C1A88F /* Convey */,
 				B5E5084128819BBB00C1A88F /* Suite */,
 				B57F25E624B0966A00915A8E /* Package.swift */,
 				B5456BFD24A9FA2100544C3F /* Sources */,
@@ -564,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				B5966CC424ACA16E00E1943A /* SVGView.swift */,
+				B5E50864288D8E0200C1A88F /* CachedSVGView.swift */,
 				B53F69D824B14E3300B6A878 /* SVGView+Resizable.swift */,
 				B5966CC724ACA32500E1943A /* SVGElementView.swift */,
 				B5FE67FA24ADF28900844229 /* SVGElementView+Style.swift */,
@@ -631,6 +639,7 @@
 			packageProductDependencies = (
 				B5456BFB24A9F96B00544C3F /* Suite */,
 				B5BF66792879AB5700EC064B /* CrossPlatformKit */,
+				B5E50868288D90D900C1A88F /* Convey */,
 			);
 			productName = SwiftVG_iOS;
 			productReference = B5456BA324A9F8C200544C3F /* SwiftVG.framework */;
@@ -737,6 +746,7 @@
 			packageReferences = (
 				B5456BF724A9F93F00544C3F /* XCRemoteSwiftPackageReference "Suite" */,
 				B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */,
+				B5E50867288D90D900C1A88F /* XCRemoteSwiftPackageReference "Convey" */,
 			);
 			productRefGroup = B5456B8724A9F86400544C3F /* Products */;
 			projectDirPath = "";
@@ -843,6 +853,7 @@
 				B5456C2C24A9FA2100544C3F /* CSSFragment.swift in Sources */,
 				B5456C2924A9FA2100544C3F /* Font+Extension.swift in Sources */,
 				B5456C2624A9FA2100544C3F /* String+Extension.swift in Sources */,
+				B5E50865288D8E0200C1A88F /* CachedSVGView.swift in Sources */,
 				B5966CC524ACA16E00E1943A /* SVGView.swift in Sources */,
 				B5456C2D24A9FA2100544C3F /* CSSValue.swift in Sources */,
 				B5456C3124A9FA2100544C3F /* SVGElement+Export.swift in Sources */,
@@ -912,6 +923,7 @@
 				B5456C8E24A9FE6D00544C3F /* CSSFragment.swift in Sources */,
 				B5456C8B24A9FE6D00544C3F /* Font+Extension.swift in Sources */,
 				B5456C8824A9FE6D00544C3F /* String+Extension.swift in Sources */,
+				B5E50866288D8E0200C1A88F /* CachedSVGView.swift in Sources */,
 				B5966CC624ACA16E00E1943A /* SVGView.swift in Sources */,
 				B5456C8F24A9FE6D00544C3F /* CSSValue.swift in Sources */,
 				B5456C9324A9FE6D00544C3F /* SVGElement+Export.swift in Sources */,
@@ -1438,6 +1450,14 @@
 				minimumVersion = 1.0.4;
 			};
 		};
+		B5E50867288D90D900C1A88F /* XCRemoteSwiftPackageReference "Convey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/Convey";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1460,6 +1480,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B5BF666F2878DCDA00EC064B /* XCRemoteSwiftPackageReference "crossplatformkit" */;
 			productName = CrossPlatformKit;
+		};
+		B5E50868288D90D900C1A88F /* Convey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5E50867288D90D900C1A88F /* XCRemoteSwiftPackageReference "Convey" */;
+			productName = Convey;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

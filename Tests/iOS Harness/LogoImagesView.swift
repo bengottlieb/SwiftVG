@@ -10,9 +10,10 @@ import SwiftUI
 import SwiftVG
 import Suite
 
+@MainActor
 struct LogoImagesView: View {
 	@State var index = 0
-	@State var oneAtAtTime = true
+	@State var oneAtAtTime = false
 	
 	var urls: [URL] {
 		let root = Bundle.main.url(forResource: "Sample Images", withExtension: nil)!.appendingPathComponent("Logos").appendingPathComponent("Bad")
@@ -21,41 +22,54 @@ struct LogoImagesView: View {
 	}
 	var body: some View {
 		let urls = urls
-		
-		ZStack() {
-			Color.black.edgesIgnoringSafeArea(.all)
-			
-			if oneAtAtTime {
-				let url = urls[index % urls.count]
-				VStack() {
-					Text("#\(index) \(url.lastPathComponent)")
-						.padding()
-					Spacer()
-					SVGView(url: url)
-						.backgroundColor(.white)
-						.id(url)
-					//	.sizeDisplaying()
+		NavigationView() {
+			ZStack() {
+			//	Color.black.edgesIgnoringSafeArea(.all)
 				
-					Spacer()
-					HStack() {
-						Button("<-") { index = max(index - 1, 0) }
-							.padding()
-
-						Button("->") { index += 1 }
-							.padding()
-					}
-				}
-				.foregroundColor(.white)
-			} else {
-				ScrollView() {
+				if oneAtAtTime {
+					let url = urls[index % urls.count]
 					VStack() {
-						ForEach(urls.indices, id: \.self) { idx in
-							SVGView(url: urls[idx])
+						Text("#\(index) \(url.lastPathComponent)")
+							.padding()
+						Spacer()
+						SVGView(url: url)
+							.backgroundColor(.white)
+							.id(url)
+						//	.sizeDisplaying()
+						
+						Spacer()
+						HStack() {
+							Button("<-") { index = max(index - 1, 0) }
+								.padding()
+							
+							Button("->") { index += 1 }
+								.padding()
 						}
 					}
+					.foregroundColor(.white)
+				} else {
+					ScrollView() {
+						LazyVGrid(columns: [.init(.adaptive(minimum: 100))]) {
+							ForEach(urls.indices, id: \.self) { idx in
+								NavigationLink(destination: detailView(url: urls[idx])) {
+									CachedSVGView(url: urls[idx])
+										.resizable()
+										.frame(width: 100, height: 100)
+										.clipped()
+										.border(Color.yellow.opacity(0.1))
+								}
+							}
+						}
+					}
+					.navigationBarHidden(true)
 				}
 			}
 		}
+	}
+	
+	func detailView(url: URL) -> some View {
+		SVGView(url: url)
+			.navigationTitle(url.lastPathComponent)
 	}
 }
 

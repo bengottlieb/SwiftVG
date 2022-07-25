@@ -13,7 +13,7 @@ import Suite
 struct BuiltInImagesView: View {
 	@ObservedObject var device = CurrentDevice.instance
 	@State var selectedImage: SVGImage?
-	var fixedImage: String? = "circles.svg"
+	var fixedImage: String? = "bench.svg"
 	
 	@State var index = Settings.instance.imageIndex
 	@State var showingSVGView = !Settings.instance.showingImages

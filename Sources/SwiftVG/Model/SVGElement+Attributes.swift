@@ -43,6 +43,10 @@ extension SVGElement: Identifiable {
 		return nil
 	}
 	
+	public var fillGradient: LinearGradient? {
+		nil
+	}
+	
 	public var fillColor: SVGColor? {
 		get {
 			if let attr = self.value(for: "fill"), let color = SVGColor(attr) { return color }

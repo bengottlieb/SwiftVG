@@ -19,27 +19,33 @@ struct SVGNativeSizePreferenceKey: PreferenceKey {
 
 public extension SVGView {
 	func resizable(onlyDown: Bool = false) -> some View {
-		ResizableSVGView(svgView: self, onlyDown: onlyDown)
+		ResizableSVGView(contentView: self, onlyDown: onlyDown)
 	}
 }
 
-struct ResizableSVGView: View {
+public extension CachedSVGView {
+	func resizable(onlyDown: Bool = false) -> some View {
+		ResizableSVGView(contentView: self, onlyDown: onlyDown)
+	}
+}
+
+struct ResizableSVGView<Content: View>: View {
 	@State var nativeSize: CGSize?
 	@State var scale: Double?
-	let svgView: SVGView
+	let contentView: Content
 	let onlyDown: Bool
 	
 	var body: some View {
 		if let scale = scale, let size = nativeSize {
 			let full = size.scaled(by: scale)
 			HStack() {
-				svgView
+				contentView
 					.scaleEffect(scale)
 			}
 			.frame(width: full.width, height: full.height)
 		} else {
 			GeometryReader() { proxy in
-				svgView
+				contentView
 					.onPreferenceChange(SVGNativeSizePreferenceKey.self) { size in
 						nativeSize = size
 						scale = calculateScale(from: proxy, using: size)

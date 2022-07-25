@@ -33,6 +33,11 @@ extension Shape {
 	@MainActor
 	func applyStyles(from element: SVGElement) -> some View {
 		ZStack(alignment: .topLeading) {
+			if let gradient = element.fillGradient {
+				self
+			.fill(gradient, style: FillStyle(eoFill: element.inheritedEvenOddFill, antialiased: false))
+			.opacity(element.fillOpacity ?? 1)
+			}
 			if let fill = element.fillColor {
 					self
 				.fill(fill.swiftUIColor, style: FillStyle(eoFill: element.inheritedEvenOddFill, antialiased: false))
