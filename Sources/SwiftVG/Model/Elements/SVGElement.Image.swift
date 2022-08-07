@@ -14,12 +14,13 @@ extension SVGElement {
 		override public var isDisplayable: Bool { return true }
 
 		var image: UXImage? {
-			if let raw = attribute("xlink:href") {
+			if let raw = attribute("xlink:href") ?? attribute("src") {
 				let components = raw.components(separatedBy: ",")
 				if components.count == 2, components[0].hasPrefix("data:image"), let data = Data(base64Encoded: components[1], options: .ignoreUnknownCharacters) {
 					return UXImage(data: data)
 				}
 			}
+			
 			return nil
 		}
 		

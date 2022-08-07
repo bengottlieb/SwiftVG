@@ -19,11 +19,11 @@ public struct CachedSVGView: View {
 	let url: URL
 	let suggestedSize: CGSize?
 	
-	public init(url: URL, suggestedSize: CGSize? = nil, scale: Double = 1.0) {
+	public init(url: URL, suggestedSize: CGSize? = nil, scale: Double = 1.0, ignoreCache: Bool = false) {
 		self.url = url
 		self.suggestedSize = suggestedSize
-		if let image = ImageCache.instance.fetchLocal(for: url, extension: "jpeg") {
-			_image = State(initialValue: image)
+		if !ignoreCache, let cached = ImageCache.instance.fetchLocal(for: url, extension: "jpeg") {
+			_image = State(initialValue: cached)
 		}
 	}
 

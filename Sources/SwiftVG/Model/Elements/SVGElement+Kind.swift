@@ -24,7 +24,7 @@ extension SVGElement {
 	}
 	
 	public enum NativeKind: String, SVGElementKind { case unknown
-		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style, polyline, a, line, polygon, image
+		case svg, path, group = "g", ellipse, circle, rect, defs, use, tspan, style, polyline, a, line, polygon, image, img
 		
 		// not yet implemented
 		case title, pattern, clipPath, metadata, text, stop, linearGradient, radialGradient, type, format, rdf = "RDF", work = "Work", desc, set, script, `switch`, marker, hkern, mask, symbol, view, mpath, cursor, textPath
@@ -47,11 +47,12 @@ extension SVGElement {
 			case .defs: return SVGElement.Defs(kind: self, parent: parent, attributes: attributes)
 			case .use: return SVGElement.Use(kind: self, parent: parent, attributes: attributes)
 			case .path: return SVGElement.Path(kind: self, parent: parent, attributes: attributes)
-			case .image: return SVGElement.Image(kind: self, parent: parent, attributes: attributes)
+			case .image, .img:
+				return SVGElement.Image(kind: self, parent: parent, attributes: attributes)
 			case .polyline: return SVGElement.Polyline(kind: self, parent: parent, attributes: attributes)
 			case .polygon: return SVGElement.Polygon(kind: self, parent: parent, attributes: attributes)
 			case .line: return SVGElement.Line(kind: self, parent: parent, attributes: attributes)
-			case .group: return SVGElement.Group(kind: self, parent: parent, attributes: attributes)
+			case .group, .foreignObject: return SVGElement.Group(kind: self, parent: parent, attributes: attributes)
 			case .a: return SVGElement.Group(kind: Self.a, parent: parent, attributes: attributes)
 			case .text, .tspan: return SVGElement.Text(kind: self, parent: parent, attributes: attributes)
 			case .style: return SVGElement.Style(kind: self, parent: parent, attributes: attributes)

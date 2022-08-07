@@ -52,11 +52,11 @@ struct LogoImagesView: View {
 						LazyVGrid(columns: [.init(.adaptive(minimum: 100))]) {
 							ForEach(urls.indices, id: \.self) { idx in
 								NavigationLink(destination: detailView(url: urls[idx])) {
-									CachedSVGView(url: urls[idx])
+									CachedSVGView(url: urls[idx], ignoreCache: true)
 										.resizable()
 										.frame(width: 100, height: 100)
 										.clipped()
-										.border(Color.yellow.opacity(0.1))
+										.border(Color.yellow.opacity(0.9))
 								}
 							}
 						}

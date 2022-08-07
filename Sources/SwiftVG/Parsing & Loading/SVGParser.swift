@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreGraphics
+import Suite
 
 class SVGParser: NSObject {
 	var image: SVGImage!
@@ -16,6 +17,7 @@ class SVGParser: NSObject {
 	var xmlParser: XMLParser!
 	var document: SVGDocument!
 	var size: CGSize?
+	var logUnknownElements = Gestalt.isAttachedToDebugger
 	
 	var title: String?
 	var currentTree: [SVGElement] = []

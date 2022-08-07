@@ -1447,7 +1447,7 @@
 			repositoryURL = "https://github.com/bengottlieb/crossplatformkit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.0.6;
 			};
 		};
 		B5E50867288D90D900C1A88F /* XCRemoteSwiftPackageReference "Convey" */ = {

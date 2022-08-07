@@ -28,7 +28,11 @@ extension SVGParser: XMLParserDelegate {
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes: [String : String] = [:]) {
 		let currentParent = (self.currentTree.last as? SVGElement.Container)
 		guard let kind = SVGElement.NativeKind(rawValue: elementName) else {
-			if !elementName.contains(":") { print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")") }
+			if !elementName.contains(":") {
+				if logUnknownElements {
+					print("Unknown element found: \(elementName) in \(self.computedTitle ?? "")")
+				}
+			}
 			
 			let element = SVGElement.Unknown(kind: SVGElement.UnknownKind(tagName: elementName), parent: currentParent, attributes: attributes)
 			currentParent?.append(child: element)
