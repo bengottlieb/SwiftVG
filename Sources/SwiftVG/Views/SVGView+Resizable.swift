@@ -9,6 +9,7 @@
 import SwiftUI
 import Suite
 
+
 struct SVGNativeSizePreferenceKey: PreferenceKey {
 	static var defaultValue: CGSize?
 	
@@ -18,12 +19,6 @@ struct SVGNativeSizePreferenceKey: PreferenceKey {
 }
 
 public extension SVGView {
-	func resizable(onlyDown: Bool = false) -> some View {
-		ResizableSVGView(contentView: self, onlyDown: onlyDown)
-	}
-}
-
-public extension CachedSVGView {
 	func resizable(onlyDown: Bool = false) -> some View {
 		ResizableSVGView(contentView: self, onlyDown: onlyDown)
 	}

@@ -18,9 +18,11 @@ public struct CachedSVGView: View {
 	@State var error: Error?
 	let url: URL
 	let suggestedSize: CGSize?
+	let contentMode: ContentMode?
 	
-	public init(url: URL, suggestedSize: CGSize? = nil, scale: Double = 1.0, ignoreCache: Bool = false) {
+	public init(url: URL, suggestedSize: CGSize? = nil, contentMode: ContentMode?, scale: Double = 1.0, ignoreCache: Bool = false) {
 		self.url = url
+		self.contentMode = contentMode
 		self.suggestedSize = suggestedSize
 		if !ignoreCache, let cached = ImageCache.instance.fetchLocal(for: url, extension: "jpeg") {
 			_image = State(initialValue: cached)
@@ -32,6 +34,7 @@ public struct CachedSVGView: View {
 			if let image = image {
 				Image(uxImage: image)
 					.resizable()
+					//.aspectRatio(contentMode: contentMode)
 			}
 		}
 		.onAppear {
@@ -52,6 +55,12 @@ public struct CachedSVGView: View {
 			print("Error while fetching/building SVG: \(error)")
 			self.error = error
 		}
+	}
+}
+
+public extension CachedSVGView {
+	func resizable(onlyDown: Bool = false) -> some View {
+		ResizableSVGView(contentView: self, onlyDown: onlyDown)
 	}
 }
 #endif
