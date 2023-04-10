@@ -17,7 +17,7 @@ class SVGParser: NSObject {
 	var xmlParser: XMLParser!
 	var document: SVGDocument!
 	var size: CGSize?
-	var logUnknownElements = Gestalt.isAttachedToDebugger
+	var logUnknownElements = CommandLine.bool(for: "svg-log-unknown")
 	
 	var title: String?
 	var currentTree: [SVGElement] = []

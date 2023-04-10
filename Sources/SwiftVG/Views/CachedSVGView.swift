@@ -20,7 +20,7 @@ public struct CachedSVGView: View {
 	let suggestedSize: CGSize?
 	let contentMode: ContentMode?
 	
-	public init(url: URL, suggestedSize: CGSize? = nil, contentMode: ContentMode?, scale: Double = 1.0, ignoreCache: Bool = false) {
+	public init(url: URL, suggestedSize: CGSize? = nil, contentMode: ContentMode? = .fit, scale: Double = 1.0, ignoreCache: Bool = false) {
 		self.url = url
 		self.contentMode = contentMode
 		self.suggestedSize = suggestedSize
