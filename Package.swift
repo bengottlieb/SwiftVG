@@ -17,13 +17,14 @@ let package = Package(
             targets: ["SwiftVG"]),
     ],
     dependencies: [
+		.package(url: "https://github.com/bengottlieb/Convey.git", from: "1.2.21"),
 		.package(url: "https://github.com/bengottlieb/Suite.git", from: "1.0.53"),
 		.package(url: "https://github.com/bengottlieb/CrossPlatformKit.git", from: "1.0.6"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "SwiftVG", dependencies: ["Suite", "CrossPlatformKit"]),
+        .target(name: "SwiftVG", dependencies: ["Suite", "CrossPlatformKit", "Convey"]),
         
  //       .testTarget(name: "SwiftVGTests", dependencies: ["SwiftVG"]),
     ]

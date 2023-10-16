@@ -44,7 +44,7 @@ public struct CachedSVGView: View {
 	
 	func fetchImage() async {
 		do {
-			if let data = try await Convey.DataCache.instance.fetch(from: url) {
+			if let data = try await Convey.DataCache.instance.fetch(from: url, provision: nil) {
 				let svg = SVGImage(data: data)
 				if let image = svg?.image {
 					self.image = image
