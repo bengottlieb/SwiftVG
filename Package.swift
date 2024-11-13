@@ -17,7 +17,7 @@ let package = Package(
             targets: ["SwiftVG"]),
     ],
     dependencies: [
-		.package(url: "https://github.com/ios-tooling/Convey.git", from: "2.2.23"),
+		.package(url: "https://github.com/ios-tooling/Convey.git", from: "2.2.3"),
 		.package(url: "https://github.com/ios-tooling/Suite.git", from: "1.1.114"),
 		.package(url: "https://github.com/ios-tooling/CrossPlatformKit.git", from: "1.0.6"),
     ],
