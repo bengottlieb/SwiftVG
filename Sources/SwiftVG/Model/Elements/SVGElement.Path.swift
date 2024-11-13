@@ -6,7 +6,7 @@
 //  Copyright © 2018 Stand Alone, inc. All rights reserved.
 //
 
-import Studio
+import Suite
 import CoreGraphics
 
 public extension SVGElement {

@@ -8,6 +8,7 @@
 
 import Suite
 import SwiftUI
+import Convey
 
 class SVGUserInterface: ObservableObject {
 	static let instance = SVGUserInterface()
@@ -67,8 +68,9 @@ public struct SVGView: View {
 		if !isSetUp, svg == nil, let url = url {
 			isSetUp = true
 			do {
-				let data = try await DataCache.instance.fetch(for: url)
-				svg = SVGImage(data: data)
+				if let data = try await DataCache.instance.fetch(from: url) {
+					svg = SVGImage(data: data)
+				}
 			} catch {
 				print("Failed to load SVG from \(url): \(error)")
 			}
