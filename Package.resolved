@@ -2,12 +2,39 @@
   "object": {
     "pins": [
       {
-        "package": "Suite",
-        "repositoryURL": "https://github.com/bengottlieb/Suite.git",
+        "package": "Convey",
+        "repositoryURL": "https://github.com/ios-tooling/Convey.git",
         "state": {
           "branch": null,
-          "revision": "e16288112d3608fd6f0faedab8cb927ada1425d4",
-          "version": "0.9.48"
+          "revision": "a026b642d34a28b851da215ccb21ee46ce68f141",
+          "version": "1.4.1"
+        }
+      },
+      {
+        "package": "CrossPlatformKit",
+        "repositoryURL": "https://github.com/ios-tooling/CrossPlatformKit.git",
+        "state": {
+          "branch": null,
+          "revision": "d34c628dd7a8a648abd01b98b2db9ed52e5ab96d",
+          "version": "1.0.12"
+        }
+      },
+      {
+        "package": "Suite",
+        "repositoryURL": "https://github.com/ios-tooling/Suite.git",
+        "state": {
+          "branch": null,
+          "revision": "8115303bbcb9e8547a616cb3c02fb47edcf30670",
+          "version": "1.1.114"
+        }
+      },
+      {
+        "package": "swift-syntax",
+        "repositoryURL": "https://github.com/apple/swift-syntax",
+        "state": {
+          "branch": null,
+          "revision": "64889f0c732f210a935a0ad7cda38f77f876262d",
+          "version": "509.1.1"
         }
       }
     ]
